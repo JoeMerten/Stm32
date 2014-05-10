@@ -1,0 +1,4246 @@
+MIME-Version: 1.0
+X-Document-Type: Workbook
+Content-Type: multipart/related; boundary="----=_NextPart_01CEE0A9.883606E0"
+
+This document is a Single File Web Page, also known as a Web Archive file.  If you are seeing this message, your browser or editor doesn't support Web Archive files.  Please download a browser that supports Web Archive, such as Windows® Internet Explorer®.
+
+------=_NextPart_01CEE0A9.883606E0
+Content-Location: file:///C:/C909BD13/Library_Examples.htm
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="us-ascii"
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml"
+xmlns:o=3D"urn:schemas-microsoft-com:office:office"
+xmlns:x=3D"urn:schemas-microsoft-com:office:excel"
+xmlns=3D"http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta name=3D"Excel Workbook Frameset">
+<meta http-equiv=3DContent-Type content=3D"text/html; charset=3Dus-ascii">
+<meta name=3DProgId content=3DExcel.Sheet>
+<meta name=3DGenerator content=3D"Microsoft Excel 14">
+<link rel=3DFile-List href=3D"Library_Examples_files/filelist.xml">
+<![if !supportTabStrip]>
+<link id=3D"shLink" href=3D"Library_Examples_files/sheet001.htm">
+
+<link id=3D"shLink">
+
+<script language=3D"JavaScript">
+<!--
+ var c_lTabs=3D1;
+
+ var c_rgszSh=3Dnew Array(c_lTabs);
+ c_rgszSh[0] =3D "Library_Examples";
+
+
+
+ var c_rgszClr=3Dnew Array(8);
+ c_rgszClr[0]=3D"window";
+ c_rgszClr[1]=3D"buttonface";
+ c_rgszClr[2]=3D"windowframe";
+ c_rgszClr[3]=3D"windowtext";
+ c_rgszClr[4]=3D"threedlightshadow";
+ c_rgszClr[5]=3D"threedhighlight";
+ c_rgszClr[6]=3D"threeddarkshadow";
+ c_rgszClr[7]=3D"threedshadow";
+
+ var g_iShCur;
+ var g_rglTabX=3Dnew Array(c_lTabs);
+
+function fnGetIEVer()
+{
+ var ua=3Dwindow.navigator.userAgent
+ var msie=3Dua.indexOf("MSIE")
+ if (msie>0 && window.navigator.platform=3D=3D"Win32")
+  return parseInt(ua.substring(msie+5,ua.indexOf(".", msie)));
+ else
+  return 0;
+}
+
+function fnBuildFrameset()
+{
+ var szHTML=3D"<frameset rows=3D\"*,18\" border=3D0 width=3D0 frameborder=
+=3Dno framespacing=3D0>"+
+  "<frame src=3D\""+document.all.item("shLink")[0].href+"\" name=3D\"frShee=
+t\" noresize>"+
+  "<frameset cols=3D\"54,*\" border=3D0 width=3D0 frameborder=3Dno framespa=
+cing=3D0>"+
+  "<frame src=3D\"\" name=3D\"frScroll\" marginwidth=3D0 marginheight=3D0 s=
+crolling=3Dno>"+
+  "<frame src=3D\"\" name=3D\"frTabs\" marginwidth=3D0 marginheight=3D0 scr=
+olling=3Dno>"+
+  "</frameset></frameset><plaintext>";
+
+ with (document) {
+  open("text/html","replace");
+  write(szHTML);
+  close();
+ }
+
+ fnBuildTabStrip();
+}
+
+function fnBuildTabStrip()
+{
+ var szHTML=3D
+  "<html><head><style>.clScroll {font:8pt Courier New;color:"+c_rgszClr[6]+=
+";cursor:default;line-height:10pt;}"+
+  ".clScroll2 {font:10pt Arial;color:"+c_rgszClr[6]+";cursor:default;line-h=
+eight:11pt;}</style></head>"+
+  "<body onclick=3D\"event.returnValue=3Dfalse;\" ondragstart=3D\"event.ret=
+urnValue=3Dfalse;\" onselectstart=3D\"event.returnValue=3Dfalse;\" bgcolor=
+=3D"+c_rgszClr[4]+" topmargin=3D0 leftmargin=3D0><table cellpadding=3D0 cel=
+lspacing=3D0 width=3D100%>"+
+  "<tr><td colspan=3D6 height=3D1 bgcolor=3D"+c_rgszClr[2]+"></td></tr>"+
+  "<tr><td style=3D\"font:1pt\">&nbsp;<td>"+
+  "<td valign=3Dtop id=3DtdScroll class=3D\"clScroll\" onclick=3D\"parent.f=
+nFastScrollTabs(0);\" onmouseover=3D\"parent.fnMouseOverScroll(0);\" onmous=
+eout=3D\"parent.fnMouseOutScroll(0);\"><a>&#171;</a></td>"+
+  "<td valign=3Dtop id=3DtdScroll class=3D\"clScroll2\" onclick=3D\"parent.=
+fnScrollTabs(0);\" ondblclick=3D\"parent.fnScrollTabs(0);\" onmouseover=3D\=
+"parent.fnMouseOverScroll(1);\" onmouseout=3D\"parent.fnMouseOutScroll(1);\=
+"><a>&lt</a></td>"+
+  "<td valign=3Dtop id=3DtdScroll class=3D\"clScroll2\" onclick=3D\"parent.=
+fnScrollTabs(1);\" ondblclick=3D\"parent.fnScrollTabs(1);\" onmouseover=3D\=
+"parent.fnMouseOverScroll(2);\" onmouseout=3D\"parent.fnMouseOutScroll(2);\=
+"><a>&gt</a></td>"+
+  "<td valign=3Dtop id=3DtdScroll class=3D\"clScroll\" onclick=3D\"parent.f=
+nFastScrollTabs(1);\" onmouseover=3D\"parent.fnMouseOverScroll(3);\" onmous=
+eout=3D\"parent.fnMouseOutScroll(3);\"><a>&#187;</a></td>"+
+  "<td style=3D\"font:1pt\">&nbsp;<td></tr></table></body></html>";
+
+ with (frames['frScroll'].document) {
+  open("text/html","replace");
+  write(szHTML);
+  close();
+ }
+
+ szHTML =3D
+  "<html><head>"+
+  "<style>A:link,A:visited,A:active {text-decoration:none;"+"color:"+c_rgsz=
+Clr[3]+";}"+
+  ".clTab {cursor:hand;background:"+c_rgszClr[1]+";font:9pt Arial;padding-l=
+eft:3px;padding-right:3px;text-align:center;}"+
+  ".clBorder {background:"+c_rgszClr[2]+";font:1pt;}"+
+  "</style></head><body onload=3D\"parent.fnInit();\" onselectstart=3D\"eve=
+nt.returnValue=3Dfalse;\" ondragstart=3D\"event.returnValue=3Dfalse;\" bgco=
+lor=3D"+c_rgszClr[4]+
+  " topmargin=3D0 leftmargin=3D0><table id=3DtbTabs cellpadding=3D0 cellspa=
+cing=3D0>";
+
+ var iCellCount=3D(c_lTabs+1)*2;
+
+ var i;
+ for (i=3D0;i<iCellCount;i+=3D2)
+  szHTML+=3D"<col width=3D1><col>";
+
+ var iRow;
+ for (iRow=3D0;iRow<6;iRow++) {
+
+  szHTML+=3D"<tr>";
+
+  if (iRow=3D=3D5)
+   szHTML+=3D"<td colspan=3D"+iCellCount+"></td>";
+  else {
+   if (iRow=3D=3D0) {
+    for(i=3D0;i<iCellCount;i++)
+     szHTML+=3D"<td height=3D1 class=3D\"clBorder\"></td>";
+   } else if (iRow=3D=3D1) {
+    for(i=3D0;i<c_lTabs;i++) {
+     szHTML+=3D"<td height=3D1 nowrap class=3D\"clBorder\">&nbsp;</td>";
+     szHTML+=3D
+      "<td id=3DtdTab height=3D1 nowrap class=3D\"clTab\" onmouseover=3D\"p=
+arent.fnMouseOverTab("+i+");\" onmouseout=3D\"parent.fnMouseOutTab("+i+");\=
+">"+
+      "<a href=3D\""+document.all.item("shLink")[i].href+"\" target=3D\"frS=
+heet\" id=3DaTab>&nbsp;"+c_rgszSh[i]+"&nbsp;</a></td>";
+    }
+    szHTML+=3D"<td id=3DtdTab height=3D1 nowrap class=3D\"clBorder\"><a id=
+=3DaTab>&nbsp;</a></td><td width=3D100%></td>";
+   } else if (iRow=3D=3D2) {
+    for (i=3D0;i<c_lTabs;i++)
+     szHTML+=3D"<td height=3D1></td><td height=3D1 class=3D\"clBorder\"></t=
+d>";
+    szHTML+=3D"<td height=3D1></td><td height=3D1></td>";
+   } else if (iRow=3D=3D3) {
+    for (i=3D0;i<iCellCount;i++)
+     szHTML+=3D"<td height=3D1></td>";
+   } else if (iRow=3D=3D4) {
+    for (i=3D0;i<c_lTabs;i++)
+     szHTML+=3D"<td height=3D1 width=3D1></td><td height=3D1></td>";
+    szHTML+=3D"<td height=3D1 width=3D1></td><td></td>";
+   }
+  }
+  szHTML+=3D"</tr>";
+ }
+
+ szHTML+=3D"</table></body></html>";
+ with (frames['frTabs'].document) {
+  open("text/html","replace");
+  charset=3Ddocument.charset;
+  write(szHTML);
+  close();
+ }
+}
+
+function fnInit()
+{
+ g_rglTabX[0]=3D0;
+ var i;
+ for (i=3D1;i<=3Dc_lTabs;i++)
+  with (frames['frTabs'].document.all.tbTabs.rows[1].cells[fnTabToCol(i-1)])
+   g_rglTabX[i]=3DoffsetLeft+offsetWidth-6;
+}
+
+function fnTabToCol(iTab)
+{
+ return 2*iTab+1;
+}
+
+function fnNextTab(fDir)
+{
+ var iNextTab=3D-1;
+ var i;
+
+ with (frames['frTabs'].document.body) {
+  if (fDir=3D=3D0) {
+   if (scrollLeft>0) {
+    for (i=3D0;i<c_lTabs&&g_rglTabX[i]<scrollLeft;i++);
+    if (i<c_lTabs)
+     iNextTab=3Di-1;
+   }
+  } else {
+   if (g_rglTabX[c_lTabs]+6>offsetWidth+scrollLeft) {
+    for (i=3D0;i<c_lTabs&&g_rglTabX[i]<=3DscrollLeft;i++);
+    if (i<c_lTabs)
+     iNextTab=3Di;
+   }
+  }
+ }
+ return iNextTab;
+}
+
+function fnScrollTabs(fDir)
+{
+ var iNextTab=3DfnNextTab(fDir);
+
+ if (iNextTab>=3D0) {
+  frames['frTabs'].scroll(g_rglTabX[iNextTab],0);
+  return true;
+ } else
+  return false;
+}
+
+function fnFastScrollTabs(fDir)
+{
+ if (c_lTabs>16)
+  frames['frTabs'].scroll(g_rglTabX[fDir?c_lTabs-1:0],0);
+ else
+  if (fnScrollTabs(fDir)>0) window.setTimeout("fnFastScrollTabs("+fDir+");"=
+,5);
+}
+
+function fnSetTabProps(iTab,fActive)
+{
+ var iCol=3DfnTabToCol(iTab);
+ var i;
+
+ if (iTab>=3D0) {
+  with (frames['frTabs'].document.all) {
+   with (tbTabs) {
+    for (i=3D0;i<=3D4;i++) {
+     with (rows[i]) {
+      if (i=3D=3D0)
+       cells[iCol].style.background=3Dc_rgszClr[fActive?0:2];
+      else if (i>0 && i<4) {
+       if (fActive) {
+        cells[iCol-1].style.background=3Dc_rgszClr[2];
+        cells[iCol].style.background=3Dc_rgszClr[0];
+        cells[iCol+1].style.background=3Dc_rgszClr[2];
+       } else {
+        if (i=3D=3D1) {
+         cells[iCol-1].style.background=3Dc_rgszClr[2];
+         cells[iCol].style.background=3Dc_rgszClr[1];
+         cells[iCol+1].style.background=3Dc_rgszClr[2];
+        } else {
+         cells[iCol-1].style.background=3Dc_rgszClr[4];
+         cells[iCol].style.background=3Dc_rgszClr[(i=3D=3D2)?2:4];
+         cells[iCol+1].style.background=3Dc_rgszClr[4];
+        }
+       }
+      } else
+       cells[iCol].style.background=3Dc_rgszClr[fActive?2:4];
+     }
+    }
+   }
+   with (aTab[iTab].style) {
+    cursor=3D(fActive?"default":"hand");
+    color=3Dc_rgszClr[3];
+   }
+  }
+ }
+}
+
+function fnMouseOverScroll(iCtl)
+{
+ frames['frScroll'].document.all.tdScroll[iCtl].style.color=3Dc_rgszClr[7];
+}
+
+function fnMouseOutScroll(iCtl)
+{
+ frames['frScroll'].document.all.tdScroll[iCtl].style.color=3Dc_rgszClr[6];
+}
+
+function fnMouseOverTab(iTab)
+{
+ if (iTab!=3Dg_iShCur) {
+  var iCol=3DfnTabToCol(iTab);
+  with (frames['frTabs'].document.all) {
+   tdTab[iTab].style.background=3Dc_rgszClr[5];
+  }
+ }
+}
+
+function fnMouseOutTab(iTab)
+{
+ if (iTab>=3D0) {
+  var elFrom=3Dframes['frTabs'].event.srcElement;
+  var elTo=3Dframes['frTabs'].event.toElement;
+
+  if ((!elTo) ||
+   (elFrom.tagName=3D=3DelTo.tagName) ||
+   (elTo.tagName=3D=3D"A" && elTo.parentElement!=3DelFrom) ||
+   (elFrom.tagName=3D=3D"A" && elFrom.parentElement!=3DelTo)) {
+
+   if (iTab!=3Dg_iShCur) {
+    with (frames['frTabs'].document.all) {
+     tdTab[iTab].style.background=3Dc_rgszClr[1];
+    }
+   }
+  }
+ }
+}
+
+function fnSetActiveSheet(iSh)
+{
+ if (iSh!=3Dg_iShCur) {
+  fnSetTabProps(g_iShCur,false);
+  fnSetTabProps(iSh,true);
+  g_iShCur=3DiSh;
+ }
+}
+
+ window.g_iIEVer=3DfnGetIEVer();
+ if (window.g_iIEVer>=3D4)
+  fnBuildFrameset();
+//-->
+</script>
+<![endif]><!--[if gte mso 9]><xml>
+ <x:ExcelWorkbook>
+  <x:ExcelWorksheets>
+   <x:ExcelWorksheet>
+    <x:Name>Library_Examples</x:Name>
+    <x:WorksheetSource HRef=3D"Library_Examples_files/sheet001.htm"/>
+   </x:ExcelWorksheet>
+  </x:ExcelWorksheets>
+  <x:Stylesheet HRef=3D"Library_Examples_files/stylesheet.css"/>
+  <x:WindowHeight>9210</x:WindowHeight>
+  <x:WindowWidth>23835</x:WindowWidth>
+  <x:WindowTopX>120</x:WindowTopX>
+  <x:WindowTopY>90</x:WindowTopY>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ProtectWindows>False</x:ProtectWindows>
+ </x:ExcelWorkbook>
+</xml><![endif]-->
+</head>
+
+<frameset rows=3D"*,39" border=3D0 width=3D0 frameborder=3Dno framespacing=
+=3D0>
+ <frame src=3D"Library_Examples_files/sheet001.htm" name=3D"frSheet">
+ <frame src=3D"Library_Examples_files/tabstrip.htm" name=3D"frTabs" marginw=
+idth=3D0 marginheight=3D0>
+ <noframes>
+  <body>
+   <p>This page uses frames, but your browser doesn't support them.</p>
+  </body>
+ </noframes>
+</frameset>
+</html>
+
+------=_NextPart_01CEE0A9.883606E0
+Content-Location: file:///C:/C909BD13/Library_Examples_files/stylesheet.css
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/css; charset="us-ascii"
+
+tr
+	{mso-height-source:auto;}
+col
+	{mso-width-source:auto;}
+br
+	{mso-data-placement:same-cell;}
+.style0
+	{mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	white-space:nowrap;
+	mso-rotate:0;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	color:black;
+	font-size:11.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Calibri, sans-serif;
+	mso-font-charset:0;
+	border:none;
+	mso-protection:locked visible;
+	mso-style-name:Normal;
+	mso-style-id:0;}
+td
+	{mso-style-parent:style0;
+	padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	mso-ignore:padding;
+	color:black;
+	font-size:11.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Calibri, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	border:none;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	mso-protection:locked visible;
+	white-space:nowrap;
+	mso-rotate:0;}
+.xl65
+	{mso-style-parent:style0;
+	color:windowtext;
+	font-size:10.0pt;
+	font-family:Arial;
+	mso-generic-font-family:auto;
+	mso-font-charset:0;}
+.xl66
+	{mso-style-parent:style0;
+	color:white;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:1.5pt solid #4F81BD;
+	background:#1F497D;
+	mso-pattern:#4F81BD none;}
+.xl67
+	{mso-style-parent:style0;
+	color:white;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:none;
+	border-left:none;
+	background:#1F497D;
+	mso-pattern:#4F81BD none;}
+.xl68
+	{mso-style-parent:style0;
+	color:white;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#1F497D;
+	mso-pattern:#4F81BD none;}
+.xl69
+	{mso-style-parent:style0;
+	color:white;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#1F497D;
+	mso-pattern:#4F81BD none;
+	white-space:normal;}
+.xl70
+	{mso-style-parent:style0;
+	color:white;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#1F497D;
+	mso-pattern:#4F81BD none;
+	white-space:normal;}
+.xl71
+	{mso-style-parent:style0;
+	color:white;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:1.5pt solid #4F81BD;
+	background:#1F497D;
+	mso-pattern:black none;}
+.xl72
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl73
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl74
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl75
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl76
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl77
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl78
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl79
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl80
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl81
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;}
+.xl82
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;}
+.xl83
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;}
+.xl84
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;}
+.xl85
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl86
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl87
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl88
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl89
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl90
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl91
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl92
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl93
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl94
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl95
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl96
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl97
+	{mso-style-parent:style0;
+	color:white;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:1.5pt solid #4F81BD;
+	background:#1F497D;
+	mso-pattern:black none;}
+.xl98
+	{mso-style-parent:style0;
+	color:white;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:1.5pt solid #4F81BD;
+	background:#1F497D;
+	mso-pattern:black none;}
+.xl99
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl100
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl101
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl102
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl103
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl104
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl105
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;}
+.xl106
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl107
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl108
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl109
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;}
+.xl110
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl111
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl112
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl113
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl114
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl115
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:none;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl116
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl117
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl118
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl119
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl120
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl121
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl122
+	{mso-style-parent:style0;
+	color:white;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:1.5pt solid #4F81BD;
+	background:#1F497D;
+	mso-pattern:black none;}
+.xl123
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl124
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl125
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;}
+.xl126
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;}
+.xl127
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl128
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;}
+.xl129
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;}
+.xl130
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;}
+.xl131
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:none;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl132
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl133
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;}
+.xl134
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl135
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl136
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl137
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl138
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl139
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl140
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl141
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl142
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl143
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl144
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl145
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl146
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl147
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl148
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl149
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl150
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl151
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:none;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl152
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl153
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl154
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl155
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;}
+.xl156
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;}
+.xl157
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl158
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl159
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;}
+.xl160
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl161
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:none;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl162
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl163
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl164
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl165
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl166
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl167
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl168
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl169
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:none;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:none;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl170
+	{mso-style-parent:style0;
+	color:windowtext;
+	font-size:10.0pt;
+	font-family:Arial;
+	mso-generic-font-family:auto;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:none;}
+.xl171
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl172
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl173
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl174
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl175
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;}
+.xl176
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl177
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl178
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl179
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl180
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl181
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:1.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+.xl182
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl183
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl184
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl185
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl186
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl187
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:white;
+	mso-pattern:black none;}
+.xl188
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl189
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl190
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl191
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:10.0pt;
+	font-weight:700;
+	text-align:left;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:.5pt solid #4F81BD;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;
+	white-space:normal;
+	padding-left:9px;
+	mso-char-indent-count:1;}
+.xl192
+	{mso-style-parent:style0;
+	color:#1F497D;
+	font-size:12.0pt;
+	font-weight:700;
+	font-style:italic;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid #4F81BD;
+	border-right:.5pt solid #4F81BD;
+	border-bottom:none;
+	border-left:.5pt solid #4F81BD;
+	background:#DCE6F1;
+	mso-pattern:black none;}
+
+------=_NextPart_01CEE0A9.883606E0
+Content-Location: file:///C:/C909BD13/Library_Examples_files/tabstrip.htm
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="us-ascii"
+
+<html>
+<head>
+<meta http-equiv=3DContent-Type content=3D"text/html; charset=3Dus-ascii">
+<meta name=3DProgId content=3DExcel.Sheet>
+<meta name=3DGenerator content=3D"Microsoft Excel 14">
+<link id=3DMain-File rel=3DMain-File href=3D"../Library_Examples.htm">
+<![if IE]>
+<base href=3D"file:///C:\C909BD13\Library_Examples_files\tabstrip.htm"
+id=3D"webarch_temp_base_tag">
+<![endif]>
+<script language=3D"JavaScript">
+<!--
+if (window.name!=3D"frTabs")
+ window.location.replace(document.all.item("Main-File").href);
+//-->
+</script>
+<style>
+<!--
+A {
+    text-decoration:none;
+    color:#000000;
+    font-size:9pt;
+}
+-->
+</style>
+</head>
+<body topmargin=3D0 leftmargin=3D0 bgcolor=3D"#808080">
+<table border=3D0 cellspacing=3D1>
+ <tr>
+ <td bgcolor=3D"#FFFFFF" nowrap><b><small><small>&nbsp;<a href=3D"sheet001.=
+htm" target=3D"frSheet"><font face=3D"Arial" color=3D"#000000">Library_Exam=
+ples</font></a>&nbsp;</small></small></b></td>
+
+ </tr>
+</table>
+</body>
+</html>
+
+------=_NextPart_01CEE0A9.883606E0
+Content-Location: file:///C:/C909BD13/Library_Examples_files/sheet001.htm
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="us-ascii"
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml"
+xmlns:o=3D"urn:schemas-microsoft-com:office:office"
+xmlns:x=3D"urn:schemas-microsoft-com:office:excel"
+xmlns=3D"http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=3DContent-Type content=3D"text/html; charset=3Dus-ascii">
+<meta name=3DProgId content=3DExcel.Sheet>
+<meta name=3DGenerator content=3D"Microsoft Excel 14">
+<link id=3DMain-File rel=3DMain-File href=3D"../Library_Examples.htm">
+<link rel=3DFile-List href=3Dfilelist.xml>
+<![if IE]>
+<base href=3D"file:///C:\C909BD13\Library_Examples_files\sheet001.htm"
+id=3D"webarch_temp_base_tag">
+<![endif]>
+<link rel=3DStylesheet href=3Dstylesheet.css>
+<style>
+<!--table
+	{mso-displayed-decimal-separator:"\,";
+	mso-displayed-thousand-separator:" ";}
+@page
+	{margin:1.0in .75in 1.0in .75in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;}
+-->
+</style>
+<![if !supportTabStrip]><script language=3D"JavaScript">
+<!--
+function fnUpdateTabs()
+ {
+  if (parent.window.g_iIEVer>=3D4) {
+   if (parent.document.readyState=3D=3D"complete"
+    && parent.frames['frTabs'].document.readyState=3D=3D"complete")
+   parent.fnSetActiveSheet(0);
+  else
+   window.setTimeout("fnUpdateTabs();",150);
+ }
+}
+
+if (window.name!=3D"frSheet")
+ window.location.replace("../Library_Examples.htm");
+else
+ fnUpdateTabs();
+//-->
+</script>
+<![endif]>
+</head>
+
+<body link=3Dblue vlink=3Dpurple>
+<!--The following information was generated by Microsoft Excel's Publish as=
+ Web
+Page wizard.--><!--If the same item is republished from Excel, all informat=
+ion between the DIV
+tags will be replaced.--><!-----------------------------><!--START OF OUTPU=
+T FROM EXCEL PUBLISH AS WEB PAGE WIZARD --><!----------------------------->
+
+<table border=3D0 cellpadding=3D0 cellspacing=3D0 width=3D1505 style=3D'bor=
+der-collapse:
+ collapse;table-layout:fixed;width:1129pt'>
+ <col width=3D23 style=3D'mso-width-source:userset;mso-width-alt:841;width:=
+17pt'>
+ <col width=3D85 style=3D'mso-width-source:userset;mso-width-alt:3108;width=
+:64pt'>
+ <col width=3D227 style=3D'mso-width-source:userset;mso-width-alt:8301;widt=
+h:170pt'>
+ <col width=3D241 style=3D'mso-width-source:userset;mso-width-alt:8813;widt=
+h:181pt'>
+ <col width=3D80 span=3D4 style=3D'mso-width-source:userset;mso-width-alt:2=
+925;
+ width:60pt'>
+ <col width=3D609 style=3D'mso-width-source:userset;mso-width-alt:22272;wid=
+th:457pt'>
+ <tr height=3D18 style=3D'mso-height-source:userset;height:13.5pt'>
+  <td height=3D18 class=3Dxl65 width=3D23 style=3D'height:13.5pt;width:17pt=
+'></td>
+  <td class=3Dxl65 width=3D85 style=3D'width:64pt'></td>
+  <td class=3Dxl65 width=3D227 style=3D'width:170pt'></td>
+  <td class=3Dxl65 width=3D241 style=3D'width:181pt'></td>
+  <td class=3Dxl65 width=3D80 style=3D'width:60pt'></td>
+  <td class=3Dxl65 width=3D80 style=3D'width:60pt'></td>
+  <td class=3Dxl65 width=3D80 style=3D'width:60pt'></td>
+  <td class=3Dxl65 width=3D80 style=3D'width:60pt'></td>
+  <td class=3Dxl65 width=3D609 style=3D'width:457pt'></td>
+ </tr>
+ <tr height=3D42 style=3D'mso-height-source:userset;height:31.5pt'>
+  <td height=3D42 class=3Dxl65 style=3D'height:31.5pt'></td>
+  <td class=3Dxl66>IP/Module</td>
+  <td class=3Dxl67>Example name</td>
+  <td class=3Dxl68>Key Words</td>
+  <td class=3Dxl69 width=3D80 style=3D'width:60pt'>STM324xG-EVAL</td>
+  <td class=3Dxl69 width=3D80 style=3D'width:60pt'>STM32437I-EVAL</td>
+  <td class=3Dxl69 width=3D80 style=3D'width:60pt'>STM32429I-EVAL</td>
+  <td class=3Dxl69 width=3D80 style=3D'width:60pt'>STM32439I-EVAL</td>
+  <td class=3Dxl70 width=3D609 style=3D'width:457pt'>Example Description</t=
+d>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td rowspan=3D5 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD'>=
+ADC</td>
+  <td class=3Dxl72>ADC_DMA</td>
+  <td class=3Dxl73 width=3D241 style=3D'width:181pt'>ADC, DMA,<span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>Regular channels, DMA Mode</td>
+  <td class=3Dxl74>X</td>
+  <td class=3Dxl75>X</td>
+  <td class=3Dxl76>X</td>
+  <td class=3Dxl77>X</td>
+  <td class=3Dxl78 width=3D609 style=3D'width:457pt'>This example provides =
+how to
+  configure the ADC peripheral in order to convert regular channel data usi=
+ng
+  DMA mode. After ADC configuration, the user can get the converted value.<=
+/td>
+ </tr>
+ <tr height=3D67 style=3D'mso-height-source:userset;height:50.25pt'>
+  <td height=3D67 class=3Dxl65 style=3D'height:50.25pt'></td>
+  <td class=3Dxl79>ADC_DualModeInterleaved</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>ADC, DMA, Dual Mode, R=
+egular
+  channels</td>
+  <td class=3Dxl81>X</td>
+  <td class=3Dxl82>X</td>
+  <td class=3Dxl83>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the ADC peripheral in order to convert a regular channel in Dual
+  interleaved mode using DMA in mode 3, in fact the same regular channel is
+  converted alternatively by ADC1 and ADC2 allowing more quick conversation.
+  After ADC configuration, the user can get the regular converted value.<sp=
+an
+  style=3D'mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+ </tr>
+ <tr height=3D54 style=3D'mso-height-source:userset;height:40.5pt'>
+  <td height=3D54 class=3Dxl65 style=3D'height:40.5pt'></td>
+  <td class=3Dxl86>ADC_DualModeRegulSimu</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>ADC, DMA, Dual Mode, R=
+egular
+  channels, Simultaneous conversion</td>
+  <td class=3Dxl88>X</td>
+  <td class=3Dxl89>X</td>
+  <td class=3Dxl90>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example provides =
+a short
+  description of how to use the ADC peripheral to convert regular channels
+  simultaneously in dual mode using DMA in mode 1.</td>
+ </tr>
+ <tr height=3D52 style=3D'mso-height-source:userset;height:39.0pt'>
+  <td height=3D52 class=3Dxl65 style=3D'height:39.0pt'></td>
+  <td class=3Dxl79>ADC_VBATMeasurement</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>ADC, Injected channels=
+, Polling
+  Mode</td>
+  <td class=3Dxl81>X</td>
+  <td class=3Dxl82>X</td>
+  <td class=3Dxl83>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example describes=
+ how to
+  measure VBAT voltage using ADC1 regular channel 18.</td>
+ </tr>
+ <tr height=3D69 style=3D'mso-height-source:userset;height:51.75pt'>
+  <td height=3D69 class=3Dxl65 style=3D'height:51.75pt'></td>
+  <td class=3Dxl93>ADC_TripleModeInterleaved</td>
+  <td class=3Dxl94 width=3D241 style=3D'width:181pt'>ADC, DMA, Triple Mode<=
+/td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl96 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the ADC peripheral in order to convert a regular channel in Dual
+  interleaved mode using DMA in mode 2, in fact the same regular channel is
+  converted alternatively by ADC1, ADC2 and ADC3 allowing the most quick
+  conversation. After ADC configuration, the user can get the regular conve=
+rted
+  value.<span style=3D'mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;</span></td>
+ </tr>
+ <tr height=3D52 style=3D'mso-height-source:userset;height:39.0pt'>
+  <td height=3D52 class=3Dxl65 style=3D'height:39.0pt'></td>
+  <td class=3Dxl97>CAN</td>
+  <td class=3Dxl79>CAN_LoopBack</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>CAN, LoopBack</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example is a basi=
+c example
+  which shows how to configure the CAN peripheral in order to set communica=
+tion
+  in loopback mode.<span style=3D'mso-spacerun:yes'>&nbsp; </span>After CAN
+  configuration, the user can see the communication with only one CAN perip=
+heral.</td>
+ </tr>
+ <tr height=3D52 style=3D'mso-height-source:userset;height:39.0pt'>
+  <td height=3D52 class=3Dxl65 style=3D'height:39.0pt'></td>
+  <td class=3Dxl98>&nbsp;</td>
+  <td class=3Dxl93>CAN_Networking</td>
+  <td class=3Dxl94 width=3D241 style=3D'width:181pt'>CAN, Network</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl96 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the CAN peripheral in order to send and receive CAN frames in
+  normal mode. After CAN configuration, the user can see the exchange of da=
+ta
+  between different CAN peripheral nodes of the network.</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td rowspan=3D4 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD;b=
+order-top:
+  none'>CORTEXM</td>
+  <td class=3Dxl99>BitBanding</td>
+  <td class=3Dxl100 width=3D241 style=3D'width:181pt'>CORTEX-M4, Bit Bandin=
+g</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl101 width=3D609 style=3D'width:457pt'>This example shows ho=
+w to use
+  CortexM4 Bit-Band access to perform atomic<span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>read-modify-write and read opera=
+tions
+  on a variable in SRAM.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl102 width=3D227 style=3D'width:170pt'>MPU</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>CORTEX-M4, MPU</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example presents =
+the MPU
+  features on STM32F4xx devices and it can be easily ported to any other ST=
+M32
+  device supporting MPU.</td>
+ </tr>
+ <tr height=3D20 style=3D'mso-height-source:userset;height:15.0pt'>
+  <td rowspan=3D2 height=3D40 class=3Dxl170 style=3D'height:30.0pt'>&nbsp;<=
+/td>
+  <td rowspan=3D2 class=3Dxl171 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>Mode_Privilege</td>
+  <td rowspan=3D2 class=3Dxl173 width=3D241 style=3D'border-bottom:1.5pt so=
+lid #4F81BD;
+  border-top:none;width:181pt'>CORTEX-M4, Priveleged Mode</td>
+  <td rowspan=3D2 class=3Dxl175 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>X</td>
+  <td rowspan=3D2 class=3Dxl175 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>X</td>
+  <td rowspan=3D2 class=3Dxl175 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl175 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>&nbsp;</td>
+  <td class=3Dxl110 width=3D609 style=3D'border-left:none;width:457pt'>This=
+ example
+  shows how to modify CortexM4 Thread mode privilege access and stack.</td>
+ </tr>
+ <tr height=3D20 style=3D'mso-height-source:userset;height:15.0pt'>
+  <td height=3D20 class=3Dxl106 width=3D609 style=3D'height:15.0pt;border-l=
+eft:none;
+  width:457pt'>CortexM4 Thread mode is entered on Reset, and can be entered=
+ as
+  a result of an exception return.</td>
+ </tr>
+ <tr height=3D36 style=3D'mso-height-source:userset;height:27.0pt'>
+  <td height=3D36 class=3Dxl65 style=3D'height:27.0pt'></td>
+  <td class=3Dxl98>CRC</td>
+  <td class=3Dxl93>CRC_Example</td>
+  <td class=3Dxl94 width=3D241 style=3D'width:181pt'>CRC</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>&nbsp;</td>
+  <td class=3Dxl95>&nbsp;</td>
+  <td class=3Dxl96 width=3D609 style=3D'width:457pt'>This example shows how=
+ to use
+  CRC (cyclic redundancy check) calculation unit to get a CRC code of a giv=
+en
+  buffer of data word (32-bit), based on a fixed generator polynomial
+  (0x4C11DB7)</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td rowspan=3D6 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD;b=
+order-top:
+  none'>CRYP</td>
+  <td class=3Dxl111 width=3D227 style=3D'width:170pt'>CRYP_AESModes</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>CRYP, AES</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example provides =
+a short
+  description of how to use the CRYPTO peripheral to encrypt and decrypt da=
+ta
+  using AES in all modes (ECB, CBC, CTR) and all key sizes (128, 192, 256)
+  Algorithm.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl112 width=3D227 style=3D'width:170pt'>CRYP_DESTDESModes</td>
+  <td class=3Dxl113 width=3D241 style=3D'width:181pt'>CRYP, DES, TDES</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl114 width=3D609 style=3D'width:457pt'>This example provides=
+ a short
+  description of how to use the CRYPTO peripheral to encrypt and decrypt da=
+ta
+  using DES and TDES in all modes (ECB, CBC) Algorithm.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl115 width=3D227 style=3D'width:170pt'>CRYP_AES_GCM</td>
+  <td class=3Dxl116 width=3D241 style=3D'width:181pt'>CRYP, AES, GCM</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl117 width=3D609 style=3D'width:457pt'>This example provides=
+ a short
+  description of how to use the CRYPTO peripheral to encrypt and decrypt da=
+ta
+  using AES with Galois/Counter Mode (GCM)</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl118 width=3D227 style=3D'width:170pt'>CRYP_AES_CCM</td>
+  <td class=3Dxl73 width=3D241 style=3D'width:181pt'>CRYP, AES, CCM</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl78 width=3D609 style=3D'width:457pt'>This example provides =
+a short
+  description of how to use the CRYPTO peripheral to encrypt and decrypt da=
+ta
+  using AES with Combined Cipher Machine (CCM)</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl79>CRYP_AES_DMA</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>CRYP, AES, DMA</td>
+  <td class=3Dxl109>X</td>
+  <td class=3Dxl109>X</td>
+  <td class=3Dxl109>&nbsp;</td>
+  <td class=3Dxl109>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example provides =
+a short
+  description of how to use the CRYPTO peripheral to encrypt and decrypt da=
+ta
+  using AES-128 Algorithm.</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td class=3Dxl93>CRYP_TDES_DMA</td>
+  <td class=3Dxl94 width=3D241 style=3D'width:181pt'>CRYP, TDES, DMA Mode</=
+td>
+  <td class=3Dxl119>X</td>
+  <td class=3Dxl119>X</td>
+  <td class=3Dxl119>&nbsp;</td>
+  <td class=3Dxl119>X</td>
+  <td class=3Dxl96 width=3D609 style=3D'width:457pt'>This example provides =
+a short
+  description of how to use the CRYPTO peripheral to encrypt and decrypt da=
+ta
+  using TDES Algorithm.</td>
+ </tr>
+ <tr height=3D36 style=3D'mso-height-source:userset;height:27.0pt'>
+  <td height=3D36 class=3Dxl65 style=3D'height:27.0pt'></td>
+  <td class=3Dxl98>DAC</td>
+  <td class=3Dxl103>DAC_SignalsGeneration</td>
+  <td class=3Dxl104 width=3D241 style=3D'width:181pt'>DAC, Noise signal, Tr=
+iangle
+  Signal</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl105>&nbsp;</td>
+  <td class=3Dxl105>&nbsp;</td>
+  <td class=3Dxl106 width=3D609 style=3D'width:457pt'>This example shows ho=
+w to
+  configure the DAC peripheral in order to generate several signals using D=
+MA
+  mode</td>
+ </tr>
+ <tr height=3D20 style=3D'mso-height-source:userset;height:15.0pt'>
+  <td rowspan=3D2 height=3D40 class=3Dxl170 style=3D'height:30.0pt'>&nbsp;<=
+/td>
+  <td rowspan=3D2 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD;b=
+order-top:
+  none'>DCMI</td>
+  <td rowspan=3D2 class=3Dxl176 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>DCMI_CameraExample</td>
+  <td rowspan=3D2 class=3Dxl178 width=3D241 style=3D'border-bottom:1.5pt so=
+lid #4F81BD;
+  border-top:none;width:181pt'>DCMI, Capture<span
+  style=3D'mso-spacerun:yes'>&nbsp;</span></td>
+  <td rowspan=3D2 class=3Dxl180 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>X</td>
+  <td rowspan=3D2 class=3Dxl180 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>X</td>
+  <td rowspan=3D2 class=3Dxl180 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl180 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>&nbsp;</td>
+  <td class=3Dxl114 width=3D609 style=3D'border-left:none;width:457pt'>This=
+ example
+  shows how to use the DCMI to control the OV9655 or OV2640 Camera module</=
+td>
+ </tr>
+ <tr height=3D20 style=3D'mso-height-source:userset;height:15.0pt'>
+  <td height=3D20 class=3Dxl92 width=3D609 style=3D'height:15.0pt;border-le=
+ft:none;
+  width:457pt'>mounted on STM324xG-EVAL or STM32437I-EVAL evaluation
+  boards.<span style=3D'mso-spacerun:yes'>&nbsp;</span></td>
+ </tr>
+ <tr height=3D36 style=3D'mso-height-source:userset;height:27.0pt'>
+  <td height=3D36 class=3Dxl65 style=3D'height:27.0pt'></td>
+  <td class=3Dxl122 style=3D'border-top:none'>DMA</td>
+  <td class=3Dxl123 style=3D'border-top:none'>DMA_FLASHToRAM</td>
+  <td class=3Dxl124 width=3D241 style=3D'border-top:none;width:181pt'>DMA, =
+FLASH, RAM</td>
+  <td class=3Dxl125 style=3D'border-top:none'>X</td>
+  <td class=3Dxl126 style=3D'border-top:none'>X</td>
+  <td class=3Dxl126 style=3D'border-top:none'>X</td>
+  <td class=3Dxl126 style=3D'border-top:none'>X</td>
+  <td class=3Dxl127 width=3D609 style=3D'width:457pt'>This example provides=
+ a
+  description of how to use a DMA channel to transfer a word data buffer fr=
+om
+  FLASH memory to embedded SRAM memory.</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td rowspan=3D4 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD;b=
+order-top:
+  none'>DMA2D</td>
+  <td class=3Dxl86>DMA2D_MemToMemWithLCD</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>DMA2D, Memory to Memor=
+y, LCD</td>
+  <td class=3Dxl88>&nbsp;</td>
+  <td class=3Dxl89>&nbsp;</td>
+  <td class=3Dxl90>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example provides a
+  description of how to configure DMA2D peripheral in Memory_to_Memory tran=
+sfer
+  mode and display the result on LCD</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl79>DMA2D_RegToMemWithLCD</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>DMA2D, Register to Mem=
+ory, LCD</td>
+  <td class=3Dxl81>&nbsp;</td>
+  <td class=3Dxl82>&nbsp;</td>
+  <td class=3Dxl83>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example provides a
+  description of how to configure DMA2D peripheral in Register_to_Memory
+  transfer mode and display the result on LCD.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl86>DMA2D_MemToMemWithPFC</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>DMA2D, Memory to Memor=
+y, LCD,
+  PFC</td>
+  <td class=3Dxl88>&nbsp;</td>
+  <td class=3Dxl89>&nbsp;</td>
+  <td class=3Dxl90>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example provides a
+  description of how to configure DMA2D peripheral in Memory_to_Memory with
+  pixel format conversion transfer mode.</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td class=3Dxl103>DMA2D_MemToMemWithBlending</td>
+  <td class=3Dxl104 width=3D241 style=3D'width:181pt'>DMA2D, Memory to Memo=
+ry, LCD,
+  Blending Mode</td>
+  <td class=3Dxl128>&nbsp;</td>
+  <td class=3Dxl129>&nbsp;</td>
+  <td class=3Dxl130>X</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl106 width=3D609 style=3D'width:457pt'>This example provides=
+ a
+  description of how to configure DMA2D peripheral in Memory_to_Memory with
+  blending transfer mode.</td>
+ </tr>
+ <tr height=3D36 style=3D'mso-height-source:userset;height:27.0pt'>
+  <td height=3D36 class=3Dxl65 style=3D'height:27.0pt'></td>
+  <td class=3Dxl97>EXTI</td>
+  <td class=3Dxl86>EXTI_Example</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>EXTI, EXTI Line</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'><span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>This example shows how to config=
+ure
+  external interrupt lines. In this example, 2 EXTI lines (EXTI Line0 and
+  Line15) are configured<span style=3D'mso-spacerun:yes'>&nbsp; </span>to
+  generate an interrupt on each rising and falling edge, respectively.<span
+  style=3D'mso-spacerun:yes'>&nbsp;</span></td>
+ </tr>
+ <tr height=3D52 style=3D'mso-height-source:userset;height:39.0pt'>
+  <td height=3D52 class=3Dxl65 style=3D'height:39.0pt'></td>
+  <td rowspan=3D10 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD'=
+>FMC</td>
+  <td class=3Dxl131>FMC_SDRAM</td>
+  <td class=3Dxl132 width=3D241 style=3D'width:181pt'>FMC, SDRAM</td>
+  <td class=3Dxl133>&nbsp;</td>
+  <td class=3Dxl133>&nbsp;</td>
+  <td class=3Dxl133>X</td>
+  <td class=3Dxl133>X</td>
+  <td class=3Dxl134 width=3D609 style=3D'width:457pt'>This example shows ho=
+w to
+  configure the FMC to drive the MT48LC2M3B2B5-7E SDRAM memory mounted on
+  STM324x9I-EVAL evaluation board. It uses an associate driver developed to
+  interface with the indicated SDRAM memory device.</td>
+ </tr>
+ <tr height=3D51 style=3D'mso-height-source:userset;height:38.25pt'>
+  <td height=3D51 class=3Dxl65 style=3D'height:38.25pt'></td>
+  <td class=3Dxl135>FMC_SRAM</td>
+  <td class=3Dxl136 width=3D241 style=3D'width:181pt'>FMC, SRAM</td>
+  <td class=3Dxl90>&nbsp;</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl78 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the FMC to drive the SRAM memory mounted<span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>on STM3240_41_G_EVAL or STM32437=
+I_EVAL
+  or STM324x9I_EVAL board. It uses an<span style=3D'mso-spacerun:yes'>&nbsp;
+  </span>associate driver developed to interface with the indicated SRAM
+  device.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl137>FMC_NOR</td>
+  <td class=3Dxl138 width=3D241 style=3D'width:181pt'>FMC, NOR</td>
+  <td class=3Dxl83>&nbsp;</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the FMC peripheral in order to use the NOR memory functionnalit=
+ies
+  and operations mounted on Big Manta Eval board (STM324x9I)</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl139 width=3D227 style=3D'width:170pt'>FMC_SDRAM_Basic</td>
+  <td class=3Dxl140 width=3D241 style=3D'width:181pt'>FMC, SDRAM</td>
+  <td class=3Dxl90>&nbsp;</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the FMC to drive the MT48LC2M3B2B5-7E SDRAM memory mounted on
+  STM324x9I-EVAL evaluation board.<span style=3D'mso-spacerun:yes'>&nbsp;</=
+span></td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td rowspan=3D2 height=3D68 class=3Dxl170 style=3D'height:51.0pt'>&nbsp;<=
+/td>
+  <td rowspan=3D2 class=3Dxl182 width=3D227 style=3D'border-bottom:.5pt sol=
+id #4F81BD;
+  border-top:none;width:170pt'>FMC_SDRAM_DMA</td>
+  <td rowspan=3D2 class=3Dxl173 width=3D241 style=3D'border-bottom:.5pt sol=
+id #4F81BD;
+  border-top:none;width:181pt'>FMC, SDRAM, DMA Mode</td>
+  <td rowspan=3D2 class=3Dxl175 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl175 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl175 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>X</td>
+  <td rowspan=3D2 class=3Dxl175 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>X</td>
+  <td class=3Dxl110 width=3D609 style=3D'border-left:none;width:457pt'>This=
+ example
+  shows how to configure the FMC and DMA peripherals in order to interface =
+with
+  the SDRAM external memory mounted on Big Manta Eval board (STM324x9I).</t=
+d>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl85 width=3D609 style=3D'height:25.5pt;border-le=
+ft:none;
+  width:457pt'>After configuration, the user can perform read/write access
+  operations on the external device using the DMA transfer mode</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl139 width=3D227 style=3D'width:170pt'>FMC_SDRAM_DataMemory<=
+/td>
+  <td class=3Dxl140 width=3D241 style=3D'width:181pt'>FMC, SDRAM, Data Memo=
+ry</td>
+  <td class=3Dxl90>&nbsp;</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example shows how=
+ to use
+  the MT48LC2M3B2B5-7E SDRAM mounted on STM324x9I-EVAL as data memory
+  (including heap and stack).</td>
+ </tr>
+ <tr height=3D20 style=3D'mso-height-source:userset;height:15.0pt'>
+  <td rowspan=3D2 height=3D40 class=3Dxl170 style=3D'height:30.0pt'>&nbsp;<=
+/td>
+  <td rowspan=3D2 class=3Dxl182 width=3D227 style=3D'border-bottom:.5pt sol=
+id #4F81BD;
+  border-top:none;width:170pt'>FMC_SRAM_DataMemory</td>
+  <td rowspan=3D2 class=3Dxl173 width=3D241 style=3D'border-bottom:.5pt sol=
+id #4F81BD;
+  border-top:none;width:181pt'>FMC, SRAM, Data Memory</td>
+  <td rowspan=3D2 class=3Dxl175 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl175 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>X</td>
+  <td rowspan=3D2 class=3Dxl175 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>X</td>
+  <td rowspan=3D2 class=3Dxl175 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>X</td>
+  <td class=3Dxl110 width=3D609 style=3D'border-left:none;width:457pt'>This=
+ example
+  shows how to use the SRAM mounted on STM32437I_EVAL</td>
+ </tr>
+ <tr height=3D20 style=3D'mso-height-source:userset;height:15.0pt'>
+  <td height=3D20 class=3Dxl85 width=3D609 style=3D'height:15.0pt;border-le=
+ft:none;
+  width:457pt'>or STM324x9I_EVAL evaluation boards as program data memory
+  (including heap and stack).</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td class=3Dxl141 width=3D227 style=3D'width:170pt'>FMC_SDRAM_LowPower</t=
+d>
+  <td class=3Dxl142 width=3D241 style=3D'width:181pt'>FMC, SDRAM, Low power=
+</td>
+  <td class=3Dxl143>&nbsp;</td>
+  <td class=3Dxl95>&nbsp;</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl96 width=3D609 style=3D'width:457pt'>This example shows how=
+ to use
+  the SDRAM memory in low power mode. It gives a proof on how the SDRAM ret=
+ains
+  data after entering the CPU in Stop mode.</td>
+ </tr>
+ <tr height=3D26 style=3D'mso-height-source:userset;height:19.5pt'>
+  <td rowspan=3D2 height=3D52 class=3Dxl170 style=3D'height:39.0pt'>&nbsp;<=
+/td>
+  <td rowspan=3D3 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD;b=
+order-top:
+  none'>FSMC</td>
+  <td rowspan=3D2 class=3Dxl184 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>FSMC_SRAM</td>
+  <td rowspan=3D2 class=3Dxl186 width=3D241 style=3D'border-bottom:.5pt sol=
+id #4F81BD;
+  border-top:none;width:181pt'>FSMC, SRAM</td>
+  <td rowspan=3D2 class=3Dxl187 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>X</td>
+  <td rowspan=3D2 class=3Dxl187 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl187 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl187 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>&nbsp;</td>
+  <td class=3Dxl110 width=3D609 style=3D'border-left:none;width:457pt'>This=
+ example
+  is a basic example which shows how to configure the FSMC peripheral<span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>in order to interface with the S=
+RAM
+  external memory mounted on Big Manta Eval board (STM324xG).</td>
+ </tr>
+ <tr height=3D26 style=3D'mso-height-source:userset;height:19.5pt'>
+  <td height=3D26 class=3Dxl85 width=3D609 style=3D'height:19.5pt;border-le=
+ft:none;
+  width:457pt'>After memory configuration, the user can perform read/write
+  access operations on the external device</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td class=3Dxl93>FSMC_SRAM_DataMemory</td>
+  <td class=3Dxl94 width=3D241 style=3D'width:181pt'>FSMC, SRAM, Data Memor=
+y</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>&nbsp;</td>
+  <td class=3Dxl95>&nbsp;</td>
+  <td class=3Dxl95>&nbsp;</td>
+  <td class=3Dxl96 width=3D609 style=3D'width:457pt'>This example shows how=
+ to use
+  the SRAM memory mounted on STM324x9I EVAL as data memory (including heap =
+and
+  stack). It comprises the configuration of system file and toolchain linke=
+r</td>
+ </tr>
+ <tr height=3D22 style=3D'mso-height-source:userset;height:16.5pt'>
+  <td height=3D22 class=3Dxl65 style=3D'height:16.5pt'></td>
+  <td rowspan=3D2 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD;b=
+order-top:
+  none'>FLASH</td>
+  <td class=3Dxl79>FLASH_EraseProgram</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>FLASH, Program, Erase,=
+ Sector</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example provides a
+  description of how to Erase and program the STM32F4xx FLASH sectors.</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td class=3Dxl102 width=3D227 style=3D'width:170pt'>FLASH_WriteProtection=
+</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>FLASH, Write Protectio=
+n</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example provides a
+  description of how to enable and disable the write protection for the
+  STM32F4xx FLASH.</td>
+ </tr>
+ <tr height=3D30 style=3D'mso-height-source:userset;height:22.5pt'>
+  <td height=3D30 class=3Dxl65 style=3D'height:22.5pt'></td>
+  <td class=3Dxl71 style=3D'border-top:none'>GPIO</td>
+  <td class=3Dxl144>GPIO_Example</td>
+  <td class=3Dxl145 width=3D241 style=3D'width:181pt'>GPIO</td>
+  <td class=3Dxl133>X</td>
+  <td class=3Dxl133>X</td>
+  <td class=3Dxl133>X</td>
+  <td class=3Dxl133>X</td>
+  <td class=3Dxl146 width=3D609 style=3D'width:457pt'>This example provides=
+ a short
+  description of how to use GPIO and typical sequence of GPIO configuration=
+</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td rowspan=3D5 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD'>=
+HASH</td>
+  <td class=3Dxl147>HASH_SHA1MD5</td>
+  <td class=3Dxl148 width=3D241 style=3D'width:181pt'>HASH, SHA1</td>
+  <td class=3Dxl149>X</td>
+  <td class=3Dxl149>X</td>
+  <td class=3Dxl149>&nbsp;</td>
+  <td class=3Dxl149>X</td>
+  <td class=3Dxl150 width=3D609 style=3D'width:457pt'>This example provides=
+ a short
+  description of how to use the HASH peripheral to hash data using SHA-1 and
+  MD5 Algorithms</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl107>HASH_HMAC_SHA1MD5</td>
+  <td class=3Dxl108 width=3D241 style=3D'width:181pt'>HASH, SHA1, HMAC, MD5=
+</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl109>&nbsp;</td>
+  <td class=3Dxl109>X</td>
+  <td class=3Dxl110 width=3D609 style=3D'width:457pt'>This example provides=
+ a short
+  description of how to use the HASH peripheral to hash data using HMAC SHA=
+-1
+  and HMAC MD5 Algorithms</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl151>HASH_SHA1MD5_DMA</td>
+  <td class=3Dxl152 width=3D241 style=3D'width:181pt'>HASH, SHA1, HMAC, MD5=
+, DMA Mode</td>
+  <td class=3Dxl121>X</td>
+  <td class=3Dxl121>X</td>
+  <td class=3Dxl153>&nbsp;</td>
+  <td class=3Dxl153>X</td>
+  <td class=3Dxl154 width=3D609 style=3D'width:457pt'>This example provides=
+ a short
+  description of how to use the HASH peripheral to hash data using SHA-1 and
+  MD5 Algorithms</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl99>HASH_SHA224SHA256_DMA</td>
+  <td class=3Dxl100 width=3D241 style=3D'width:181pt'>HASH, SHA224, SHA256,=
+ DMA Mode</td>
+  <td class=3Dxl155>&nbsp;</td>
+  <td class=3Dxl155>X</td>
+  <td class=3Dxl156>&nbsp;</td>
+  <td class=3Dxl156>X</td>
+  <td class=3Dxl101 width=3D609 style=3D'width:457pt'>This example provides=
+ a short
+  description of how to use the HASH peripheral to hash data using SHA-224 =
+and
+  SHA-256 Algorithms</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td class=3Dxl93>HASH_ContextSwap</td>
+  <td class=3Dxl94 width=3D241 style=3D'width:181pt'>HASH, Context Swap</td>
+  <td class=3Dxl119>X</td>
+  <td class=3Dxl119>X</td>
+  <td class=3Dxl95>&nbsp;</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl96 width=3D609 style=3D'width:457pt'>This example provides =
+a short
+  description of how to use the HASH peripheral to save and restore hash
+  context to serve a high priority hash operation</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td rowspan=3D3 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD;b=
+order-top:
+  none'>I2C</td>
+  <td class=3Dxl99>I2C_DataExchangeDMA</td>
+  <td class=3Dxl100 width=3D241 style=3D'width:181pt'>I2C, Two Boards, DMA =
+Mode</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl101 width=3D609 style=3D'width:457pt'>This example of how t=
+o use the
+  I2C API to ensure the communication between slave Receiver/Transmitter and
+  master Transmitter/Receiver based on DMA<span style=3D'mso-spacerun:yes'>=
+&nbsp;
+  </span>process.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl120>I2C_EEPROM</td>
+  <td class=3Dxl113 width=3D241 style=3D'width:181pt'>I2C, EEPROM</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl121>&nbsp;</td>
+  <td class=3Dxl121>&nbsp;</td>
+  <td class=3Dxl114 width=3D609 style=3D'width:457pt'>This firmware provide=
+s a basic
+  example of how to use the I2C API to communicate with an I2C EEPROM
+  device<span style=3D'mso-spacerun:yes'>&nbsp;</span></td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td class=3Dxl157>I2C_IOExpander</td>
+  <td class=3Dxl158 width=3D241 style=3D'width:181pt'>I2C, IOExpander, Touc=
+h Screen,
+  Joystick</td>
+  <td class=3Dxl105>&nbsp;</td>
+  <td class=3Dxl105>&nbsp;</td>
+  <td class=3Dxl159>X</td>
+  <td class=3Dxl159>&nbsp;</td>
+  <td class=3Dxl160 width=3D609 style=3D'width:457pt'>This firmware provide=
+s an
+  example of configuring and using the IO Expander in order to control input
+  Joystick IOs, output Ios.</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td rowspan=3D2 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD;b=
+order-top:
+  none'>I2S</td>
+  <td class=3Dxl86>I2S_DataExchangePolling</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>I2S, Polling Mode</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example provides =
+a small
+  application to show how to configure the I2S for full duplex communicatio=
+n,
+  based on polling mode and through I2S firmwarelibrary.<span
+  style=3D'mso-spacerun:yes'>&nbsp;</span></td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td class=3Dxl103>I2S_Audio</td>
+  <td class=3Dxl104 width=3D241 style=3D'width:181pt'>I2S, CODEC</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl105>&nbsp;</td>
+  <td class=3Dxl105>&nbsp;</td>
+  <td class=3Dxl106 width=3D609 style=3D'width:457pt'>This example provides=
+ basic
+  implementation of audio features, It allows to play an audio file through=
+ the
+  I2S peripheral and using the external codec.</td>
+ </tr>
+ <tr height=3D36 style=3D'mso-height-source:userset;height:27.0pt'>
+  <td height=3D36 class=3Dxl65 style=3D'height:27.0pt'></td>
+  <td class=3Dxl98>IWDG</td>
+  <td class=3Dxl93>IWDG_Example</td>
+  <td class=3Dxl94 width=3D241 style=3D'width:181pt'>IWDG</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl96 width=3D609 style=3D'width:457pt'>This example shows how=
+ to update
+  at regular period the IWDG reload counter and how to simulate a software
+  fault generating an MCU IWDG reset on expiry of a programmed time period<=
+/td>
+ </tr>
+ <tr height=3D26 style=3D'mso-height-source:userset;height:19.5pt'>
+  <td rowspan=3D2 height=3D52 class=3Dxl170 style=3D'height:39.0pt'>&nbsp;<=
+/td>
+  <td rowspan=3D7 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD;b=
+order-top:
+  none'>LTDC</td>
+  <td rowspan=3D2 class=3Dxl184 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>LTDC_Display_1Layer</td>
+  <td rowspan=3D2 class=3Dxl186 width=3D241 style=3D'border-bottom:.5pt sol=
+id #4F81BD;
+  border-top:none;width:181pt'>LTDC, Layer 1</td>
+  <td rowspan=3D2 class=3Dxl187 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl187 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl187 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>X</td>
+  <td rowspan=3D2 class=3Dxl187 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>&nbsp;</td>
+  <td class=3Dxl110 width=3D609 style=3D'border-left:none;width:457pt'>This=
+ example
+  provides a description of how to configure LTDC peripheral to display BMP
+  image on LCD using only one layer.</td>
+ </tr>
+ <tr height=3D26 style=3D'mso-height-source:userset;height:19.5pt'>
+  <td height=3D26 class=3Dxl85 width=3D609 style=3D'height:19.5pt;border-le=
+ft:none;
+  width:457pt'>In this basic example the goal is to explain the different
+  fields of the LTDC structure.<span style=3D'mso-spacerun:yes'>&nbsp;</spa=
+n></td>
+ </tr>
+ <tr height=3D25 style=3D'mso-height-source:userset;height:19.15pt'>
+  <td rowspan=3D2 height=3D50 class=3Dxl170 style=3D'height:38.3pt'>&nbsp;<=
+/td>
+  <td rowspan=3D2 class=3Dxl188 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>LTDC_Display_2Layers</td>
+  <td rowspan=3D2 class=3Dxl190 width=3D241 style=3D'border-bottom:.5pt sol=
+id #4F81BD;
+  border-top:none;width:181pt'>LTDC, Layer 1, Layer 2, Blending, CLUT Mode<=
+/td>
+  <td rowspan=3D2 class=3Dxl192 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl192 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl192 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>X</td>
+  <td rowspan=3D2 class=3Dxl192 style=3D'border-bottom:.5pt solid #4F81BD;b=
+order-top:
+  none'>&nbsp;</td>
+  <td class=3Dxl114 width=3D609 style=3D'border-left:none;width:457pt'><span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>This example describes how to
+  configure the LTDC peripheral to display two Layers<span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>at the same time.</td>
+ </tr>
+ <tr height=3D25 style=3D'mso-height-source:userset;height:19.15pt'>
+  <td height=3D25 class=3Dxl92 width=3D609 style=3D'height:19.15pt;border-l=
+eft:none;
+  width:457pt'><span style=3D'mso-spacerun:yes'>&nbsp; </span>The goal of t=
+his
+  example is to explain how to blend two layers and how to display an image
+  with L8 (8bits per pixels indexed) as pixel format.<span
+  style=3D'mso-spacerun:yes'>&nbsp;</span></td>
+ </tr>
+ <tr height=3D51 style=3D'mso-height-source:userset;height:38.25pt'>
+  <td height=3D51 class=3Dxl65 style=3D'height:38.25pt'></td>
+  <td class=3Dxl79>LTDC_ColorKeying</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>LTDC, Layer 1, Layer 2,
+  Blending, Color keying mode</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example provides a
+  description of how to configure the LCD to display 2 blended pictures and
+  apply the color Keying functionality. In this example, the importance is =
+to
+  explain the color Keying and how to configure this functionality.</td>
+ </tr>
+ <tr height=3D21 style=3D'mso-height-source:userset;height:15.75pt'>
+  <td height=3D21 class=3Dxl65 style=3D'height:15.75pt'></td>
+  <td class=3Dxl86>LTDC_PicturesFromSDCard</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>LTDC, SD Card, FatFS, =
+SDRAM</td>
+  <td class=3Dxl121>&nbsp;</td>
+  <td class=3Dxl121>&nbsp;</td>
+  <td class=3Dxl121>X</td>
+  <td class=3Dxl121>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example describes=
+ how to
+  display on LCD pictures saved under SD card</td>
+ </tr>
+ <tr height=3D22 style=3D'mso-height-source:userset;height:16.5pt'>
+  <td height=3D22 class=3Dxl65 style=3D'height:16.5pt'></td>
+  <td class=3Dxl107>LTDC_AnimatedPictureFromSDCard</td>
+  <td class=3Dxl108 width=3D241 style=3D'width:181pt'>LTDC, FatFs, SD Card,=
+ SDRAM</td>
+  <td class=3Dxl155>&nbsp;</td>
+  <td class=3Dxl155>&nbsp;</td>
+  <td class=3Dxl155>X</td>
+  <td class=3Dxl155>X</td>
+  <td class=3Dxl110 width=3D609 style=3D'width:457pt'>This example describe=
+s how to
+  display on LCD an animated picture saved under microSD or FLASH USB</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td rowspan=3D4 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD;b=
+order-top:
+  none'>NVIC</td>
+  <td class=3Dxl147>NVIC_WFIMode</td>
+  <td class=3Dxl148 width=3D241 style=3D'width:181pt'>NVIC, WFI, Low Power<=
+/td>
+  <td class=3Dxl149>X</td>
+  <td class=3Dxl149>X</td>
+  <td class=3Dxl149>X</td>
+  <td class=3Dxl149>X</td>
+  <td class=3Dxl150 width=3D609 style=3D'width:457pt'>This example shows ho=
+w to enter
+  the system to WFI mode with DMA transfer enabled and wake-up from this mo=
+de
+  by the DMA End of Transfer interrupt.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl79>NVIC_IRQMask</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>NVIC, IRQ Handler, Mas=
+k</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example demonstra=
+tes the
+  use of the Nested Vectored Interrupt Controller (NVIC) IRQ Channels
+  configuration and how to mask/activate different IRQs.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl120>NVIC_IRQPriority</td>
+  <td class=3Dxl113 width=3D241 style=3D'width:181pt'>NVIC, IRQ Handler, Pr=
+iority</td>
+  <td class=3Dxl121>X</td>
+  <td class=3Dxl121>X</td>
+  <td class=3Dxl121>X</td>
+  <td class=3Dxl121>X</td>
+  <td class=3Dxl114 width=3D609 style=3D'width:457pt'>This example demonstr=
+ates the
+  use of the Nested Vectored Interrupt Controller (NVIC) and how to configu=
+re
+  their priorities.</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td class=3Dxl157>NVIC_VectorTableRelocation</td>
+  <td class=3Dxl158 width=3D241 style=3D'width:181pt'>NVIC, IRQ Handler, Ve=
+ctor table</td>
+  <td class=3Dxl159>X</td>
+  <td class=3Dxl159>X</td>
+  <td class=3Dxl159>X</td>
+  <td class=3Dxl159>X</td>
+  <td class=3Dxl160 width=3D609 style=3D'width:457pt'>This example describe=
+s how to
+  relocate the CortexM4 vector table in a specific address other than the
+  default Flash memory base address.</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td rowspan=3D5 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD;b=
+order-top:
+  none'>PWR</td>
+  <td class=3Dxl86>PWR_STOP</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>PWR, STOP Mode, Under-=
+Driver,
+  RTC</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example shows how=
+ to enter
+  the system to STOP mode and wake-up from this mode using RTC Wakeup Timer
+  Event. In this Example is developed w/ Under-drive mode enabled or
+  disabled<span style=3D'mso-spacerun:yes'>&nbsp;</span></td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl79>PWR_STANDBY</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>PWR, STANDBY Mode, RTC=
+, Alarm,
+  Wake-up Pins</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example shows how=
+ to enter
+  the system to STANDBY mode and wake-up from this mode using: external RES=
+ET,
+  RTC Alarm A or WKUP pin</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl120>PWR_PVD</td>
+  <td class=3Dxl113 width=3D241 style=3D'width:181pt'>PWR, PVD</td>
+  <td class=3Dxl121>X</td>
+  <td class=3Dxl121>X</td>
+  <td class=3Dxl121>&nbsp;</td>
+  <td class=3Dxl121>&nbsp;</td>
+  <td class=3Dxl114 width=3D609 style=3D'width:457pt'>This example shows ho=
+w to
+  configure the programmable voltage detector using an external interrupt l=
+ine</td>
+ </tr>
+ <tr height=3D21 style=3D'mso-height-source:userset;height:15.75pt'>
+  <td height=3D21 class=3Dxl65 style=3D'height:15.75pt'></td>
+  <td class=3Dxl161>PWR_BOR</td>
+  <td class=3Dxl116 width=3D241 style=3D'width:181pt'>PWR, BOR</td>
+  <td class=3Dxl155>X</td>
+  <td class=3Dxl155>X</td>
+  <td class=3Dxl155>&nbsp;</td>
+  <td class=3Dxl155>&nbsp;</td>
+  <td class=3Dxl117 width=3D609 style=3D'width:457pt'>This example shows ho=
+w to
+  configure the programmable BOR thresholds using the FLASH option bytes</t=
+d>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td class=3Dxl162>PWR_CurrentConsumption</td>
+  <td class=3Dxl163 width=3D241 style=3D'width:181pt'>PWR, Current Consumpt=
+ion</td>
+  <td class=3Dxl119>X</td>
+  <td class=3Dxl119>X</td>
+  <td class=3Dxl119>&nbsp;</td>
+  <td class=3Dxl119>&nbsp;</td>
+  <td class=3Dxl164 width=3D609 style=3D'width:457pt'>This example shows ho=
+w to
+  configure the STM32F4xx system to measure different Low Power modes curre=
+nt
+  consumption (included new mode implemented within STM32F42xx/43xx)</td>
+ </tr>
+ <tr height=3D53 style=3D'mso-height-source:userset;height:39.75pt'>
+  <td height=3D53 class=3Dxl65 style=3D'height:39.75pt'></td>
+  <td class=3Dxl98>RCC</td>
+  <td class=3Dxl103>RCC_Example</td>
+  <td class=3Dxl104 width=3D241 style=3D'width:181pt'>RCC, MCO</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl105>&nbsp;</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl106 width=3D609 style=3D'width:457pt'>This example shows ho=
+w to use,
+  for debug purpose, the RCC_GetClocksFreq function to retrieve the current
+  status and frequencies of different on chip clocks. You can see the
+  RCC_ClockFreq structure content, which hold the frequencies of different =
+on
+  chip clocks, using your toolchain debugger.</td>
+ </tr>
+ <tr height=3D36 style=3D'mso-height-source:userset;height:27.0pt'>
+  <td height=3D36 class=3Dxl65 style=3D'height:27.0pt'></td>
+  <td class=3Dxl97>RNG</td>
+  <td class=3Dxl120>RNG_MultiRNG</td>
+  <td class=3Dxl113 width=3D241 style=3D'width:181pt'>RNG</td>
+  <td class=3Dxl121>X</td>
+  <td class=3Dxl121>X</td>
+  <td class=3Dxl121>&nbsp;</td>
+  <td class=3Dxl121>X</td>
+  <td class=3Dxl114 width=3D609 style=3D'width:457pt'>This example provides=
+ a short
+  description of how to use the RNG peripheral to generate Random 32bit num=
+bers</td>
+ </tr>
+ <tr height=3D20 style=3D'mso-height-source:userset;height:15.0pt'>
+  <td rowspan=3D2 height=3D40 class=3Dxl170 style=3D'height:30.0pt'>&nbsp;<=
+/td>
+  <td rowspan=3D8 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD'>=
+RTC</td>
+  <td rowspan=3D2 class=3Dxl184 style=3D'border-bottom:.5pt solid #4F81BD'>=
+RTC_Calendar</td>
+  <td rowspan=3D2 class=3Dxl186 width=3D241 style=3D'border-bottom:.5pt sol=
+id #4F81BD;
+  width:181pt'>RTC, Calendar</td>
+  <td rowspan=3D2 class=3Dxl187 style=3D'border-bottom:.5pt solid #4F81BD'>=
+X</td>
+  <td rowspan=3D2 class=3Dxl187 style=3D'border-bottom:.5pt solid #4F81BD'>=
+X</td>
+  <td rowspan=3D2 class=3Dxl187 style=3D'border-bottom:.5pt solid #4F81BD'>=
+&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl187 style=3D'border-bottom:.5pt solid #4F81BD'>=
+&nbsp;</td>
+  <td class=3Dxl134 width=3D609 style=3D'border-left:none;width:457pt'>This=
+ example
+  demonstrates how to use the RTC API, it provides steps to setup the RTC
+  peripheral, in</td>
+ </tr>
+ <tr height=3D20 style=3D'mso-height-source:userset;height:15.0pt'>
+  <td height=3D20 class=3Dxl85 width=3D609 style=3D'height:15.0pt;border-le=
+ft:none;
+  width:457pt'><span style=3D'mso-spacerun:yes'>&nbsp; </span>terms of pres=
+caler
+  and interrupts, to be used to keep time and to generate alarm interrupt.<=
+/td>
+ </tr>
+ <tr height=3D51 style=3D'mso-height-source:userset;height:38.25pt'>
+  <td height=3D51 class=3Dxl65 style=3D'height:38.25pt'></td>
+  <td class=3Dxl86>RTC_Timer</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>RTC, Timer</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'><span
+  style=3D'mso-spacerun:yes'>&nbsp;</span>This example provides a short
+  description of how to use the RTC peripheral with<span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>Alarm sub seconds feature to sim=
+ulate
+  a timer with refresh time equal to 250 ms<span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>(1 second/ 8) * 2).The RTC is
+  configured to generate sub seconds interrupt each 125ms (will have<span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>8 interrupt per 1 second).</td>
+ </tr>
+ <tr height=3D51 style=3D'mso-height-source:userset;height:38.25pt'>
+  <td height=3D51 class=3Dxl65 style=3D'height:38.25pt'></td>
+  <td class=3Dxl79>RTC_LSI</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>RTC, LSI, Auto calibra=
+tion</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example demonstra=
+tes and
+  explains how to use the LSI clock source auto calibration to get a precise
+  RTC clock. As an application example, it demonstrates how to configure the
+  TIM5 timer internally connected to LSI clock output, in order to adjust t=
+he
+  RTC prescaler.<span style=3D'mso-spacerun:yes'>&nbsp;</span></td>
+ </tr>
+ <tr height=3D85 style=3D'mso-height-source:userset;height:63.75pt'>
+  <td height=3D85 class=3Dxl65 style=3D'height:63.75pt'></td>
+  <td class=3Dxl86>RTC_BKPDomain</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>RTC, Back-up Domain</t=
+d>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example demonstra=
+tes and
+  explains how to use the peripherals available on Backup Domain. These
+  peripherals are: the RCC BDCR register containing the LSE Osc configurati=
+on
+  and the RTC Clock enable/disable bits. It embeds also the RTC peripheral =
+with
+  its associated Backup Data registers. And finally the Backup SRAM (4KB) w=
+ith
+  its low power regulator allowing preserving its contents when the product=
+ is
+  powered by VBAT pin.</td>
+ </tr>
+ <tr height=3D51 style=3D'mso-height-source:userset;height:38.25pt'>
+  <td height=3D51 class=3Dxl65 style=3D'height:38.25pt'></td>
+  <td class=3Dxl79>RTC_StopWatch</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>RTC, STOP Watch</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example illustrat=
+es how to
+  use the STM32F4xx new RTC's sub-seconds and<span
+  style=3D'mso-spacerun:yes'>&nbsp;&nbsp; </span>Tamper feature (Filter,
+  sampling) features. It simulates a precise chronometer with 10 record tim=
+es
+  possibilities stored in the Backup registers (10 registers<span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>for time (second, minutes and ho=
+urs)
+  and 10 registers for subsecond)<span
+  style=3D'mso-spacerun:yes'>&nbsp;&nbsp;</span></td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl86>RTC_Tamper</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>RTC, Tamper</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl91>&nbsp;</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'><span
+  style=3D'mso-spacerun:yes'>&nbsp;</span>This example shows how to write/r=
+ead
+  data to/from RTC Backup data registers and demonstrates the Tamper detect=
+ion
+  feature</td>
+ </tr>
+ <tr height=3D22 style=3D'mso-height-source:userset;height:16.5pt'>
+  <td height=3D22 class=3Dxl65 style=3D'height:16.5pt'></td>
+  <td class=3Dxl103>RTC_TimeStamp</td>
+  <td class=3Dxl104 width=3D241 style=3D'width:181pt'>RTC, TimeStamp</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl105>&nbsp;</td>
+  <td class=3Dxl105>&nbsp;</td>
+  <td class=3Dxl106 width=3D609 style=3D'width:457pt'>This example provides=
+ a short
+  description of how to use the RTC peripheral and the Time Stamp feature</=
+td>
+ </tr>
+ <tr height=3D26 style=3D'mso-height-source:userset;height:19.9pt'>
+  <td rowspan=3D2 height=3D52 class=3Dxl170 style=3D'height:39.8pt'>&nbsp;<=
+/td>
+  <td rowspan=3D2 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD;b=
+order-top:
+  none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl176 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>SAI_Audio</td>
+  <td rowspan=3D2 class=3Dxl178 width=3D241 style=3D'border-bottom:1.5pt so=
+lid #4F81BD;
+  border-top:none;width:181pt'>SAI, CODEC Audio</td>
+  <td rowspan=3D2 class=3Dxl180 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl180 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>&nbsp;</td>
+  <td rowspan=3D2 class=3Dxl180 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>X</td>
+  <td rowspan=3D2 class=3Dxl180 style=3D'border-bottom:1.5pt solid #4F81BD;
+  border-top:none'>X</td>
+  <td class=3Dxl114 width=3D609 style=3D'border-left:none;width:457pt'>This=
+ example
+  provides basic implementation of audio features.</td>
+ </tr>
+ <tr height=3D26 style=3D'mso-height-source:userset;height:19.9pt'>
+  <td height=3D26 class=3Dxl96 width=3D609 style=3D'height:19.9pt;border-le=
+ft:none;
+  width:457pt'>It allows to play an audio file through the SAI peripheral a=
+nd
+  using the external codec implemented on the STM324x9I_EVAL board.</td>
+ </tr>
+ <tr height=3D53 style=3D'mso-height-source:userset;height:39.75pt'>
+  <td height=3D53 class=3Dxl65 style=3D'height:39.75pt'></td>
+  <td class=3Dxl97>SDIO</td>
+  <td class=3Dxl79>SDIO_uSDCard</td>
+  <td class=3Dxl165 width=3D241 style=3D'width:181pt'>SDIO, SD Card</td>
+  <td class=3Dxl83>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example provides =
+a basic
+  example of how to use the SDIO firmware library and an associate driver to
+  perform read/write operations on the SD Card memory (SD Card V1.0, V1.1, =
+V2.0
+  and SDHC (High Capacity) protocol) that could be mounted on the STM324xG_=
+EVAL/STM324x7I_EVAL
+  boards.</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td rowspan=3D3 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD'>=
+SPI</td>
+  <td class=3Dxl166>SPI_FLASH</td>
+  <td class=3Dxl167 width=3D241 style=3D'width:181pt'>SPI, FLASH</td>
+  <td class=3Dxl149>&nbsp;</td>
+  <td class=3Dxl149>&nbsp;</td>
+  <td class=3Dxl149>&nbsp;</td>
+  <td class=3Dxl149>&nbsp;</td>
+  <td class=3Dxl150 width=3D609 style=3D'width:457pt'>This example provides=
+ a basic
+  example of how to use the SPI firmware library and an associated driver
+  &quot;spi_flash.c&quot; to communicate with an M25P64 SPI FLASH.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl79>SPI_DataExchangeInterrupt</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>SPI, Two Boards, Full =
+Duplex,
+  Interrupt Mode</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl84>&nbsp;</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example provides =
+a small
+  application in which joystick buttons are used to trigger SPI communicati=
+on
+  using Interrupt and though using SPI firmware library.</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td class=3Dxl102 width=3D227 style=3D'width:170pt'>SPI_DataExchangeDMA</=
+td>
+  <td class=3Dxl94 width=3D241 style=3D'width:181pt'>SPI, Two Boards, Full =
+Duplex,
+  DMA Mode</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl121>&nbsp;</td>
+  <td class=3Dxl121>&nbsp;</td>
+  <td class=3Dxl96 width=3D609 style=3D'width:457pt'>This example provides =
+a small
+  application in which joystick buttons are used to trigger SPI communicati=
+on
+  using DMA and though using SPI firmware library.</td>
+ </tr>
+ <tr height=3D53 style=3D'mso-height-source:userset;height:39.75pt'>
+  <td height=3D53 class=3Dxl65 style=3D'height:39.75pt'></td>
+  <td class=3Dxl97>Systick</td>
+  <td class=3Dxl144>SysTick_Example</td>
+  <td class=3Dxl165 width=3D241 style=3D'width:181pt'>SDIO, SD Card</td>
+  <td class=3Dxl83>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl133>X</td>
+  <td class=3Dxl133>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the SysTick to generate a time base equal to 1 ms. The system c=
+lock
+  is set to 168 MHz for STM32F40/41xxx devices and 180 Mhz<span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>for STM32F42/43xxx devices, the
+  SysTick is clocked by the AHB clock (HCLK).</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td rowspan=3D19 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD'=
+>TIM</td>
+  <td class=3Dxl147>TIM_TimeBase<span style=3D'mso-spacerun:yes'>&nbsp;</sp=
+an></td>
+  <td class=3Dxl148 width=3D241 style=3D'width:181pt'>TIM</td>
+  <td class=3Dxl149>X</td>
+  <td class=3Dxl149>X</td>
+  <td class=3Dxl149>X</td>
+  <td class=3Dxl149>X</td>
+  <td class=3Dxl150 width=3D609 style=3D'width:457pt'>This example shows ho=
+w to
+  configure the TIM peripheral in Output Compare Timing mode with the
+  corresponding Interrupt requests for each channel in order to generate 4
+  different time bases</td>
+ </tr>
+ <tr height=3D21 style=3D'mso-height-source:userset;height:15.75pt'>
+  <td height=3D21 class=3Dxl65 style=3D'height:15.75pt'></td>
+  <td class=3Dxl79>TIM_InputCapture<span style=3D'mso-spacerun:yes'>&nbsp;<=
+/span></td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>TIM, Input Capture</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example shows how=
+ to use
+  the TIM peripheral to measure the frequency of an external signal</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl86>TIM_OCActive</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>TIM, OutPut Compare</t=
+d>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the TIM peripheral to generate four different signals with four
+  different delays</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl79>TIM_OCInactive<span style=3D'mso-spacerun:yes'>&nbsp;</s=
+pan></td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>TIM, OutPut Compare</t=
+d>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the TIM peripheral in Output Compare Inactive mode with the
+  corresponding Interrupt requests for each channel.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl86>TIM_OCToggle<span style=3D'mso-spacerun:yes'>&nbsp;</spa=
+n></td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>TIM, OutPut Compare</t=
+d>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the TIM3 peripheral to generate four different signals with four
+  different frequencies.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl79>TIM_TIM9OCToggle<span style=3D'mso-spacerun:yes'>&nbsp;<=
+/span></td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>TIM, OutPut Compare</t=
+d>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the TIM9 peripheral to generate four different signals with four
+  different frequencies.</td>
+ </tr>
+ <tr height=3D21 style=3D'mso-height-source:userset;height:15.75pt'>
+  <td height=3D21 class=3Dxl65 style=3D'height:15.75pt'></td>
+  <td class=3Dxl86>TIM_PWMOutput</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>TIM, PWM OutPut</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the TIM peripheral in PWM (Pulse Width Modulation) mode</td>
+ </tr>
+ <tr height=3D21 style=3D'mso-height-source:userset;height:15.75pt'>
+  <td height=3D21 class=3Dxl65 style=3D'height:15.75pt'></td>
+  <td class=3Dxl79>TIM_TIM10PWMOutput</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>TIM, PWM OutPut</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the TIM peripheral in PWM (Pulse Width Modulation)<span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>mode.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl86>TIM_7PWMOutput<span style=3D'mso-spacerun:yes'>&nbsp;</s=
+pan></td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>TIM, PWM OutPut</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the TIM1 peripheral to generate 7 PWM signals with 4 different =
+duty
+  cycles (50%, 37.5%, 25% and 12.5%).</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl79>TIM_PWMInput<span style=3D'mso-spacerun:yes'>&nbsp;</spa=
+n></td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>TIM, PWM Input</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example shows how=
+ to use
+  the TIM peripheral to measure the frequency and duty cycle of an external
+  signal</td>
+ </tr>
+ <tr height=3D21 style=3D'mso-height-source:userset;height:15.75pt'>
+  <td height=3D21 class=3Dxl65 style=3D'height:15.75pt'></td>
+  <td class=3Dxl86>TIM_Synchro</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>TIM, Synchro</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  synchronize TIM1 and Timers (TIM3 and TIM4) in parallel mode</td>
+ </tr>
+ <tr height=3D21 style=3D'mso-height-source:userset;height:15.75pt'>
+  <td height=3D21 class=3Dxl65 style=3D'height:15.75pt'></td>
+  <td class=3Dxl79>TIM_ParallelSynchro<span
+  style=3D'mso-spacerun:yes'>&nbsp;</span></td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>TIM, Synchro</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  synchronize TIM peripherals in parallel mode.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl86>TIM_OnePulse</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>TIM, One Pulse</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example shows how=
+ to use
+  the TIM peripheral to generate a One pulse Mode after a Rising edge of an
+  external signal is received in Timer Input pin</td>
+ </tr>
+ <tr height=3D21 style=3D'mso-height-source:userset;height:15.75pt'>
+  <td height=3D21 class=3Dxl65 style=3D'height:15.75pt'></td>
+  <td class=3Dxl79>TIM_ExtTriggerSynchro<span
+  style=3D'mso-spacerun:yes'>&nbsp;</span></td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>TIM, External Trigger<=
+/td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  synchronize TIM peripherals in cascade mode with an external trigger</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl86>TIM_DMA</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>TIM, DMA</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example provides a
+  description of how to use DMA with TIM1 Update request to transfer Data f=
+rom
+  memory to TIM1 Capture Compare Register3</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl79>TIM_DMABurst</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>TIM, Burst Mode</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example shows how=
+ to update
+  the TIM1 channel1 period and the duty cycle using the TIM1 DMA burst feat=
+ure</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl86>TIM_ComplementarySignals<span
+  style=3D'mso-spacerun:yes'>&nbsp;</span></td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>TIM, Complementary Cha=
+nnels</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the TIM1 peripheral to generate three complementary TIM1 signal=
+s,
+  to insert a defined dead time value, to use the break feature and to lock=
+ the
+  desired parameters</td>
+ </tr>
+ <tr height=3D21 style=3D'mso-height-source:userset;height:15.75pt'>
+  <td height=3D21 class=3Dxl65 style=3D'height:15.75pt'></td>
+  <td class=3Dxl79>TIM_CascadeSynchro</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>TIM, Synchro</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  synchronize TIM peripherals in cascade mode</td>
+ </tr>
+ <tr height=3D69 style=3D'mso-height-source:userset;height:51.75pt'>
+  <td height=3D69 class=3Dxl65 style=3D'height:51.75pt'></td>
+  <td class=3Dxl93>TIM_6Steps<span style=3D'mso-spacerun:yes'>&nbsp;</span>=
+</td>
+  <td class=3Dxl94 width=3D241 style=3D'width:181pt'>TIM, PWM</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl96 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  configure the TIM1 peripheral to generate 6 Steps. The STM32F4xx TIM1
+  peripheral offers the possibility to program in advance the configuration=
+ for
+  the next TIM1 outputs behavior (step) and change the configuration of all=
+ the
+  channels at the same time. This operation is possible when the COM
+  (commutation) event is used</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td rowspan=3D4 class=3Dxl71 style=3D'border-bottom:1.5pt solid #4F81BD;b=
+order-top:
+  none'>USART</td>
+  <td class=3Dxl168>USART_DataExchangeInterrupt</td>
+  <td class=3Dxl169 width=3D241 style=3D'width:181pt'>UART, Two Boards, Int=
+errupt
+  Mode<span style=3D'mso-spacerun:yes'>&nbsp;</span></td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl101 width=3D609 style=3D'width:457pt'>This example provides=
+ a small
+  application in which joystick buttons are used to trigger USART communica=
+tion
+  using interrupts and though using USART firmware library.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl86>USART_DataExchangeDMA</td>
+  <td class=3Dxl87 width=3D241 style=3D'width:181pt'>UART, Two Baords, DMA =
+Mode</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl91>X</td>
+  <td class=3Dxl92 width=3D609 style=3D'width:457pt'>This example provides =
+a small
+  application in which joystick buttons are used to trigger USART
+  communications using DMA and though using USART firmware library.</td>
+ </tr>
+ <tr height=3D34 style=3D'mso-height-source:userset;height:25.5pt'>
+  <td height=3D34 class=3Dxl65 style=3D'height:25.5pt'></td>
+  <td class=3Dxl79>UART_Hyperterminal</td>
+  <td class=3Dxl80 width=3D241 style=3D'width:181pt'>UART, HyperTerminal</t=
+d>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl84>X</td>
+  <td class=3Dxl85 width=3D609 style=3D'width:457pt'>This example provides a
+  description of how to use the EVAL_COM1 Transmit and Receive interrupts to
+  communicate with the hyperterminal.</td>
+ </tr>
+ <tr height=3D35 style=3D'mso-height-source:userset;height:26.25pt'>
+  <td height=3D35 class=3Dxl65 style=3D'height:26.25pt'></td>
+  <td class=3Dxl93>UART_Printf</td>
+  <td class=3Dxl94 width=3D241 style=3D'width:181pt'>UART, printf</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl95>X</td>
+  <td class=3Dxl96 width=3D609 style=3D'width:457pt'>This example shows how=
+ to
+  retarget the C library printf function to the USART.<span
+  style=3D'mso-spacerun:yes'>&nbsp; </span>This implementation output the p=
+rintf
+  message on the Hyperterminal.</td>
+ </tr>
+ <tr height=3D36 style=3D'mso-height-source:userset;height:27.0pt'>
+  <td height=3D36 class=3Dxl65 style=3D'height:27.0pt'></td>
+  <td class=3Dxl98>WWDG</td>
+  <td class=3Dxl103>WWDG_Example</td>
+  <td class=3Dxl104 width=3D241 style=3D'width:181pt'>WWDG</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl105>X</td>
+  <td class=3Dxl106 width=3D609 style=3D'width:457pt'>This example shows ho=
+w to
+  update at regular period the WWDG counter and how to simulate a software
+  fault generating an MCU WWDG reset on expiry of a programmed time period.=
+</td>
+ </tr>
+ <tr height=3D18 style=3D'mso-height-source:userset;height:13.5pt'>
+  <td height=3D18 class=3Dxl65 style=3D'height:13.5pt'></td>
+  <td class=3Dxl65></td>
+  <td class=3Dxl65></td>
+  <td class=3Dxl65></td>
+  <td class=3Dxl65></td>
+  <td class=3Dxl65></td>
+  <td class=3Dxl65></td>
+  <td class=3Dxl65></td>
+  <td class=3Dxl65><!-----------------------------><!--END OF OUTPUT FROM E=
+XCEL PUBLISH AS WEB PAGE WIZARD--><!-----------------------------></td>
+ </tr>
+ <![if supportMisalignedColumns]>
+ <tr height=3D0 style=3D'display:none'>
+  <td width=3D23 style=3D'width:17pt'></td>
+  <td width=3D85 style=3D'width:64pt'></td>
+  <td width=3D227 style=3D'width:170pt'></td>
+  <td width=3D241 style=3D'width:181pt'></td>
+  <td width=3D80 style=3D'width:60pt'></td>
+  <td width=3D80 style=3D'width:60pt'></td>
+  <td width=3D80 style=3D'width:60pt'></td>
+  <td width=3D80 style=3D'width:60pt'></td>
+  <td width=3D609 style=3D'width:457pt'></td>
+ </tr>
+ <![endif]>
+</table>
+
+</body>
+
+</html>
+
+------=_NextPart_01CEE0A9.883606E0
+Content-Location: file:///C:/C909BD13/Library_Examples_files/filelist.xml
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/xml; charset="utf-8"
+
+<xml xmlns:o=3D"urn:schemas-microsoft-com:office:office">
+ <o:MainFile HRef=3D"../Library_Examples.htm"/>
+ <o:File HRef=3D"stylesheet.css"/>
+ <o:File HRef=3D"tabstrip.htm"/>
+ <o:File HRef=3D"sheet001.htm"/>
+ <o:File HRef=3D"filelist.xml"/>
+</xml>
+------=_NextPart_01CEE0A9.883606E0--

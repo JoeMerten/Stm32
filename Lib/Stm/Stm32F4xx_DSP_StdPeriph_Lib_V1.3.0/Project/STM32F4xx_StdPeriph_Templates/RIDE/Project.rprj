@@ -1,0 +1,7 @@
+
+<Project ActiveApp="Project" Header="Project 'Project'" OutputFile="" Path=".\Project.rprj" Project="Yes" sate="96" >
+	<ApplicationBuild Config="STM32F401xx" Extern=".\Project.rapp" Header="Project" OutputFile=".\obj\Project.elf" Path=".\Project.rapp" sate="98" >		
+</ApplicationBuild>
+			
+
+</Project>
