@@ -488,6 +488,8 @@ function DoFile {
         "UTF-8 Unicode English text");;
         "UTF-8 Unicode English text, with CRLF line terminators");;
 
+        "ASCII English text, with CRLF, LF line terminators");;
+
         "UTF-8 Unicode C program text");;
         "UTF-8 Unicode C program text, with CRLF line terminators");;
         "ASCII C program text");;
@@ -498,15 +500,21 @@ function DoFile {
         "HTML document");;
         "HTML document, ASCII text");;
         "HTML document, ASCII text, with CRLF line terminators");;
+        "HTML document, UTF-8 Unicode text");;
+        "HTML document, UTF-8 Unicode text, with CRLF line terminators");;
 
-        "ASCII English text, with CRLF, LF line terminators");&
         "ASCII English text, with very long lines");&
         "ASCII English text, with very long lines, with CRLF line terminators");&
         "ASCII C program text, with very long lines");&
         "ASCII C program text, with very long lines, with CRLF line terminators");&
-        "HTML document, Non-ISO extended-ASCII text, with CRLF line terminators");&
         "HIER NUR EIN DUMMY 1")
-            Warning "$filename has type \"$type\"";
+            Warning "$filename has type \"$type\""
+            #return 0
+            ;;
+
+        "HTML document, Non-ISO extended-ASCII text, with CRLF line terminators")
+            Warning "$filename has type \"$type\""
+            [ "$base" == "readme.txt" ] && CheckAnsiCodes "$filename" # Komischerweise werden einige readme.txt als html eingestuft, wohl wegen der enthaltenen "<a href=...>"
             return 0;;
 
         "ISO-8859 English text, with CRLF line terminators");&
@@ -515,7 +523,7 @@ function DoFile {
         "Non-ISO extended-ASCII C program text, with CRLF line terminators");&
         "Non-ISO extended-ASCII English text, with CRLF line terminators");&
         "HIER NUR EIN DUMMY 2")
-            Warning "$filename has type \"$type\"";
+            Warning "$filename has type \"$type\""
             CheckAnsiCodes "$filename"
             return 0;;
 
@@ -619,6 +627,10 @@ done
 # - Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Project/STM32F10x_StdPeriph_Template/TrueSTUDIO/STM32100E-EVAL/stm32_flash.ld
 #   -> Enthält Ansi-kodierte Anführungszeichen (93h und 94h)
 #      -> The file is distributed "as is," ...
+# - Lib/Stm/Stm32F4xx_DSP_StdPeriph_Lib_V1.3.0/Libraries/CMSIS/DSP_Lib/Examples/arm_graphic_equalizer_example/arm_graphic_equalizer_data.c
+#   -> Überwiegend CR-LF aber auch eine Zeile mit nur LF
+# - Lib/Stm/Stm32F2xx_StdPeriph_Lib_V1.1.0/Project/STM32F2xx_StdPeriph_Examples/PWR/STOP/readme.txt
+#   -> enthält Ansicode ™ in "Cortex™-M3"
 
 
 DIRS="Lib"

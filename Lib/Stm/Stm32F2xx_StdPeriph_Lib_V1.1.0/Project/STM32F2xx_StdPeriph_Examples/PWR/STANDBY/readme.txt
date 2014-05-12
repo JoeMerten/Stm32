@@ -57,7 +57,7 @@ These Steps are repeated in an infinite loop.
       @subpage PWR_CurrentConsumption example.
 
 @note This example can not be used in DEBUG mode, this is due to the fact 
-      that the Cortex™-M3 core is no longer clocked during low power mode 
+      that the Cortexâ„¢-M3 core is no longer clocked during low power mode 
       so debugging features are disbaled
 
       
