@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2S/SPI_I2S_Switch/main.c 
+  * @file    I2S/SPI_I2S_Switch/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -30,7 +30,7 @@
 
 /** @addtogroup I2S_SPI_I2S_Switch
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -75,23 +75,23 @@ TestStatus Buffercmp(uint16_t* pBuffer1, uint16_t* pBuffer2, uint16_t BufferLeng
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System clocks configuration ---------------------------------------------*/
   RCC_Configuration();
 
   /* GPIO configuration ------------------------------------------------------*/
   GPIO_Configuration();
- 
+
   /* Deinitializes the SPI2 and SPI3 peripheral registers --------------------*/
   SPI_I2S_DeInit(SPI2);
   SPI_I2S_DeInit(SPI3);
-  
+
   /* I2S peripheral configuration */
   I2S_InitStructure.I2S_Standard = I2S_Standard_Phillips;
   I2S_InitStructure.I2S_DataFormat = I2S_DataFormat_16bextended;
@@ -132,14 +132,14 @@ int main(void)
 
   TransferStatus1 = Buffercmp((uint16_t *)I2S2_Buffer_Rx, I2S3_Buffer_Tx, BufferSize);
   /* TransferStatus1 = PASSED, if the data transmitted from I2S3 and received by
-                               I2S2 are the same 
+                               I2S2 are the same
      TransferStatus1 = FAILED, if the data transmitted from I2S3 and received by
                                I2S2 are different */
 
   /* Reset TxIdx, RxIdx indexes */
   TxIdx = 0;
   RxIdx = 0;
-  
+
   /* Switch to SPI mode communication ----------------------------------------*/
   /* SPI3 configuration */
   SPI_InitStructure.SPI_Direction = SPI_Direction_1Line_Tx;
@@ -190,10 +190,10 @@ int main(void)
   {
     I2S2_Buffer_Rx[TxIdx] = 0;
   }
-  
+
   TxIdx = 0;
   RxIdx = 0;
-      
+
   /* I2S3 Slave Transmitter to I2S2 Master Receiver communication ------------*/
   /* I2S3 configuration */
   I2S_InitStructure.I2S_Mode = I2S_Mode_SlaveTx;
@@ -236,7 +236,7 @@ int main(void)
                                I2S2 are the same
      TransferStatus3 = FAILED, if the data transmitted from I2S3 and received by
                                I2S2 are different */
- 
+
   while (1)
   {}
 }
@@ -264,20 +264,20 @@ void RCC_Configuration(void)
 
     /* Flash 2 wait state */
     FLASH_SetLatency(FLASH_Latency_2);
-	
+
     /* HCLK = SYSCLK */
-    RCC_HCLKConfig(RCC_SYSCLK_Div1); 
-  
+    RCC_HCLKConfig(RCC_SYSCLK_Div1);
+
     /* PCLK2 = HCLK */
-    RCC_PCLK2Config(RCC_HCLK_Div1); 
+    RCC_PCLK2Config(RCC_HCLK_Div1);
 
     /* PCLK1 = HCLK/2 */
     RCC_PCLK1Config(RCC_HCLK_Div2);
 
     /* ADCCLK = PCLK2/4 */
-    RCC_ADCCLKConfig(RCC_PCLK2_Div4); 
-  
-#ifndef STM32F10X_CL  
+    RCC_ADCCLKConfig(RCC_PCLK2_Div4);
+
+#ifndef STM32F10X_CL
     /* PLLCLK = 8MHz * 9 = 72 MHz */
     RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_9);
 
@@ -294,26 +294,26 @@ void RCC_Configuration(void)
     while (RCC_GetFlagStatus(RCC_FLAG_PLL2RDY) == RESET)
     {}
 
-    /* PLL configuration: PLLCLK = (PLL2 / 5) * 9 = 72 MHz */ 
+    /* PLL configuration: PLLCLK = (PLL2 / 5) * 9 = 72 MHz */
     RCC_PREDIV1Config(RCC_PREDIV1_Source_PLL2, RCC_PREDIV1_Div5);
     RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_9);
 
     /* PPL3 configuration: PLL3CLK = (HSE / 5) * 11 = PLL3_VCO = 110 MHz */
     RCC_PLL3Config(RCC_PLL3Mul_11);
     /* Enable PLL3 */
-    RCC_PLL3Cmd(ENABLE);    
+    RCC_PLL3Cmd(ENABLE);
     /* Wait till PLL3 is ready */
     while (RCC_GetFlagStatus(RCC_FLAG_PLL3RDY) == RESET)
     {}
 
-    /* Configure I2S clock source: On Connectivity Line Devices, the I2S can be 
-        clocked by PLL3 VCO instead of SYS_CLK in order to guarantee higher 
+    /* Configure I2S clock source: On Connectivity Line Devices, the I2S can be
+        clocked by PLL3 VCO instead of SYS_CLK in order to guarantee higher
         precision */
     RCC_I2S3CLKConfig(RCC_I2S3CLKSource_PLL3_VCO);
-    RCC_I2S2CLKConfig(RCC_I2S2CLKSource_PLL3_VCO);  
+    RCC_I2S2CLKConfig(RCC_I2S2CLKSource_PLL3_VCO);
 #endif
 
-    /* Enable PLL */ 
+    /* Enable PLL */
     RCC_PLLCmd(ENABLE);
 
     /* Wait till PLL is ready */
@@ -328,20 +328,20 @@ void RCC_Configuration(void)
     while(RCC_GetSYSCLKSource() != 0x08)
     {
     }
-  }  
-  
+  }
+
   /* Enable peripheral clocks --------------------------------------------------*/
   /* GPIOA, GPIOB and AFIO clocks enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB |
                          RCC_APB2Periph_AFIO, ENABLE);
 
-#ifdef USE_STM3210C_EVAL 
+#ifdef USE_STM3210C_EVAL
   /* GPIOC Clock enable (for the SPI3 remapped pins)  */
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC , ENABLE);  
-#endif /* USE_STM3210C_EVAL */  
-  
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC , ENABLE);
+#endif /* USE_STM3210C_EVAL */
+
   /* SPI2 and SPI3 clocks enable */
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2 | RCC_APB1Periph_SPI3, ENABLE);  
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2 | RCC_APB1Periph_SPI3, ENABLE);
 }
 
 /**
@@ -358,7 +358,7 @@ void GPIO_Configuration(void)
       This operation is not necessary for Connectivity Line devices since
       SPI3 I/Os can be remapped on other GPIO pins */
   GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
-#endif /* USE_STM3210E_EVAL */ 
+#endif /* USE_STM3210E_EVAL */
 
   /* Configure SPI2 pins: CK, WS and SD ---------------------------------*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_15;
@@ -367,10 +367,10 @@ void GPIO_Configuration(void)
   GPIO_Init(GPIOB, &GPIO_InitStructure);
 
 #ifdef USE_STM3210C_EVAL
-  
+
   /* Remap SPI3 on PC10-PC11-PC12-PA4 GPIO pins ------------------------*/
   GPIO_PinRemapConfig(GPIO_Remap_SPI3, ENABLE);
-  
+
   /* Configure SPI3 pins: CK and SD ------------------------------------*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10 | GPIO_Pin_12;
   GPIO_Init(GPIOC, &GPIO_InitStructure);
@@ -378,9 +378,9 @@ void GPIO_Configuration(void)
   /* Configure SPI3 pins: WS -------------------------------------------*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
-  
+
 #elif defined (USE_STM3210E_EVAL)
-  
+
   /* Configure SPI3 pins: CK and SD ------------------------------------*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3 | GPIO_Pin_5;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
@@ -388,8 +388,8 @@ void GPIO_Configuration(void)
   /* Configure SPI3 pins: WS -------------------------------------------*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
-  
-#endif /* USE_STM3210C_EVAL */ 
+
+#endif /* USE_STM3210C_EVAL */
 }
 
 /**
@@ -438,10 +438,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

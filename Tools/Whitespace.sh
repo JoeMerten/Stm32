@@ -479,20 +479,30 @@ function DoFile {
     local type="$(file --brief "$filename")"
     #Trace "$filename: $type"
     case "$type" in
-        "ASCII English text");;
+        "ASCII text");;
         "ASCII text, with CRLF line terminators");;
+        "ASCII English text");;
         "ASCII English text, with CRLF line terminators");;
         "UTF-8 Unicode text");;
         "UTF-8 Unicode text, with CRLF line terminators");;
+        "UTF-8 Unicode English text");;
         "UTF-8 Unicode English text, with CRLF line terminators");;
-        "UTF-8 Unicode C program text, with CRLF line terminators");;
 
+        "UTF-8 Unicode C program text");;
+        "UTF-8 Unicode C program text, with CRLF line terminators");;
+        "ASCII C program text");;
         "ASCII C program text, with CRLF line terminators");;
+        "ASCII C++ program text");;
         "ASCII C++ program text, with CRLF line terminators");;
+
+        "HTML document");;
+        "HTML document, ASCII text");;
         "HTML document, ASCII text, with CRLF line terminators");;
 
         "ASCII English text, with CRLF, LF line terminators");&
+        "ASCII English text, with very long lines");&
         "ASCII English text, with very long lines, with CRLF line terminators");&
+        "ASCII C program text, with very long lines");&
         "ASCII C program text, with very long lines, with CRLF line terminators");&
         "HTML document, Non-ISO extended-ASCII text, with CRLF line terminators");&
         "HIER NUR EIN DUMMY 1")
@@ -509,7 +519,7 @@ function DoFile {
             CheckAnsiCodes "$filename"
             return 0;;
 
-         *) Error "$filename has type \"$type\""
+         *) Error "$filename has unhandled type \"$type\""
          return 1
     esac
 

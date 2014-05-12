@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    IWDG/IWDG_Example/stm32f2xx_it.c 
+  * @file    IWDG/IWDG_Example/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -37,7 +37,7 @@
 
 /** @addtogroup IWDG_Example
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -180,11 +180,11 @@ void EXTI15_10_IRQHandler(void)
   {
     /* Clear the Key Button EXTI Line Pending Bit */
     EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
-    
+
     /* As the following address is invalid (not mapped), a Hardfault exception
-	  will be generated with an infinite loop and when the IWDG counter reaches 0
+      will be generated with an infinite loop and when the IWDG counter reaches 0
     the IWDG reset occurs */
- 	  *(__IO uint32_t *) 0xA0001000 = 0xFF;
+      *(__IO uint32_t *) 0xA0001000 = 0xFF;
   }
 }
 
@@ -196,10 +196,10 @@ void EXTI15_10_IRQHandler(void)
 void TIM5_IRQHandler(void)
 {
   if (TIM_GetITStatus(TIM5, TIM_IT_CC4) != RESET)
-  {    
+  {
     /* Get the Input Capture value */
     tmpCC4[CaptureNumber++] = TIM_GetCapture4(TIM5);
-   
+
     /* Clear CC4 Interrupt pending bit */
     TIM_ClearITPendingBit(TIM5, TIM_IT_CC4);
 
@@ -213,10 +213,10 @@ void TIM5_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

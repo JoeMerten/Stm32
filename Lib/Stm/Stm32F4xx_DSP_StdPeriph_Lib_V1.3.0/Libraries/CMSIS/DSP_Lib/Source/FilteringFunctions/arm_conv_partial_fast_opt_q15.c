@@ -1,24 +1,24 @@
-/* ----------------------------------------------------------------------    
-* Copyright (C) 2010-2013 ARM Limited. All rights reserved.    
-*    
+/* ----------------------------------------------------------------------
+* Copyright (C) 2010-2013 ARM Limited. All rights reserved.
+*
 * $Date:        17. January 2013
-* $Revision: 	V1.4.1
-*    
-* Project: 	    CMSIS DSP Library    
-* Title:		arm_conv_partial_fast_opt_q15.c    
-*    
-* Description:	Fast Q15 Partial convolution.    
-*    
+* $Revision:    V1.4.1
+*
+* Project:      CMSIS DSP Library
+* Title:        arm_conv_partial_fast_opt_q15.c
+*
+* Description:  Fast Q15 Partial convolution.
+*
 * Target Processor: Cortex-M4/Cortex-M3
-*  
-* Redistribution and use in source and binary forms, with or without 
+*
+* Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *   - Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   - Redistributions in binary form must reproduce the above copyright
 *     notice, this list of conditions and the following disclaimer in
-*     the documentation and/or other materials provided with the 
+*     the documentation and/or other materials provided with the
 *     distribution.
 *   - Neither the name of ARM LIMITED nor the names of its contributors
 *     may be used to endorse or promote products derived from this
@@ -27,7 +27,7 @@
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
 * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
 * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
@@ -35,39 +35,39 @@
 * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-* POSSIBILITY OF SUCH DAMAGE.     
+* POSSIBILITY OF SUCH DAMAGE.
 * -------------------------------------------------------------------- */
 
 #include "arm_math.h"
 
-/**    
- * @ingroup groupFilters    
+/**
+ * @ingroup groupFilters
  */
 
-/**    
- * @addtogroup PartialConv    
- * @{    
+/**
+ * @addtogroup PartialConv
+ * @{
  */
 
-/**    
- * @brief Partial convolution of Q15 sequences (fast version) for Cortex-M3 and Cortex-M4.    
- * @param[in]       *pSrcA points to the first input sequence.    
- * @param[in]       srcALen length of the first input sequence.    
- * @param[in]       *pSrcB points to the second input sequence.    
- * @param[in]       srcBLen length of the second input sequence.    
- * @param[out]      *pDst points to the location where the output result is written.    
- * @param[in]       firstIndex is the first output sample to start with.    
- * @param[in]       numPoints is the number of output points to be computed.    
- * @param[in]       *pScratch1 points to scratch buffer of size max(srcALen, srcBLen) + 2*min(srcALen, srcBLen) - 2.   
- * @param[in]       *pScratch2 points to scratch buffer of size min(srcALen, srcBLen).   
- * @return Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen+srcBLen-2].    
- *    
- * See <code>arm_conv_partial_q15()</code> for a slower implementation of this function which uses a 64-bit accumulator to avoid wrap around distortion.    
- *    
- * \par Restrictions    
- *  If the silicon does not support unaligned memory access enable the macro UNALIGNED_SUPPORT_DISABLE    
- *	In this case input, output, scratch1 and scratch2 buffers should be aligned by 32-bit    
- *     
+/**
+ * @brief Partial convolution of Q15 sequences (fast version) for Cortex-M3 and Cortex-M4.
+ * @param[in]       *pSrcA points to the first input sequence.
+ * @param[in]       srcALen length of the first input sequence.
+ * @param[in]       *pSrcB points to the second input sequence.
+ * @param[in]       srcBLen length of the second input sequence.
+ * @param[out]      *pDst points to the location where the output result is written.
+ * @param[in]       firstIndex is the first output sample to start with.
+ * @param[in]       numPoints is the number of output points to be computed.
+ * @param[in]       *pScratch1 points to scratch buffer of size max(srcALen, srcBLen) + 2*min(srcALen, srcBLen) - 2.
+ * @param[in]       *pScratch2 points to scratch buffer of size min(srcALen, srcBLen).
+ * @return Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen+srcBLen-2].
+ *
+ * See <code>arm_conv_partial_q15()</code> for a slower implementation of this function which uses a 64-bit accumulator to avoid wrap around distortion.
+ *
+ * \par Restrictions
+ *  If the silicon does not support unaligned memory access enable the macro UNALIGNED_SUPPORT_DISABLE
+ *  In this case input, output, scratch1 and scratch2 buffers should be aligned by 32-bit
+ *
  */
 
 #ifndef UNALIGNED_SUPPORT_DISABLE
@@ -145,7 +145,7 @@ arm_status arm_conv_partial_fast_opt_q15(
     /* Apply loop unrolling and do 4 Copies simultaneously. */
     k = srcBLen >> 2u;
 
-    /* First part of the processing with loop unrolling copies 4 data points at a time.       
+    /* First part of the processing with loop unrolling copies 4 data points at a time.
      ** a second loop below copies for the remaining 1 to 3 samples. */
 
     /* Copy smaller length input sequence in reverse order into second scratch buffer */
@@ -161,7 +161,7 @@ arm_status arm_conv_partial_fast_opt_q15(
       k--;
     }
 
-    /* If the count is not a multiple of 4, copy remaining samples here.       
+    /* If the count is not a multiple of 4, copy remaining samples here.
      ** No loop unrolling is used. */
     k = srcBLen % 0x4u;
 
@@ -205,7 +205,7 @@ arm_status arm_conv_partial_fast_opt_q15(
 
     pOut = pDst + firstIndex;
 
-    /* First part of the processing with loop unrolling process 4 data points at a time.       
+    /* First part of the processing with loop unrolling process 4 data points at a time.
      ** a second loop below process for the remaining 1 to 3 samples. */
 
     /* Actual convolution process starts here */
@@ -381,7 +381,7 @@ arm_status arm_conv_partial_fast_opt_q15(
 
       blkCnt--;
 
-      /* The result is in 2.30 format.  Convert to 1.15 with saturation.       
+      /* The result is in 2.30 format.  Convert to 1.15 with saturation.
        ** Then store the output in the destination buffer. */
       *pOut++ = (q15_t) (__SSAT((acc0 >> 15), 16));
 
@@ -473,7 +473,7 @@ arm_status arm_conv_partial_fast_opt_q15(
     /* Apply loop unrolling and do 4 Copies simultaneously. */
     k = srcBLen >> 2u;
 
-    /* First part of the processing with loop unrolling copies 4 data points at a time.       
+    /* First part of the processing with loop unrolling copies 4 data points at a time.
      ** a second loop below copies for the remaining 1 to 3 samples. */
     while(k > 0u)
     {
@@ -487,7 +487,7 @@ arm_status arm_conv_partial_fast_opt_q15(
       k--;
     }
 
-    /* If the count is not a multiple of 4, copy remaining samples here.       
+    /* If the count is not a multiple of 4, copy remaining samples here.
      ** No loop unrolling is used. */
     k = srcBLen % 0x4u;
 
@@ -515,7 +515,7 @@ arm_status arm_conv_partial_fast_opt_q15(
     /* Apply loop unrolling and do 4 Copies simultaneously. */
     k = srcALen >> 2u;
 
-    /* First part of the processing with loop unrolling copies 4 data points at a time.       
+    /* First part of the processing with loop unrolling copies 4 data points at a time.
      ** a second loop below copies for the remaining 1 to 3 samples. */
     while(k > 0u)
     {
@@ -529,7 +529,7 @@ arm_status arm_conv_partial_fast_opt_q15(
       k--;
     }
 
-    /* If the count is not a multiple of 4, copy remaining samples here.       
+    /* If the count is not a multiple of 4, copy remaining samples here.
      ** No loop unrolling is used. */
     k = srcALen % 0x4u;
 
@@ -546,7 +546,7 @@ arm_status arm_conv_partial_fast_opt_q15(
     /* Apply loop unrolling and do 4 Copies simultaneously. */
     k = (srcBLen - 1u) >> 2u;
 
-    /* First part of the processing with loop unrolling copies 4 data points at a time.       
+    /* First part of the processing with loop unrolling copies 4 data points at a time.
      ** a second loop below copies for the remaining 1 to 3 samples. */
     while(k > 0u)
     {
@@ -560,7 +560,7 @@ arm_status arm_conv_partial_fast_opt_q15(
       k--;
     }
 
-    /* If the count is not a multiple of 4, copy remaining samples here.       
+    /* If the count is not a multiple of 4, copy remaining samples here.
      ** No loop unrolling is used. */
     k = (srcBLen - 1u) % 0x4u;
 
@@ -761,8 +761,8 @@ arm_status arm_conv_partial_fast_opt_q15(
   return (status);
 }
 
-#endif	/*	#ifndef UNALIGNED_SUPPORT_DISABLE	*/
+#endif  /*  #ifndef UNALIGNED_SUPPORT_DISABLE   */
 
-/**    
- * @} end of PartialConv group    
+/**
+ * @} end of PartialConv group
  */

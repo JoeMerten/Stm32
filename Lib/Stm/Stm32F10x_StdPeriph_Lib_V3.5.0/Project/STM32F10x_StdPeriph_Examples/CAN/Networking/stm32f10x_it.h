@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CAN/Networking/stm32f10x_it.h 
+  * @file    CAN/Networking/stm32f10x_it.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F10x_IT_H
@@ -45,7 +45,7 @@ void USB_LP_CAN1_RX0_IRQHandler(void);
 #else
 void CAN1_RX0_IRQHandler(void);
 #endif
-					 
+
 #endif /* __STM32F10x_IT_H */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

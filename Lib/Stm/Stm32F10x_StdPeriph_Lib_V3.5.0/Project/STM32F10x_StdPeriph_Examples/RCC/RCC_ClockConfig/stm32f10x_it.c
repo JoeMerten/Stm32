@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RCC/RCC_ClockConfig/stm32f10x_it.c 
+  * @file    RCC/RCC_ClockConfig/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -31,7 +31,7 @@
 
 /** @addtogroup RCC_ClockConfig
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -70,7 +70,7 @@ void NMI_Handler(void)
  #else
     /* Enable PLL Ready interrupt */
     RCC_ITConfig(RCC_IT_PLLRDY, ENABLE);
- #endif	/* STM32F10X_CL */
+ #endif /* STM32F10X_CL */
 #endif /* SYSCLK_HSE */
 
     /* Clear Clock Security System interrupt pending bit */
@@ -175,20 +175,20 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief  This function handles RCC interrupt request. 
+  * @brief  This function handles RCC interrupt request.
   * @param  None
   * @retval None
   */
 void RCC_IRQHandler(void)
 {
   if(RCC_GetITStatus(RCC_IT_HSERDY) != RESET)
-  { 
+  {
     /* Clear HSERDY interrupt pending bit */
     RCC_ClearITPendingBit(RCC_IT_HSERDY);
 
     /* Check if the HSE clock is still available */
     if (RCC_GetFlagStatus(RCC_FLAG_HSERDY) != RESET)
-    { 
+    {
 #ifdef SYSCLK_HSE
       /* Select HSE as system clock source */
       RCC_SYSCLKConfig(RCC_SYSCLKSource_HSE);
@@ -197,32 +197,32 @@ void RCC_IRQHandler(void)
       /* Enable PLL2 */
       RCC_PLL2Cmd(ENABLE);
  #else
-      /* Enable PLL: once the PLL is ready the PLLRDY interrupt is generated */ 
+      /* Enable PLL: once the PLL is ready the PLLRDY interrupt is generated */
       RCC_PLLCmd(ENABLE);
- #endif	/* STM32F10X_CL */
-#endif /* SYSCLK_HSE */      
+ #endif /* STM32F10X_CL */
+#endif /* SYSCLK_HSE */
     }
   }
 
 #ifdef STM32F10X_CL
   if(RCC_GetITStatus(RCC_IT_PLL2RDY) != RESET)
-  { 
+  {
     /* Clear PLL2RDY interrupt pending bit */
     RCC_ClearITPendingBit(RCC_IT_PLL2RDY);
 
-    /* Enable PLL: once the PLL is ready the PLLRDY interrupt is generated */ 
+    /* Enable PLL: once the PLL is ready the PLLRDY interrupt is generated */
     RCC_PLLCmd(ENABLE);
   }
-#endif /* STM32F10X_CL */   
+#endif /* STM32F10X_CL */
 
   if(RCC_GetITStatus(RCC_IT_PLLRDY) != RESET)
-  { 
+  {
     /* Clear PLLRDY interrupt pending bit */
     RCC_ClearITPendingBit(RCC_IT_PLLRDY);
 
     /* Check if the PLL is still locked */
     if (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) != RESET)
-    { 
+    {
       /* Select PLL as system clock source */
       RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
     }
@@ -247,10 +247,10 @@ void RCC_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

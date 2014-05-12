@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM1_Synchro/main.c 
+  * @file    TIM/TIM1_Synchro/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup TIM_TIM1_Synchro
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -51,13 +51,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -68,7 +68,7 @@ int main(void)
      1/TIM1 is configured as Master Timer:
      - PWM Mode is used
      - The TIM1 Update event is used as Trigger Output
-    
+
      2/TIM3 and TIM4 are slaves for TIM1,
      - PWM Mode is used
      - The ITR0(TIM1) is used as input trigger for both slaves
@@ -82,14 +82,14 @@ int main(void)
     TIM1 frequency = TIM1 counter clock / (TIM1_Period + 1) = 281.250 KHz
     and the duty cycle is equal to: TIM1_CCR1/(TIM1_ARR + 1) = 50%
 
-    The TIM3 is running at: 
+    The TIM3 is running at:
     (TIM1 frequency)/ ((TIM3 period +1)* (Repetition_Counter+1)) = 18.750 KHz and
     a duty cycle equal to TIM3_CCR1/(TIM3_ARR + 1) = 33.3%
 
     The TIM4 is running at:
     (TIM1 frequency)/ ((TIM4 period +1)* (Repetition_Counter+1)) = 28.125 KHz and
     a duty cycle equal to TIM4_CCR1/(TIM4_ARR + 1) = 50%
-  
+
   o For Low-Density Value line and Medium-Density Value line devices:
     The TIMxCLK is fixed to 24 MHz, Prescaler = 0 so the TIM1 counter clock is 24 MHz.
     TIM1 frequency = 93.75 KHz
@@ -115,7 +115,7 @@ int main(void)
   /* Slave Mode selection: TIM3 */
   TIM_SelectSlaveMode(TIM3, TIM_SlaveMode_Gated);
   TIM_SelectInputTrigger(TIM3, TIM_TS_ITR0);
-  
+
   /* TIM4 Peripheral Configuration ----------------------------------------*/
   /* TIM4 Slave Configuration: PWM1 Mode */
   TIM_TimeBaseStructure.TIM_Period = 1;
@@ -134,7 +134,7 @@ int main(void)
   /* Slave Mode selection: TIM4 */
   TIM_SelectSlaveMode(TIM4, TIM_SlaveMode_Gated);
   TIM_SelectInputTrigger(TIM4, TIM_TS_ITR0);
-  
+
   /* TIM1 Peripheral Configuration ----------------------------------------*/
   /* Time Base configuration */
   TIM_TimeBaseStructure.TIM_Prescaler = 0;
@@ -173,7 +173,7 @@ int main(void)
 
   /* Select the Master Slave Mode */
   TIM_SelectMasterSlaveMode(TIM1, TIM_MasterSlaveMode_Enable);
-  
+
   /* TIM1 counter enable */
   TIM_Cmd(TIM1, ENABLE);
 
@@ -220,14 +220,14 @@ void GPIO_Configuration(void)
 
   GPIO_Init(GPIOC, &GPIO_InitStructure);
 
-  GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);	
+  GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);
 
   /* GPIOE Configuration: TIM1 channel1 as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_8;
 
   GPIO_Init(GPIOE, &GPIO_InitStructure);
 
-  GPIO_PinRemapConfig(GPIO_FullRemap_TIM1, ENABLE);	
+  GPIO_PinRemapConfig(GPIO_FullRemap_TIM1, ENABLE);
 
 #else
 
@@ -265,10 +265,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -40,8 +40,8 @@
 /* Private define ------------------------------------------------------------*/
 
 #if defined (USE_STM324xG_EVAL)
-  #define MESSAGE1    " Dual ADC Interleaved DMA mode3 example " 
-  #define MESSAGE2   "ADC Ch12 Conv 6Msps " 
+  #define MESSAGE1    " Dual ADC Interleaved DMA mode3 example "
+  #define MESSAGE2   "ADC Ch12 Conv 6Msps "
   #define MESSAGE3   " Connect voltage to "
   #define MESSAGE4   "  ADC Ch12 (PC.02)  "
   #define MESSAGE5   "   ADC1 = %d,%d V   "
@@ -50,8 +50,8 @@
   #define FONTSIZE         Font8x12
 
 #elif defined (USE_STM324x7I_EVAL)
-  #define MESSAGE1    " Dual ADC Interleaved DMA mode3 example " 
-  #define MESSAGE2   "ADC Ch12 Conv 6Msps " 
+  #define MESSAGE1    " Dual ADC Interleaved DMA mode3 example "
+  #define MESSAGE2   "ADC Ch12 Conv 6Msps "
   #define MESSAGE3   " Connect voltage to "
   #define MESSAGE4   "  ADC Ch12 (PC.02)  "
   #define MESSAGE5   "   ADC1 = %d,%d V   "
@@ -59,9 +59,9 @@
   #define LINENUM            0x13
   #define FONTSIZE         Font8x12
 
-#else 
-  #define MESSAGE1   " Dual ADC Interleaved DMA mode3 example " 
-  #define MESSAGE2   "     ADC Ch12 Conv 6Msps      " 
+#else
+  #define MESSAGE1   " Dual ADC Interleaved DMA mode3 example "
+  #define MESSAGE2   "     ADC Ch12 Conv 6Msps      "
   #define MESSAGE3   "      Connect voltage to      "
   #define MESSAGE4   "       ADC Ch12 (PC.02)       "
   #define MESSAGE5   "         ADC1 = %d,%d V       "
@@ -92,10 +92,10 @@ static void Display(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
      */
@@ -121,12 +121,12 @@ int main(void)
 
 /**
   * @brief  ADC configuration
-  * @note   This function Configure the ADC peripheral  
+  * @note   This function Configure the ADC peripheral
             1) Enable peripheral clocks
             2) Configure ADC Channel 12 pin as analog input
             3) DMA2_Stream0 channel2 configuration
             4) Configure ADC1 Channel 12
-            5) Configure ADC2 Channel 12             
+            5) Configure ADC2 Channel 12
   * @param  None
   * @retval None
   */
@@ -143,7 +143,7 @@ static void ADC_Config(void)
   RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_DMA2 , ENABLE);
   RCC_APB2PeriphClockCmd( RCC_APB2Periph_ADC1 , ENABLE);
   RCC_APB2PeriphClockCmd( RCC_APB2Periph_ADC2 , ENABLE);
-  
+
   /* Configure ADC Channel 12 pin as analog input */
   GPIO_InitStructure.GPIO_Pin = GPIO_PIN;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
@@ -151,7 +151,7 @@ static void ADC_Config(void)
   GPIO_Init(GPIO_PORT, &GPIO_InitStructure);
 
   /* DMA2 Stream0 channel 0 configuration */
-  DMA_InitStructure.DMA_Channel = DMA_CHANNELx;  
+  DMA_InitStructure.DMA_Channel = DMA_CHANNELx;
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)ADC_CDR_ADDRESS;
   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)&uhADCDualConvertedValue;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
@@ -180,8 +180,8 @@ static void ADC_Config(void)
   ADC_CommonInitStructure.ADC_TwoSamplingDelay = ADC_TwoSamplingDelay_6Cycles;
   ADC_CommonInitStructure.ADC_DMAAccessMode = ADC_DMAAccessMode_3;
   ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div2;
-  ADC_CommonInit(&ADC_CommonInitStructure);  
-  
+  ADC_CommonInit(&ADC_CommonInitStructure);
+
   /* DMA mode 3 is used in interleaved mode in 6-bit or 8-bit resolutions */
   ADC_InitStructure.ADC_Resolution = ADC_Resolution_8b;
 
@@ -189,12 +189,12 @@ static void ADC_Config(void)
   ADC_InitStructure.ADC_ScanConvMode = DISABLE;
   ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
   ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
-  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC1;	
+  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC1;
   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
   ADC_InitStructure.ADC_NbrOfConversion = 1;
   ADC_Init(ADC1, &ADC_InitStructure);
-  /* ADC1 regular channel 12 configuration */ 
-  ADC_RegularChannelConfig(ADC1, ADC_CHANNEL, 1, ADC_SampleTime_3Cycles); 
+  /* ADC1 regular channel 12 configuration */
+  ADC_RegularChannelConfig(ADC1, ADC_CHANNEL, 1, ADC_SampleTime_3Cycles);
 
   /* ADC2 regular channel 12 configuration ************************************/
   ADC_Init(ADC2, &ADC_InitStructure);
@@ -209,7 +209,7 @@ static void ADC_Config(void)
 
   /* Enable ADC2 **************************************************************/
   ADC_Cmd(ADC2, ENABLE);
-}  
+}
 
 #ifdef USE_LCD
 /**
@@ -254,32 +254,32 @@ static void Display_Init(void)
 
 /* Initialize the LCD */
   LCD_Init();
-  
+
   /* Display message on LCD */
-#if defined (USE_STM324x9I_EVAL) 
+#if defined (USE_STM324x9I_EVAL)
   /* Initialize the LCD Layers */
   LCD_LayerInit();
-  
+
   /* Initialize the LCD Layers */
   LCD_LayerInit();
-  
+
   /* Enable The Display */
-  LCD_DisplayOn(); 
- 
+  LCD_DisplayOn();
+
   /* Set LCD Background Layer  */
   LCD_SetLayer(LCD_BACKGROUND_LAYER);
- 
-  /* Clear the Background Layer */ 
+
+  /* Clear the Background Layer */
   LCD_Clear(LCD_COLOR_WHITE);
-  
+
   /* Set LCD Foreground Layer  */
   LCD_SetLayer(LCD_FOREGROUND_LAYER);
 
   /* Configure the transparency for foreground */
   LCD_SetTransparency(100);
 #endif /* USE_STM324x9I_EVAL */
-  
-  /* Clear the LCD */ 
+
+  /* Clear the LCD */
   LCD_Clear(White);
 
   /* Set the LCD Text size */
@@ -300,7 +300,7 @@ static void Display_Init(void)
 
   /* Set the LCD Back Color and Text Color*/
   LCD_SetBackColor(White);
-  LCD_SetTextColor(Blue); 
+  LCD_SetTextColor(Blue);
 
   LCD_DisplayStringLine(LCD_LINE_2, (uint8_t*)MESSAGE3);
   LCD_DisplayStringLine(LCD_LINE_3, (uint8_t*)MESSAGE4);
@@ -331,10 +331,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

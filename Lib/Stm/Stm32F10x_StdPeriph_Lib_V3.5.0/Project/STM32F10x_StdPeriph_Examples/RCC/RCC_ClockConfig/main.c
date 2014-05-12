@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RCC/RCC_ClockConfig/main.c 
+  * @file    RCC/RCC_ClockConfig/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup RCC_ClockConfig
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -55,7 +55,7 @@ void SetSysClock(void);
 #elif defined SYSCLK_FREQ_48MHz
   void SetSysClockTo48(void);
 #elif defined SYSCLK_FREQ_56MHz
-  void SetSysClockTo56(void);  
+  void SetSysClockTo56(void);
 #elif defined SYSCLK_FREQ_72MHz
   void SetSysClockTo72(void);
 #endif
@@ -69,13 +69,13 @@ void SetSysClock(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* Configure the System clock frequency, HCLK, PCLK2 and PCLK1 prescalers */
   SetSysClock();
 
@@ -86,10 +86,10 @@ int main(void)
   /* Enable Clock Security System(CSS): this will generate an NMI exception
      when HSE clock fails */
   RCC_ClockSecuritySystemCmd(ENABLE);
-     
+
   /* NVIC configuration ------------------------------------------------------*/
   NVIC_Configuration();
- 
+
   /* Initialize Leds mounted on STM3210X-EVAL board --------------------------*/
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
@@ -104,7 +104,7 @@ int main(void)
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
   RCC_MCOConfig(RCC_MCO_HSE);
-  
+
   while (1)
   {
     /* Toggle LED1 */
@@ -114,7 +114,7 @@ int main(void)
 
     /* Toggle LED2 */
     STM_EVAL_LEDToggle(LED2);
-	/* Insert delay */
+    /* Insert delay */
     Delay(DELAY_COUNT);
 
     /* Toggle LED3 */
@@ -136,7 +136,7 @@ int main(void)
   * @retval None
   */
 void SetSysClock(void)
-{    
+{
 /* The System clock configuration functions defined below assume that:
         - For Low, Medium and High density devices an external 8MHz crystal is
           used to drive the System clock.
@@ -147,30 +147,30 @@ void SetSysClock(void)
 #if defined SYSCLK_HSE
   SetSysClockToHSE();
 #elif defined SYSCLK_FREQ_24MHz
-  SetSysClockTo24();  
+  SetSysClockTo24();
 #elif defined SYSCLK_FREQ_36MHz
   SetSysClockTo36();
 #elif defined SYSCLK_FREQ_48MHz
   SetSysClockTo48();
 #elif defined SYSCLK_FREQ_56MHz
-  SetSysClockTo56(); 
+  SetSysClockTo56();
 #elif defined SYSCLK_FREQ_72MHz
   SetSysClockTo72();
 #endif
- 
+
  /* If none of the define above is enabled, the HSI is used as System clock
-    source (default after reset) */ 
+    source (default after reset) */
 }
 
 /**
   * @brief  Selects HSE as System clock source and configure HCLK, PCLK2
-  *         and PCLK1 prescalers. 
+  *         and PCLK1 prescalers.
   * @param  None
   * @retval None
   */
 void SetSysClockToHSE(void)
 {
-  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration -----------------------------*/   
+  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration -----------------------------*/
   /* RCC system reset(for debug purpose) */
   RCC_DeInit();
 
@@ -191,24 +191,24 @@ void SetSysClockToHSE(void)
     FLASH_SetLatency(FLASH_Latency_0);
 #else
     if (HSE_Value <= 24000000)
-	{
+    {
       /* Flash 0 wait state */
       FLASH_SetLatency(FLASH_Latency_0);
-	}
-	else
-	{
+    }
+    else
+    {
       /* Flash 1 wait state */
       FLASH_SetLatency(FLASH_Latency_1);
-	}
+    }
 
 #endif /* STM32F10X_CL */
 #endif /* STM32F10X_LD_VL && STM32F10X_MD_VL */
- 
+
     /* HCLK = SYSCLK */
-    RCC_HCLKConfig(RCC_SYSCLK_Div1); 
-  
+    RCC_HCLKConfig(RCC_SYSCLK_Div1);
+
     /* PCLK2 = HCLK */
-    RCC_PCLK2Config(RCC_HCLK_Div1); 
+    RCC_PCLK2Config(RCC_HCLK_Div1);
 
     /* PCLK1 = HCLK */
     RCC_PCLK1Config(RCC_HCLK_Div1);
@@ -223,7 +223,7 @@ void SetSysClockToHSE(void)
   }
   else
   { /* If HSE fails to start-up, the application will have wrong clock configuration.
-       User can add here some code to deal with this error */    
+       User can add here some code to deal with this error */
 
     /* Go to infinite loop */
     while (1)
@@ -233,14 +233,14 @@ void SetSysClockToHSE(void)
 }
 
 /**
-  * @brief  Sets System clock frequency to 24MHz and configure HCLK, PCLK2 
-  *         and PCLK1 prescalers. 
+  * @brief  Sets System clock frequency to 24MHz and configure HCLK, PCLK2
+  *         and PCLK1 prescalers.
   * @param  None
   * @retval None
   */
 void SetSysClockTo24(void)
 {
-  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration -----------------------------*/   
+  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration -----------------------------*/
   /* RCC system reset(for debug purpose) */
   RCC_DeInit();
 
@@ -259,12 +259,12 @@ void SetSysClockTo24(void)
     /* Flash 0 wait state */
     FLASH_SetLatency(FLASH_Latency_0);
 #endif /* STM32F10X_LD_VL && STM32F10X_MD_VL */
- 
+
     /* HCLK = SYSCLK */
-    RCC_HCLKConfig(RCC_SYSCLK_Div1); 
-  
+    RCC_HCLKConfig(RCC_SYSCLK_Div1);
+
     /* PCLK2 = HCLK */
-    RCC_PCLK2Config(RCC_HCLK_Div1); 
+    RCC_PCLK2Config(RCC_HCLK_Div1);
 
     /* PCLK1 = HCLK */
     RCC_PCLK1Config(RCC_HCLK_Div1);
@@ -282,10 +282,10 @@ void SetSysClockTo24(void)
     while (RCC_GetFlagStatus(RCC_FLAG_PLL2RDY) == RESET)
     {}
 
-    /* PLL configuration: PLLCLK = (PLL2 / 10) * 6 = 24 MHz */ 
+    /* PLL configuration: PLLCLK = (PLL2 / 10) * 6 = 24 MHz */
     RCC_PREDIV1Config(RCC_PREDIV1_Source_PLL2, RCC_PREDIV1_Div10);
     RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_6);
-#elif defined STM32F10X_LD_VL || defined STM32F10X_MD_VL || defined STM32F10X_HD_VL 
+#elif defined STM32F10X_LD_VL || defined STM32F10X_MD_VL || defined STM32F10X_HD_VL
     /* PLLCLK = (8MHz/2) * 6 = 24 MHz */
     RCC_PREDIV1Config(RCC_PREDIV1_Source_HSE, RCC_PREDIV1_Div2);
     RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_6);
@@ -294,7 +294,7 @@ void SetSysClockTo24(void)
     RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_3);
 #endif
 
-    /* Enable PLL */ 
+    /* Enable PLL */
     RCC_PLLCmd(ENABLE);
 
     /* Wait till PLL is ready */
@@ -312,7 +312,7 @@ void SetSysClockTo24(void)
   }
   else
   { /* If HSE fails to start-up, the application will have wrong clock configuration.
-       User can add here some code to deal with this error */    
+       User can add here some code to deal with this error */
 
     /* Go to infinite loop */
     while (1)
@@ -322,14 +322,14 @@ void SetSysClockTo24(void)
 }
 #if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL && !defined STM32F10X_HD_VL
 /**
-  * @brief  Sets System clock frequency to 36MHz and configure HCLK, PCLK2 
-  *         and PCLK1 prescalers. 
+  * @brief  Sets System clock frequency to 36MHz and configure HCLK, PCLK2
+  *         and PCLK1 prescalers.
   * @param  None
   * @retval None
   */
 void SetSysClockTo36(void)
 {
-  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration -----------------------------*/   
+  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration -----------------------------*/
   /* RCC system reset(for debug purpose) */
   RCC_DeInit();
 
@@ -346,12 +346,12 @@ void SetSysClockTo36(void)
 
     /* Flash 1 wait state */
     FLASH_SetLatency(FLASH_Latency_1);
- 
+
     /* HCLK = SYSCLK */
-    RCC_HCLKConfig(RCC_SYSCLK_Div1); 
-  
+    RCC_HCLKConfig(RCC_SYSCLK_Div1);
+
     /* PCLK2 = HCLK */
-    RCC_PCLK2Config(RCC_HCLK_Div1); 
+    RCC_PCLK2Config(RCC_HCLK_Div1);
 
     /* PCLK1 = HCLK */
     RCC_PCLK1Config(RCC_HCLK_Div1);
@@ -369,7 +369,7 @@ void SetSysClockTo36(void)
     while (RCC_GetFlagStatus(RCC_FLAG_PLL2RDY) == RESET)
     {}
 
-    /* PLL configuration: PLLCLK = (PLL2 / 10) * 9 = 36 MHz */ 
+    /* PLL configuration: PLLCLK = (PLL2 / 10) * 9 = 36 MHz */
     RCC_PREDIV1Config(RCC_PREDIV1_Source_PLL2, RCC_PREDIV1_Div10);
     RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_9);
 #else
@@ -377,7 +377,7 @@ void SetSysClockTo36(void)
     RCC_PLLConfig(RCC_PLLSource_HSE_Div2, RCC_PLLMul_9);
 #endif
 
-    /* Enable PLL */ 
+    /* Enable PLL */
     RCC_PLLCmd(ENABLE);
 
     /* Wait till PLL is ready */
@@ -395,7 +395,7 @@ void SetSysClockTo36(void)
   }
   else
   { /* If HSE fails to start-up, the application will have wrong clock configuration.
-       User can add here some code to deal with this error */    
+       User can add here some code to deal with this error */
 
     /* Go to infinite loop */
     while (1)
@@ -405,14 +405,14 @@ void SetSysClockTo36(void)
 }
 
 /**
-  * @brief  Sets System clock frequency to 48MHz and configure HCLK, PCLK2 
-  *         and PCLK1 prescalers. 
+  * @brief  Sets System clock frequency to 48MHz and configure HCLK, PCLK2
+  *         and PCLK1 prescalers.
   * @param  None
   * @retval None
   */
 void SetSysClockTo48(void)
 {
-  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration -----------------------------*/   
+  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration -----------------------------*/
   /* RCC system reset(for debug purpose) */
   RCC_DeInit();
 
@@ -429,12 +429,12 @@ void SetSysClockTo48(void)
 
     /* Flash 1 wait state */
     FLASH_SetLatency(FLASH_Latency_1);
- 
+
     /* HCLK = SYSCLK */
-    RCC_HCLKConfig(RCC_SYSCLK_Div1); 
-  
+    RCC_HCLKConfig(RCC_SYSCLK_Div1);
+
     /* PCLK2 = HCLK */
-    RCC_PCLK2Config(RCC_HCLK_Div1); 
+    RCC_PCLK2Config(RCC_HCLK_Div1);
 
     /* PCLK1 = HCLK/2 */
     RCC_PCLK1Config(RCC_HCLK_Div2);
@@ -452,7 +452,7 @@ void SetSysClockTo48(void)
     while (RCC_GetFlagStatus(RCC_FLAG_PLL2RDY) == RESET)
     {}
 
-    /* PLL configuration: PLLCLK = (PLL2 / 5) * 6 = 48 MHz */ 
+    /* PLL configuration: PLLCLK = (PLL2 / 5) * 6 = 48 MHz */
     RCC_PREDIV1Config(RCC_PREDIV1_Source_PLL2, RCC_PREDIV1_Div5);
     RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_6);
 #else
@@ -460,7 +460,7 @@ void SetSysClockTo48(void)
     RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_6);
 #endif
 
-    /* Enable PLL */ 
+    /* Enable PLL */
     RCC_PLLCmd(ENABLE);
 
     /* Wait till PLL is ready */
@@ -478,7 +478,7 @@ void SetSysClockTo48(void)
   }
   else
   { /* If HSE fails to start-up, the application will have wrong clock configuration.
-       User can add here some code to deal with this error */    
+       User can add here some code to deal with this error */
 
     /* Go to infinite loop */
     while (1)
@@ -488,14 +488,14 @@ void SetSysClockTo48(void)
 }
 
 /**
-  * @brief  Sets System clock frequency to 56MHz and configure HCLK, PCLK2 
-  *         and PCLK1 prescalers. 
+  * @brief  Sets System clock frequency to 56MHz and configure HCLK, PCLK2
+  *         and PCLK1 prescalers.
   * @param  None
   * @retval None
   */
 void SetSysClockTo56(void)
 {
-  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration -----------------------------*/   
+  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration -----------------------------*/
   /* RCC system reset(for debug purpose) */
   RCC_DeInit();
 
@@ -512,12 +512,12 @@ void SetSysClockTo56(void)
 
     /* Flash 2 wait state */
     FLASH_SetLatency(FLASH_Latency_2);
- 
+
     /* HCLK = SYSCLK */
-    RCC_HCLKConfig(RCC_SYSCLK_Div1); 
-  
+    RCC_HCLKConfig(RCC_SYSCLK_Div1);
+
     /* PCLK2 = HCLK */
-    RCC_PCLK2Config(RCC_HCLK_Div1); 
+    RCC_PCLK2Config(RCC_HCLK_Div1);
 
     /* PCLK1 = HCLK/2 */
     RCC_PCLK1Config(RCC_HCLK_Div2);
@@ -535,7 +535,7 @@ void SetSysClockTo56(void)
     while (RCC_GetFlagStatus(RCC_FLAG_PLL2RDY) == RESET)
     {}
 
-    /* PLL configuration: PLLCLK = (PLL2 / 5) * 7 = 56 MHz */ 
+    /* PLL configuration: PLLCLK = (PLL2 / 5) * 7 = 56 MHz */
     RCC_PREDIV1Config(RCC_PREDIV1_Source_PLL2, RCC_PREDIV1_Div5);
     RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_7);
 #else
@@ -543,7 +543,7 @@ void SetSysClockTo56(void)
     RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_7);
 #endif
 
-    /* Enable PLL */ 
+    /* Enable PLL */
     RCC_PLLCmd(ENABLE);
 
     /* Wait till PLL is ready */
@@ -561,7 +561,7 @@ void SetSysClockTo56(void)
   }
   else
   { /* If HSE fails to start-up, the application will have wrong clock configuration.
-       User can add here some code to deal with this error */    
+       User can add here some code to deal with this error */
 
     /* Go to infinite loop */
     while (1)
@@ -571,14 +571,14 @@ void SetSysClockTo56(void)
 }
 
 /**
-  * @brief  Sets System clock frequency to 72MHz and configure HCLK, PCLK2 
-  *         and PCLK1 prescalers. 
+  * @brief  Sets System clock frequency to 72MHz and configure HCLK, PCLK2
+  *         and PCLK1 prescalers.
   * @param  None
   * @retval None
   */
 void SetSysClockTo72(void)
 {
-  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration -----------------------------*/   
+  /* SYSCLK, HCLK, PCLK2 and PCLK1 configuration -----------------------------*/
   /* RCC system reset(for debug purpose) */
   RCC_DeInit();
 
@@ -595,12 +595,12 @@ void SetSysClockTo72(void)
 
     /* Flash 2 wait state */
     FLASH_SetLatency(FLASH_Latency_2);
- 
+
     /* HCLK = SYSCLK */
-    RCC_HCLKConfig(RCC_SYSCLK_Div1); 
-  
+    RCC_HCLKConfig(RCC_SYSCLK_Div1);
+
     /* PCLK2 = HCLK */
-    RCC_PCLK2Config(RCC_HCLK_Div1); 
+    RCC_PCLK2Config(RCC_HCLK_Div1);
 
     /* PCLK1 = HCLK/2 */
     RCC_PCLK1Config(RCC_HCLK_Div2);
@@ -618,7 +618,7 @@ void SetSysClockTo72(void)
     while (RCC_GetFlagStatus(RCC_FLAG_PLL2RDY) == RESET)
     {}
 
-    /* PLL configuration: PLLCLK = (PLL2 / 5) * 9 = 72 MHz */ 
+    /* PLL configuration: PLLCLK = (PLL2 / 5) * 9 = 72 MHz */
     RCC_PREDIV1Config(RCC_PREDIV1_Source_PLL2, RCC_PREDIV1_Div5);
     RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_9);
 #else
@@ -626,7 +626,7 @@ void SetSysClockTo72(void)
     RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_9);
 #endif
 
-    /* Enable PLL */ 
+    /* Enable PLL */
     RCC_PLLCmd(ENABLE);
 
     /* Wait till PLL is ready */
@@ -644,7 +644,7 @@ void SetSysClockTo72(void)
   }
   else
   { /* If HSE fails to start-up, the application will have wrong clock configuration.
-       User can add here some code to deal with this error */    
+       User can add here some code to deal with this error */
 
     /* Go to infinite loop */
     while (1)
@@ -667,7 +667,7 @@ void NVIC_Configuration(void)
   /* Enable and configure RCC global IRQ channel */
   NVIC_InitStructure.NVIC_IRQChannel = RCC_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;  
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
 }
@@ -692,7 +692,7 @@ void Delay(__IO uint32_t nCount)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -706,10 +706,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

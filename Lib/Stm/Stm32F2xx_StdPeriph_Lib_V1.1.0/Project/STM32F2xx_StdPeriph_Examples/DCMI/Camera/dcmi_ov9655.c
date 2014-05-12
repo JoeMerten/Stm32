@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
-  * @brief   This file includes the driver for OV9655 Camera module mounted on 
+  * @brief   This file includes the driver for OV9655 Camera module mounted on
   *          STM322xG-EVAL board RevA and RevB.
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -36,7 +36,7 @@
 
 /** @addtogroup DCMI_Camera
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -362,12 +362,12 @@ static unsigned char OV9655_QVGA[][2]=
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Initializes the hardware resources (I2C and GPIO) used to configure 
+  * @brief  Initializes the hardware resources (I2C and GPIO) used to configure
   *         the OV9655 camera.
   * @param  None
   * @retval None
   */
-void OV9655_HW_Init(void) 
+void OV9655_HW_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
   I2C_InitTypeDef  I2C_InitStruct;
@@ -391,7 +391,7 @@ void OV9655_HW_Init(void)
   GPIO_PinAFConfig(GPIOI, GPIO_PinSource6, GPIO_AF_DCMI);
   GPIO_PinAFConfig(GPIOI, GPIO_PinSource7, GPIO_AF_DCMI);
   GPIO_PinAFConfig(GPIOI, GPIO_PinSource4, GPIO_AF_DCMI);
-  
+
   /* DCMI GPIO configuration */
   /* D0..D4(PH9/10/11/12/14), HSYNC(PH8) */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11 |
@@ -417,13 +417,13 @@ void OV9655_HW_Init(void)
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);
 
   /* GPIOB clock enable */
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE); 
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
 
   /* Connect I2C1 pins to AF4 */
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource9, GPIO_AF_I2C1);
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_I2C1);
-  
-  /* Configure I2C1 GPIOs */  
+
+  /* Configure I2C1 GPIOs */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_9;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
@@ -434,10 +434,10 @@ void OV9655_HW_Init(void)
   /* Configure I2C1 */
   /* I2C DeInit */
   I2C_DeInit(I2C1);
-    
+
   /* Enable the I2C peripheral */
   I2C_Cmd(I2C1, ENABLE);
- 
+
   /* Set the I2C structure parameters */
   I2C_InitStruct.I2C_Mode = I2C_Mode_I2C;
   I2C_InitStruct.I2C_DutyCycle = I2C_DutyCycle_2;
@@ -445,7 +445,7 @@ void OV9655_HW_Init(void)
   I2C_InitStruct.I2C_Ack = I2C_Ack_Enable;
   I2C_InitStruct.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
   I2C_InitStruct.I2C_ClockSpeed = 30000;
-  
+
   /* Initialize the I2C peripheral w/ selected parameters */
   I2C_Init(I2C1, &I2C_InitStruct);
 }
@@ -476,7 +476,7 @@ void OV9655_ReadID(OV9655_IDTypeDef* OV9655ID)
 /**
   * @brief  Configures the DCMI/DMA to capture image from the OV9655 camera.
   * @param  ImageFormat: Image format BMP or JPEG
-  * @param  BMPImageSize: BMP Image size  
+  * @param  BMPImageSize: BMP Image size
   * @retval None
   */
 void OV9655_Init(ImageFormat_TypeDef ImageFormat)
@@ -488,7 +488,7 @@ void OV9655_Init(ImageFormat_TypeDef ImageFormat)
   /* Enable DCMI clock */
   RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_DCMI, ENABLE);
 
-  /* DCMI configuration */ 
+  /* DCMI configuration */
   DCMI_InitStructure.DCMI_CaptureMode = DCMI_CaptureMode_Continuous;
   DCMI_InitStructure.DCMI_SynchroMode = DCMI_SynchroMode_Hardware;
   DCMI_InitStructure.DCMI_PCKPolarity = DCMI_PCKPolarity_Falling;
@@ -500,12 +500,12 @@ void OV9655_Init(ImageFormat_TypeDef ImageFormat)
   /* Configures the DMA2 to transfer Data from DCMI */
   /* Enable DMA2 clock */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2, ENABLE);
-  
+
   /* DMA2 Stream1 Configuration */
   DMA_DeInit(DMA2_Stream1);
 
-  DMA_InitStructure.DMA_Channel = DMA_Channel_1;  
-  DMA_InitStructure.DMA_PeripheralBaseAddr = DCMI_DR_ADDRESS;	
+  DMA_InitStructure.DMA_Channel = DMA_Channel_1;
+  DMA_InitStructure.DMA_PeripheralBaseAddr = DCMI_DR_ADDRESS;
   DMA_InitStructure.DMA_Memory0BaseAddr = FSMC_LCD_ADDRESS;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
   DMA_InitStructure.DMA_BufferSize = 1;
@@ -533,23 +533,23 @@ void OV9655_Init(ImageFormat_TypeDef ImageFormat)
     }
     case BMP_QVGA:
     {
-      /* DCMI configuration */ 
-      DCMI_Init(&DCMI_InitStructure);
-
-      /* DMA2 IRQ channel Configuration */
-      DMA_Init(DMA2_Stream1, &DMA_InitStructure); 
-      break;
-    }
-    default:
-    {
-      /* DCMI configuration */ 
+      /* DCMI configuration */
       DCMI_Init(&DCMI_InitStructure);
 
       /* DMA2 IRQ channel Configuration */
       DMA_Init(DMA2_Stream1, &DMA_InitStructure);
       break;
     }
-  }    
+    default:
+    {
+      /* DCMI configuration */
+      DCMI_Init(&DCMI_InitStructure);
+
+      /* DMA2 IRQ channel Configuration */
+      DMA_Init(DMA2_Stream1, &DMA_InitStructure);
+      break;
+    }
+  }
 }
 
 /**
@@ -594,7 +594,7 @@ void OV9655_QVGAConfig(void)
 
 /**
   * @brief  Configures the OV9655 camera brightness.
-  * @param  Brightness: Brightness value, where Brightness can be: 
+  * @param  Brightness: Brightness value, where Brightness can be:
   *         positively (0x01 ~ 0x7F) and negatively (0x80 ~ 0xFF)
   * @retval None
   */
@@ -613,7 +613,7 @@ void OV9655_BrightnessConfig(uint8_t Brightness)
 uint8_t OV9655_WriteReg(uint16_t Addr, uint8_t Data)
 {
   uint32_t timeout = DCMI_TIMEOUT_MAX;
-  
+
   /* Generate the Start Condition */
   I2C_GenerateSTART(I2C1, ENABLE);
 
@@ -624,10 +624,10 @@ uint8_t OV9655_WriteReg(uint16_t Addr, uint8_t Data)
     /* If the timeout delay is exeeded, exit with error code */
     if ((timeout--) == 0) return 0xFF;
   }
-   
+
   /* Send DCMI selcted device slave Address for write */
   I2C_Send7bitAddress(I2C1, OV9655_DEVICE_WRITE_ADDRESS, I2C_Direction_Transmitter);
- 
+
   /* Test on I2C1 EV6 and clear it */
   timeout = DCMI_TIMEOUT_MAX; /* Initialize timeout value */
   while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))
@@ -635,7 +635,7 @@ uint8_t OV9655_WriteReg(uint16_t Addr, uint8_t Data)
     /* If the timeout delay is exeeded, exit with error code */
     if ((timeout--) == 0) return 0xFF;
   }
- 
+
   /* Send I2C1 location address LSB */
   I2C_SendData(I2C1, (uint8_t)(Addr));
 
@@ -646,7 +646,7 @@ uint8_t OV9655_WriteReg(uint16_t Addr, uint8_t Data)
     /* If the timeout delay is exeeded, exit with error code */
     if ((timeout--) == 0) return 0xFF;
   }
-  
+
   /* Send Data */
   I2C_SendData(I2C1, Data);
 
@@ -656,11 +656,11 @@ uint8_t OV9655_WriteReg(uint16_t Addr, uint8_t Data)
   {
     /* If the timeout delay is exeeded, exit with error code */
     if ((timeout--) == 0) return 0xFF;
-  }  
- 
+  }
+
   /* Send I2C1 STOP Condition */
   I2C_GenerateSTOP(I2C1, ENABLE);
-  
+
   /* If operation is OK, return 0 */
   return 0;
 }
@@ -686,10 +686,10 @@ uint8_t OV9655_ReadReg(uint16_t Addr)
     /* If the timeout delay is exeeded, exit with error code */
     if ((timeout--) == 0) return 0xFF;
   }
-  
+
   /* Send DCMI selcted device slave Address for write */
   I2C_Send7bitAddress(I2C1, OV9655_DEVICE_READ_ADDRESS, I2C_Direction_Transmitter);
- 
+
   /* Test on I2C1 EV6 and clear it */
   timeout = DCMI_TIMEOUT_MAX; /* Initialize timeout value */
   while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))
@@ -707,22 +707,22 @@ uint8_t OV9655_ReadReg(uint16_t Addr)
   {
     /* If the timeout delay is exeeded, exit with error code */
     if ((timeout--) == 0) return 0xFF;
-  } 
-  
+  }
+
   /* Clear AF flag if arised */
   I2C1->SR1 |= (uint16_t)0x0400;
 
   /* Generate the Start Condition */
   I2C_GenerateSTART(I2C1, ENABLE);
-  
+
   /* Test on I2C1 EV6 and clear it */
   timeout = DCMI_TIMEOUT_MAX; /* Initialize timeout value */
   while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT))
   {
     /* If the timeout delay is exeeded, exit with error code */
     if ((timeout--) == 0) return 0xFF;
-  } 
-  
+  }
+
   /* Send DCMI selcted device slave Address for write */
   I2C_Send7bitAddress(I2C1, OV9655_DEVICE_READ_ADDRESS, I2C_Direction_Receiver);
 
@@ -733,7 +733,7 @@ uint8_t OV9655_ReadReg(uint16_t Addr)
     /* If the timeout delay is exeeded, exit with error code */
     if ((timeout--) == 0) return 0xFF;
   }
- 
+
   /* Prepare an NACK for the next data received */
   I2C_AcknowledgeConfig(I2C1, DISABLE);
 
@@ -757,10 +757,10 @@ uint8_t OV9655_ReadReg(uint16_t Addr)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

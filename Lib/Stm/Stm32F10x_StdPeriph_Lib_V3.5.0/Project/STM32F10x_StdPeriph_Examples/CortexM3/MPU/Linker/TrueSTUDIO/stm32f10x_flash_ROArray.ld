@@ -69,7 +69,7 @@ SECTIONS
     *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
     *(.glue_7)         /* glue arm to thumb code */
     *(.glue_7t)        /* glue thumb to arm code */
-	*(.eh_frame)
+    *(.eh_frame)
 
     KEEP (*(.init))
     KEEP (*(.fini))
@@ -169,6 +169,6 @@ SECTIONS
   }
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
-  
+
   .ROarraySection : {*(.ROarraySection)} >MEMORY_ARRAY
 }

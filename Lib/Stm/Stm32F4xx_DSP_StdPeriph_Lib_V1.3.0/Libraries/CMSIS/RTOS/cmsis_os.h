@@ -21,7 +21,7 @@
  * Version 1.02
  *    Control functions for short timeouts in microsecond resolution:
  *    Added: osKernelSysTick, osKernelSysTickFrequency, osKernelSysTickMicroSec
- *    Removed: osSignalGet 
+ *    Removed: osSignalGet
  *----------------------------------------------------------------------------
  *
  * Copyright (c) 2013 ARM LIMITED
@@ -134,7 +134,7 @@ used throughout the whole project.
 #define osCMSIS           0x10002      ///< API version (main [31:16] .sub [15:0])
 
 /// \note CAN BE CHANGED: \b osCMSIS_KERNEL identifies the underlying RTOS kernel and version number.
-#define osCMSIS_KERNEL    0x10000	   ///< RTOS identification and version (main [31:16] .sub [15:0])
+#define osCMSIS_KERNEL    0x10000      ///< RTOS identification and version (main [31:16] .sub [15:0])
 
 /// \note MUST REMAIN UNCHANGED: \b osKernelSystemId shall be consistent in every CMSIS-RTOS.
 #define osKernelSystemId "KERNEL V1.00"   ///< RTOS identification string
@@ -331,9 +331,9 @@ int32_t osKernelRunning(void);
 
 #if (defined (osFeature_SysTick)  &&  (osFeature_SysTick != 0))     // System Timer available
 
-/// Get the RTOS kernel system timer counter 
+/// Get the RTOS kernel system timer counter
 /// \note MUST REMAIN UNCHANGED: \b osKernelSysTick shall be consistent in every CMSIS-RTOS.
-/// \return RTOS kernel system timer as 32-bit value 
+/// \return RTOS kernel system timer as 32-bit value
 uint32_t osKernelSysTick (void);
 
 /// The RTOS kernel system timer frequency in Hz

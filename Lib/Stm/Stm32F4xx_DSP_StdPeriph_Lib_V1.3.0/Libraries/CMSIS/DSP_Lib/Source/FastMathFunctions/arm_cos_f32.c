@@ -1,24 +1,24 @@
-/* ----------------------------------------------------------------------    
-* Copyright (C) 2010-2013 ARM Limited. All rights reserved.    
-*    
+/* ----------------------------------------------------------------------
+* Copyright (C) 2010-2013 ARM Limited. All rights reserved.
+*
 * $Date:        17. January 2013
-* $Revision: 	V1.4.1
-*    
-* Project: 	    CMSIS DSP Library    
-* Title:		arm_cos_f32.c    
-*    
-* Description:	Fast cosine calculation for floating-point values.   
-*    
+* $Revision:    V1.4.1
+*
+* Project:      CMSIS DSP Library
+* Title:        arm_cos_f32.c
+*
+* Description:  Fast cosine calculation for floating-point values.
+*
 * Target Processor: Cortex-M4/Cortex-M3/Cortex-M0
-*  
-* Redistribution and use in source and binary forms, with or without 
+*
+* Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *   - Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   - Redistributions in binary form must reproduce the above copyright
 *     notice, this list of conditions and the following disclaimer in
-*     the documentation and/or other materials provided with the 
+*     the documentation and/or other materials provided with the
 *     distribution.
 *   - Neither the name of ARM LIMITED nor the names of its contributors
 *     may be used to endorse or promote products derived from this
@@ -27,7 +27,7 @@
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
 * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
 * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
@@ -35,65 +35,65 @@
 * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-* POSSIBILITY OF SUCH DAMAGE.    
+* POSSIBILITY OF SUCH DAMAGE.
 * -------------------------------------------------------------------- */
 
 #include "arm_math.h"
-/**    
- * @ingroup groupFastMath    
+/**
+ * @ingroup groupFastMath
  */
 
-/**    
- * @defgroup cos Cosine    
- *    
- * Computes the trigonometric cosine function using a combination of table lookup   
- * and cubic interpolation.  There are separate functions for   
- * Q15, Q31, and floating-point data types.   
- * The input to the floating-point version is in radians while the   
- * fixed-point Q15 and Q31 have a scaled input with the range   
+/**
+ * @defgroup cos Cosine
+ *
+ * Computes the trigonometric cosine function using a combination of table lookup
+ * and cubic interpolation.  There are separate functions for
+ * Q15, Q31, and floating-point data types.
+ * The input to the floating-point version is in radians while the
+ * fixed-point Q15 and Q31 have a scaled input with the range
  * [0 +0.9999] mapping to [0 2*pi).  The fixed-point range is chosen so that a
  * value of 2*pi wraps around to 0.
- *   
- * The implementation is based on table lookup using 256 values together with cubic interpolation.   
- * The steps used are:   
- *  -# Calculation of the nearest integer table index   
- *  -# Fetch the four table values a, b, c, and d     
- *  -# Compute the fractional portion (fract) of the table index.   
- *  -# Calculation of wa, wb, wc, wd    
- *  -# The final result equals <code>a*wa + b*wb + c*wc + d*wd</code>   
- *   
- * where   
- * <pre>    
- *    a=Table[index-1];    
- *    b=Table[index+0];    
- *    c=Table[index+1];    
- *    d=Table[index+2];    
- * </pre>   
- * and   
- * <pre>    
- *    wa=-(1/6)*fract.^3 + (1/2)*fract.^2 - (1/3)*fract;    
- *    wb=(1/2)*fract.^3 - fract.^2 - (1/2)*fract + 1;    
- *    wc=-(1/2)*fract.^3+(1/2)*fract.^2+fract;    
- *    wd=(1/6)*fract.^3 - (1/6)*fract;    
- * </pre>    
+ *
+ * The implementation is based on table lookup using 256 values together with cubic interpolation.
+ * The steps used are:
+ *  -# Calculation of the nearest integer table index
+ *  -# Fetch the four table values a, b, c, and d
+ *  -# Compute the fractional portion (fract) of the table index.
+ *  -# Calculation of wa, wb, wc, wd
+ *  -# The final result equals <code>a*wa + b*wb + c*wc + d*wd</code>
+ *
+ * where
+ * <pre>
+ *    a=Table[index-1];
+ *    b=Table[index+0];
+ *    c=Table[index+1];
+ *    d=Table[index+2];
+ * </pre>
+ * and
+ * <pre>
+ *    wa=-(1/6)*fract.^3 + (1/2)*fract.^2 - (1/3)*fract;
+ *    wb=(1/2)*fract.^3 - fract.^2 - (1/2)*fract + 1;
+ *    wc=-(1/2)*fract.^3+(1/2)*fract.^2+fract;
+ *    wd=(1/6)*fract.^3 - (1/6)*fract;
+ * </pre>
  */
 
- /**    
- * @addtogroup cos    
- * @{    
+ /**
+ * @addtogroup cos
+ * @{
  */
 
 
-/**    
-* \par    
+/**
+* \par
 * <b>Example code for Generation of Cos Table:</b>
 * <pre>
-* tableSize = 256;    
-* for(n = -1; n < (tableSize + 2); n++)    
-* {    
-*	cosTable[n+1]= cos(2*pi*n/tableSize);    
-* } </pre>    
-* where pi value is  3.14159265358979    
+* tableSize = 256;
+* for(n = -1; n < (tableSize + 2); n++)
+* {
+*   cosTable[n+1]= cos(2*pi*n/tableSize);
+* } </pre>
+* where pi value is  3.14159265358979
 */
 
 static const float32_t cosTable[260] = {
@@ -197,10 +197,10 @@ static const float32_t cosTable[260] = {
   0.998795449733734130f
 };
 
-/**   
- * @brief  Fast approximation to the trigonometric cosine function for floating-point data.   
- * @param[in] x input value in radians.   
- * @return cos(x).   
+/**
+ * @brief  Fast approximation to the trigonometric cosine function for floating-point data.
+ * @param[in] x input value in radians.
+ * @return cos(x).
  */
 
 
@@ -285,6 +285,6 @@ float32_t arm_cos_f32(
 
 }
 
-/**    
- * @} end of cos group    
+/**
+ * @} end of cos group
  */

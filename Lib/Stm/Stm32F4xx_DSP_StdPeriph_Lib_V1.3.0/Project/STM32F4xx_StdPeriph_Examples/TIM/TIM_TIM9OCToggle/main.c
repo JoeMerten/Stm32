@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_TIM9OCToggle/main.c 
+  * @file    TIM/TIM_TIM9OCToggle/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup TIM_TIM9OCToggle
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -58,10 +58,10 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
      */
@@ -71,31 +71,31 @@ int main(void)
 
   /* ---------------------------------------------------------------------------
      TIM9 Configuration: Output Compare Toggle Mode:
-    
-    In this example TIM9 input clock (TIM9CLK) is set to 2 * APB2 clock (PCLK2), 
-    since APB2 prescaler is different from 1.   
-      TIM9CLK = 2 * PCLK2  
-      PCLK2 = HCLK / 2 
+
+    In this example TIM9 input clock (TIM9CLK) is set to 2 * APB2 clock (PCLK2),
+    since APB2 prescaler is different from 1.
+      TIM9CLK = 2 * PCLK2
+      PCLK2 = HCLK / 2
       => TIM9CLK = HCLK = SystemCoreClock
-          
+
     To get TIM9 counter clock at 15 MHz, the prescaler is computed as follows:
        Prescaler = (TIM9CLK / TIM9 counter clock) - 1
        Prescaler = (SystemCoreClock /15 MHz) - 1
-                                              
+
     CC1 update rate = TIM9 counter clock / CCR1_Val = 366.2 Hz
-    ==> So the TIM9 Channel 1 generates a periodic signal with 
-	      a frequency equal to 183.1 Hz
+    ==> So the TIM9 Channel 1 generates a periodic signal with
+          a frequency equal to 183.1 Hz
 
     CC2 update rate = TIM9 counter clock / CCR2_Val = 732.4 Hz
-    ==> So the TIM9 channel 2 generates a periodic signal with 
-	      a frequency equal to 366.3 Hz
+    ==> So the TIM9 channel 2 generates a periodic signal with
+          a frequency equal to 366.3 Hz
 
-    Note: 
+    Note:
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
      Each time the core clock (HCLK) changes, user had to call SystemCoreClockUpdate()
      function to update SystemCoreClock variable value. Otherwise, any configuration
-     based on this variable will be incorrect.    
-  --------------------------------------------------------------------------- */   
+     based on this variable will be incorrect.
+  --------------------------------------------------------------------------- */
 
 
   /* Compute the prescaler value */
@@ -151,18 +151,18 @@ void TIM_Config(void)
 
   /* GPIOA clock enable */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA , ENABLE);
-  
+
   /* GPIOA Configuration: TIM9 CH1 (PA2) and TIM9 CH2 (PA3) */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP ;
-  GPIO_Init(GPIOA, &GPIO_InitStructure); 
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
 
   /* Connect TIM pins to AF3 */
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_TIM9);
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_TIM9); 
+  GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_TIM9);
 
   /* Enable the TIM9 global Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = TIM1_BRK_TIM9_IRQn;
@@ -192,10 +192,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 #endif
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

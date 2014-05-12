@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/OCActive/main.c 
+  * @file    TIM/OCActive/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup TIM_OCActive
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -55,13 +55,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
  /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -69,7 +69,7 @@ int main(void)
   GPIO_Configuration();
 
   /* ---------------------------------------------------------------
-    TIM3 Configuration: 
+    TIM3 Configuration:
     TIM3CLK = SystemCoreClock / 2,
     The objective is to get TIM3 counter clock at 1 KHz:
      - Prescaler = (TIM3CLK / TIM3 counter clock) - 1
@@ -178,7 +178,7 @@ void GPIO_Configuration(void)
 
   GPIO_Init(GPIOC, &GPIO_InitStructure);
 
-  GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);	
+  GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);
 
  /* GPIOD Configuration: Pin7 an Output push-pull */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
@@ -226,10 +226,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TimeBase/main.c 
+  * @file    TIM/TimeBase/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -37,7 +37,7 @@
 
 /** @addtogroup TIM_TimeBase
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -162,7 +162,7 @@ void TIM3_IRQHandler(void)
 
     /* LED1 toggling with frequency = 73.24 Hz */
     STM_EVAL_LEDToggle(LED1);
-	capture = TIM_GetCapture1(TIM3);
+    capture = TIM_GetCapture1(TIM3);
     TIM_SetCompare1(TIM3, capture + CCR1_Val);
   }
   else if (TIM_GetITStatus(TIM3, TIM_IT_CC2) != RESET)
@@ -212,10 +212,10 @@ void TIM3_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

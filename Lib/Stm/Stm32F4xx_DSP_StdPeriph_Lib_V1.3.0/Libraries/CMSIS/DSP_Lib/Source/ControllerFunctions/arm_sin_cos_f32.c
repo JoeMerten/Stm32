@@ -1,24 +1,24 @@
-/* ----------------------------------------------------------------------    
-* Copyright (C) 2010-2013 ARM Limited. All rights reserved.    
-*    
+/* ----------------------------------------------------------------------
+* Copyright (C) 2010-2013 ARM Limited. All rights reserved.
+*
 * $Date:        17. January 2013
-* $Revision: 	V1.4.1
-*    
-* Project: 	    CMSIS DSP Library    
-* Title:		arm_sin_cos_f32.c    
-*    
-* Description:	Sine and Cosine calculation for floating-point values.   
-*    
+* $Revision:    V1.4.1
+*
+* Project:      CMSIS DSP Library
+* Title:        arm_sin_cos_f32.c
+*
+* Description:  Sine and Cosine calculation for floating-point values.
+*
 * Target Processor: Cortex-M4/Cortex-M3/Cortex-M0
-*  
-* Redistribution and use in source and binary forms, with or without 
+*
+* Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *   - Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   - Redistributions in binary form must reproduce the above copyright
 *     notice, this list of conditions and the following disclaimer in
-*     the documentation and/or other materials provided with the 
+*     the documentation and/or other materials provided with the
 *     distribution.
 *   - Neither the name of ARM LIMITED nor the names of its contributors
 *     may be used to endorse or promote products derived from this
@@ -27,7 +27,7 @@
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
 * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
 * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
@@ -35,48 +35,48 @@
 * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-* POSSIBILITY OF SUCH DAMAGE.   
+* POSSIBILITY OF SUCH DAMAGE.
 * -------------------------------------------------------------------- */
 
 #include "arm_math.h"
 
-/**    
- * @ingroup groupController    
+/**
+ * @ingroup groupController
  */
 
-/**    
- * @defgroup SinCos Sine Cosine   
- *    
- * Computes the trigonometric sine and cosine values using a combination of table lookup   
- * and linear interpolation.     
- * There are separate functions for Q31 and floating-point data types.   
- * The input to the floating-point version is in degrees while the   
- * fixed-point Q31 have a scaled input with the range   
- * [-1 0.9999] mapping to [-180 179] degrees.   
- *   
- * The implementation is based on table lookup using 360 values together with linear interpolation.   
- * The steps used are:   
- *  -# Calculation of the nearest integer table index.   
- *  -# Compute the fractional portion (fract) of the input.   
- *  -# Fetch the value corresponding to \c index from sine table to \c y0 and also value from \c index+1 to \c y1.      
- *  -# Sine value is computed as <code> *psinVal = y0 + (fract * (y1 - y0))</code>.    
- *  -# Fetch the value corresponding to \c index from cosine table to \c y0 and also value from \c index+1 to \c y1.      
- *  -# Cosine value is computed as <code> *pcosVal = y0 + (fract * (y1 - y0))</code>.    
+/**
+ * @defgroup SinCos Sine Cosine
+ *
+ * Computes the trigonometric sine and cosine values using a combination of table lookup
+ * and linear interpolation.
+ * There are separate functions for Q31 and floating-point data types.
+ * The input to the floating-point version is in degrees while the
+ * fixed-point Q31 have a scaled input with the range
+ * [-1 0.9999] mapping to [-180 179] degrees.
+ *
+ * The implementation is based on table lookup using 360 values together with linear interpolation.
+ * The steps used are:
+ *  -# Calculation of the nearest integer table index.
+ *  -# Compute the fractional portion (fract) of the input.
+ *  -# Fetch the value corresponding to \c index from sine table to \c y0 and also value from \c index+1 to \c y1.
+ *  -# Sine value is computed as <code> *psinVal = y0 + (fract * (y1 - y0))</code>.
+ *  -# Fetch the value corresponding to \c index from cosine table to \c y0 and also value from \c index+1 to \c y1.
+ *  -# Cosine value is computed as <code> *pcosVal = y0 + (fract * (y1 - y0))</code>.
  */
 
- /**    
- * @addtogroup SinCos    
- * @{    
+ /**
+ * @addtogroup SinCos
+ * @{
  */
 
 
-/**    
-* \par    
-* Cosine Table is generated from following loop    
-* <pre>for(i = 0; i < 360; i++)    
-* {    
-*    cosTable[i]= cos((i-180) * PI/180.0);    
-* } </pre>   
+/**
+* \par
+* Cosine Table is generated from following loop
+* <pre>for(i = 0; i < 360; i++)
+* {
+*    cosTable[i]= cos((i-180) * PI/180.0);
+* } </pre>
 */
 
 static const float32_t cosTable[360] = {
@@ -217,13 +217,13 @@ static const float32_t cosTable[360] = {
   -0.999847695156391270f, -1.000000000000000000f
 };
 
-/**    
-* \par    
-* Sine Table is generated from following loop    
-* <pre>for(i = 0; i < 360; i++)    
-* {    
-*    sinTable[i]= sin((i-180) * PI/180.0);    
-* } </pre>    
+/**
+* \par
+* Sine Table is generated from following loop
+* <pre>for(i = 0; i < 360; i++)
+* {
+*    sinTable[i]= sin((i-180) * PI/180.0);
+* } </pre>
 */
 
 
@@ -366,12 +366,12 @@ static const float32_t sinTable[360] = {
 };
 
 
-/**    
- * @brief  Floating-point sin_cos function.   
- * @param[in]  theta    input value in degrees    
- * @param[out] *pSinVal points to the processed sine output.    
- * @param[out] *pCosVal points to the processed cos output.    
- * @return none.   
+/**
+ * @brief  Floating-point sin_cos function.
+ * @param[in]  theta    input value in degrees
+ * @param[out] *pSinVal points to the processed sine output.
+ * @param[out] *pCosVal points to the processed cos output.
+ * @return none.
  */
 
 
@@ -431,6 +431,6 @@ void arm_sin_cos_f32(
 
 }
 
-/**    
- * @} end of SinCos group    
+/**
+ * @} end of SinCos group
  */

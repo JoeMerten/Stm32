@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    SPI/SPI_TwoBoards/DataExchangeInterrupt/stm32f2xx_it.c 
+  * @file    SPI/SPI_TwoBoards/DataExchangeInterrupt/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -37,7 +37,7 @@
 
 /** @addtogroup SPI_DataExchangeInterrupt
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -164,7 +164,7 @@ void SysTick_Handler(void)
   {
     TimeOut--;
   }
-    
+
   if (Counter < 10)
   {
     Counter++;
@@ -205,14 +205,14 @@ void SPIx_IRQHANDLER(void)
   {
     RxBuffer[Rx_Idx++] = SPI_I2S_ReceiveData(SPIx);
   }
-#endif 
+#endif
 #ifdef SPI_MASTER
   /* SPI in Master Tramitter mode--------------------------------------- */
   if (SPI_I2S_GetITStatus(SPIx, SPI_I2S_IT_TXE) == SET)
   {
     if (CmdStatus == 0x00)
     {
-	    /* Send Transaction code */
+        /* Send Transaction code */
       SPI_I2S_SendData(SPIx, CmdTransmitted);
       CmdStatus = 0x01;
     }
@@ -220,7 +220,7 @@ void SPIx_IRQHANDLER(void)
     {
       if (Tx_Idx < GetVar_NbrOfData())
       {
-	      /* Send Transaction data */
+          /* Send Transaction data */
         SPI_I2S_SendData(SPIx, TxBuffer[Tx_Idx++]);
       }
       else
@@ -235,10 +235,10 @@ void SPIx_IRQHANDLER(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

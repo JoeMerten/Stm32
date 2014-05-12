@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FSMC/OneNAND/main.c 
+  * @file    FSMC/OneNAND/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32_eval.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup FSMC_OneNAND
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -59,46 +59,46 @@ void Fill_hBuffer(uint16_t *pBuffer, uint16_t BufferLenght, uint32_t Offset);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
      */
-  
+
   /* Initialize LEDs on STM3220F-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
-  STM_EVAL_LEDInit(LED3);  
-  STM_EVAL_LEDInit(LED4); 
-  
+  STM_EVAL_LEDInit(LED3);
+  STM_EVAL_LEDInit(LED4);
+
   /* FSMC Initialization */
   OneNAND_Init();
 
   /* Read OneNAND memory ID */
   OneNAND_ReadID(&OneNAND_ID);
 
-  /* Verify the OneNAND ID */ 
-  if((OneNAND_ID.Manufacturer_ID == OneNAND_SAMSUNG_MANUFACTURER_ID) && 
-     (OneNAND_ID.Device_ID == OneNAND_SAMSUNG_DEVICE_ID)) 
+  /* Verify the OneNAND ID */
+  if((OneNAND_ID.Manufacturer_ID == OneNAND_SAMSUNG_MANUFACTURER_ID) &&
+     (OneNAND_ID.Device_ID == OneNAND_SAMSUNG_DEVICE_ID))
   {
     /* Fill the buffer to send */
     Fill_hBuffer(TxBuffer, OneNAND_BUFFER_SIZE , 0x320F);
     Address.Block = OneNAND_WRITE_BLOCK_NUMBER;
     Address.Page = OneNAND_WRITE_PAGE_NUMBER;
-    
 
-    /***** Erase then write to the OneNAND memory ******************************/  
+
+    /***** Erase then write to the OneNAND memory ******************************/
     /* Unlock the selected OneNAND block */
     Status = OneNAND_UnlockBlock(OneNAND_WRITE_BLOCK_NUMBER);
 
     if (Status == 0)
-    { 
+    {
       /* Erase the selected OneNAND block */
       Status = OneNAND_EraseBlock(Address.Block);
 
       if (Status == 0)
-      { 
+      {
         /* Write data to the OneNAND memory (128Kbytes by page 2KBytes each) */
         for(PageIndex = 0; (PageIndex < OneNAND_NUMBER_OF_PAGE_PER_BLOCK) && (Status ==0); PageIndex++)
         {
@@ -107,7 +107,7 @@ int main(void)
         }
 
         if (Status == 0)
-        { 
+        {
           /***** Verify of the written data using asynchronous read ***********/
           Fill_hBuffer(RxBuffer_A, OneNAND_BUFFER_SIZE , 0xFF);
           Status = 0;
@@ -118,7 +118,7 @@ int main(void)
           {
             /* Read back the written data (By page) */
             OneNAND_AsynchronousRead(RxBuffer_A, Address, OneNAND_BUFFER_SIZE);
-   
+
             /* Verify the written data */
             for(j = 0; j < OneNAND_BUFFER_SIZE; j++)
             {
@@ -129,14 +129,14 @@ int main(void)
             }
             Address.Page++;
           }
-          
+
           if (Status != 0)
-          { 
+          {
             /* Turn ON LED2 */
-            STM_EVAL_LEDOn(LED2); 
+            STM_EVAL_LEDOn(LED2);
           }
 
-          /***** Verify of the written data using synchronous read ************/   
+          /***** Verify of the written data using synchronous read ************/
           Fill_hBuffer(RxBuffer_S, OneNAND_BUFFER_SIZE , 0xFF);
           Status = 0;
           Address.Block = OneNAND_WRITE_BLOCK_NUMBER;
@@ -146,7 +146,7 @@ int main(void)
           {
             /* Read back the written data (By page) */
             OneNAND_SynchronousRead(RxBuffer_S, Address, OneNAND_BUFFER_SIZE);
-   
+
             /* Verify the written data */
             for(j = 0; j < OneNAND_BUFFER_SIZE; j++)
             {
@@ -159,45 +159,45 @@ int main(void)
           }
 
           if (Status != 0)
-          { 
+          {
             /* Turn ON LED3 */
             STM_EVAL_LEDOn(LED3);
           }
-        }        
-        else
-        { 
-          /* Turn ON LED4 */
-          STM_EVAL_LEDOn(LED4); 
         }
-      } 
+        else
+        {
+          /* Turn ON LED4 */
+          STM_EVAL_LEDOn(LED4);
+        }
+      }
       else
-      { 
+      {
         /* Turn ON LED2 and LED4*/
-        STM_EVAL_LEDOn(LED2); 
-        STM_EVAL_LEDOn(LED4); 
-      }     
-    } 
+        STM_EVAL_LEDOn(LED2);
+        STM_EVAL_LEDOn(LED4);
+      }
+    }
     else
-    { 
+    {
       /* Turn ON LED3 and LED4 */
       STM_EVAL_LEDOn(LED3);
-      STM_EVAL_LEDOn(LED4); 
-    }  
+      STM_EVAL_LEDOn(LED4);
+    }
   }
   else
   {
     /* Turn ON LED2, LED3 and LED4 */
-    STM_EVAL_LEDOn(LED2);    
+    STM_EVAL_LEDOn(LED2);
     STM_EVAL_LEDOn(LED3);
     STM_EVAL_LEDOn(LED4);
   }
 
   if (Status == 0)
-  { 
+  {
    /* Turn ON LED1 */
    STM_EVAL_LEDOn(LED1);
   }
-  		  
+
   /* Infinite loop */
   while (1)
   {
@@ -232,7 +232,7 @@ void Fill_hBuffer(uint16_t *pBuffer, uint16_t BufferLenght, uint32_t Offset)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

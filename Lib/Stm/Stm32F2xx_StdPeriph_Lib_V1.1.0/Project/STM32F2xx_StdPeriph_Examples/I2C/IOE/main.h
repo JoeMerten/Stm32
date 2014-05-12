@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2C/IOE/main.c 
+  * @file    I2C/IOE/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
@@ -37,8 +37,8 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
-//#define BUTTON_POLLING_MODE   
-#define BUTTON_INTERRUPT_MODE    
+//#define BUTTON_POLLING_MODE
+#define BUTTON_INTERRUPT_MODE
 
 //#define IOE_POLLING_MODE
 #define IOE_INTERRUPT_MODE
@@ -47,7 +47,7 @@
   #define BUTTON_MODE  BUTTON_MODE_GPIO
 #else
   #define BUTTON_MODE  BUTTON_MODE_EXTI
-#endif 	/* BUTTON_POLLING_MODE */
+#endif  /* BUTTON_POLLING_MODE */
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

@@ -1,24 +1,24 @@
-/* ----------------------------------------------------------------------    
-* Copyright (C) 2010-2013 ARM Limited. All rights reserved.    
-*    
+/* ----------------------------------------------------------------------
+* Copyright (C) 2010-2013 ARM Limited. All rights reserved.
+*
 * $Date:        17. January 2013
-* $Revision: 	V1.4.1
-*    
-* Project: 	    CMSIS DSP Library    
-* Title:        arm_fir_q15.c    
-*    
-* Description:  Q15 FIR filter processing function.    
-*    
+* $Revision:    V1.4.1
+*
+* Project:      CMSIS DSP Library
+* Title:        arm_fir_q15.c
+*
+* Description:  Q15 FIR filter processing function.
+*
 * Target Processor: Cortex-M4/Cortex-M3/Cortex-M0
-*  
-* Redistribution and use in source and binary forms, with or without 
+*
+* Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *   - Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   - Redistributions in binary form must reproduce the above copyright
 *     notice, this list of conditions and the following disclaimer in
-*     the documentation and/or other materials provided with the 
+*     the documentation and/or other materials provided with the
 *     distribution.
 *   - Neither the name of ARM LIMITED nor the names of its contributors
 *     may be used to endorse or promote products derived from this
@@ -27,7 +27,7 @@
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
 * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
 * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
@@ -35,44 +35,44 @@
 * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-* POSSIBILITY OF SUCH DAMAGE.   
+* POSSIBILITY OF SUCH DAMAGE.
 * -------------------------------------------------------------------- */
 
 #include "arm_math.h"
 
-/**       
- * @ingroup groupFilters       
+/**
+ * @ingroup groupFilters
  */
 
-/**       
- * @addtogroup FIR       
- * @{       
+/**
+ * @addtogroup FIR
+ * @{
  */
 
-/**       
- * @brief Processing function for the Q15 FIR filter.       
- * @param[in] *S points to an instance of the Q15 FIR structure.       
- * @param[in] *pSrc points to the block of input data.       
- * @param[out] *pDst points to the block of output data.       
- * @param[in]  blockSize number of samples to process per call.       
- * @return none.       
- *   
- *   
- * \par Restrictions   
- *  If the silicon does not support unaligned memory access enable the macro UNALIGNED_SUPPORT_DISABLE   
- *	In this case input, output, state buffers should be aligned by 32-bit   
- *   
- * <b>Scaling and Overflow Behavior:</b>       
- * \par       
- * The function is implemented using a 64-bit internal accumulator.       
- * Both coefficients and state variables are represented in 1.15 format and multiplications yield a 2.30 result.       
- * The 2.30 intermediate results are accumulated in a 64-bit accumulator in 34.30 format.       
- * There is no risk of internal overflow with this approach and the full precision of intermediate multiplications is preserved.       
- * After all additions have been performed, the accumulator is truncated to 34.15 format by discarding low 15 bits.       
- * Lastly, the accumulator is saturated to yield a result in 1.15 format.       
- *       
- * \par       
- * Refer to the function <code>arm_fir_fast_q15()</code> for a faster but less precise implementation of this function.       
+/**
+ * @brief Processing function for the Q15 FIR filter.
+ * @param[in] *S points to an instance of the Q15 FIR structure.
+ * @param[in] *pSrc points to the block of input data.
+ * @param[out] *pDst points to the block of output data.
+ * @param[in]  blockSize number of samples to process per call.
+ * @return none.
+ *
+ *
+ * \par Restrictions
+ *  If the silicon does not support unaligned memory access enable the macro UNALIGNED_SUPPORT_DISABLE
+ *  In this case input, output, state buffers should be aligned by 32-bit
+ *
+ * <b>Scaling and Overflow Behavior:</b>
+ * \par
+ * The function is implemented using a 64-bit internal accumulator.
+ * Both coefficients and state variables are represented in 1.15 format and multiplications yield a 2.30 result.
+ * The 2.30 intermediate results are accumulated in a 64-bit accumulator in 34.30 format.
+ * There is no risk of internal overflow with this approach and the full precision of intermediate multiplications is preserved.
+ * After all additions have been performed, the accumulator is truncated to 34.15 format by discarding low 15 bits.
+ * Lastly, the accumulator is saturated to yield a result in 1.15 format.
+ *
+ * \par
+ * Refer to the function <code>arm_fir_fast_q15()</code> for a faster but less precise implementation of this function.
  */
 
 #ifndef ARM_MATH_CM0_FAMILY
@@ -103,22 +103,22 @@ void arm_fir_q15(
   /* pStateCurnt points to the location where the new input data should be written */
   pStateCurnt = &(S->pState[(numTaps - 1u)]);
 
-  /* Apply loop unrolling and compute 4 output values simultaneously.       
-   * The variables acc0 ... acc3 hold output values that are being computed:       
-   *       
-   *    acc0 =  b[numTaps-1] * x[n-numTaps-1] + b[numTaps-2] * x[n-numTaps-2] + b[numTaps-3] * x[n-numTaps-3] +...+ b[0] * x[0]       
-   *    acc1 =  b[numTaps-1] * x[n-numTaps] +   b[numTaps-2] * x[n-numTaps-1] + b[numTaps-3] * x[n-numTaps-2] +...+ b[0] * x[1]       
-   *    acc2 =  b[numTaps-1] * x[n-numTaps+1] + b[numTaps-2] * x[n-numTaps] +   b[numTaps-3] * x[n-numTaps-1] +...+ b[0] * x[2]       
-   *    acc3 =  b[numTaps-1] * x[n-numTaps+2] + b[numTaps-2] * x[n-numTaps+1] + b[numTaps-3] * x[n-numTaps]   +...+ b[0] * x[3]       
+  /* Apply loop unrolling and compute 4 output values simultaneously.
+   * The variables acc0 ... acc3 hold output values that are being computed:
+   *
+   *    acc0 =  b[numTaps-1] * x[n-numTaps-1] + b[numTaps-2] * x[n-numTaps-2] + b[numTaps-3] * x[n-numTaps-3] +...+ b[0] * x[0]
+   *    acc1 =  b[numTaps-1] * x[n-numTaps] +   b[numTaps-2] * x[n-numTaps-1] + b[numTaps-3] * x[n-numTaps-2] +...+ b[0] * x[1]
+   *    acc2 =  b[numTaps-1] * x[n-numTaps+1] + b[numTaps-2] * x[n-numTaps] +   b[numTaps-3] * x[n-numTaps-1] +...+ b[0] * x[2]
+   *    acc3 =  b[numTaps-1] * x[n-numTaps+2] + b[numTaps-2] * x[n-numTaps+1] + b[numTaps-3] * x[n-numTaps]   +...+ b[0] * x[3]
    */
 
   blkCnt = blockSize >> 2;
 
-  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.       
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.
    ** a second loop below computes the remaining 1 to 3 samples. */
   while(blkCnt > 0u)
   {
-    /* Copy four new input samples into the state buffer.       
+    /* Copy four new input samples into the state buffer.
      ** Use 32-bit SIMD to move the 16-bit data.  Only requires two copies. */
     *__SIMD32(pStateCurnt)++ = *__SIMD32(pSrc)++;
     *__SIMD32(pStateCurnt)++ = *__SIMD32(pSrc)++;
@@ -143,7 +143,7 @@ void arm_fir_q15(
 
     px1 += 2u;
 
-    /* Loop over the number of taps.  Unroll by a factor of 4.       
+    /* Loop over the number of taps.  Unroll by a factor of 4.
      ** Repeat until we've computed numTaps-4 coefficients. */
     tapCnt = numTaps >> 2;
 
@@ -198,7 +198,7 @@ void arm_fir_q15(
     }
 
 
-    /* If the filter length is not a multiple of 4, compute the remaining filter taps.       
+    /* If the filter length is not a multiple of 4, compute the remaining filter taps.
      ** This is always be 2 taps since the filter length is even. */
     if((numTaps & 0x3u) != 0u)
     {
@@ -220,7 +220,7 @@ void arm_fir_q15(
       acc3 = __SMLALD(x3, c0, acc3);
     }
 
-    /* The results in the 4 accumulators are in 2.30 format.  Convert to 1.15 with saturation.       
+    /* The results in the 4 accumulators are in 2.30 format.  Convert to 1.15 with saturation.
      ** Then store the 4 outputs in the destination buffer. */
 
 #ifndef ARM_MATH_BIG_ENDIAN
@@ -248,7 +248,7 @@ void arm_fir_q15(
     blkCnt--;
   }
 
-  /* If the blockSize is not a multiple of 4, compute any remaining output samples here.       
+  /* If the blockSize is not a multiple of 4, compute any remaining output samples here.
    ** No loop unrolling is used. */
   blkCnt = blockSize % 0x4u;
   while(blkCnt > 0u)
@@ -278,7 +278,7 @@ void arm_fir_q15(
     }
     while(tapCnt > 0u);
 
-    /* The result is in 2.30 format.  Convert to 1.15 with saturation.       
+    /* The result is in 2.30 format.  Convert to 1.15 with saturation.
      ** Then store the output in the destination buffer. */
     *pDst++ = (q15_t) (__SSAT((acc0 >> 15), 16));
 
@@ -289,8 +289,8 @@ void arm_fir_q15(
     blkCnt--;
   }
 
-  /* Processing is complete.       
-   ** Now copy the last numTaps - 1 samples to the satrt of the state buffer.       
+  /* Processing is complete.
+   ** Now copy the last numTaps - 1 samples to the satrt of the state buffer.
    ** This prepares the state buffer for the next function call. */
 
   /* Points to the start of the state buffer */
@@ -346,22 +346,22 @@ void arm_fir_q15(
   /* pStateCurnt points to the location where the new input data should be written */
   pStateCurnt = &(S->pState[(numTaps - 1u)]);
 
-  /* Apply loop unrolling and compute 4 output values simultaneously.      
-   * The variables acc0 ... acc3 hold output values that are being computed:      
-   *      
-   *    acc0 =  b[numTaps-1] * x[n-numTaps-1] + b[numTaps-2] * x[n-numTaps-2] + b[numTaps-3] * x[n-numTaps-3] +...+ b[0] * x[0]      
-   *    acc1 =  b[numTaps-1] * x[n-numTaps] +   b[numTaps-2] * x[n-numTaps-1] + b[numTaps-3] * x[n-numTaps-2] +...+ b[0] * x[1]      
-   *    acc2 =  b[numTaps-1] * x[n-numTaps+1] + b[numTaps-2] * x[n-numTaps] +   b[numTaps-3] * x[n-numTaps-1] +...+ b[0] * x[2]      
-   *    acc3 =  b[numTaps-1] * x[n-numTaps+2] + b[numTaps-2] * x[n-numTaps+1] + b[numTaps-3] * x[n-numTaps]   +...+ b[0] * x[3]      
+  /* Apply loop unrolling and compute 4 output values simultaneously.
+   * The variables acc0 ... acc3 hold output values that are being computed:
+   *
+   *    acc0 =  b[numTaps-1] * x[n-numTaps-1] + b[numTaps-2] * x[n-numTaps-2] + b[numTaps-3] * x[n-numTaps-3] +...+ b[0] * x[0]
+   *    acc1 =  b[numTaps-1] * x[n-numTaps] +   b[numTaps-2] * x[n-numTaps-1] + b[numTaps-3] * x[n-numTaps-2] +...+ b[0] * x[1]
+   *    acc2 =  b[numTaps-1] * x[n-numTaps+1] + b[numTaps-2] * x[n-numTaps] +   b[numTaps-3] * x[n-numTaps-1] +...+ b[0] * x[2]
+   *    acc3 =  b[numTaps-1] * x[n-numTaps+2] + b[numTaps-2] * x[n-numTaps+1] + b[numTaps-3] * x[n-numTaps]   +...+ b[0] * x[3]
    */
 
   blkCnt = blockSize >> 2;
 
-  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.      
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.
    ** a second loop below computes the remaining 1 to 3 samples. */
   while(blkCnt > 0u)
   {
-    /* Copy four new input samples into the state buffer.      
+    /* Copy four new input samples into the state buffer.
      ** Use 32-bit SIMD to move the 16-bit data.  Only requires two copies. */
     *pStateCurnt++ = *pSrc++;
     *pStateCurnt++ = *pSrc++;
@@ -387,7 +387,7 @@ void arm_fir_q15(
     /* Read the third and forth samples from the state buffer: x[n-N-2], x[n-N-3] */
     x2 = *__SIMD32(px)++;
 
-    /* Loop over the number of taps.  Unroll by a factor of 4.      
+    /* Loop over the number of taps.  Unroll by a factor of 4.
      ** Repeat until we've computed numTaps-(numTaps%4) coefficients. */
     tapCnt = numTaps >> 2;
 
@@ -458,7 +458,7 @@ void arm_fir_q15(
 
     }
 
-    /* If the filter length is not a multiple of 4, compute the remaining filter taps.       
+    /* If the filter length is not a multiple of 4, compute the remaining filter taps.
      ** This is always be 2 taps since the filter length is even. */
     if((numTaps & 0x3u) != 0u)
     {
@@ -494,7 +494,7 @@ void arm_fir_q15(
       acc3 = __SMLALDX(x1, c0, acc3);
     }
 
-    /* The results in the 4 accumulators are in 2.30 format.  Convert to 1.15 with saturation.       
+    /* The results in the 4 accumulators are in 2.30 format.  Convert to 1.15 with saturation.
      ** Then store the 4 outputs in the destination buffer. */
 
 #ifndef ARM_MATH_BIG_ENDIAN
@@ -522,7 +522,7 @@ void arm_fir_q15(
     blkCnt--;
   }
 
-  /* If the blockSize is not a multiple of 4, compute any remaining output samples here.      
+  /* If the blockSize is not a multiple of 4, compute any remaining output samples here.
    ** No loop unrolling is used. */
   blkCnt = blockSize % 0x4u;
   while(blkCnt > 0u)
@@ -542,12 +542,12 @@ void arm_fir_q15(
     do
     {
       acc0 += (q31_t) * px++ * *pb++;
-	  acc0 += (q31_t) * px++ * *pb++;
+      acc0 += (q31_t) * px++ * *pb++;
       tapCnt--;
     }
     while(tapCnt > 0u);
 
-    /* The result is in 2.30 format.  Convert to 1.15 with saturation.      
+    /* The result is in 2.30 format.  Convert to 1.15 with saturation.
      ** Then store the output in the destination buffer. */
     *pDst++ = (q15_t) (__SSAT((acc0 >> 15), 16));
 
@@ -558,8 +558,8 @@ void arm_fir_q15(
     blkCnt--;
   }
 
-  /* Processing is complete.      
-   ** Now copy the last numTaps - 1 samples to the satrt of the state buffer.      
+  /* Processing is complete.
+   ** Now copy the last numTaps - 1 samples to the satrt of the state buffer.
    ** This prepares the state buffer for the next function call. */
 
   /* Points to the start of the state buffer */
@@ -649,7 +649,7 @@ void arm_fir_q15(
       tapCnt--;
     } while(tapCnt > 0u);
 
-    /* The result is in 2.30 format.  Convert to 1.15         
+    /* The result is in 2.30 format.  Convert to 1.15
      ** Then store the output in the destination buffer. */
     *pDst++ = (q15_t) __SSAT((acc >> 15u), 16);
 
@@ -660,8 +660,8 @@ void arm_fir_q15(
     blkCnt--;
   }
 
-  /* Processing is complete.         
-   ** Now copy the last numTaps - 1 samples to the satrt of the state buffer.       
+  /* Processing is complete.
+   ** Now copy the last numTaps - 1 samples to the satrt of the state buffer.
    ** This prepares the state buffer for the next function call. */
 
   /* Points to the start of the state buffer */
@@ -686,6 +686,6 @@ void arm_fir_q15(
 
 
 
-/**       
- * @} end of FIR group       
+/**
+ * @} end of FIR group
  */

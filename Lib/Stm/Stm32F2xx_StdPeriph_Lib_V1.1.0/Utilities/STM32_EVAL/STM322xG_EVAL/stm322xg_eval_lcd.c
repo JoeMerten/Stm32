@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm322xg_eval_lcd.h"
@@ -33,26 +33,26 @@
 
 /** @addtogroup Utilities
   * @{
-  */ 
+  */
 
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM322xG_EVAL
   * @{
   */
-    
-/** @defgroup STM322xG_EVAL_LCD 
+
+/** @defgroup STM322xG_EVAL_LCD
   * @brief This file includes the LCD driver for AM-240320L8TNQW00H (LCD_ILI9320)
   *        and AM240320D5TOQW01H (LCD_ILI9325) Liquid Crystal Display Modules
   *        of STM322xG_EVAL board.
   * @{
-  */ 
+  */
 
 /** @defgroup STM322xG_EVAL_LCD_Private_TypesDefinitions
   * @{
-  */ 
+  */
 typedef struct
 {
   __IO uint16_t LCD_REG;
@@ -60,7 +60,7 @@ typedef struct
 } LCD_TypeDef;
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM322xG_EVAL_LCD_Private_Defines
@@ -74,32 +74,32 @@ typedef struct
 #define POLY_X(Z)          ((int32_t)((Points + Z)->Y))
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM322xG_EVAL_LCD_Private_Macros
   * @{
   */
-#define ABS(X)  ((X) > 0 ? (X) : -(X))     
+#define ABS(X)  ((X) > 0 ? (X) : -(X))
 /**
   * @}
-  */ 
-    
+  */
+
 /** @defgroup STM322xG_EVAL_LCD_Private_Variables
   * @{
-  */ 
+  */
 static sFONT *LCD_Currentfonts;
 
   /* Global variables to set the written text color */
 __IO uint16_t TextColor = 0x0000, BackColor = 0xFFFF;
-  
+
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM322xG_EVAL_LCD_Private_FunctionPrototypes
   * @{
-  */ 
+  */
 #ifndef USE_Delay
 static void delay(__IO uint32_t nCount);
 #endif /* USE_Delay*/
@@ -109,12 +109,12 @@ static void LCD_PolyLineRelativeClosed(pPoint Points, uint16_t PointCount, uint1
 
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM322xG_EVAL_LCD_Private_Functions
   * @{
-  */ 
+  */
 
 /**
   * @brief  DeInitializes the LCD.
@@ -122,7 +122,7 @@ static void LCD_PolyLineRelativeClosed(pPoint Points, uint16_t PointCount, uint1
   * @retval None
   */
 void LCD_DeInit(void)
-{ 
+{
   GPIO_InitTypeDef GPIO_InitStructure;
 
   /*!< LCD Display Off */
@@ -130,10 +130,10 @@ void LCD_DeInit(void)
 
   /* BANK 3 (of NOR/SRAM Bank 1~4) is disabled */
   FSMC_NORSRAMCmd(FSMC_Bank1_NORSRAM3, ENABLE);
-  
+
   /*!< LCD_SPI DeInit */
   FSMC_NORSRAMDeInit(FSMC_Bank1_NORSRAM3);
-   
+
 /*-- GPIO Configuration ------------------------------------------------------*/
   /* SRAM Data lines configuration */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_8 | GPIO_Pin_9 |
@@ -141,7 +141,7 @@ void LCD_DeInit(void)
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
   GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_NOPULL;
   GPIO_Init(GPIOD, &GPIO_InitStructure);
- 
+
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource0, GPIO_AF_MCO);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource1, GPIO_AF_MCO);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource8, GPIO_AF_MCO);
@@ -152,7 +152,7 @@ void LCD_DeInit(void)
 
 
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 |
-                                GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | 
+                                GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 |
                                 GPIO_Pin_15;
 
   GPIO_Init(GPIOE, &GPIO_InitStructure);
@@ -168,8 +168,8 @@ void LCD_DeInit(void)
   GPIO_PinAFConfig(GPIOE, GPIO_PinSource15 , GPIO_AF_MCO);
 
   /* SRAM Address lines configuration */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | 
-                                GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_12 | GPIO_Pin_13 | 
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 |
+                                GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_12 | GPIO_Pin_13 |
                                 GPIO_Pin_14 | GPIO_Pin_15;
   GPIO_Init(GPIOF, &GPIO_InitStructure);
   GPIO_PinAFConfig(GPIOF,GPIO_PinSource0, GPIO_AF_MCO);
@@ -184,7 +184,7 @@ void LCD_DeInit(void)
   GPIO_PinAFConfig(GPIOF,GPIO_PinSource15, GPIO_AF_MCO);
 
 
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | 
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 |
                                 GPIO_Pin_4 | GPIO_Pin_5;
 
   GPIO_Init(GPIOG, &GPIO_InitStructure);
@@ -196,7 +196,7 @@ void LCD_DeInit(void)
   GPIO_PinAFConfig(GPIOG,GPIO_PinSource4, GPIO_AF_MCO);
   GPIO_PinAFConfig(GPIOG,GPIO_PinSource5, GPIO_AF_MCO);
 
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13; 
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13;
 
   GPIO_Init(GPIOD, &GPIO_InitStructure);
 
@@ -204,7 +204,7 @@ void LCD_DeInit(void)
   GPIO_PinAFConfig(GPIOD,GPIO_PinSource12, GPIO_AF_MCO);
   GPIO_PinAFConfig(GPIOD,GPIO_PinSource13, GPIO_AF_MCO);
 
-  /* NOE and NWE configuration */  
+  /* NOE and NWE configuration */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 |GPIO_Pin_5;
 
   GPIO_Init(GPIOD, &GPIO_InitStructure);
@@ -212,14 +212,14 @@ void LCD_DeInit(void)
   GPIO_PinAFConfig(GPIOD,GPIO_PinSource5, GPIO_AF_MCO);
 
   /* NE3 configuration */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10; 
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
 
   GPIO_Init(GPIOG, &GPIO_InitStructure);
   GPIO_PinAFConfig(GPIOG, GPIO_PinSource12, GPIO_AF_MCO);
 
   /* NBL0, NBL1 configuration */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1; 
-  GPIO_Init(GPIOE, &GPIO_InitStructure); 
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;
+  GPIO_Init(GPIOE, &GPIO_InitStructure);
 
   GPIO_PinAFConfig(GPIOE,GPIO_PinSource0, GPIO_AF_MCO);
   GPIO_PinAFConfig(GPIOE,GPIO_PinSource1, GPIO_AF_MCO);
@@ -231,9 +231,9 @@ void LCD_DeInit(void)
   * @retval None
   */
 void STM322xG_LCD_Init(void)
-{ 
+{
   __IO uint32_t lcdid = 0;
-  
+
 /* Configure the LCD Control pins --------------------------------------------*/
   LCD_CtrlLinesConfig();
 
@@ -243,7 +243,7 @@ void STM322xG_LCD_Init(void)
   _delay_(5); /* delay 50 ms */
 
   /* Read the LCD ID */
-  lcdid = LCD_ReadReg(0x00);  
+  lcdid = LCD_ReadReg(0x00);
 
   /* Check if the LCD is ILI9320 Controller */
   if(lcdid == 0x9320)
@@ -290,7 +290,7 @@ void STM322xG_LCD_Init(void)
     LCD_WriteReg(LCD_REG_57, 0x0700);
     LCD_WriteReg(LCD_REG_60, 0x0700);
     LCD_WriteReg(LCD_REG_61, 0x1F00);
-  
+
     /* Set GRAM area ---------------------------------------------------------*/
     LCD_WriteReg(LCD_REG_80, 0x0000); /* Horizontal GRAM Start Address */
     LCD_WriteReg(LCD_REG_81, 0x00EF); /* Horizontal GRAM End Address */
@@ -321,7 +321,7 @@ void STM322xG_LCD_Init(void)
     /* AM=1 (address is updated in vertical writing direction) */
     LCD_WriteReg(LCD_REG_3, 0x1018);
 
-    LCD_WriteReg(LCD_REG_7, 0x0173); /* 262K color and display ON */  
+    LCD_WriteReg(LCD_REG_7, 0x0173); /* 262K color and display ON */
   }
   else if(lcdid == 0x9325) /* Check if the LCD is ILI9325 Controller */
   {
@@ -398,7 +398,7 @@ void STM322xG_LCD_Init(void)
     /* AM=1 (address is updated in vertical writing direction) */
     LCD_WriteReg(LCD_REG_3, 0x1018);
 
-    LCD_WriteReg(LCD_REG_7, 0x0133); /* 262K color and display ON */ 
+    LCD_WriteReg(LCD_REG_7, 0x0133); /* 262K color and display ON */
   }
   LCD_SetFont(&LCD_DEFAULT_FONT);
 }
@@ -411,15 +411,15 @@ void STM322xG_LCD_Init(void)
   */
 void LCD_SetColors(__IO uint16_t _TextColor, __IO uint16_t _BackColor)
 {
-  TextColor = _TextColor; 
+  TextColor = _TextColor;
   BackColor = _BackColor;
 }
 
 /**
   * @brief  Gets the LCD Text and Background colors.
-  * @param  _TextColor: pointer to the variable that will contain the Text 
+  * @param  _TextColor: pointer to the variable that will contain the Text
             Color.
-  * @param  _BackColor: pointer to the variable that will contain the Background 
+  * @param  _BackColor: pointer to the variable that will contain the Background
             Color.
   * @retval None
   */
@@ -497,19 +497,19 @@ void LCD_ClearLine(uint16_t Line)
 void LCD_Clear(uint16_t Color)
 {
   uint32_t index = 0;
-  
-  LCD_SetCursor(0x00, 0x013F); 
+
+  LCD_SetCursor(0x00, 0x013F);
   LCD_WriteRAM_Prepare(); /* Prepare to write GRAM */
   for(index = 0; index < 76800; index++)
   {
     LCD->LCD_RAM = Color;
-  }  
+  }
 }
 
 /**
   * @brief  Sets the cursor position.
   * @param  Xpos: specifies the X position.
-  * @param  Ypos: specifies the Y position. 
+  * @param  Ypos: specifies the Y position.
   * @retval None
   */
 void LCD_SetCursor(uint16_t Xpos, uint16_t Ypos)
@@ -530,15 +530,15 @@ void LCD_DrawChar(uint16_t Xpos, uint16_t Ypos, const uint16_t *c)
   uint32_t index = 0, i = 0;
   uint16_t  Xaddress = 0;
   Xaddress = Xpos;
-  
+
   LCD_SetCursor(Xaddress, Ypos);
-  
+
   for(index = 0; index < LCD_Currentfonts->Height; index++)
   {
     LCD_WriteRAM_Prepare(); /* Prepare to write GRAM */
     for(i = 0; i < LCD_Currentfonts->Width; i++)
     {
-  
+
       if((((c[index] & ((0x80 << ((LCD_Currentfonts->Width / 12 ) * 8 ) ) >> i)) == 0x00) &&(LCD_Currentfonts->Width <= 12))||
         (((c[index] & (0x1 << i)) == 0x00)&&(LCD_Currentfonts->Width > 12 )))
 
@@ -548,7 +548,7 @@ void LCD_DrawChar(uint16_t Xpos, uint16_t Ypos, const uint16_t *c)
       else
       {
         LCD_WriteRAM(TextColor);
-      } 
+      }
     }
     Xaddress++;
     LCD_SetCursor(Xaddress, Ypos);
@@ -619,7 +619,7 @@ void LCD_SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t
   if(Ypos >= Width)
   {
     LCD_WriteReg(LCD_REG_82, (Ypos - Width + 1));
-  }  
+  }
   else
   {
     LCD_WriteReg(LCD_REG_82, 0);
@@ -637,7 +637,7 @@ void LCD_SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t
 void LCD_WindowModeDisable(void)
 {
   LCD_SetDisplayWindow(239, 0x13F, 240, 320);
-  LCD_WriteReg(LCD_REG_3, 0x1018);    
+  LCD_WriteReg(LCD_REG_3, 0x1018);
 }
 
 /**
@@ -652,7 +652,7 @@ void LCD_WindowModeDisable(void)
 void LCD_DrawLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length, uint8_t Direction)
 {
   uint32_t i = 0;
-  
+
   LCD_SetCursor(Xpos, Ypos);
   if(Direction == LCD_DIR_HORIZONTAL)
   {
@@ -686,7 +686,7 @@ void LCD_DrawRect(uint16_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width)
 {
   LCD_DrawLine(Xpos, Ypos, Width, LCD_DIR_HORIZONTAL);
   LCD_DrawLine((Xpos + Height), Ypos, Width, LCD_DIR_HORIZONTAL);
-  
+
   LCD_DrawLine(Xpos, Ypos, Height, LCD_DIR_VERTICAL);
   LCD_DrawLine(Xpos, (Ypos - Width + 1), Height, LCD_DIR_VERTICAL);
 }
@@ -700,14 +700,14 @@ void LCD_DrawRect(uint16_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width)
   */
 void LCD_DrawCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
 {
-  int32_t  D;/* Decision Variable */ 
+  int32_t  D;/* Decision Variable */
   uint32_t  CurX;/* Current X Value */
-  uint32_t  CurY;/* Current Y Value */ 
-  
+  uint32_t  CurY;/* Current Y Value */
+
   D = 3 - (Radius << 1);
   CurX = 0;
   CurY = Radius;
-  
+
   while (CurX <= CurY)
   {
     LCD_SetCursor(Xpos + CurX, Ypos + CurY);
@@ -735,7 +735,7 @@ void LCD_DrawCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
     LCD_WriteRAM_Prepare(); /* Prepare to write GRAM */
     LCD_WriteRAM(TextColor);
     if (D < 0)
-    { 
+    {
       D += (CurX << 2) + 6;
     }
     else
@@ -755,7 +755,7 @@ void LCD_DrawCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
 void LCD_DrawMonoPict(const uint32_t *Pict)
 {
   uint32_t index = 0, i = 0;
-  LCD_SetCursor(0, (LCD_PIXEL_WIDTH - 1)); 
+  LCD_SetCursor(0, (LCD_PIXEL_WIDTH - 1));
   LCD_WriteRAM_Prepare(); /* Prepare to write GRAM */
   for(index = 0; index < 2400; index++)
   {
@@ -793,15 +793,15 @@ void LCD_WriteBMP(uint32_t BmpAddress)
   /* I/D=00 (Horizontal : decrement, Vertical : decrement) */
   /* AM=1 (address is updated in vertical writing direction) */
   LCD_WriteReg(LCD_REG_3, 0x1008);
- 
+
   LCD_WriteRAM_Prepare();
- 
+
   for(index = 0; index < size; index++)
   {
     LCD_WriteRAM(*(__IO uint16_t *)BmpAddress);
     BmpAddress += 2;
   }
- 
+
   /* Set GRAM write direction and BGR = 1 */
   /* I/D = 01 (Horizontal : increment, Vertical : decrement) */
   /* AM = 1 (address is updated in vertical writing direction) */
@@ -822,7 +822,7 @@ void LCD_DrawFullRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Hei
 
   LCD_DrawLine(Xpos, Ypos, Width, LCD_DIR_HORIZONTAL);
   LCD_DrawLine((Xpos + Height), Ypos, Width, LCD_DIR_HORIZONTAL);
-  
+
   LCD_DrawLine(Xpos, Ypos, Height, LCD_DIR_VERTICAL);
   LCD_DrawLine(Xpos, (Ypos - Width + 1), Height, LCD_DIR_VERTICAL);
 
@@ -834,7 +834,7 @@ void LCD_DrawFullRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Hei
 
   while(Height--)
   {
-    LCD_DrawLine(++Xpos, Ypos, Width, LCD_DIR_HORIZONTAL);    
+    LCD_DrawLine(++Xpos, Ypos, Width, LCD_DIR_HORIZONTAL);
   }
 
   LCD_SetTextColor(TextColor);
@@ -849,32 +849,32 @@ void LCD_DrawFullRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Hei
   */
 void LCD_DrawFullCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
 {
-  int32_t  D;    /* Decision Variable */ 
+  int32_t  D;    /* Decision Variable */
   uint32_t  CurX;/* Current X Value */
-  uint32_t  CurY;/* Current Y Value */ 
-  
+  uint32_t  CurY;/* Current Y Value */
+
   D = 3 - (Radius << 1);
 
   CurX = 0;
   CurY = Radius;
-  
+
   LCD_SetTextColor(BackColor);
 
   while (CurX <= CurY)
   {
-    if(CurY > 0) 
+    if(CurY > 0)
     {
       LCD_DrawLine(Xpos - CurX, Ypos + CurY, 2*CurY, LCD_DIR_HORIZONTAL);
       LCD_DrawLine(Xpos + CurX, Ypos + CurY, 2*CurY, LCD_DIR_HORIZONTAL);
     }
 
-    if(CurX > 0) 
+    if(CurX > 0)
     {
       LCD_DrawLine(Xpos - CurY, Ypos + CurX, 2*CurX, LCD_DIR_HORIZONTAL);
       LCD_DrawLine(Xpos + CurY, Ypos + CurX, 2*CurX, LCD_DIR_HORIZONTAL);
     }
     if (D < 0)
-    { 
+    {
       D += (CurX << 2) + 6;
     }
     else
@@ -899,15 +899,15 @@ void LCD_DrawFullCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
   */
 void LCD_DrawUniLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
 {
-  int16_t deltax = 0, deltay = 0, x = 0, y = 0, xinc1 = 0, xinc2 = 0, 
-  yinc1 = 0, yinc2 = 0, den = 0, num = 0, numadd = 0, numpixels = 0, 
+  int16_t deltax = 0, deltay = 0, x = 0, y = 0, xinc1 = 0, xinc2 = 0,
+  yinc1 = 0, yinc2 = 0, den = 0, num = 0, numadd = 0, numpixels = 0,
   curpixel = 0;
-  
+
   deltax = ABS(x2 - x1);        /* The difference between the x's */
   deltay = ABS(y2 - y1);        /* The difference between the y's */
   x = x1;                       /* Start x off at the first pixel */
   y = y1;                       /* Start y off at the first pixel */
-  
+
   if (x2 >= x1)                 /* The x-values are increasing */
   {
     xinc1 = 1;
@@ -918,7 +918,7 @@ void LCD_DrawUniLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
     xinc1 = -1;
     xinc2 = -1;
   }
-  
+
   if (y2 >= y1)                 /* The y-values are increasing */
   {
     yinc1 = 1;
@@ -929,7 +929,7 @@ void LCD_DrawUniLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
     yinc1 = -1;
     yinc2 = -1;
   }
-  
+
   if (deltax >= deltay)         /* There is at least one x-value for every y-value */
   {
     xinc1 = 0;                  /* Don't change the x when numerator >= denominator */
@@ -948,7 +948,7 @@ void LCD_DrawUniLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
     numadd = deltax;
     numpixels = deltay;         /* There are more y-values than x-values */
   }
-  
+
   for (curpixel = 0; curpixel <= numpixels; curpixel++)
   {
     PutPixel(x, y);             /* Draw the current pixel */
@@ -1004,7 +1004,7 @@ static void LCD_PolyLineRelativeClosed(pPoint Points, uint16_t PointCount, uint1
   if(PointCount < 2)
   {
     return;
-  }  
+  }
   X = Points->X;
   Y = Points->Y;
   while(--PointCount)
@@ -1017,7 +1017,7 @@ static void LCD_PolyLineRelativeClosed(pPoint Points, uint16_t PointCount, uint1
   if(Closed)
   {
     LCD_DrawUniLine(First->X, First->Y, X, Y);
-  }  
+  }
 }
 
 /**
@@ -1082,10 +1082,10 @@ void LCD_FillPolyLine(pPoint Points, uint16_t PointCount)
     {
       IMAGE_RIGHT = pixelX;
     }
-    
+
     pixelY = POLY_Y(i);
     if(pixelY < IMAGE_TOP)
-    { 
+    {
       IMAGE_TOP = pixelY;
     }
     if(pixelY > IMAGE_BOTTOM)
@@ -1093,53 +1093,53 @@ void LCD_FillPolyLine(pPoint Points, uint16_t PointCount)
       IMAGE_BOTTOM = pixelY;
     }
   }
-  
-  LCD_SetTextColor(BackColor);  
+
+  LCD_SetTextColor(BackColor);
 
   /*  Loop through the rows of the image. */
-  for (pixelY = IMAGE_TOP; pixelY < IMAGE_BOTTOM; pixelY++) 
-  {  
+  for (pixelY = IMAGE_TOP; pixelY < IMAGE_BOTTOM; pixelY++)
+  {
     /* Build a list of nodes. */
     nodes = 0; j = PointCount-1;
 
-    for (i = 0; i < PointCount; i++) 
+    for (i = 0; i < PointCount; i++)
     {
       if (((POLY_Y(i)<(double) pixelY) && (POLY_Y(j)>=(double) pixelY)) || \
           ((POLY_Y(j)<(double) pixelY) && (POLY_Y(i)>=(double) pixelY)))
       {
-        nodeX[nodes++]=(int) (POLY_X(i)+((pixelY-POLY_Y(i))*(POLY_X(j)-POLY_X(i)))/(POLY_Y(j)-POLY_Y(i))); 
+        nodeX[nodes++]=(int) (POLY_X(i)+((pixelY-POLY_Y(i))*(POLY_X(j)-POLY_X(i)))/(POLY_Y(j)-POLY_Y(i)));
       }
-      j = i; 
+      j = i;
     }
-  
+
     /* Sort the nodes, via a simple "Bubble" sort. */
     i = 0;
-    while (i < nodes-1) 
+    while (i < nodes-1)
     {
-      if (nodeX[i]>nodeX[i+1]) 
+      if (nodeX[i]>nodeX[i+1])
       {
-        swap = nodeX[i]; 
-        nodeX[i] = nodeX[i+1]; 
-        nodeX[i+1] = swap; 
+        swap = nodeX[i];
+        nodeX[i] = nodeX[i+1];
+        nodeX[i+1] = swap;
         if(i)
         {
-          i--; 
+          i--;
         }
       }
-      else 
+      else
       {
         i++;
       }
     }
-  
+
     /*  Fill the pixels between node pairs. */
-    for (i = 0; i < nodes; i+=2) 
+    for (i = 0; i < nodes; i+=2)
     {
-      if(nodeX[i] >= IMAGE_RIGHT) 
+      if(nodeX[i] >= IMAGE_RIGHT)
       {
         break;
       }
-      if(nodeX[i+1] > IMAGE_LEFT) 
+      if(nodeX[i+1] > IMAGE_LEFT)
       {
         if (nodeX[i] < IMAGE_LEFT)
         {
@@ -1157,7 +1157,7 @@ void LCD_FillPolyLine(pPoint Points, uint16_t PointCount)
         /* for (j=nodeX[i]; j<nodeX[i+1]; j++) PutPixel(j,pixelY); */
       }
     }
-  } 
+  }
 
   /* draw the edges */
   LCD_SetTextColor(TextColor);
@@ -1267,7 +1267,7 @@ void LCD_DisplayOn(void)
 void LCD_DisplayOff(void)
 {
   /* Display Off */
-  LCD_WriteReg(LCD_REG_7, 0x0); 
+  LCD_WriteReg(LCD_REG_7, 0x0);
 }
 
 /**
@@ -1305,7 +1305,7 @@ void LCD_CtrlLinesConfig(void)
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource15, GPIO_AF_FSMC);
 
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 |
-                                GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | 
+                                GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 |
                                 GPIO_Pin_15;
   GPIO_Init(GPIOE, &GPIO_InitStructure);
 
@@ -1321,11 +1321,11 @@ void LCD_CtrlLinesConfig(void)
 
   /* SRAM Address lines configuration */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
-  GPIO_Init(GPIOF, &GPIO_InitStructure);  
-  GPIO_PinAFConfig(GPIOF, GPIO_PinSource0, GPIO_AF_FSMC);	   
+  GPIO_Init(GPIOF, &GPIO_InitStructure);
+  GPIO_PinAFConfig(GPIOF, GPIO_PinSource0, GPIO_AF_FSMC);
 
   /* NE3 configuration */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10; 
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
 
   GPIO_Init(GPIOG, &GPIO_InitStructure);
   GPIO_PinAFConfig(GPIOG, GPIO_PinSource10, GPIO_AF_FSMC);
@@ -1340,10 +1340,10 @@ void LCD_FSMCConfig(void)
 {
   FSMC_NORSRAMInitTypeDef  FSMC_NORSRAMInitStructure;
   FSMC_NORSRAMTimingInitTypeDef  p;
-   
+
   /* Enable FSMC clock */
   RCC_AHB3PeriphClockCmd(RCC_AHB3Periph_FSMC, ENABLE);
-  
+
 /*-- FSMC Configuration ------------------------------------------------------*/
 /*----------------------- SRAM Bank 3 ----------------------------------------*/
   /* FSMC_Bank1_NORSRAM4 configuration */
@@ -1379,7 +1379,7 @@ void LCD_FSMCConfig(void)
   FSMC_NORSRAMInitStructure.FSMC_ReadWriteTimingStruct = &p;
   FSMC_NORSRAMInitStructure.FSMC_WriteTimingStruct = &p;
 
-  FSMC_NORSRAMInit(&FSMC_NORSRAMInitStructure);   
+  FSMC_NORSRAMInit(&FSMC_NORSRAMInitStructure);
 
   /* Enable FSMC NOR/SRAM Bank3 */
   FSMC_NORSRAMCmd(FSMC_Bank1_NORSRAM3, ENABLE);
@@ -1388,14 +1388,14 @@ void LCD_FSMCConfig(void)
 /**
   * @brief  Displays a pixel.
   * @param  x: pixel x.
-  * @param  y: pixel y.  
+  * @param  y: pixel y.
   * @retval None
   */
 static void PutPixel(int16_t x, int16_t y)
-{ 
+{
   if(x < 0 || x > 239 || y < 0 || y > 319)
   {
-    return;  
+    return;
   }
   LCD_DrawLine(x, y, 1, LCD_DIR_HORIZONTAL);
 }
@@ -1409,7 +1409,7 @@ static void PutPixel(int16_t x, int16_t y)
   */
 static void delay(__IO uint32_t nCount)
 {
-  __IO uint32_t index = 0; 
+  __IO uint32_t index = 0;
   for(index = (100000 * nCount); index != 0; index--)
   {
   }
@@ -1417,22 +1417,22 @@ static void delay(__IO uint32_t nCount)
 #endif /* USE_Delay*/
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
-  
-/**
-  * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
-  
+  */
+
 /**
   * @}
-  */  
+  */
+
+/**
+  * @}
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

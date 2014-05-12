@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    HASH/HMAC_SHA1_MD5/main.c 
+  * @file    HASH/HMAC_SHA1_MD5/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup HMAC_SHA1_MD5
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -42,11 +42,11 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* "The hash processor is a fully compliant implementation of the secure
-    hash algorithm (SHA-1), the MD5 (message-digest algorithm 5) hash 
+    hash algorithm (SHA-1), the MD5 (message-digest algorithm 5) hash
     algorithm and the HMAC (keyed-hash message authentication code)
     algorithm suitable for a variety of applications.*** STM32 ***"
   */
-const uint8_t Input[INPUT_TAB_SIZE] =  
+const uint8_t Input[INPUT_TAB_SIZE] =
                           {0x54,0x68,0x65,0x20,0x68,0x61,0x73,0x68,
                            0x20,0x70,0x72,0x6f,0x63,0x65,0x73,0x73,
                            0x6f,0x72,0x20,0x69,0x73,0x20,0x61,0x20,
@@ -83,10 +83,10 @@ const uint8_t Input[INPUT_TAB_SIZE] =
 
 /* key = "The hash processor is a fully compliant implementation of the secure
           hash algorithm (SHA-1), the MD5 (message-digest algorithm 5) hash algorithm
-          and the HMAC (keyed-hash message authentication code)algorithm suitable for 
-          a variety of applications.*** STM32 ***" 
+          and the HMAC (keyed-hash message authentication code)algorithm suitable for
+          a variety of applications.*** STM32 ***"
   */
-const uint8_t Key[KEY_TAB_SIZE] =  
+const uint8_t Key[KEY_TAB_SIZE] =
                         {0x54,0x68,0x65,0x20,0x68,0x61,0x73,0x68,
                          0x20,0x70,0x72,0x6f,0x63,0x65,0x73,0x73,
                          0x6f,0x72,0x20,0x69,0x73,0x20,0x61,0x20,
@@ -120,7 +120,7 @@ const uint8_t Key[KEY_TAB_SIZE] =
                          0x63,0x61,0x74,0x69,0x6f,0x6e,0x73,0x2e,
                          0x2a,0x2a,0x2a,0x20,0x53,0x54,0x4d,0x33,
                          0x32,0x20,0x2a,0x2a,0x2a};
-						    
+
 static uint8_t Md5output[16];
 static uint8_t Sha1output[20];
 
@@ -147,17 +147,17 @@ static void Display_MD5Digest(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
        before to branch to application main.
      */
-                
+
   /* USART configuration */
   USART_Config();
   /* Enable HASH clock */
   RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_HASH, ENABLE);
-     
+
   /* Display the original message */
   Display_MainMessage();
 /*=============================================================================
@@ -178,14 +178,14 @@ int main(void)
 ==============================================================================*/
 
   /* HMAC MD5 Digest Computation */
-  HMAC_MD5((uint8_t*)Key, KEY_TAB_SIZE, 
+  HMAC_MD5((uint8_t*)Key, KEY_TAB_SIZE,
            (uint8_t*)Input, INPUT_TAB_SIZE,
-           Md5output); 
+           Md5output);
 
   /* Display the HMAC MD5 digest */
   Display_MD5Digest();
 
-  while(1);  
+  while(1);
 }
 
 /**
@@ -196,7 +196,7 @@ int main(void)
 static void Display_MainMessage(void)
 {
   uint32_t i=0;
-  
+
   printf("\n\r ======================================\n\r");
   printf(" ====         HMAC Example         ====\n\r");
   printf(" ======================================\n\r");
@@ -216,7 +216,7 @@ static void Display_MainMessage(void)
   {
     printf("%c", Key[i]);
   }
-  
+
 }
 
 /**
@@ -282,14 +282,14 @@ static void Display_MD5Digest(void)
 }
 
 /**
-  * @brief  USART configuration 
+  * @brief  USART configuration
   * @param  None
   * @retval None
   */
 static void USART_Config(void)
 {
   /* USARTx configured as follows:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -337,7 +337,7 @@ PUTCHAR_PROTOTYPE
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -350,10 +350,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

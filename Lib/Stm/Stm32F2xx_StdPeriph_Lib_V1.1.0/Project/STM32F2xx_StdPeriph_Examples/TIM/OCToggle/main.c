@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/OCToggle/main.c 
+  * @file    TIM/OCToggle/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -34,7 +34,7 @@
 
 /** @addtogroup TIM_OCToggle
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -60,51 +60,51 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
      */
-       
+
   /* TIM Configuration */
   TIM_Config();
 
   /* ---------------------------------------------------------------------------
     TIM3 Configuration: Output Compare Toggle Mode:
-    
-    In this example TIM3 input clock (TIM3CLK) is set to 2 * APB1 clock (PCLK1), 
-    since APB1 prescaler is different from 1.   
-      TIM3CLK = 2 * PCLK1  
-      PCLK1 = HCLK / 4 
+
+    In this example TIM3 input clock (TIM3CLK) is set to 2 * APB1 clock (PCLK1),
+    since APB1 prescaler is different from 1.
+      TIM3CLK = 2 * PCLK1
+      PCLK1 = HCLK / 4
       => TIM3CLK = HCLK / 2 = SystemCoreClock /2
-          
+
     To get TIM3 counter clock at 15 MHz, the prescaler is computed as follows:
        Prescaler = (TIM3CLK / TIM3 counter clock) - 1
        Prescaler = ((SystemCoreClock /2) /15 MHz) - 1
-                                              
+
      CC1 update rate = TIM3 counter clock / CCR1_Val = 366.2 Hz
-	   ==> So the TIM3 Channel 1 generates a periodic signal with a 
-	       frequency equal to 183.1 Hz.
+       ==> So the TIM3 Channel 1 generates a periodic signal with a
+           frequency equal to 183.1 Hz.
 
      CC2 update rate = TIM3 counter clock / CCR2_Val = 732.4 Hz
-	   ==> So the TIM3 Channel 2 generates a periodic signal with a 
-	       frequency equal to 366.3 Hz.
+       ==> So the TIM3 Channel 2 generates a periodic signal with a
+           frequency equal to 366.3 Hz.
 
      CC3 update rate = TIM3 counter clock / CCR3_Val = 1464.8 Hz
-	   ==> So the TIM3 Channel 3 generates a periodic signal with a 
-	       frequency equal to 732.4 Hz.
+       ==> So the TIM3 Channel 3 generates a periodic signal with a
+           frequency equal to 732.4 Hz.
 
      CC4 update rate = TIM3 counter clock / CCR4_Val = 2929.6 Hz
-	   ==> So the TIM3 Channel 4 generates a periodic signal with a 
-	       frequency equal to 1464.8 Hz.
+       ==> So the TIM3 Channel 4 generates a periodic signal with a
+           frequency equal to 1464.8 Hz.
 
-    Note: 
+    Note:
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f2xx.c file.
      Each time the core clock (HCLK) changes, user had to call SystemCoreClockUpdate()
      function to update SystemCoreClock variable value. Otherwise, any configuration
-     based on this variable will be incorrect.    
-  --------------------------------------------------------------------------- */   
+     based on this variable will be incorrect.
+  --------------------------------------------------------------------------- */
 
   /* Compute the prescaler value */
   PrescalerValue = (uint16_t) ((SystemCoreClock / 2) / 15000000) - 1;
@@ -169,24 +169,24 @@ void TIM_Config(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
   NVIC_InitTypeDef NVIC_InitStructure;
-  
+
   /* TIM3 clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 
   /* GPIOC clock enable */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
-   
+
   /* GPIOC Configuration: TIM3 CH1 (PC6), TIM3 CH2 (PC7), TIM3 CH2 (PC8) and TIM3 CH4 (PC9) */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP ;
-  GPIO_Init(GPIOC, &GPIO_InitStructure); 
-    
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
+
   /* Connect TIM Channels to AF2 */
   GPIO_PinAFConfig(GPIOC, GPIO_PinSource6, GPIO_AF_TIM3);
-  GPIO_PinAFConfig(GPIOC, GPIO_PinSource7, GPIO_AF_TIM3); 
+  GPIO_PinAFConfig(GPIOC, GPIO_PinSource7, GPIO_AF_TIM3);
   GPIO_PinAFConfig(GPIOC, GPIO_PinSource8, GPIO_AF_TIM3);
   GPIO_PinAFConfig(GPIOC, GPIO_PinSource9, GPIO_AF_TIM3);
 
@@ -218,10 +218,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 #endif
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

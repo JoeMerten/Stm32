@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -49,11 +49,11 @@ __IO JOYState_TypeDef PressedButton  = JOY_NONE;
 __IO uint8_t UsartMode = USART_MODE_TRANSMITTER;
 __IO uint8_t UsartTransactionType = USART_TRANSACTIONTYPE_CMD;
 
-uint8_t CmdBuffer [0x02] = {0x00, 0x00}; /* {Transaction Command, 
+uint8_t CmdBuffer [0x02] = {0x00, 0x00}; /* {Transaction Command,
 Number of byte to receive or to transmit} */
 uint8_t AckBuffer [0x02] = {0x00, 0x00};  /* {Transaction Command, ACK command} */
 
-__IO uint32_t TimeOut = 0x00;  
+__IO uint32_t TimeOut = 0x00;
 /* Private function prototypes -----------------------------------------------*/
 static void USART_Config(void);
 static void SysTickConfig(void);
@@ -69,67 +69,67 @@ static void Fill_Buffer(uint8_t *pBuffer, uint16_t BufferLength);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
      */
-  
+
   /* USART configuration -----------------------------------------------------*/
   USART_Config();
-  
+
   /* SysTick configuration ---------------------------------------------------*/
   SysTickConfig();
-  
+
   /* Initialize LEDs mounted on STM322xG-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
-  
+
   /* Configure the IO Expander mounted on STM322xG-EVAL board */
   TimeOut = USER_TIMEOUT;
   while ((IOE_Config() != IOE_OK) && (TimeOut != 0x00))
   {}
-  
+
   if(TimeOut == 0)
   {
     TimeOut_UserCallback();
   }
-  
+
   /* Enable the USARTx Receive interrupt: this interrupt is generated when the
   USARTx receive data register is not empty */
   USART_ITConfig(USARTx, USART_IT_RXNE, ENABLE);
-  
+
   while (1)
   {
     TxIndex = 0x00;
     RxIndex = 0x00;
-    UsartTransactionType = USART_TRANSACTIONTYPE_CMD; 
+    UsartTransactionType = USART_TRANSACTIONTYPE_CMD;
     UsartMode = USART_MODE_RECEIVER;
-    
+
     Fill_Buffer(CmdBuffer, 0x02);
     Fill_Buffer(AckBuffer, 0x02);
-    
+
     /* Clear the RxBuffer */
     Fill_Buffer(RxBuffer, TXBUFFERSIZE);
-    
+
     PressedButton = IOE_JoyStickGetState();
-    
-    /* Waiting Joystick is pressed or transaction command is received */ 
+
+    /* Waiting Joystick is pressed or transaction command is received */
     while ((PressedButton == JOY_NONE) && (CmdBuffer[0x00] == 0x00))
     {
       PressedButton = IOE_JoyStickGetState();
     }
 
-    /* 
-      If the Joystick is pressed go to transmitter mode, otherwise (the transaction 
-      command is received) go to receiver mode 
+    /*
+      If the Joystick is pressed go to transmitter mode, otherwise (the transaction
+      command is received) go to receiver mode
     */
-    
+
 /******************************************************************************/
-/*                      USART in Mode Transmitter                             */           
+/*                      USART in Mode Transmitter                             */
 /******************************************************************************/
     if ((PressedButton != JOY_NONE) && (CmdBuffer[0x00] == 0x00))
     {
@@ -151,7 +151,7 @@ int main(void)
           CmdBuffer[0x00] = CMD_UP;
           CmdBuffer[0x01] = CMD_UP_SIZE;
           break;
-        /* JOY_DOWN button pressed */          
+        /* JOY_DOWN button pressed */
         case JOY_DOWN:
           CmdBuffer[0x00] = CMD_DOWN;
           CmdBuffer[0x01] = CMD_DOWN_SIZE;
@@ -164,12 +164,12 @@ int main(void)
         default:
           break;
       }
-      
+
       if (CmdBuffer[0x00]!= 0x00)
       {
         /* Enable the USARTx transmit data register empty interrupt */
         USART_ITConfig(USARTx, USART_IT_TXE, ENABLE);
-        
+
         /* Wait until USART sends the command or time out */
         TimeOut = USER_TIMEOUT;
         while ((TxIndex < 0x02)&&(TimeOut != 0x00))
@@ -178,7 +178,7 @@ int main(void)
         {
           TimeOut_UserCallback();
         }
-        
+
         /* The software must wait until TC=1. The TC flag remains cleared during all data
            transfers and it is set by hardware at the last frame’s end of transmission*/
         TimeOut = USER_TIMEOUT;
@@ -189,7 +189,7 @@ int main(void)
         {
           TimeOut_UserCallback();
         }
-        
+
         /* Wait until USART receives the Ack command  or time out*/
         TimeOut = USER_TIMEOUT;
         while ((RxIndex < 0x02)&&(TimeOut != 0x00))
@@ -197,15 +197,15 @@ int main(void)
         if(TimeOut == 0)
         {
           TimeOut_UserCallback();
-        } 
+        }
         /* USART sends the data */
-        UsartTransactionType = USART_TRANSACTIONTYPE_DATA; 
+        UsartTransactionType = USART_TRANSACTIONTYPE_DATA;
         TxIndex = 0x00;
         RxIndex = 0x00;
-        
+
         /* Enable the USARTx transmit data register empty interrupt */
         USART_ITConfig(USARTx, USART_IT_TXE, ENABLE);
-        
+
         /* Wait until end of data transfer */
         TimeOut = USER_TIMEOUT;
         while ((TxIndex < GetVar_NbrOfData())&&(TimeOut != 0x00))
@@ -213,8 +213,8 @@ int main(void)
         if(TimeOut == 0)
         {
           TimeOut_UserCallback();
-        } 
-        
+        }
+
         /* The software must wait until TC=1. The TC flag remains cleared during all data
            transfers and it is set by hardware at the last frame’s end of transmission*/
         TimeOut = USER_TIMEOUT;
@@ -228,9 +228,9 @@ int main(void)
       }
       CmdBuffer[0x00] = 0x00;
     }
-    
+
 /******************************************************************************/
-/*                      USART in Receiver Mode                                */           
+/*                      USART in Receiver Mode                                */
 /******************************************************************************/
     if (CmdBuffer[0x00] != 0x00)
     {
@@ -241,12 +241,12 @@ int main(void)
       if(TimeOut == 0)
       {
         TimeOut_UserCallback();
-      } 
+      }
       UsartMode = USART_MODE_RECEIVER;
-      
+
       /* Enable the USARTx transmit data register empty interrupt */
       USART_ITConfig(USARTx, USART_IT_TXE, ENABLE);
-      
+
       /* Wait until USART sends the ACK command or time out*/
       TimeOut = USER_TIMEOUT;
       while ((TxIndex < 0x02)&&(TimeOut != 0x00))
@@ -254,8 +254,8 @@ int main(void)
       if(TimeOut == 0)
       {
         TimeOut_UserCallback();
-      } 
-      
+      }
+
       /* The software must wait until TC=1. The TC flag remains cleared during all data
          transfers and it is set by hardware at the last frame’s end of transmission*/
       TimeOut = USER_TIMEOUT;
@@ -266,12 +266,12 @@ int main(void)
       {
         TimeOut_UserCallback();
       }
-      
+
       /* USART receives the data */
-      UsartTransactionType = USART_TRANSACTIONTYPE_DATA; 
+      UsartTransactionType = USART_TRANSACTIONTYPE_DATA;
       TxIndex = 0x00;
       RxIndex = 0x00;
-      
+
       /* Wait until end of data transfer or time out */
       TimeOut = USER_TIMEOUT;
       while ((RxIndex < GetVar_NbrOfData())&&(TimeOut != 0x00))
@@ -279,7 +279,7 @@ int main(void)
       if(TimeOut == 0)
       {
         TimeOut_UserCallback();
-      } 
+      }
       switch (CmdBuffer[0x01])
       {
         /* CMD_RIGHT command received */
@@ -328,7 +328,7 @@ int main(void)
           break;
         /* CMD_SEL command received */
         case CMD_SEL_SIZE:
-          if (Buffercmp(TxBuffer, RxBuffer, CMD_SEL_SIZE) != FAILED) 
+          if (Buffercmp(TxBuffer, RxBuffer, CMD_SEL_SIZE) != FAILED)
           {
             /* Turn ON all LED2, LED3 and LED4 */
             STM_EVAL_LEDOn(LED2);
@@ -354,7 +354,7 @@ static void TimeOut_UserCallback(void)
   /* User can add his own implementation to manage TimeOut Communication failure */
   /* Block communication and all processes */
   while (1)
-  {   
+  {
   }
 }
 
@@ -368,17 +368,17 @@ static void USART_Config(void)
   USART_InitTypeDef USART_InitStructure;
   NVIC_InitTypeDef NVIC_InitStructure;
   GPIO_InitTypeDef GPIO_InitStructure;
-  
+
   /* Enable GPIO clock */
   RCC_AHB1PeriphClockCmd(USARTx_TX_GPIO_CLK | USARTx_RX_GPIO_CLK, ENABLE);
-  
+
   /* Enable USART clock */
   USARTx_CLK_INIT(USARTx_CLK, ENABLE);
-  
+
   /* Connect USART pins to AF7 */
   GPIO_PinAFConfig(USARTx_TX_GPIO_PORT, USARTx_TX_SOURCE, USARTx_TX_AF);
   GPIO_PinAFConfig(USARTx_RX_GPIO_PORT, USARTx_RX_SOURCE, USARTx_RX_AF);
-  
+
   /* Configure USART Tx and Rx as alternate function push-pull */
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
@@ -386,25 +386,25 @@ static void USART_Config(void)
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
   GPIO_InitStructure.GPIO_Pin = USARTx_TX_PIN;
   GPIO_Init(USARTx_TX_GPIO_PORT, &GPIO_InitStructure);
-  
+
   GPIO_InitStructure.GPIO_Pin = USARTx_RX_PIN;
   GPIO_Init(USARTx_RX_GPIO_PORT, &GPIO_InitStructure);
 
   /* Enable the USART OverSampling by 8 */
-  USART_OverSampling8Cmd(USARTx, ENABLE);  
+  USART_OverSampling8Cmd(USARTx, ENABLE);
 
   /* USARTx configuration ----------------------------------------------------*/
   /* USARTx configured as follow:
         - BaudRate = 3750000 baud
-		   - Maximum BaudRate that can be achieved when using the Oversampling by 8
-		     is: (USART APB Clock / 8) 
-			 Example: 
-			    - (USART3 APB1 Clock / 8) = (30 MHz / 8) = 3750000 baud
-			    - (USART1 APB2 Clock / 8) = (60 MHz / 8) = 7500000 baud
-		   - Maximum BaudRate that can be achieved when using the Oversampling by 16
-		     is: (USART APB Clock / 16) 
-			 Example: (USART3 APB1 Clock / 16) = (30 MHz / 16) = 1875000 baud
-			 Example: (USART1 APB2 Clock / 16) = (60 MHz / 16) = 3750000 baud
+           - Maximum BaudRate that can be achieved when using the Oversampling by 8
+             is: (USART APB Clock / 8)
+             Example:
+                - (USART3 APB1 Clock / 8) = (30 MHz / 8) = 3750000 baud
+                - (USART1 APB2 Clock / 8) = (60 MHz / 8) = 7500000 baud
+           - Maximum BaudRate that can be achieved when using the Oversampling by 16
+             is: (USART APB Clock / 16)
+             Example: (USART3 APB1 Clock / 16) = (30 MHz / 16) = 1875000 baud
+             Example: (USART1 APB2 Clock / 16) = (60 MHz / 16) = 3750000 baud
         - Word Length = 8 Bits
         - one Stop Bit
         - No parity
@@ -418,18 +418,18 @@ static void USART_Config(void)
   USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
   USART_Init(USARTx, &USART_InitStructure);
-  
+
   /* NVIC configuration */
   /* Configure the Priority Group to 2 bits */
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-  
+
   /* Enable the USARTx Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = USARTx_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
-  
+
   /* Enable USART */
   USART_Cmd(USARTx, ENABLE);
 }
@@ -469,7 +469,7 @@ static TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t Buffe
     pBuffer1++;
     pBuffer2++;
   }
-  
+
   return PASSED;
 }
 /**
@@ -490,7 +490,7 @@ uint8_t GetVar_NbrOfData(void)
 static void Fill_Buffer(uint8_t *pBuffer, uint16_t BufferLength)
 {
   uint16_t index = 0;
-  
+
   /* Put in global buffer same values */
   for (index = 0; index < BufferLength; index++ )
   {
@@ -511,7 +511,7 @@ void assert_failed(uint8_t* file, uint32_t line)
 {
   /* User can add his own implementation to report the file name and line number,
   ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  
+
   /* Infinite loop */
   while (1)
   {}

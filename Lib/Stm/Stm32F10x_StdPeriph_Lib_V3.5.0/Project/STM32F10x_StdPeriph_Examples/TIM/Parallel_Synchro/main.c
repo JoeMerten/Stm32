@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/Parallel_Synchro/main.c 
+  * @file    TIM/Parallel_Synchro/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup TIM_Parallel_Synchro
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -50,13 +50,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -66,7 +66,7 @@ int main(void)
   /* Timers synchronisation in parallel mode ----------------------------
      1/TIM2 is configured as Master Timer:
      - PWM Mode is used
-     - The TIM2 Update event is used as Trigger Output  
+     - The TIM2 Update event is used as Trigger Output
      2/TIM3 and TIM4 are slaves for TIM2,
      - PWM Mode is used
      - The ITR1(TIM2) is used as input trigger for both slaves
@@ -83,12 +83,12 @@ int main(void)
      The TIM4 is running:
      - At (TIM2 frequency)/ (TIM4 period + 1) = 56.250 KHz and a duty cycle
      equal to TIM4_CCR1/(TIM4_ARR + 1) = 60%
-     
+
   * For Value line devices:
      The TIMxCLK is fixed to 24 MHz, the TIM2 counter clock is 24 MHz.
      TIM2 frequency = 93.750 KHz,
      TIM3 frequency = 23.437 KHz,
-     TIM4 frequency = 18.75 KHz     
+     TIM4 frequency = 18.75 KHz
   -------------------------------------------------------------------- */
 
   /* Time base configuration */
@@ -131,11 +131,11 @@ int main(void)
   /* Slave Mode selection: TIM3 */
   TIM_SelectSlaveMode(TIM3, TIM_SlaveMode_Gated);
   TIM_SelectInputTrigger(TIM3, TIM_TS_ITR1);
-  
+
   /* Slave Mode selection: TIM4 */
   TIM_SelectSlaveMode(TIM4, TIM_SlaveMode_Gated);
   TIM_SelectInputTrigger(TIM4, TIM_TS_ITR1);
-  
+
   /* TIM enable counter */
   TIM_Cmd(TIM3, ENABLE);
   TIM_Cmd(TIM2, ENABLE);
@@ -151,7 +151,7 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{  
+{
   /* TIM2, TIM3 and TIM4 clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3 |
                          RCC_APB1Periph_TIM4, ENABLE);
@@ -178,7 +178,7 @@ void GPIO_Configuration(void)
 
   GPIO_Init(GPIOC, &GPIO_InitStructure);
 
-  GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);	
+  GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);
 
 #else
 /* GPIOA Configuration: PA6(TIM3 CH1) as alternate function push-pull */
@@ -223,10 +223,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

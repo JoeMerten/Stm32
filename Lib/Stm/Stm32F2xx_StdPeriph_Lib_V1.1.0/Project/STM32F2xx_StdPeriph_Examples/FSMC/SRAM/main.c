@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FSMC/SRAM/main.c 
+  * @file    FSMC/SRAM/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm322xg_eval.h"
@@ -35,7 +35,7 @@
 
 /** @addtogroup FSMC_SRAM
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -59,18 +59,18 @@ void Fill_Buffer(uint16_t *pBuffer, uint16_t BufferLenght, uint32_t Offset);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
      */
-  
+
   /* Initialize LEDs on STM322xG-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
 
-    
+
   /* Configure FSMC Bank 1 NOR/SRAM2  */
   SRAM_Init();
 
@@ -80,16 +80,16 @@ int main(void)
   SRAM_WriteBuffer(TxBuffer, WRITE_READ_ADDR, BUFFER_SIZE);
 
   /* Read data from FSMC SRAM memory */
-  SRAM_ReadBuffer(RxBuffer, WRITE_READ_ADDR, BUFFER_SIZE);  
+  SRAM_ReadBuffer(RxBuffer, WRITE_READ_ADDR, BUFFER_SIZE);
 
-  /* Read back SRAM memory and check content correctness */   
+  /* Read back SRAM memory and check content correctness */
   for (Index = 0x00; (Index < BUFFER_SIZE) && (WriteReadStatus == 0); Index++)
   {
     if (RxBuffer[Index] != TxBuffer[Index])
     {
       WriteReadStatus++;
     }
-  }	
+  }
 
   if (WriteReadStatus == 0)
   {
@@ -98,10 +98,10 @@ int main(void)
     STM_EVAL_LEDOn(LED1);
   }
   else
-  { 
+  {
     /* KO */
     /* Turn on LD2 */
-    STM_EVAL_LEDOn(LED2);     
+    STM_EVAL_LEDOn(LED2);
   }
 
   while (1)
@@ -137,7 +137,7 @@ void Fill_Buffer(uint16_t *pBuffer, uint16_t BufferLenght, uint32_t Offset)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

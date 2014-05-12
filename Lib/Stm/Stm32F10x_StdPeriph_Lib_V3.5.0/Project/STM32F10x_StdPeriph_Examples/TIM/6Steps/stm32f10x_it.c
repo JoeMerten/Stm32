@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/6Steps/stm32f10x_it.c 
+  * @file    TIM/6Steps/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -30,7 +30,7 @@
 
 /** @addtogroup TIM_6Steps
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -151,7 +151,7 @@ void SysTick_Handler(void)
 void TIM1_TRG_COM_TIM17_IRQHandler(void)
 #else
 void TIM1_TRG_COM_IRQHandler(void)
-#endif	
+#endif
 {
    /* Clear TIM1 COM pending bit */
    TIM_ClearITPendingBit(TIM1, TIM_IT_COM);
@@ -181,7 +181,7 @@ void TIM1_TRG_COM_IRQHandler(void)
     TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
     TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
     TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Enable);
-    
+
     /*  Channel3 configuration */
     TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
     TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Enable);
@@ -284,10 +284,10 @@ void TIM1_TRG_COM_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

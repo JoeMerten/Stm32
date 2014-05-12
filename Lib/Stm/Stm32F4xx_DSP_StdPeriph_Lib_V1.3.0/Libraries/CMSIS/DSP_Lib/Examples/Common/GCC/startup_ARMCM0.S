@@ -177,13 +177,13 @@ Reset_Handler:
 #endif
 
 #ifndef __NO_SYSTEM_INIT
-    bl	SystemInit
+    bl  SystemInit
 #endif
 
 #ifndef __START
 #define __START _start
 #endif
-    bl	__START
+    bl  __START
 
     .pool
     .size Reset_Handler, . - Reset_Handler

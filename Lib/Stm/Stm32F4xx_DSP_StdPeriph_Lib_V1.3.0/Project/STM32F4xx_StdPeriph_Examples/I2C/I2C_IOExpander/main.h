@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2C/I2C_IOExpander/main.h 
+  * @file    I2C/I2C_IOExpander/main.h
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -29,7 +29,7 @@
 #ifndef __MAIN_H
 #define __MAIN_H
 
-/* Includes ------------------------------------------------------------------*/ 
+/* Includes ------------------------------------------------------------------*/
 #include "stm324x9i_eval.h"
 #include "stm324x9i_eval_lcd.h"
 #include "stm324x9i_eval_ioe8.h"
@@ -40,7 +40,7 @@
 /* Uncomment the line below if you will use the Buttons in polling mode */
 /* #define BUTTON_POLLING_MODE */
 /* Uncomment the line below if you will use the Buttons in interrupt mode */
-#define BUTTON_INTERRUPT_MODE     
+#define BUTTON_INTERRUPT_MODE
 
 /* Uncomment the line below if you will use the IOE in polling mode */
 #define IOE_POLLING_MODE
@@ -51,7 +51,7 @@
   #define BUTTON_MODE  BUTTON_MODE_GPIO
 #else
   #define BUTTON_MODE  BUTTON_MODE_EXTI
-#endif 	/* BUTTON_POLLING_MODE */
+#endif  /* BUTTON_POLLING_MODE */
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

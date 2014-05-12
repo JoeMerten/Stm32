@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DAC/DualModeDMA_SineWave/main.c 
+  * @file    DAC/DualModeDMA_SineWave/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup DAC_DualModeDMA_SineWave
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -38,13 +38,13 @@
 DAC_InitTypeDef            DAC_InitStructure;
 DMA_InitTypeDef            DMA_InitStructure;
 TIM_TimeBaseInitTypeDef    TIM_TimeBaseStructure;
-uint32_t Idx = 0;  
-  
+uint32_t Idx = 0;
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 const uint16_t Sine12bit[32] = {
                       2047, 2447, 2831, 3185, 3498, 3750, 3939, 4056, 4095, 4056,
-                      3939, 3750, 3495, 3185, 2831, 2447, 2047, 1647, 1263, 909, 
+                      3939, 3750, 3495, 3185, 2831, 2447, 2047, 1647, 1263, 909,
                       599, 344, 155, 38, 0, 38, 155, 344, 599, 909, 1263, 1647};
 
 uint32_t DualSine12bit[32];
@@ -63,29 +63,29 @@ void Delay(__IO uint32_t nCount);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-	  
-  
-  /* System Clocks Configuration */
-  RCC_Configuration();   
+     */
 
-  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically 
-     connected to the DAC converter. In order to avoid parasitic consumption, 
+
+  /* System Clocks Configuration */
+  RCC_Configuration();
+
+  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically
+     connected to the DAC converter. In order to avoid parasitic consumption,
      the GPIO pin should be configured in analog */
   GPIO_Configuration();
 
   /* TIM2 Configuration */
   /* Time base configuration */
-  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure); 
-  TIM_TimeBaseStructure.TIM_Period = 0x19;          
-  TIM_TimeBaseStructure.TIM_Prescaler = 0x0;       
-  TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;    
-  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  
+  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
+  TIM_TimeBaseStructure.TIM_Period = 0x19;
+  TIM_TimeBaseStructure.TIM_Prescaler = 0x0;
+  TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;
+  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
   TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
 
   /* TIM2 TRGO selection */
@@ -135,10 +135,10 @@ int main(void)
   DMA_Cmd(DMA1_Channel4, ENABLE);
 #endif
 
-  /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is 
+  /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is
      automatically connected to the DAC converter. */
   DAC_Cmd(DAC_Channel_1, ENABLE);
-  /* Enable DAC Channel2: Once the DAC channel2 is enabled, PA.05 is 
+  /* Enable DAC Channel2: Once the DAC channel2 is enabled, PA.05 is
      automatically connected to the DAC converter. */
   DAC_Cmd(DAC_Channel_2, ENABLE);
 
@@ -160,7 +160,7 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{   
+{
   /* Enable peripheral clocks ------------------------------------------------*/
 #if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL
   /* DMA2 clock enable */
@@ -187,8 +187,8 @@ void GPIO_Configuration(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
 
-  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically 
-     connected to the DAC converter. In order to avoid parasitic consumption, 
+  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically
+     connected to the DAC converter. In order to avoid parasitic consumption,
      the GPIO pin should be configured in analog */
   GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_4 | GPIO_Pin_5;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
@@ -215,7 +215,7 @@ void Delay(__IO uint32_t nCount)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -229,10 +229,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

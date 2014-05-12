@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FLASH/Program/main.c 
+  * @file    FLASH/Program/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup FLASH_Program
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -51,7 +51,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 #endif /* STM32F10X_XL */
 
 /* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/  
+/* Private variables ---------------------------------------------------------*/
 uint32_t EraseCounter = 0x00, Address = 0x00;
 uint32_t Data = 0x3210ABCD;
 uint32_t NbrOfPage = 0x00;
@@ -62,7 +62,7 @@ volatile TestStatus MemoryProgramStatus = PASSED;
 volatile TestStatus MemoryProgramStatus2 = PASSED;
 #endif /* STM32F10X_XL */
 
-/* Private function prototypes -----------------------------------------------*/   
+/* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -72,14 +72,14 @@ volatile TestStatus MemoryProgramStatus2 = PASSED;
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
+     */
 
-/* Porgram FLASH Bank1 ********************************************************/       
+/* Porgram FLASH Bank1 ********************************************************/
   /* Unlock the Flash Bank1 Program Erase controller */
   FLASH_UnlockBank1();
 
@@ -87,14 +87,14 @@ int main(void)
   NbrOfPage = (BANK1_WRITE_END_ADDR - BANK1_WRITE_START_ADDR) / FLASH_PAGE_SIZE;
 
   /* Clear All pending flags */
-  FLASH_ClearFlag(FLASH_FLAG_EOP | FLASH_FLAG_PGERR | FLASH_FLAG_WRPRTERR);	
+  FLASH_ClearFlag(FLASH_FLAG_EOP | FLASH_FLAG_PGERR | FLASH_FLAG_WRPRTERR);
 
   /* Erase the FLASH pages */
   for(EraseCounter = 0; (EraseCounter < NbrOfPage) && (FLASHStatus == FLASH_COMPLETE); EraseCounter++)
   {
     FLASHStatus = FLASH_ErasePage(BANK1_WRITE_START_ADDR + (FLASH_PAGE_SIZE * EraseCounter));
   }
-  
+
   /* Program Flash Bank1 */
   Address = BANK1_WRITE_START_ADDR;
 
@@ -105,7 +105,7 @@ int main(void)
   }
 
   FLASH_LockBank1();
-  
+
   /* Check the correctness of written data */
   Address = BANK1_WRITE_START_ADDR;
 
@@ -119,7 +119,7 @@ int main(void)
   }
 
 #ifdef STM32F10X_XL
-/* Program FLASH Bank2 ********************************************************/  
+/* Program FLASH Bank2 ********************************************************/
   /* Unlock the Flash Bank2 Program Erase controller */
   FLASH_UnlockBank2();
 
@@ -127,14 +127,14 @@ int main(void)
   NbrOfPage = (BANK2_WRITE_END_ADDR - BANK2_WRITE_START_ADDR) / FLASH_PAGE_SIZE;
 
   /* Clear All pending flags */
-  FLASH_ClearFlag(FLASH_FLAG_EOP | FLASH_FLAG_PGERR | FLASH_FLAG_WRPRTERR);	
+  FLASH_ClearFlag(FLASH_FLAG_EOP | FLASH_FLAG_PGERR | FLASH_FLAG_WRPRTERR);
 
   /* Erase the FLASH pages */
   for(EraseCounter = 0; (EraseCounter < NbrOfPage) && (FLASHStatus == FLASH_COMPLETE); EraseCounter++)
   {
     FLASHStatus = FLASH_ErasePage(BANK2_WRITE_START_ADDR + (FLASH_PAGE_SIZE * EraseCounter));
   }
-  
+
   /* Program Flash Bank2 */
   Address = BANK2_WRITE_START_ADDR;
 
@@ -145,7 +145,7 @@ int main(void)
   }
 
   FLASH_LockBank2();
-    
+
   /* Check the correctness of written data */
   Address = BANK2_WRITE_START_ADDR;
 
@@ -158,8 +158,8 @@ int main(void)
     Address += 4;
   }
 
-#endif /* STM32F10X_XL */ 
-  
+#endif /* STM32F10X_XL */
+
   while (1)
   {
   }
@@ -175,7 +175,7 @@ int main(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -188,10 +188,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

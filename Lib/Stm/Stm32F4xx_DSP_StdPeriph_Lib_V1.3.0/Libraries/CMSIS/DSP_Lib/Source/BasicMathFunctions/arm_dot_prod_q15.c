@@ -1,24 +1,24 @@
-/* ----------------------------------------------------------------------    
-* Copyright (C) 2010-2013 ARM Limited. All rights reserved.    
-*    
+/* ----------------------------------------------------------------------
+* Copyright (C) 2010-2013 ARM Limited. All rights reserved.
+*
 * $Date:        17. January 2013
-* $Revision: 	V1.4.1
-*    
-* Project: 	    CMSIS DSP Library    
-* Title:		arm_dot_prod_q15.c    
-*    
-* Description:	Q15 dot product.    
-*    
+* $Revision:    V1.4.1
+*
+* Project:      CMSIS DSP Library
+* Title:        arm_dot_prod_q15.c
+*
+* Description:  Q15 dot product.
+*
 * Target Processor: Cortex-M4/Cortex-M3/Cortex-M0
-*  
-* Redistribution and use in source and binary forms, with or without 
+*
+* Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *   - Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   - Redistributions in binary form must reproduce the above copyright
 *     notice, this list of conditions and the following disclaimer in
-*     the documentation and/or other materials provided with the 
+*     the documentation and/or other materials provided with the
 *     distribution.
 *   - Neither the name of ARM LIMITED nor the names of its contributors
 *     may be used to endorse or promote products derived from this
@@ -27,7 +27,7 @@
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
 * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
 * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
@@ -40,30 +40,30 @@
 
 #include "arm_math.h"
 
-/**    
- * @ingroup groupMath    
+/**
+ * @ingroup groupMath
  */
 
-/**    
- * @addtogroup dot_prod    
- * @{    
+/**
+ * @addtogroup dot_prod
+ * @{
  */
 
-/**    
- * @brief Dot product of Q15 vectors.    
- * @param[in]       *pSrcA points to the first input vector    
- * @param[in]       *pSrcB points to the second input vector    
- * @param[in]       blockSize number of samples in each vector    
- * @param[out]      *result output result returned here    
- * @return none.    
- *    
- * <b>Scaling and Overflow Behavior:</b>    
- * \par    
- * The intermediate multiplications are in 1.15 x 1.15 = 2.30 format and these    
- * results are added to a 64-bit accumulator in 34.30 format.    
- * Nonsaturating additions are used and given that there are 33 guard bits in the accumulator    
- * there is no risk of overflow.    
- * The return result is in 34.30 format.    
+/**
+ * @brief Dot product of Q15 vectors.
+ * @param[in]       *pSrcA points to the first input vector
+ * @param[in]       *pSrcB points to the second input vector
+ * @param[in]       blockSize number of samples in each vector
+ * @param[out]      *result output result returned here
+ * @return none.
+ *
+ * <b>Scaling and Overflow Behavior:</b>
+ * \par
+ * The intermediate multiplications are in 1.15 x 1.15 = 2.30 format and these
+ * results are added to a 64-bit accumulator in 34.30 format.
+ * Nonsaturating additions are used and given that there are 33 guard bits in the accumulator
+ * there is no risk of overflow.
+ * The return result is in 34.30 format.
  */
 
 void arm_dot_prod_q15(
@@ -83,7 +83,7 @@ void arm_dot_prod_q15(
   /*loop Unrolling */
   blkCnt = blockSize >> 2u;
 
-  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.    
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.
    ** a second loop below computes the remaining 1 to 3 samples. */
   while(blkCnt > 0u)
   {
@@ -96,7 +96,7 @@ void arm_dot_prod_q15(
     blkCnt--;
   }
 
-  /* If the blockSize is not a multiple of 4, compute any remaining output samples here.    
+  /* If the blockSize is not a multiple of 4, compute any remaining output samples here.
    ** No loop unrolling is used. */
   blkCnt = blockSize % 0x4u;
 
@@ -135,6 +135,6 @@ void arm_dot_prod_q15(
 
 }
 
-/**    
- * @} end of dot_prod group    
+/**
+ * @} end of dot_prod group
  */

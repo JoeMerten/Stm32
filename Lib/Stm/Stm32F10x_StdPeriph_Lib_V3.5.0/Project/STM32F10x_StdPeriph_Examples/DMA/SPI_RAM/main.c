@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DMA/SPI_RAM/main.c 
+  * @file    DMA/SPI_RAM/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -30,7 +30,7 @@
 
 /** @addtogroup DMA_SPI_RAM
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum { FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -71,23 +71,23 @@ TestStatus Buffercmp(uint8_t* pBuffer, uint8_t* pBuffer1, uint16_t BufferLength)
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-  
+     */
+
   /* Configure the STM32_EVAL LED */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   /* Turn Off LED1 and LED2 */
   STM_EVAL_LEDOff(LED1);
-  STM_EVAL_LEDOff(LED2);     
-  
+  STM_EVAL_LEDOff(LED2);
+
   /* System Clocks Configuration */
   RCC_Configuration();
-       
+
   /* Configure the GPIO ports */
   GPIO_Configuration();
 
@@ -102,7 +102,7 @@ int main(void)
   SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
   SPI_InitStructure.SPI_CRCPolynomial = CRCPolynomial;
   SPI_Init(SPI_MASTER, &SPI_InitStructure);
-  
+
   /* SPI_SLAVE configuration -------------------------------------------------*/
   SPI_InitStructure.SPI_Mode = SPI_Mode_Slave;
   SPI_Init(SPI_SLAVE, &SPI_InitStructure);
@@ -123,7 +123,7 @@ int main(void)
   DMA_Init(SPI_MASTER_Rx_DMA_Channel, &DMA_InitStructure);
 
   /* SPI_MASTER_Tx_DMA_Channel configuration ---------------------------------*/
-  DMA_DeInit(SPI_MASTER_Tx_DMA_Channel);  
+  DMA_DeInit(SPI_MASTER_Tx_DMA_Channel);
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)SPI_MASTER_DR_Base;
   DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)SPI_MASTER_Buffer_Tx;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
@@ -131,7 +131,7 @@ int main(void)
   DMA_Init(SPI_MASTER_Tx_DMA_Channel, &DMA_InitStructure);
 
   /* SPI_SLAVE_Rx_DMA_Channel configuration ----------------------------------*/
-  DMA_DeInit(SPI_SLAVE_Rx_DMA_Channel);  
+  DMA_DeInit(SPI_SLAVE_Rx_DMA_Channel);
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)SPI_SLAVE_DR_Base;
   DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)SPI_SLAVE_Buffer_Rx;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
@@ -139,7 +139,7 @@ int main(void)
   DMA_Init(SPI_SLAVE_Rx_DMA_Channel, &DMA_InitStructure);
 
   /* SPI_SLAVE_Tx_DMA_Channel configuration ----------------------------------*/
-  DMA_DeInit(SPI_SLAVE_Tx_DMA_Channel);  
+  DMA_DeInit(SPI_SLAVE_Tx_DMA_Channel);
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)SPI_SLAVE_DR_Base;
   DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)SPI_SLAVE_Buffer_Tx;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
@@ -154,7 +154,7 @@ int main(void)
   SPI_I2S_DMACmd(SPI_SLAVE, SPI_I2S_DMAReq_Tx, ENABLE);
   /* Enable SPI_SLAVE DMA Rx request */
   SPI_I2S_DMACmd(SPI_SLAVE, SPI_I2S_DMAReq_Rx, ENABLE);
- 
+
   /* Enable SPI_MASTER CRC calculation */
   SPI_CalculateCRC(SPI_MASTER, ENABLE);
   /* Enable SPI_SLAVE CRC calculation */
@@ -170,7 +170,7 @@ int main(void)
   DMA_Cmd(SPI_SLAVE_Rx_DMA_Channel, ENABLE);
   DMA_Cmd(SPI_SLAVE_Tx_DMA_Channel, ENABLE);
   DMA_Cmd(SPI_MASTER_Tx_DMA_Channel, ENABLE);
-   
+
   /* Transfer complete */
   while(!DMA_GetFlagStatus(SPI_MASTER_Rx_DMA_FLAG));
   while(!DMA_GetFlagStatus(SPI_SLAVE_Rx_DMA_FLAG));
@@ -185,9 +185,9 @@ int main(void)
   /* Check the correctness of written dada */
   TransferStatus1 = Buffercmp(SPI_SLAVE_Buffer_Rx, SPI_MASTER_Buffer_Tx, BufferSize);
   TransferStatus2 = Buffercmp(SPI_MASTER_Buffer_Rx, SPI_SLAVE_Buffer_Tx, BufferSize);
-  /* TransferStatus1, TransferStatus2 = PASSED, if the data transmitted and received 
+  /* TransferStatus1, TransferStatus2 = PASSED, if the data transmitted and received
      are correct */
-  /* TransferStatus1, TransferStatus2 = FAILED, if the data transmitted and received  
+  /* TransferStatus1, TransferStatus2 = FAILED, if the data transmitted and received
      are different */
 
   /* Test on the SPI_MASTER CRCR ERROR flag */
@@ -199,7 +199,7 @@ int main(void)
   if ((SPI_I2S_GetFlagStatus(SPI_SLAVE, SPI_FLAG_CRCERR)) != RESET)
   {
     TransferStatus2 = FAILED;
-  } 
+  }
 
   /* Read SPI_MASTER received CRC value */
   SPI_MASTERCRCValue = SPI_I2S_ReceiveData(SPI_MASTER);
@@ -213,20 +213,20 @@ int main(void)
     STM_EVAL_LEDOn(LED1);
   }
   else
-  { 
+  {
     /* KO */
     /* Turn Off LD1 */
     STM_EVAL_LEDOff(LED1);
   }
-    
+
   if (TransferStatus2 != FAILED)
-  {	
+  {
     /* OK */
     /* Turn on LD2 */
     STM_EVAL_LEDOn(LED2);
   }
   else
-  { 
+  {
     /* KO */
     /* Turn Off LD2 */
     STM_EVAL_LEDOff(LED2);
@@ -245,7 +245,7 @@ int main(void)
 void RCC_Configuration(void)
 {
   /* PCLK2 = HCLK/2 */
-  RCC_PCLK2Config(RCC_HCLK_Div2); 
+  RCC_PCLK2Config(RCC_HCLK_Div2);
 
   /* Enable peripheral clocks ------------------------------------------------*/
   /* Enable DMA1 or/and DMA2 clock */
@@ -258,7 +258,7 @@ void RCC_Configuration(void)
 
   /* Enable SPI_MASTER Periph clock */
   RCC_APB1PeriphClockCmd(SPI_MASTER_CLK, ENABLE);
-                           
+
 #else
   /* Enable SPI_MASTER clock and GPIO clock for SPI_MASTER and SPI_SLAVE */
   RCC_APB2PeriphClockCmd(SPI_MASTER_GPIO_CLK | SPI_SLAVE_GPIO_CLK |
@@ -317,12 +317,12 @@ TestStatus Buffercmp(uint8_t* pBuffer, uint8_t* pBuffer1, uint16_t BufferLength)
     {
       return FAILED;
     }
-    
+
     pBuffer++;
     pBuffer1++;
   }
 
-  return PASSED;  
+  return PASSED;
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -335,7 +335,7 @@ TestStatus Buffercmp(uint8_t* pBuffer, uint8_t* pBuffer1, uint16_t BufferLength)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -349,10 +349,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

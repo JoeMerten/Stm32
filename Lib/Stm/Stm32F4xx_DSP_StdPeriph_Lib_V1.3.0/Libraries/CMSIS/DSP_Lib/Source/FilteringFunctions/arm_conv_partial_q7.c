@@ -1,24 +1,24 @@
-/* ----------------------------------------------------------------------   
-* Copyright (C) 2010-2013 ARM Limited. All rights reserved.   
-*   
+/* ----------------------------------------------------------------------
+* Copyright (C) 2010-2013 ARM Limited. All rights reserved.
+*
 * $Date:        17. January 2013
-* $Revision: 	V1.4.1
-*   
-* Project: 	    CMSIS DSP Library   
-* Title:		arm_conv_partial_q7.c   
-*   
-* Description:	Partial convolution of Q7 sequences.   
-*   
+* $Revision:    V1.4.1
+*
+* Project:      CMSIS DSP Library
+* Title:        arm_conv_partial_q7.c
+*
+* Description:  Partial convolution of Q7 sequences.
+*
 * Target Processor: Cortex-M4/Cortex-M3/Cortex-M0
-*  
-* Redistribution and use in source and binary forms, with or without 
+*
+* Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *   - Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   - Redistributions in binary form must reproduce the above copyright
 *     notice, this list of conditions and the following disclaimer in
-*     the documentation and/or other materials provided with the 
+*     the documentation and/or other materials provided with the
 *     distribution.
 *   - Neither the name of ARM LIMITED nor the names of its contributors
 *     may be used to endorse or promote products derived from this
@@ -27,7 +27,7 @@
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
 * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
 * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
@@ -35,34 +35,34 @@
 * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-* POSSIBILITY OF SUCH DAMAGE.    
+* POSSIBILITY OF SUCH DAMAGE.
 * -------------------------------------------------------------------- */
 
 #include "arm_math.h"
 
-/**   
- * @ingroup groupFilters   
+/**
+ * @ingroup groupFilters
  */
 
-/**   
- * @addtogroup PartialConv   
- * @{   
+/**
+ * @addtogroup PartialConv
+ * @{
  */
 
-/**   
- * @brief Partial convolution of Q7 sequences.   
- * @param[in]       *pSrcA points to the first input sequence.   
- * @param[in]       srcALen length of the first input sequence.   
- * @param[in]       *pSrcB points to the second input sequence.   
- * @param[in]       srcBLen length of the second input sequence.   
- * @param[out]      *pDst points to the location where the output result is written.   
- * @param[in]       firstIndex is the first output sample to start with.   
- * @param[in]       numPoints is the number of output points to be computed.   
- * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen+srcBLen-2].   
- *  
- * \par    
+/**
+ * @brief Partial convolution of Q7 sequences.
+ * @param[in]       *pSrcA points to the first input sequence.
+ * @param[in]       srcALen length of the first input sequence.
+ * @param[in]       *pSrcB points to the second input sequence.
+ * @param[in]       srcBLen length of the second input sequence.
+ * @param[out]      *pDst points to the location where the output result is written.
+ * @param[in]       firstIndex is the first output sample to start with.
+ * @param[in]       numPoints is the number of output points to be computed.
+ * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen+srcBLen-2].
+ *
+ * \par
  * Refer the function <code>arm_conv_partial_opt_q7()</code> for a faster implementation of this function.
- *  
+ *
  */
 
 arm_status arm_conv_partial_q7(
@@ -129,7 +129,7 @@ arm_status arm_conv_partial_q7(
       srcALen = j;
     }
 
-    /* Conditions to check which loopCounter holds   
+    /* Conditions to check which loopCounter holds
      * the first and last indices of the output samples to be calculated. */
     check = firstIndex + numPoints;
     blockSize3 = ((int32_t) check - (int32_t) srcALen);
@@ -142,31 +142,31 @@ arm_status arm_conv_partial_q7(
     blockSize2 = (blockSize2 > 0) ? blockSize2 : 0;
 
     /* conv(x,y) at n = x[n] * y[0] + x[n-1] * y[1] + x[n-2] * y[2] + ...+ x[n-N+1] * y[N -1] */
-    /* The function is internally   
-     * divided into three stages according to the number of multiplications that has to be   
-     * taken place between inputA samples and inputB samples. In the first stage of the   
-     * algorithm, the multiplications increase by one for every iteration.   
-     * In the second stage of the algorithm, srcBLen number of multiplications are done.   
-     * In the third stage of the algorithm, the multiplications decrease by one   
+    /* The function is internally
+     * divided into three stages according to the number of multiplications that has to be
+     * taken place between inputA samples and inputB samples. In the first stage of the
+     * algorithm, the multiplications increase by one for every iteration.
+     * In the second stage of the algorithm, srcBLen number of multiplications are done.
+     * In the third stage of the algorithm, the multiplications decrease by one
      * for every iteration. */
 
-    /* Set the output pointer to point to the firstIndex   
+    /* Set the output pointer to point to the firstIndex
      * of the output sample to be calculated. */
     pOut = pDst + firstIndex;
 
-    /* --------------------------   
-     * Initializations of stage1   
+    /* --------------------------
+     * Initializations of stage1
      * -------------------------*/
 
-    /* sum = x[0] * y[0]   
-     * sum = x[0] * y[1] + x[1] * y[0]   
-     * ....   
-     * sum = x[0] * y[srcBlen - 1] + x[1] * y[srcBlen - 2] +...+ x[srcBLen - 1] * y[0]   
+    /* sum = x[0] * y[0]
+     * sum = x[0] * y[1] + x[1] * y[0]
+     * ....
+     * sum = x[0] * y[srcBlen - 1] + x[1] * y[srcBlen - 2] +...+ x[srcBLen - 1] * y[0]
      */
 
-    /* In this stage the MAC operations are increased by 1 for every iteration.   
-       The count variable holds the number of MAC operations performed.   
-       Since the partial convolution starts from from firstIndex   
+    /* In this stage the MAC operations are increased by 1 for every iteration.
+       The count variable holds the number of MAC operations performed.
+       Since the partial convolution starts from from firstIndex
        Number of Macs to be performed is firstIndex + 1 */
     count = 1u + firstIndex;
 
@@ -177,8 +177,8 @@ arm_status arm_conv_partial_q7(
     pSrc2 = pIn2 + firstIndex;
     py = pSrc2;
 
-    /* ------------------------   
-     * Stage1 process   
+    /* ------------------------
+     * Stage1 process
      * ----------------------*/
 
     /* The first stage starts here */
@@ -190,7 +190,7 @@ arm_status arm_conv_partial_q7(
       /* Apply loop unrolling and compute 4 MACs simultaneously. */
       k = count >> 2u;
 
-      /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.   
+      /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.
        ** a second loop below computes MACs for the remaining 1 to 3 samples. */
       while(k > 0u)
       {
@@ -226,7 +226,7 @@ arm_status arm_conv_partial_q7(
         k--;
       }
 
-      /* If the count is not a multiple of 4, compute any remaining MACs here.   
+      /* If the count is not a multiple of 4, compute any remaining MACs here.
        ** No loop unrolling is used. */
       k = count % 0x4u;
 
@@ -253,14 +253,14 @@ arm_status arm_conv_partial_q7(
       blockSize1--;
     }
 
-    /* --------------------------   
-     * Initializations of stage2   
+    /* --------------------------
+     * Initializations of stage2
      * ------------------------*/
 
-    /* sum = x[0] * y[srcBLen-1] + x[1] * y[srcBLen-2] +...+ x[srcBLen-1] * y[0]   
-     * sum = x[1] * y[srcBLen-1] + x[2] * y[srcBLen-2] +...+ x[srcBLen] * y[0]   
-     * ....   
-     * sum = x[srcALen-srcBLen-2] * y[srcBLen-1] + x[srcALen] * y[srcBLen-2] +...+ x[srcALen-1] * y[0]   
+    /* sum = x[0] * y[srcBLen-1] + x[1] * y[srcBLen-2] +...+ x[srcBLen-1] * y[0]
+     * sum = x[1] * y[srcBLen-1] + x[2] * y[srcBLen-2] +...+ x[srcBLen] * y[0]
+     * ....
+     * sum = x[srcALen-srcBLen-2] * y[srcBLen-1] + x[srcALen] * y[srcBLen-2] +...+ x[srcALen-1] * y[0]
      */
 
     /* Working pointer of inputA */
@@ -273,12 +273,12 @@ arm_status arm_conv_partial_q7(
     /* count is index by which the pointer pIn1 to be incremented */
     count = 0u;
 
-    /* -------------------   
-     * Stage2 process   
+    /* -------------------
+     * Stage2 process
      * ------------------*/
 
-    /* Stage2 depends on srcBLen as in this stage srcBLen number of MACS are performed.   
-     * So, to loop unroll over blockSize2,   
+    /* Stage2 depends on srcBLen as in this stage srcBLen number of MACS are performed.
+     * So, to loop unroll over blockSize2,
      * srcBLen should be greater than or equal to 4 */
     if(srcBLen >= 4u)
     {
@@ -301,7 +301,7 @@ arm_status arm_conv_partial_q7(
         /* Apply loop unrolling and compute 4 MACs simultaneously. */
         k = srcBLen >> 2u;
 
-        /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.   
+        /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.
          ** a second loop below computes MACs for the remaining 1 to 3 samples. */
         do
         {
@@ -413,7 +413,7 @@ arm_status arm_conv_partial_q7(
 
         } while(--k);
 
-        /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.   
+        /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.
          ** No loop unrolling is used. */
         k = srcBLen % 0x4u;
 
@@ -462,7 +462,7 @@ arm_status arm_conv_partial_q7(
         blkCnt--;
       }
 
-      /* If the blockSize2 is not a multiple of 4, compute any remaining output samples here.   
+      /* If the blockSize2 is not a multiple of 4, compute any remaining output samples here.
        ** No loop unrolling is used. */
       blkCnt = (uint32_t) blockSize2 % 0x4u;
 
@@ -474,7 +474,7 @@ arm_status arm_conv_partial_q7(
         /* Apply loop unrolling and compute 4 MACs simultaneously. */
         k = srcBLen >> 2u;
 
-        /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.   
+        /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.
          ** a second loop below computes MACs for the remaining 1 to 3 samples. */
         while(k > 0u)
         {
@@ -509,7 +509,7 @@ arm_status arm_conv_partial_q7(
           k--;
         }
 
-        /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.   
+        /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.
          ** No loop unrolling is used. */
         k = srcBLen % 0x4u;
 
@@ -526,11 +526,11 @@ arm_status arm_conv_partial_q7(
         *pOut++ = (q7_t) (__SSAT(sum >> 7, 8));
 
         /* Increment the pointer pIn1 index, count by 1 */
- 	    count++;
+        count++;
 
         /* Update the inputA and inputB pointers for next MAC calculation */
-      	px = pIn1 + count;
-        py = pSrc2;	
+        px = pIn1 + count;
+        py = pSrc2;
 
         /* Decrement the loop counter */
         blkCnt--;
@@ -538,7 +538,7 @@ arm_status arm_conv_partial_q7(
     }
     else
     {
-      /* If the srcBLen is not a multiple of 4,   
+      /* If the srcBLen is not a multiple of 4,
        * the blockSize2 loop cannot be unrolled by 4 */
       blkCnt = (uint32_t) blockSize2;
 
@@ -575,18 +575,18 @@ arm_status arm_conv_partial_q7(
     }
 
 
-    /* --------------------------   
-     * Initializations of stage3   
+    /* --------------------------
+     * Initializations of stage3
      * -------------------------*/
 
-    /* sum += x[srcALen-srcBLen+1] * y[srcBLen-1] + x[srcALen-srcBLen+2] * y[srcBLen-2] +...+ x[srcALen-1] * y[1]   
-     * sum += x[srcALen-srcBLen+2] * y[srcBLen-1] + x[srcALen-srcBLen+3] * y[srcBLen-2] +...+ x[srcALen-1] * y[2]   
-     * ....   
-     * sum +=  x[srcALen-2] * y[srcBLen-1] + x[srcALen-1] * y[srcBLen-2]   
-     * sum +=  x[srcALen-1] * y[srcBLen-1]   
+    /* sum += x[srcALen-srcBLen+1] * y[srcBLen-1] + x[srcALen-srcBLen+2] * y[srcBLen-2] +...+ x[srcALen-1] * y[1]
+     * sum += x[srcALen-srcBLen+2] * y[srcBLen-1] + x[srcALen-srcBLen+3] * y[srcBLen-2] +...+ x[srcALen-1] * y[2]
+     * ....
+     * sum +=  x[srcALen-2] * y[srcBLen-1] + x[srcALen-1] * y[srcBLen-2]
+     * sum +=  x[srcALen-1] * y[srcBLen-1]
      */
 
-    /* In this stage the MAC operations are decreased by 1 for every iteration.   
+    /* In this stage the MAC operations are decreased by 1 for every iteration.
        The count variable holds the number of MAC operations performed */
     count = srcBLen - 1u;
 
@@ -598,8 +598,8 @@ arm_status arm_conv_partial_q7(
     pSrc2 = pIn2 + (srcBLen - 1u);
     py = pSrc2;
 
-    /* -------------------   
-     * Stage3 process   
+    /* -------------------
+     * Stage3 process
      * ------------------*/
 
     while(blockSize3 > 0)
@@ -610,7 +610,7 @@ arm_status arm_conv_partial_q7(
       /* Apply loop unrolling and compute 4 MACs simultaneously. */
       k = count >> 2u;
 
-      /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.   
+      /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.
        ** a second loop below computes MACs for the remaining 1 to 3 samples. */
       while(k > 0u)
       {
@@ -646,7 +646,7 @@ arm_status arm_conv_partial_q7(
         k--;
       }
 
-      /* If the count is not a multiple of 4, compute any remaining MACs here.   
+      /* If the count is not a multiple of 4, compute any remaining MACs here.
        ** No loop unrolling is used. */
       k = count % 0x4u;
 
@@ -729,6 +729,6 @@ arm_status arm_conv_partial_q7(
 
 }
 
-/**   
- * @} end of PartialConv group   
+/**
+ * @} end of PartialConv group
  */

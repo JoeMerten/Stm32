@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/OCToggle/main.c 
+  * @file    TIM/OCToggle/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup TIM_OCToggle
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -56,13 +56,13 @@ void NVIC_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -171,7 +171,7 @@ void GPIO_Configuration(void)
 
   GPIO_Init(GPIOC, &GPIO_InitStructure);
 
-  GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);	
+  GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);
 
 #else
   /* GPIOA Configuration:TIM3 Channel1, 2, 3 and 4 as alternate function push-pull */
@@ -224,10 +224,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 #endif
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

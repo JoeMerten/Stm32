@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Lib_DEBUG/Lib_DEBUG_Example/stm32f21xx_ip_dbg.c 
+  * @file    Lib_DEBUG/Lib_DEBUG_Example/stm32f21xx_ip_dbg.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_ip_dbg.h"
@@ -34,7 +34,7 @@
 
 /** @addtogroup Lib_DEBUG_Example
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -142,7 +142,7 @@ void IP_Debug(void)
   CAN1_DBG = (CAN_TypeDef *)  CAN1_BASE;
   CAN2_DBG = (CAN_TypeDef *)  CAN2_BASE;
 
-/************************************* CRC ************************************/  
+/************************************* CRC ************************************/
   CRC_DBG = (CRC_TypeDef *)  CRC_BASE;
 
 /************************************* CRYP ***********************************/
@@ -152,7 +152,7 @@ void IP_Debug(void)
   DAC_DBG = (DAC_TypeDef *)  DAC_BASE;
 
 /************************************* DBGMCU *********************************/
-	DBGMCU_DBG = (DBGMCU_TypeDef *)  DBGMCU_BASE;
+    DBGMCU_DBG = (DBGMCU_TypeDef *)  DBGMCU_BASE;
 
 /************************************* DCMI ***********************************/
   DCMI_DBG = (DCMI_TypeDef *)  DCMI_BASE;
@@ -175,7 +175,7 @@ void IP_Debug(void)
   DMA2_Stream4_DBG = (DMA_Stream_TypeDef *)  DMA2_Stream4_BASE;
   DMA2_Stream5_DBG = (DMA_Stream_TypeDef *)  DMA2_Stream5_BASE;
   DMA2_Stream6_DBG = (DMA_Stream_TypeDef *)  DMA2_Stream6_BASE;
-	DMA2_Stream7_DBG = (DMA_Stream_TypeDef *) DMA2_Stream7_BASE;
+    DMA2_Stream7_DBG = (DMA_Stream_TypeDef *) DMA2_Stream7_BASE;
 
 /************************************* EXTI ***********************************/
   EXTI_DBG = (EXTI_TypeDef *)  EXTI_BASE;
@@ -273,5 +273,5 @@ void IP_Debug(void)
 /**
   * @}
   */
-  
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

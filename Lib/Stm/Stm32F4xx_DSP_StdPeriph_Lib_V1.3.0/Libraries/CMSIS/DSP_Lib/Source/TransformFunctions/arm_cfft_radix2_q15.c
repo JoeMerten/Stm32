@@ -1,25 +1,25 @@
-/* ----------------------------------------------------------------------   
-* Copyright (C) 2010-2013 ARM Limited. All rights reserved.   
-*   
-* $Date:        17. January 2013  
-* $Revision: 	V1.4.1  
-*   
-* Project: 	    CMSIS DSP Library   
-* Title:	    arm_cfft_radix2_q15.c   
-*   
-* Description:	Radix-2 Decimation in Frequency CFFT & CIFFT Fixed point processing function   
-*   
-*   
+/* ----------------------------------------------------------------------
+* Copyright (C) 2010-2013 ARM Limited. All rights reserved.
+*
+* $Date:        17. January 2013
+* $Revision:    V1.4.1
+*
+* Project:      CMSIS DSP Library
+* Title:        arm_cfft_radix2_q15.c
+*
+* Description:  Radix-2 Decimation in Frequency CFFT & CIFFT Fixed point processing function
+*
+*
 * Target Processor: Cortex-M4/Cortex-M3/Cortex-M0
-*  
-* Redistribution and use in source and binary forms, with or without 
+*
+* Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *   - Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   - Redistributions in binary form must reproduce the above copyright
 *     notice, this list of conditions and the following disclaimer in
-*     the documentation and/or other materials provided with the 
+*     the documentation and/or other materials provided with the
 *     distribution.
 *   - Neither the name of ARM LIMITED nor the names of its contributors
 *     may be used to endorse or promote products derived from this
@@ -28,7 +28,7 @@
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
 * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
 * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
@@ -36,7 +36,7 @@
 * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-* POSSIBILITY OF SUCH DAMAGE.   
+* POSSIBILITY OF SUCH DAMAGE.
 * -------------------------------------------------------------------- */
 
 #include "arm_math.h"
@@ -52,28 +52,28 @@ void arm_radix2_butterfly_inverse_q15(
   uint32_t fftLen,
   q15_t * pCoef,
   uint16_t twidCoefModifier);
-	
+
 void arm_bitreversal_q15(
   q15_t * pSrc,
   uint32_t fftLen,
   uint16_t bitRevFactor,
   uint16_t * pBitRevTab);
 
-/**   
- * @ingroup groupTransforms   
+/**
+ * @ingroup groupTransforms
  */
 
-/**   
- * @addtogroup ComplexFFT   
- * @{   
+/**
+ * @addtogroup ComplexFFT
+ * @{
  */
 
-/**   
- * @details   
- * @brief Processing function for the fixed-point CFFT/CIFFT.  
- * @param[in]      *S    points to an instance of the fixed-point CFFT/CIFFT structure.  
- * @param[in, out] *pSrc points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.  
- * @return none.  
+/**
+ * @details
+ * @brief Processing function for the fixed-point CFFT/CIFFT.
+ * @param[in]      *S    points to an instance of the fixed-point CFFT/CIFFT structure.
+ * @param[in, out] *pSrc points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+ * @return none.
  */
 
 void arm_cfft_radix2_q15(
@@ -95,8 +95,8 @@ void arm_cfft_radix2_q15(
   arm_bitreversal_q15(pSrc, S->fftLen, S->bitRevFactor, S->pBitRevTable);
 }
 
-/**   
- * @} end of ComplexFFT group   
+/**
+ * @} end of ComplexFFT group
  */
 
 void arm_radix2_butterfly_q15(
@@ -113,14 +113,14 @@ void arm_radix2_butterfly_q15(
   q31_t T, S, R;
   q31_t coeff, out1, out2;
 
-  //N = fftLen; 
+  //N = fftLen;
   n2 = fftLen;
 
   n1 = n2;
   n2 = n2 >> 1;
   ia = 0;
 
-  // loop for groups 
+  // loop for groups
   for (i = 0; i < n2; i++)
   {
     coeff = _SIMD32_OFFSET(pCoef + (ia * 2u));
@@ -160,7 +160,7 @@ void arm_radix2_butterfly_q15(
 
     ia = ia + twidCoefModifier;
 
-    // loop for butterfly 
+    // loop for butterfly
     i++;
     l++;
 
@@ -191,25 +191,25 @@ void arm_radix2_butterfly_q15(
     _SIMD32_OFFSET(pSrc + (2u * l)) =
       (q31_t) ((out2) & 0xFFFF0000) | (out1 & 0x0000FFFF);
 
-  }                             // groups loop end 
+  }                             // groups loop end
 
   twidCoefModifier = twidCoefModifier << 1u;
 
-  // loop for stage 
+  // loop for stage
   for (k = fftLen / 2; k > 2; k = k >> 1)
   {
     n1 = n2;
     n2 = n2 >> 1;
     ia = 0;
 
-    // loop for groups 
+    // loop for groups
     for (j = 0; j < n2; j++)
     {
       coeff = _SIMD32_OFFSET(pCoef + (ia * 2u));
 
       ia = ia + twidCoefModifier;
 
-      // loop for butterfly 
+      // loop for butterfly
       for (i = j; i < fftLen; i += n1)
       {
         l = i + n2;
@@ -264,12 +264,12 @@ void arm_radix2_butterfly_q15(
         _SIMD32_OFFSET(pSrc + (2u * l)) =
           (q31_t) ((out2) & 0xFFFF0000) | (out1 & 0x0000FFFF);
 
-      }                         // butterfly loop end 
+      }                         // butterfly loop end
 
-    }                           // groups loop end 
+    }                           // groups loop end
 
     twidCoefModifier = twidCoefModifier << 1u;
-  }                             // stages loop end 
+  }                             // stages loop end
 
   n1 = n2;
   n2 = n2 >> 1;
@@ -279,7 +279,7 @@ void arm_radix2_butterfly_q15(
 
   ia = ia + twidCoefModifier;
 
-  // loop for butterfly 
+  // loop for butterfly
   for (i = 0; i < fftLen; i += n1)
   {
     l = i + n2;
@@ -307,7 +307,7 @@ void arm_radix2_butterfly_q15(
 
     _SIMD32_OFFSET(pSrc + (2u * l)) = R;
 
-  }                             // groups loop end 
+  }                             // groups loop end
 
 
 #else
@@ -317,21 +317,21 @@ void arm_radix2_butterfly_q15(
   q15_t xt, yt, cosVal, sinVal;
 
 
-  //N = fftLen; 
+  //N = fftLen;
   n2 = fftLen;
 
   n1 = n2;
   n2 = n2 >> 1;
   ia = 0;
 
-  // loop for groups 
+  // loop for groups
   for (j = 0; j < n2; j++)
   {
     cosVal = pCoef[ia * 2];
     sinVal = pCoef[(ia * 2) + 1];
     ia = ia + twidCoefModifier;
 
-    // loop for butterfly 
+    // loop for butterfly
     for (i = j; i < fftLen; i += n1)
     {
       l = i + n2;
@@ -348,27 +348,27 @@ void arm_radix2_butterfly_q15(
       pSrc[2u * l + 1u] = (((int16_t) (((q31_t) yt * cosVal) >> 16)) -
                            ((int16_t) (((q31_t) xt * sinVal) >> 16)));
 
-    }                           // butterfly loop end 
+    }                           // butterfly loop end
 
-  }                             // groups loop end 
+  }                             // groups loop end
 
   twidCoefModifier = twidCoefModifier << 1u;
 
-  // loop for stage 
+  // loop for stage
   for (k = fftLen / 2; k > 2; k = k >> 1)
   {
     n1 = n2;
     n2 = n2 >> 1;
     ia = 0;
 
-    // loop for groups 
+    // loop for groups
     for (j = 0; j < n2; j++)
     {
       cosVal = pCoef[ia * 2];
       sinVal = pCoef[(ia * 2) + 1];
       ia = ia + twidCoefModifier;
 
-      // loop for butterfly 
+      // loop for butterfly
       for (i = j; i < fftLen; i += n1)
       {
         l = i + n2;
@@ -384,18 +384,18 @@ void arm_radix2_butterfly_q15(
         pSrc[2u * l + 1u] = (((int16_t) (((q31_t) yt * cosVal) >> 16)) -
                              ((int16_t) (((q31_t) xt * sinVal) >> 16)));
 
-      }                         // butterfly loop end 
+      }                         // butterfly loop end
 
-    }                           // groups loop end 
+    }                           // groups loop end
 
     twidCoefModifier = twidCoefModifier << 1u;
-  }                             // stages loop end 
+  }                             // stages loop end
 
   n1 = n2;
   n2 = n2 >> 1;
   ia = 0;
 
-  // loop for groups 
+  // loop for groups
   for (j = 0; j < n2; j++)
   {
     cosVal = pCoef[ia * 2];
@@ -403,7 +403,7 @@ void arm_radix2_butterfly_q15(
 
     ia = ia + twidCoefModifier;
 
-    // loop for butterfly 
+    // loop for butterfly
     for (i = j; i < fftLen; i += n1)
     {
       l = i + n2;
@@ -417,9 +417,9 @@ void arm_radix2_butterfly_q15(
 
       pSrc[2u * l + 1u] = yt;
 
-    }                           // butterfly loop end 
+    }                           // butterfly loop end
 
-  }                             // groups loop end 
+  }                             // groups loop end
 
   twidCoefModifier = twidCoefModifier << 1u;
 
@@ -442,14 +442,14 @@ void arm_radix2_butterfly_inverse_q15(
   q31_t T, S, R;
   q31_t coeff, out1, out2;
 
-  //N = fftLen; 
+  //N = fftLen;
   n2 = fftLen;
 
   n1 = n2;
   n2 = n2 >> 1;
   ia = 0;
 
-  // loop for groups 
+  // loop for groups
   for (i = 0; i < n2; i++)
   {
     coeff = _SIMD32_OFFSET(pCoef + (ia * 2u));
@@ -488,7 +488,7 @@ void arm_radix2_butterfly_inverse_q15(
 
     ia = ia + twidCoefModifier;
 
-    // loop for butterfly 
+    // loop for butterfly
     i++;
     l++;
 
@@ -518,25 +518,25 @@ void arm_radix2_butterfly_inverse_q15(
     _SIMD32_OFFSET(pSrc + (2u * l)) =
       (q31_t) ((out2) & 0xFFFF0000) | (out1 & 0x0000FFFF);
 
-  }                             // groups loop end 
+  }                             // groups loop end
 
   twidCoefModifier = twidCoefModifier << 1u;
 
-  // loop for stage 
+  // loop for stage
   for (k = fftLen / 2; k > 2; k = k >> 1)
   {
     n1 = n2;
     n2 = n2 >> 1;
     ia = 0;
 
-    // loop for groups 
+    // loop for groups
     for (j = 0; j < n2; j++)
     {
       coeff = _SIMD32_OFFSET(pCoef + (ia * 2u));
 
       ia = ia + twidCoefModifier;
 
-      // loop for butterfly 
+      // loop for butterfly
       for (i = j; i < fftLen; i += n1)
       {
         l = i + n2;
@@ -590,25 +590,25 @@ void arm_radix2_butterfly_inverse_q15(
         _SIMD32_OFFSET(pSrc + (2u * l)) =
           (q31_t) ((out2) & 0xFFFF0000) | (out1 & 0x0000FFFF);
 
-      }                         // butterfly loop end 
+      }                         // butterfly loop end
 
-    }                           // groups loop end 
+    }                           // groups loop end
 
     twidCoefModifier = twidCoefModifier << 1u;
-  }                             // stages loop end 
+  }                             // stages loop end
 
   n1 = n2;
   n2 = n2 >> 1;
   ia = 0;
 
-  // loop for groups 
+  // loop for groups
   for (j = 0; j < n2; j++)
   {
     coeff = _SIMD32_OFFSET(pCoef + (ia * 2u));
 
     ia = ia + twidCoefModifier;
 
-    // loop for butterfly 
+    // loop for butterfly
     for (i = j; i < fftLen; i += n1)
     {
       l = i + n2;
@@ -623,9 +623,9 @@ void arm_radix2_butterfly_inverse_q15(
 
       _SIMD32_OFFSET(pSrc + (2u * l)) = R;
 
-    }                           // butterfly loop end 
+    }                           // butterfly loop end
 
-  }                             // groups loop end 
+  }                             // groups loop end
 
   twidCoefModifier = twidCoefModifier << 1u;
 
@@ -636,21 +636,21 @@ void arm_radix2_butterfly_inverse_q15(
   unsigned n1, n2, ia;
   q15_t xt, yt, cosVal, sinVal;
 
-  //N = fftLen; 
+  //N = fftLen;
   n2 = fftLen;
 
   n1 = n2;
   n2 = n2 >> 1;
   ia = 0;
 
-  // loop for groups 
+  // loop for groups
   for (j = 0; j < n2; j++)
   {
     cosVal = pCoef[ia * 2];
     sinVal = pCoef[(ia * 2) + 1];
     ia = ia + twidCoefModifier;
 
-    // loop for butterfly 
+    // loop for butterfly
     for (i = j; i < fftLen; i += n1)
     {
       l = i + n2;
@@ -667,27 +667,27 @@ void arm_radix2_butterfly_inverse_q15(
       pSrc[2u * l + 1u] = (((int16_t) (((q31_t) yt * cosVal) >> 16)) +
                            ((int16_t) (((q31_t) xt * sinVal) >> 16)));
 
-    }                           // butterfly loop end 
+    }                           // butterfly loop end
 
-  }                             // groups loop end 
+  }                             // groups loop end
 
   twidCoefModifier = twidCoefModifier << 1u;
 
-  // loop for stage 
+  // loop for stage
   for (k = fftLen / 2; k > 2; k = k >> 1)
   {
     n1 = n2;
     n2 = n2 >> 1;
     ia = 0;
 
-    // loop for groups 
+    // loop for groups
     for (j = 0; j < n2; j++)
     {
       cosVal = pCoef[ia * 2];
       sinVal = pCoef[(ia * 2) + 1];
       ia = ia + twidCoefModifier;
 
-      // loop for butterfly 
+      // loop for butterfly
       for (i = j; i < fftLen; i += n1)
       {
         l = i + n2;
@@ -703,12 +703,12 @@ void arm_radix2_butterfly_inverse_q15(
         pSrc[2u * l + 1u] = (((int16_t) (((q31_t) yt * cosVal) >> 16)) +
                              ((int16_t) (((q31_t) xt * sinVal) >> 16)));
 
-      }                         // butterfly loop end 
+      }                         // butterfly loop end
 
-    }                           // groups loop end 
+    }                           // groups loop end
 
     twidCoefModifier = twidCoefModifier << 1u;
-  }                             // stages loop end 
+  }                             // stages loop end
 
   n1 = n2;
   n2 = n2 >> 1;
@@ -719,7 +719,7 @@ void arm_radix2_butterfly_inverse_q15(
 
   ia = ia + twidCoefModifier;
 
-  // loop for butterfly 
+  // loop for butterfly
   for (i = 0; i < fftLen; i += n1)
   {
     l = i + n2;
@@ -733,7 +733,7 @@ void arm_radix2_butterfly_inverse_q15(
 
     pSrc[2u * l + 1u] = yt;
 
-  }                             // groups loop end 
+  }                             // groups loop end
 
 
 #endif //             #ifndef ARM_MATH_CM0_FAMILY

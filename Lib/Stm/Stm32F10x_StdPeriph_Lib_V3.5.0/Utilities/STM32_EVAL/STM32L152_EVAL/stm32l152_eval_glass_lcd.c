@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V4.5.0
   * @date    07-March-2011
-  * @brief   This file includes the LCD Glass driver for Pacific Display 
+  * @brief   This file includes the LCD Glass driver for Pacific Display
   *          (LCD_PD878, PD878-DP-FH-W-LV-6-RH) Module of STM32L152-EVAL board RevB.
   ******************************************************************************
   * @attention
@@ -17,9 +17,9 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
-  
+  ******************************************************************************
+  */
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l152_eval_glass_lcd.h"
 
@@ -29,48 +29,48 @@
 
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM32L152_EVAL
   * @{
   */
-  
-/** @defgroup STM32L152_EVAL_GLASS_LCD 
-  * @brief This file includes the LCD Glass driver for Pacific Display 
+
+/** @defgroup STM32L152_EVAL_GLASS_LCD
+  * @brief This file includes the LCD Glass driver for Pacific Display
   *        (LCD_PD878, PD878-DP-FH-W-LV-6-RH) Module of STM32L152-EVAL board.
   * @{
-  */ 
+  */
 
 /** @defgroup STM32L152_EVAL_GLASS_LCD_Private_Types
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32L152_EVAL_GLASS_LCD_Private_Defines
   * @{
-  */ 
+  */
 /**
   * @}
-  */   
+  */
 
 
 /** @defgroup STM32L152_EVAL_GLASS_LCD_Private_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32L152_EVAL_GLASS_LCD_Private_Variables
   * @{
-  */ 
+  */
 
 /**
-  @verbatim      
+  @verbatim
 ================================================================================
                               GLASS LCD MAPPING
 ================================================================================
@@ -114,7 +114,7 @@ The character A for example is:
 uint8_t digit[4];     /* Digit LCD RAM buffer */
 __I uint16_t mask[4] = {0xF000, 0x0F00, 0x00F0, 0x000F};
 __I uint8_t shift[4] = {0x0C, 0x08, 0x04, 0x00};
-  
+
 /* Letters and number map of PD_878 LCD */
 __I uint16_t LetterMap[26]=
 {
@@ -126,7 +126,7 @@ __I uint16_t LetterMap[26]=
 0x4961, 0x6008, 0x0551, 0x0390, 0x05D2, 0x8282, 0x8208, 0x4281
 };
 
-__I uint16_t NumberMap[10]= 
+__I uint16_t NumberMap[10]=
 {
 /* 0       1       2       3       4       5       6       7       8       9  */
 0x47D1, 0x0640, 0x4C31, 0x4C61, 0x0D60, 0x4961, 0x4971, 0x4440, 0x4D71, 0x4D61
@@ -134,38 +134,38 @@ __I uint16_t NumberMap[10]=
 
 /**
   * @}
-  */ 
-  
+  */
+
 
 /** @defgroup STM32L152_EVAL_LCD_Private_Function_Prototypes
   * @{
-  */ 
+  */
 static void Convert(uint8_t* c, Point_Typedef point, Apostrophe_Typedef apostrophe);
 static void delay(__IO uint32_t nCount);
 static void LCD_GPIOConfig(void);
 
 /**
   * @}
-  */ 
-  
+  */
+
 /** @defgroup STM32L152_EVAL_LCD_Private_Functions
   * @{
-  */ 
+  */
 
 /**
   * @brief  Configures the LCD GLASS relative GPIO port IOs and LCD peripheral.
-  * @param  None 
+  * @param  None
   * @retval None
   */
 void LCD_GLASS_Init(void)
 {
   LCD_InitTypeDef LCD_InitStructure;
-  
+
   LCD_GPIOConfig(); /*!< Configure the LCD Glass GPIO pins */
 
   /*!< Configure the LCD interface -------------------------------------------*/
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_LCD, ENABLE); /*!< Enable LCD APB1 Clock */
-  
+
   LCD_InitStructure.LCD_Prescaler = LCD_Prescaler_8;
   LCD_InitStructure.LCD_Divider = LCD_Divider_16;
   LCD_InitStructure.LCD_Duty = LCD_Duty_1_4;
@@ -175,34 +175,34 @@ void LCD_GLASS_Init(void)
 
   /*!< Configure the Pulse On Duration */
   LCD_PulseOnDurationConfig(LCD_PulseOnDuration_2);
-  
+
   /*!< Configure the LCD Contrast (3.51V) */
   LCD_ContrastConfig(LCD_Contrast_Level_7);
 
   /*!< Wait Until the LCD FCR register is synchronized */
   LCD_WaitForSynchro();
-  
+
   /*!< Enable LCD peripheral */
   LCD_Cmd(ENABLE);
-  
+
   /*!< Wait Until the LCD is enabled */
   while(LCD_GetFlagStatus(LCD_FLAG_ENS) == RESET)
   {
   }
-  /*!< Wait Until the LCD Booster is ready */  
+  /*!< Wait Until the LCD Booster is ready */
   while(LCD_GetFlagStatus(LCD_FLAG_RDY) == RESET)
   {
-  }    
+  }
 }
 
 /**
   * @brief  This function writes a char in the LCD RAM.
   * @param  ch: The character to dispaly.
   * @param  point: A point to add in front of char.
-  *          This parameter  can be one of the following values:  
+  *          This parameter  can be one of the following values:
   *              @arg POINT_OFF: No point to add in front of char.
   *              @arg POINT_ON: Add a point in front of char.
-  * @param  apostrophe: Flag indicating if a apostrophe has to be add in front 
+  * @param  apostrophe: Flag indicating if a apostrophe has to be add in front
   *                     of displayed character.
   *          This parameter  can be one of the following values:
   *              @arg APOSTROPHE_OFF: No apostrophe to add in back of char.
@@ -221,7 +221,7 @@ void LCD_GLASS_DisplayChar(uint8_t* ch, Point_Typedef point, Apostrophe_Typedef 
   LCD_GLASS_WriteChar(ch, point, apostrophe, position);
 
   /*!< Requesy LCD RAM update */
-  LCD_UpdateDisplayRequest();  
+  LCD_UpdateDisplayRequest();
 }
 
 /**
@@ -256,10 +256,10 @@ void LCD_GLASS_DisplayString(uint8_t* ptr)
   * @brief  This function writes a char in the LCD RAM.
   * @param  ch: The character to dispaly.
   * @param  point: A point to add in front of char.
-  *          This parameter  can be one of the following values:  
+  *          This parameter  can be one of the following values:
   *              @arg POINT_OFF : No point to add in front of char.
   *              @arg POINT_ON : Add a point in front of char.
-  * @param  apostrophe: Flag indicating if a apostrophe has to be add in front 
+  * @param  apostrophe: Flag indicating if a apostrophe has to be add in front
   *                     of displayed character.
   *          This parameter  can be one of the following values:
   *              @arg APOSTROPHE_OFF : No apostrophe to add in back of char.
@@ -271,7 +271,7 @@ void LCD_GLASS_DisplayString(uint8_t* ptr)
 void LCD_GLASS_WriteChar(uint8_t* ch, Point_Typedef point, Apostrophe_Typedef apostrophe, uint8_t position)
 {
   uint32_t tmp = 0x00;
-    
+
   Convert(ch, point, apostrophe); /*!< Convert the corresponding character */
 
   switch (position)
@@ -282,21 +282,21 @@ void LCD_GLASS_WriteChar(uint8_t* ch, Point_Typedef point, Apostrophe_Typedef ap
       LCD->RAM[LCD_RAMRegister_2] &= (uint32_t)(0xFFFFFFF0);
       LCD->RAM[LCD_RAMRegister_4] &= (uint32_t)(0xFFFFFFF0);
       LCD->RAM[LCD_RAMRegister_6] &= (uint32_t)(0xFFFFFFF0);
-  
+
       /*!< Write the corresponding segments (SEG0, SEG1, SEG2, SEG3) */
       LCD->RAM[LCD_RAMRegister_0] |= (uint32_t)(digit[0]);
       LCD->RAM[LCD_RAMRegister_2] |= (uint32_t)(digit[1]);
       LCD->RAM[LCD_RAMRegister_4] |= (uint32_t)(digit[2]);
       LCD->RAM[LCD_RAMRegister_6] |= (uint32_t)(digit[3]);
       break;
-      
+
     case 6:
       /*!< Clear the corresponding segments (SEG4, SEG5, SEG6, SEG10) */
       LCD->RAM[LCD_RAMRegister_0] &= (uint32_t)(0xFFFFFB8F);
       LCD->RAM[LCD_RAMRegister_2] &= (uint32_t)(0xFFFFFB8F);
       LCD->RAM[LCD_RAMRegister_4] &= (uint32_t)(0xFFFFFB8F);
       LCD->RAM[LCD_RAMRegister_6] &= (uint32_t)(0xFFFFFB8F);
-  
+
       /*!< Write the corresponding segments (SEG4, SEG5, SEG6, SEG10) */
       tmp = (((digit[0] & 0x8) << 7) | ((digit[0]& 0x7) << 4));
       LCD->RAM[LCD_RAMRegister_0] |= (uint32_t) tmp;
@@ -307,14 +307,14 @@ void LCD_GLASS_WriteChar(uint8_t* ch, Point_Typedef point, Apostrophe_Typedef ap
       tmp = (((digit[3] & 0x8) << 7) | ((digit[3]& 0x7) << 4));
       LCD->RAM[LCD_RAMRegister_6] |= (uint32_t) tmp;
       break;
-      
+
     case 5:
       /*!< Clear the corresponding segments (SEG11, SEG16, SEG18, SEG19) */
       LCD->RAM[LCD_RAMRegister_0] &= (uint32_t)(0xFFF2F7FF);
       LCD->RAM[LCD_RAMRegister_2] &= (uint32_t)(0xFFF2F7FF);
       LCD->RAM[LCD_RAMRegister_4] &= (uint32_t)(0xFFF2F7FF);
       LCD->RAM[LCD_RAMRegister_6] &= (uint32_t)(0xFFF2F7FF);
-  
+
       /*!< Write the corresponding segments (SEG11, SEG16, SEG18, SEG19) */
       tmp = (((digit[0] & 0x1) << 11) | ((digit[0]& 0x2) << 15) | ((digit[0]& 0xC) << 16));
       LCD->RAM[LCD_RAMRegister_0] |= (uint32_t)(tmp);
@@ -325,49 +325,49 @@ void LCD_GLASS_WriteChar(uint8_t* ch, Point_Typedef point, Apostrophe_Typedef ap
       tmp = (((digit[3] & 0x1) << 11) | ((digit[3]& 0x2) << 15) | ((digit[3]& 0xC) << 16));
       LCD->RAM[LCD_RAMRegister_6] |= (uint32_t)(tmp);
       break;
-      
+
     case 4:
       /*!< Clear the corresponding segments (SEG20, SEG21, SEG22, SEG23) */
       LCD->RAM[LCD_RAMRegister_0] &= (uint32_t)(0xFF0FFFFF);
       LCD->RAM[LCD_RAMRegister_2] &= (uint32_t)(0xFF0FFFFF);
       LCD->RAM[LCD_RAMRegister_4] &= (uint32_t)(0xFF0FFFFF);
       LCD->RAM[LCD_RAMRegister_6] &= (uint32_t)(0xFF0FFFFF);
-  
+
       /*!< Write the corresponding segments (SEG20, SEG21, SEG22, SEG23) */
       LCD->RAM[LCD_RAMRegister_0] |= (uint32_t)(digit[0] << 20);
       LCD->RAM[LCD_RAMRegister_2] |= (uint32_t)(digit[1] << 20);
       LCD->RAM[LCD_RAMRegister_4] |= (uint32_t)(digit[2] << 20);
       LCD->RAM[LCD_RAMRegister_6] |= (uint32_t)(digit[3] << 20);
       break;
-      
+
     case 3:
       /*!< Clear the corresponding segments (SEG28, SEG29, SEG30, SEG31) */
       LCD->RAM[LCD_RAMRegister_0] &= (uint32_t)(0x0FFFFFFF);
       LCD->RAM[LCD_RAMRegister_2] &= (uint32_t)(0x0FFFFFFF);
       LCD->RAM[LCD_RAMRegister_4] &= (uint32_t)(0x0FFFFFFF);
       LCD->RAM[LCD_RAMRegister_6] &= (uint32_t)(0x0FFFFFFF);
-  
+
       /*!< Write the corresponding segments (SEG28, SEG29, SEG30, SEG31) */
       LCD->RAM[LCD_RAMRegister_0] |= (uint32_t)(digit[0] << 28);
       LCD->RAM[LCD_RAMRegister_2] |= (uint32_t)(digit[1] << 28);
       LCD->RAM[LCD_RAMRegister_4] |= (uint32_t)(digit[2] << 28);
       LCD->RAM[LCD_RAMRegister_6] |= (uint32_t)(digit[3] << 28);
       break;
-      
+
     case 2:
       /*!< Clear the corresponding segments (SEG32, SEG33, SEG34, SEG35) */
       LCD->RAM[LCD_RAMRegister_1] &= (uint32_t)(0xFFFFFFF0);
       LCD->RAM[LCD_RAMRegister_3] &= (uint32_t)(0xFFFFFFF0);
       LCD->RAM[LCD_RAMRegister_5] &= (uint32_t)(0xFFFFFFF0);
       LCD->RAM[LCD_RAMRegister_7] &= (uint32_t)(0xFFFFFFF0);
-  
+
       /*!< Write the corresponding segments (SEG32, SEG33, SEG34, SEG35) */
       LCD->RAM[LCD_RAMRegister_1] |= (uint32_t)(digit[0] << 0);
       LCD->RAM[LCD_RAMRegister_3] |= (uint32_t)(digit[1] << 0);
       LCD->RAM[LCD_RAMRegister_5] |= (uint32_t)(digit[2] << 0);
       LCD->RAM[LCD_RAMRegister_7] |= (uint32_t)(digit[3] << 0);
       break;
-      
+
     case 1:
       /*!< Clear the corresponding segments (SEG36, SEG37, SEG38, SEG39) */
       LCD->RAM[LCD_RAMRegister_1] &= (uint32_t)(0xFFFFFF0F);
@@ -380,16 +380,16 @@ void LCD_GLASS_WriteChar(uint8_t* ch, Point_Typedef point, Apostrophe_Typedef ap
       LCD->RAM[LCD_RAMRegister_3] |= (uint32_t)(digit[1] << 4);
       LCD->RAM[LCD_RAMRegister_5] |= (uint32_t)(digit[2] << 4);
       LCD->RAM[LCD_RAMRegister_7] |= (uint32_t)(digit[3] << 4);
-      
+
       break;
-      
+
     case 0:
       /*!< Clear the corresponding segments (SEG40, SEG41, SEG42, SEG43) */
       LCD->RAM[LCD_RAMRegister_1] &= (uint32_t)(0xFFFFF0FF);
       LCD->RAM[LCD_RAMRegister_3] &= (uint32_t)(0xFFFFF0FF);
       LCD->RAM[LCD_RAMRegister_5] &= (uint32_t)(0xFFFFF0FF);
       LCD->RAM[LCD_RAMRegister_7] &= (uint32_t)(0xFFFFF0FF);
-  
+
       /*!< Write the corresponding segments (SEG40, SEG41, SEG42, SEG43) */
       LCD->RAM[LCD_RAMRegister_1] |= (uint32_t)(digit[0] << 8);
       LCD->RAM[LCD_RAMRegister_3] |= (uint32_t)(digit[1] << 8);
@@ -401,11 +401,11 @@ void LCD_GLASS_WriteChar(uint8_t* ch, Point_Typedef point, Apostrophe_Typedef ap
 
 /**
   * @brief  Display a string in scrolling mode
-  * @note   The LCD should be cleared before to start the write operation.  
+  * @note   The LCD should be cleared before to start the write operation.
   * @param  ptr: Pointer to string to display on the LCD Glass.
   * @param  nScroll: Specifies how many time the message will be scrolled
   * @param  ScrollSpeed: Speciifes the speed of the scroll.
-  *                     Low value gives higher speed. 
+  *                     Low value gives higher speed.
   * @retval None
   */
 void LCD_GLASS_ScrollString(uint8_t* ptr, uint16_t nScroll, uint16_t ScrollSpeed)
@@ -418,7 +418,7 @@ void LCD_GLASS_ScrollString(uint8_t* ptr, uint16_t nScroll, uint16_t ScrollSpeed
   LCD_GLASS_DisplayString(ptr1);
 
   delay(ScrollSpeed);
-		
+
   for (Repetition = 0; Repetition < nScroll; Repetition++)
   {
     *(str + 1) = *ptr1;
@@ -428,7 +428,7 @@ void LCD_GLASS_ScrollString(uint8_t* ptr, uint16_t nScroll, uint16_t ScrollSpeed
     *(str + 5) = *(ptr1 + 4);
     *(str + 6) = *(ptr1 + 5);
     *(str + 7) =*(ptr1 + 6);
-    *(str) = *(ptr1 + 7);    
+    *(str) = *(ptr1 + 7);
     LCD_GLASS_Clear();
     LCD_GLASS_DisplayString(str);
     delay(ScrollSpeed);
@@ -440,7 +440,7 @@ void LCD_GLASS_ScrollString(uint8_t* ptr, uint16_t nScroll, uint16_t ScrollSpeed
     *(str + 5) = *(ptr1 + 3);
     *(str + 6) = *(ptr1 + 4);
     *(str + 7) = *(ptr1 + 5);
-    *(str) = *(ptr1 + 6);    
+    *(str) = *(ptr1 + 6);
     LCD_GLASS_Clear();
     LCD_GLASS_DisplayString(str);
     delay(ScrollSpeed);
@@ -451,7 +451,7 @@ void LCD_GLASS_ScrollString(uint8_t* ptr, uint16_t nScroll, uint16_t ScrollSpeed
     *(str + 4) = *(ptr1 + 1);
     *(str + 5) = *(ptr1 + 2);
     *(str + 6) = *(ptr1 + 3);
-    *(str + 7) = *(ptr1 + 4);    
+    *(str + 7) = *(ptr1 + 4);
     *(str) = *(ptr1 + 5);
     LCD_GLASS_Clear();
     LCD_GLASS_DisplayString(str);
@@ -463,7 +463,7 @@ void LCD_GLASS_ScrollString(uint8_t* ptr, uint16_t nScroll, uint16_t ScrollSpeed
     *(str + 4) = *ptr1;
     *(str + 5) = *(ptr1 + 1);
     *(str + 6) = *(ptr1 + 2);
-    *(str + 7) = *(ptr1 + 3);    
+    *(str + 7) = *(ptr1 + 3);
     *(str) = *(ptr1 + 4);
     LCD_GLASS_Clear();
     LCD_GLASS_DisplayString(str);
@@ -475,7 +475,7 @@ void LCD_GLASS_ScrollString(uint8_t* ptr, uint16_t nScroll, uint16_t ScrollSpeed
     *(str + 4) = *(ptr1 + 7);
     *(str + 5) = *ptr1;
     *(str + 6) = *(ptr1 + 1);
-    *(str + 7) = *(ptr1 + 2);    
+    *(str + 7) = *(ptr1 + 2);
     *(str) = *(ptr1 + 3);
     LCD_GLASS_Clear();
     LCD_GLASS_DisplayString(str);
@@ -487,7 +487,7 @@ void LCD_GLASS_ScrollString(uint8_t* ptr, uint16_t nScroll, uint16_t ScrollSpeed
     *(str + 4) = *(ptr1 + 6);
     *(str + 5) = *(ptr1 + 7);
     *(str + 6) = *ptr1;
-    *(str + 7) = *(ptr1 + 1);    
+    *(str + 7) = *(ptr1 + 1);
     *(str) = *(ptr1 + 2);
     LCD_GLASS_Clear();
     LCD_GLASS_DisplayString(str);
@@ -499,19 +499,19 @@ void LCD_GLASS_ScrollString(uint8_t* ptr, uint16_t nScroll, uint16_t ScrollSpeed
     *(str + 4) = *(ptr1 + 5);
     *(str + 5) = *(ptr1 + 6);
     *(str + 6) = *(ptr1 + 7);
-    *(str + 7) = *ptr1;    
+    *(str + 7) = *ptr1;
     *(str) = *(ptr1 + 1);
     LCD_GLASS_Clear();
     LCD_GLASS_DisplayString(str);
     delay(ScrollSpeed);
-    
+
     *(str + 1) = *(ptr1 + 1);
     *(str + 2) = *(ptr1 + 2);
     *(str + 3) = *(ptr1 + 3);
     *(str + 4) = *(ptr1 + 4);
     *(str + 5) = *(ptr1 + 5);
     *(str + 6) = *(ptr1 + 6);
-    *(str + 7) = *(ptr1 + 7);    
+    *(str + 7) = *(ptr1 + 7);
     *(str) = *(ptr1);
     LCD_GLASS_Clear();
     LCD_GLASS_DisplayString(str);
@@ -522,7 +522,7 @@ void LCD_GLASS_ScrollString(uint8_t* ptr, uint16_t nScroll, uint16_t ScrollSpeed
 /**
   * @brief This function Clear a char in the LCD RAM.
   * @param position: Position in the LCD of the caracter to write.
-  *                  This parameter can be any value in range [0:7]. 
+  *                  This parameter can be any value in range [0:7].
   * @retval None
   */
 void LCD_GLASS_ClearChar(uint8_t position)
@@ -536,7 +536,7 @@ void LCD_GLASS_ClearChar(uint8_t position)
       LCD->RAM[LCD_RAMRegister_4] &= (uint32_t)(0xFFFFFFF0);
       LCD->RAM[LCD_RAMRegister_6] &= (uint32_t)(0xFFFFFFF0);
       break;
-      
+
     case 6:
       /*!< Clear the corresponding segments (SEG4, SEG5, SEG6, SEG10) */
       LCD->RAM[LCD_RAMRegister_0] &= (uint32_t)(0xFFFFFB8F);
@@ -544,7 +544,7 @@ void LCD_GLASS_ClearChar(uint8_t position)
       LCD->RAM[LCD_RAMRegister_4] &= (uint32_t)(0xFFFFFB8F);
       LCD->RAM[LCD_RAMRegister_6] &= (uint32_t)(0xFFFFFB8F);
       break;
-      
+
     case 5:
       /*!< Clear the corresponding segments (SEG11, SEG16, SEG18, SEG19) */
       LCD->RAM[LCD_RAMRegister_0] &= (uint32_t)(0xFFF2F7FF);
@@ -552,7 +552,7 @@ void LCD_GLASS_ClearChar(uint8_t position)
       LCD->RAM[LCD_RAMRegister_4] &= (uint32_t)(0xFFF2F7FF);
       LCD->RAM[LCD_RAMRegister_6] &= (uint32_t)(0xFFF2F7FF);
       break;
-      
+
     case 4:
       /*!< Clear the corresponding segments (SEG20, SEG21, SEG22, SEG23) */
       LCD->RAM[LCD_RAMRegister_0] &= (uint32_t)(0xFF0FFFFF);
@@ -560,7 +560,7 @@ void LCD_GLASS_ClearChar(uint8_t position)
       LCD->RAM[LCD_RAMRegister_4] &= (uint32_t)(0xFF0FFFFF);
       LCD->RAM[LCD_RAMRegister_6] &= (uint32_t)(0xFF0FFFFF);
       break;
-      
+
     case 3:
       /*!< Clear the corresponding segments (SEG28, SEG29, SEG30, SEG31) */
       LCD->RAM[LCD_RAMRegister_0] &= (uint32_t)(0x0FFFFFFF);
@@ -568,7 +568,7 @@ void LCD_GLASS_ClearChar(uint8_t position)
       LCD->RAM[LCD_RAMRegister_4] &= (uint32_t)(0x0FFFFFFF);
       LCD->RAM[LCD_RAMRegister_6] &= (uint32_t)(0x0FFFFFFF);
       break;
-      
+
     case 2:
       /*!< Clear the corresponding segments (SEG32, SEG33, SEG34, SEG35) */
       LCD->RAM[LCD_RAMRegister_1] &= (uint32_t)(0xFFFFFFF0);
@@ -576,7 +576,7 @@ void LCD_GLASS_ClearChar(uint8_t position)
       LCD->RAM[LCD_RAMRegister_5] &= (uint32_t)(0xFFFFFFF0);
       LCD->RAM[LCD_RAMRegister_7] &= (uint32_t)(0xFFFFFFF0);
       break;
-      
+
     case 1:
       /*!< Clear the corresponding segments (SEG36, SEG37, SEG38, SEG39) */
       LCD->RAM[LCD_RAMRegister_1] &= (uint32_t)(0xFFFFFF0F);
@@ -584,7 +584,7 @@ void LCD_GLASS_ClearChar(uint8_t position)
       LCD->RAM[LCD_RAMRegister_5] &= (uint32_t)(0xFFFFFF0F);
       LCD->RAM[LCD_RAMRegister_7] &= (uint32_t)(0xFFFFFF0F);
       break;
-      
+
     case 0:
       /*!< Clear the corresponding segments (SEG40, SEG41, SEG42, SEG43) */
       LCD->RAM[LCD_RAMRegister_1] &= (uint32_t)(0xFFFFF0FF);
@@ -597,7 +597,7 @@ void LCD_GLASS_ClearChar(uint8_t position)
 
 /**
   * @brief  This function Clear the whole LCD RAM.
-  * @param  None 
+  * @param  None
   * @retval None
   */
 void LCD_GLASS_Clear(void)
@@ -614,10 +614,10 @@ void LCD_GLASS_Clear(void)
   * @brief  Converts an ascii char to an LCD digit.
   * @param  c: Char to display.
   * @param  point: A point to add in front of char.
-  *          This parameter  can be one of the following values:  
+  *          This parameter  can be one of the following values:
   *              @arg POINT_OFF : No point to add in front of char.
   *              @arg POINT_ON : Add a point in front of char.
-  * @param  apostrophe: Flag indicating if a apostrophe has to be add in front 
+  * @param  apostrophe: Flag indicating if a apostrophe has to be add in front
   *                     of displayed character.
   *          This parameter  can be one of the following values:
   *              @arg APOSTROPHE_OFF : No apostrophe to add in back of char.
@@ -634,19 +634,19 @@ static void Convert(uint8_t* c, Point_Typedef point, Apostrophe_Typedef apostrop
   {
     ch = LetterMap[*c - 0x41];
   }
-  
+
   /*!< The character c is a number*/
   if ((*c < 0x3A) & (*c > 0x2F))
   {
     ch = NumberMap[*c - 0x30];
   }
-  
+
   /*!< The character c is a space character */
   if (*c == 0x20)
   {
     ch =0x00;
   }
-  
+
   /*!< Set the DP seg in the character that can be displayed if the point is on */
   if (point == POINT_ON)
   {
@@ -668,13 +668,13 @@ static void Convert(uint8_t* c, Point_Typedef point, Apostrophe_Typedef apostrop
 
 /**
   * @brief  Configures the LCD Segments and Coms GPIOs.
-  * @param  None 
+  * @param  None
   * @retval None
   */
 static void LCD_GPIOConfig(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
-  
+
   /*!< Enable GPIOA, GPIOB, GPIOC, GPIOD and GPIOE AHB Clocks */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB | RCC_AHBPeriph_GPIOC
                         | RCC_AHBPeriph_GPIOD | RCC_AHBPeriph_GPIOE, ENABLE);
@@ -820,36 +820,36 @@ static void LCD_GPIOConfig(void)
   */
 static void delay(__IO uint32_t nCount)
 {
-  __IO uint32_t index = 0; 
+  __IO uint32_t index = 0;
   for(index = (0xFF * nCount); index != 0; index--)
   {
-  }    
+  }
 }
 
 /**
   * @}
-  */ 
+  */
 
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */   
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

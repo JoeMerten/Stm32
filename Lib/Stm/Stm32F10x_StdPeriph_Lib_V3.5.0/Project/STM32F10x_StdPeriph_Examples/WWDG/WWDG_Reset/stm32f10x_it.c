@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    WWDG/WWDG_Reset/stm32f10x_it.c 
+  * @file    WWDG/WWDG_Reset/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -152,14 +152,14 @@ void SysTick_Handler(void)
 void EXTI9_5_IRQHandler(void)
 {
   if (EXTI_GetITStatus(KEY_BUTTON_EXTI_LINE) != RESET)
-  {  
+  {
     /* Clear the Key Button EXTI Line Pending Bit */
     EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
-    
+
     /* As the following address is invalid (not mapped), a Hardfault exception
-	  will be generated with an infinite loop and when the WWDG counter falls to 63
+      will be generated with an infinite loop and when the WWDG counter falls to 63
     the WWDG reset occurs */
- 	  *(__IO uint32_t *) 0x000000FF = 0xFF;
+      *(__IO uint32_t *) 0x000000FF = 0xFF;
   }
 }
 
@@ -182,10 +182,10 @@ void EXTI9_5_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

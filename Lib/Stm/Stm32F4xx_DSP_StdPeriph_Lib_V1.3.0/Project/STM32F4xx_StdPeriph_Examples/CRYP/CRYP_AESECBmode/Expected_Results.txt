@@ -20,4 +20,4 @@
  AES-128 Decrypted Data:
  ---------------------------------------
 [0x6BC1BEE2][0x2E409F96][0xE93D7E11][0x7393172A]  Block 1 
-[0xAE2D8A57][0x1E03AC9C][0x9EB76FAC][0x45AF8E51]  Block 2 
+[0xAE2D8A57][0x1E03AC9C][0x9EB76FAC][0x45AF8E51]  Block 2

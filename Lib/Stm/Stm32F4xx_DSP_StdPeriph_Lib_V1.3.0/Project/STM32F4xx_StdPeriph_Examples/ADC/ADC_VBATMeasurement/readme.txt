@@ -104,4 +104,3 @@ In order to make the program work, you must do the following:
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
- 

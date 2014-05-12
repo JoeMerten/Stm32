@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/Smartcard/main.c 
+  * @file    USART/Smartcard/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -31,7 +31,7 @@
 
 /** @addtogroup USART_SmartCard
   * @{
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "smartcard.h"
@@ -71,7 +71,7 @@ static void Delay(uint32_t nCount);
 int main(void)
 {
   SC_State SCState = SC_POWER_OFF;
-     
+
   /* Setup SysTick Timer for 1 msec interrupts  */
   SysTick_Config(SystemCoreClock / 1000);
 
@@ -83,17 +83,17 @@ int main(void)
 
   /* Configure Smartcard Interface GPIO pins */
   SC_IOConfig();
-	  
+
 /*-------------------------------- Idle task ---------------------------------*/
   while(1)
   {
-    /* Loop while no Smartcard is detected */  
+    /* Loop while no Smartcard is detected */
     while(CardInserted == 0)
     {
     }
-       
+
     /* Start SC Demo ---------------------------------------------------------*/
-    
+
     /* Wait A2R --------------------------------------------------------------*/
     SCState = SC_POWER_ON;
 
@@ -102,8 +102,8 @@ int main(void)
     SC_ADPU.Header.P1 = 0x00;
     SC_ADPU.Header.P2 = 0x00;
     SC_ADPU.Body.LC = 0x00;
-   
-    while(SCState != SC_ACTIVE_ON_T0) 
+
+    while(SCState != SC_ACTIVE_ON_T0)
     {
       SC_Handler(&SCState, &SC_ADPU, &SC_Responce);
     }
@@ -125,8 +125,8 @@ int main(void)
     {
       SC_ADPU.Body.Data[i] = MasterRoot[i];
     }
-    while(i < LC_MAX) 
-    {    
+    while(i < LC_MAX)
+    {
       SC_ADPU.Body.Data[i++] = 0;
     }
     SC_ADPU.Body.LE = 0;
@@ -149,7 +149,7 @@ int main(void)
     /* Select ICCID ----------------------------------------------------------*/
     if(((SC_Responce.SW1 << 8) | (SC_Responce.SW2)) == SC_OP_TERMINATED)
     {
-      /* Check if the CHV1 is enabled */   
+      /* Check if the CHV1 is enabled */
       if((SC_Responce.Data[13] & 0x80) == 0x00)
       {
         CHV1Status = 0x01;
@@ -165,8 +165,8 @@ int main(void)
       {
         SC_ADPU.Body.Data[i] = ICCID[i];
       }
-      while(i < LC_MAX) 
-      {    
+      while(i < LC_MAX)
+      {
         SC_ADPU.Body.Data[i++] = 0;
       }
       SC_ADPU.Body.LE = 0;
@@ -196,7 +196,7 @@ int main(void)
       {
         ICCID_Content[i] =  SC_Responce.Data[i];
       }
-      /* Send APDU Command for GSMDir selection */ 
+      /* Send APDU Command for GSMDir selection */
       SC_ADPU.Header.CLA = SC_CLA_GSM11;
       SC_ADPU.Header.INS = SC_SELECT_FILE;
       SC_ADPU.Header.P1 = 0x00;
@@ -207,8 +207,8 @@ int main(void)
       {
         SC_ADPU.Body.Data[i] = GSMDir[i];
       }
-      while(i < LC_MAX) 
-      {    
+      while(i < LC_MAX)
+      {
         SC_ADPU.Body.Data[i++] = 0;
       }
       SC_ADPU.Body.LE = 0;
@@ -229,8 +229,8 @@ int main(void)
       {
         SC_ADPU.Body.Data[i] = IMSI[i];
       }
-      while(i < LC_MAX) 
-      {    
+      while(i < LC_MAX)
+      {
         SC_ADPU.Body.Data[i++] = 0;
       }
       SC_ADPU.Body.LE = 0;
@@ -262,13 +262,13 @@ int main(void)
         SC_ADPU.Header.P1 = 0x00;
         SC_ADPU.Header.P2 = 0x01;
         SC_ADPU.Body.LC = 0x08;
- 
+
         for(i = 0; i < SC_ADPU.Body.LC; i++)
         {
           SC_ADPU.Body.Data[i] = CHV1[i];
         }
-        while(i < LC_MAX) 
-        {    
+        while(i < LC_MAX)
+        {
           SC_ADPU.Body.Data[i++] = 0;
         }
         SC_ADPU.Body.LE = 0;
@@ -291,8 +291,8 @@ int main(void)
         {
           SC_ADPU.Body.Data[i] = CHV1[i];
         }
-        while(i < LC_MAX) 
-        {    
+        while(i < LC_MAX)
+        {
           SC_ADPU.Body.Data[i++] = 0;
         }
         SC_ADPU.Body.LE = 0;
@@ -336,7 +336,7 @@ int main(void)
 static void Delay(uint32_t nCount)
 {
   TimingDelay = nCount;
- 
+
   while(TimingDelay != 0)
   {
   }
@@ -344,14 +344,14 @@ static void Delay(uint32_t nCount)
 
 #ifdef USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number where 
+  * @brief  Reports the name of the source file and the source line number where
   *         the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/Cascade_Synchro/main.c 
+  * @file    TIM/Cascade_Synchro/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup TIM_Cascade_Synchro
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -50,13 +50,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -66,14 +66,14 @@ int main(void)
   /* Timers synchronisation in cascade mode ----------------------------
      1/TIM2 is configured as Master Timer:
      - PWM Mode is used
-     - The TIM2 Update event is used as Trigger Output  
+     - The TIM2 Update event is used as Trigger Output
 
      2/TIM3 is slave for TIM2 and Master for TIM4,
      - PWM Mode is used
-     - The ITR1(TIM2) is used as input trigger 
+     - The ITR1(TIM2) is used as input trigger
      - Gated mode is used, so start and stop of slave counter
       are controlled by the Master trigger output signal(TIM2 update event).
-      - The TIM3 Update event is used as Trigger Output. 
+      - The TIM3 Update event is used as Trigger Output.
 
       3/TIM4 is slave for TIM3,
      - PWM Mode is used
@@ -85,7 +85,7 @@ int main(void)
        The TIMxCLK is fixed to 72 MHz, the TIM2 counter clock is 72 MHz.
 
        The Master Timer TIM2 is running at TIM2 frequency :
-       TIM2 frequency = (TIM2 counter clock)/ (TIM2 period + 1) = 281.250 KHz 
+       TIM2 frequency = (TIM2 counter clock)/ (TIM2 period + 1) = 281.250 KHz
        and the duty cycle = TIM2_CCR1/(TIM2_ARR + 1) = 25%.
 
        The TIM3 is running:
@@ -153,7 +153,7 @@ int main(void)
   /* Slave Mode selection: TIM4 */
   TIM_SelectSlaveMode(TIM4, TIM_SlaveMode_Gated);
   TIM_SelectInputTrigger(TIM4, TIM_TS_ITR2);
-  
+
   /* TIM enable counter */
   TIM_Cmd(TIM3, ENABLE);
   TIM_Cmd(TIM2, ENABLE);
@@ -170,7 +170,7 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{  
+{
   /* TIM2, TIM3 and TIM4 clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3 |
                          RCC_APB1Periph_TIM4, ENABLE);
@@ -197,7 +197,7 @@ void GPIO_Configuration(void)
 
   GPIO_Init(GPIOC, &GPIO_InitStructure);
 
-  GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);	
+  GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);
 
 #else
 /* GPIOA Configuration: PA6(TIM3 CH1) as alternate function push-pull */
@@ -242,10 +242,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

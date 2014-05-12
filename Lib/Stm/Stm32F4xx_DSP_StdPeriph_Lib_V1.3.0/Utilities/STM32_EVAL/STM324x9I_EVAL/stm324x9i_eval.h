@@ -17,15 +17,15 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
-  
+  */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM324X9I_EVAL_H
 #define __STM324X9I_EVAL_H
@@ -37,7 +37,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
 #include "stm32_eval_legacy.h"
-   
+
 /** @addtogroup Utilities
   * @{
   */
@@ -49,15 +49,15 @@
 /** @addtogroup STM324x9I_EVAL
   * @{
   */
-      
+
 /** @addtogroup STM324x9I_EVAL_LOW_LEVEL
   * @{
-  */ 
+  */
 
 /** @defgroup STM324x9I_EVAL_LOW_LEVEL_Exported_Types
   * @{
   */
-typedef enum 
+typedef enum
 {
   LED1 = 0,
   LED2 = 1,
@@ -65,21 +65,21 @@ typedef enum
   LED4 = 3
 } Led_TypeDef;
 
-typedef enum 
-{  
+typedef enum
+{
   BUTTON_WAKEUP = 0,
   BUTTON_TAMPER = 1,
   BUTTON_KEY = 2
 } Button_TypeDef;
 
-typedef enum 
-{  
+typedef enum
+{
   BUTTON_MODE_GPIO = 0,
   BUTTON_MODE_EXTI = 1
 } ButtonMode_TypeDef;
 
-typedef enum 
-{ 
+typedef enum
+{
   JOY_NONE  = 0,
   JOY_SEL   = 1,
   JOY_DOWN  = 2,
@@ -89,22 +89,22 @@ typedef enum
 } JOYState_TypeDef
 ;
 
-typedef enum 
+typedef enum
 {
   COM1 = 0,
   COM2 = 1
 } COM_TypeDef;
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM324x9I_EVAL_LOW_LEVEL_Exported_Constants
   * @{
-  */ 
+  */
 
-/** 
-  * @brief  Define for STM324x9I_EVAL board  
-  */ 
+/**
+  * @brief  Define for STM324x9I_EVAL board
+  */
 #if !defined (USE_STM324x9I_EVAL)
  #define USE_STM324x9I_EVAL
 #endif
@@ -116,29 +116,29 @@ typedef enum
 
 #define LED1_PIN                         GPIO_Pin_6
 #define LED1_GPIO_PORT                   GPIOG
-#define LED1_GPIO_CLK                    RCC_AHB1Periph_GPIOG  
-  
+#define LED1_GPIO_CLK                    RCC_AHB1Periph_GPIOG
+
 #define LED2_PIN                         GPIO_Pin_7
 #define LED2_GPIO_PORT                   GPIOG
-#define LED2_GPIO_CLK                    RCC_AHB1Periph_GPIOG  
-  
+#define LED2_GPIO_CLK                    RCC_AHB1Periph_GPIOG
+
 #define LED3_PIN                         GPIO_Pin_10
 #define LED3_GPIO_PORT                   GPIOG
-#define LED3_GPIO_CLK                    RCC_AHB1Periph_GPIOG  
-  
+#define LED3_GPIO_CLK                    RCC_AHB1Periph_GPIOG
+
 #define LED4_PIN                         GPIO_Pin_12
 #define LED4_GPIO_PORT                   GPIOG
 #define LED4_GPIO_CLK                    RCC_AHB1Periph_GPIOG
 
 /**
   * @}
-  */ 
-  
+  */
+
 /** @addtogroup STM324x9I_EVAL_LOW_LEVEL_BUTTON
   * @{
-  */  
-#define BUTTONn                          3 /* Joystick pins are connected to 
-                                              an IO Expander (accessible through 
+  */
+#define BUTTONn                          3 /* Joystick pins are connected to
+                                              an IO Expander (accessible through
                                               I2C1 interface) */
 
 /**
@@ -150,7 +150,7 @@ typedef enum
 #define WAKEUP_BUTTON_EXTI_LINE          EXTI_Line0
 #define WAKEUP_BUTTON_EXTI_PORT_SOURCE   EXTI_PortSourceGPIOA
 #define WAKEUP_BUTTON_EXTI_PIN_SOURCE    EXTI_PinSource0
-#define WAKEUP_BUTTON_EXTI_IRQn          EXTI0_IRQn 
+#define WAKEUP_BUTTON_EXTI_IRQn          EXTI0_IRQn
 
 /**
  * @brief Tamper push-button
@@ -161,7 +161,7 @@ typedef enum
 #define TAMPER_BUTTON_EXTI_LINE          EXTI_Line13
 #define TAMPER_BUTTON_EXTI_PORT_SOURCE   EXTI_PortSourceGPIOC
 #define TAMPER_BUTTON_EXTI_PIN_SOURCE    EXTI_PinSource13
-#define TAMPER_BUTTON_EXTI_IRQn          EXTI15_10_IRQn 
+#define TAMPER_BUTTON_EXTI_IRQn          EXTI15_10_IRQn
 
 /**
  * @brief Key push-button
@@ -172,11 +172,11 @@ typedef enum
 #define KEY_BUTTON_EXTI_LINE             EXTI_Line13
 #define KEY_BUTTON_EXTI_PORT_SOURCE      EXTI_PortSourceGPIOC
 #define KEY_BUTTON_EXTI_PIN_SOURCE       EXTI_PinSource13
-#define KEY_BUTTON_EXTI_IRQn             EXTI15_10_IRQn 
+#define KEY_BUTTON_EXTI_IRQn             EXTI15_10_IRQn
 
 /**
   * @}
-  */ 
+  */
 
 /** @addtogroup STM324x9I_EVAL_LOW_LEVEL_COM
   * @{
@@ -185,7 +185,7 @@ typedef enum
 
 /**
  * @brief Definition for COM port1, connected to USART1
- */ 
+ */
 #define EVAL_COM1                        USART1
 #define EVAL_COM1_CLK                    RCC_APB2Periph_USART1
 #define EVAL_COM1_TX_PIN                 GPIO_Pin_9
@@ -202,29 +202,29 @@ typedef enum
 
 /**
   * @}
-  */ 
+  */
 
 /** @addtogroup STM324x9I_EVAL_LOW_LEVEL_SD_FLASH
   * @{
-  */ 
+  */
 /**
   * @brief  SD FLASH SDIO Interface
   */
-   
+
 #define SDIO_FIFO_ADDRESS                ((uint32_t)0x40012C80)
-/** 
+/**
   * @brief  SDIO Intialization Frequency (400KHz max)
   */
 #define SDIO_INIT_CLK_DIV                ((uint8_t)0x76)
-/** 
-  * @brief  SDIO Data Transfer Frequency (25MHz max) 
+/**
+  * @brief  SDIO Data Transfer Frequency (25MHz max)
   */
-#define SDIO_TRANSFER_CLK_DIV            ((uint8_t)0x0) 
+#define SDIO_TRANSFER_CLK_DIV            ((uint8_t)0x0)
 
 #define SD_SDIO_DMA                   DMA2
 #define SD_SDIO_DMA_CLK               RCC_AHB1Periph_DMA2
- 
-#define SD_SDIO_DMA_STREAM3	          3
+
+#define SD_SDIO_DMA_STREAM3           3
 
 #ifdef SD_SDIO_DMA_STREAM3
  #define SD_SDIO_DMA_STREAM            DMA2_Stream3
@@ -233,9 +233,9 @@ typedef enum
  #define SD_SDIO_DMA_FLAG_DMEIF        DMA_FLAG_DMEIF3
  #define SD_SDIO_DMA_FLAG_TEIF         DMA_FLAG_TEIF3
  #define SD_SDIO_DMA_FLAG_HTIF         DMA_FLAG_HTIF3
- #define SD_SDIO_DMA_FLAG_TCIF         DMA_FLAG_TCIF3 
+ #define SD_SDIO_DMA_FLAG_TCIF         DMA_FLAG_TCIF3
  #define SD_SDIO_DMA_IRQn              DMA2_Stream3_IRQn
- #define SD_SDIO_DMA_IRQHANDLER        DMA2_Stream3_IRQHandler 
+ #define SD_SDIO_DMA_IRQHANDLER        DMA2_Stream3_IRQHandler
 #elif defined SD_SDIO_DMA_STREAM6
  #define SD_SDIO_DMA_STREAM            DMA2_Stream6
  #define SD_SDIO_DMA_CHANNEL           DMA_Channel_4
@@ -243,20 +243,20 @@ typedef enum
  #define SD_SDIO_DMA_FLAG_DMEIF        DMA_FLAG_DMEIF6
  #define SD_SDIO_DMA_FLAG_TEIF         DMA_FLAG_TEIF6
  #define SD_SDIO_DMA_FLAG_HTIF         DMA_FLAG_HTIF6
- #define SD_SDIO_DMA_FLAG_TCIF         DMA_FLAG_TCIF6 
+ #define SD_SDIO_DMA_FLAG_TCIF         DMA_FLAG_TCIF6
  #define SD_SDIO_DMA_IRQn              DMA2_Stream6_IRQn
  #define SD_SDIO_DMA_IRQHANDLER        DMA2_Stream6_IRQHandler
 #endif /* SD_SDIO_DMA_STREAM3 */
 
 /**
   * @}
-  */ 
+  */
 
 /** @addtogroup STM324x9I_EVAL_I2C_SPEED
   * @{
   */
-    
-/* I2C clock speed configuration (in Hz), used by LCD, Audio Codec, IOE8 
+
+/* I2C clock speed configuration (in Hz), used by LCD, Audio Codec, IOE8
    and IOE16 drivers */
 #ifndef I2C_SPEED
  #define I2C_SPEED                        100000
@@ -264,18 +264,18 @@ typedef enum
 
 /**
   * @}
-  */ 
-  
+  */
+
 /**
   * @}
-  */ 
-  
+  */
+
 /** @defgroup STM324x9I_EVAL_LOW_LEVEL_Exported_Macros
   * @{
-  */  
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM324x9I_EVAL_LOW_LEVEL_Exported_Functions
@@ -287,15 +287,15 @@ void     STM_EVAL_LEDOff(Led_TypeDef Led);
 void     STM_EVAL_LEDToggle(Led_TypeDef Led);
 void     STM_EVAL_PBInit(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode);
 uint32_t STM_EVAL_PBGetState(Button_TypeDef Button);
-void     STM_EVAL_COMInit(COM_TypeDef COM, USART_InitTypeDef* USART_InitStruct); 
+void     STM_EVAL_COMInit(COM_TypeDef COM, USART_InitTypeDef* USART_InitStruct);
 void     SD_LowLevel_DeInit(void);
-void     SD_LowLevel_Init(void); 
+void     SD_LowLevel_Init(void);
 void     SD_LowLevel_DMA_TxConfig(uint32_t *BufferSRC, uint32_t BufferSize);
 void     SD_LowLevel_DMA_RxConfig(uint32_t *BufferDST, uint32_t BufferSize);
 /**
   * @}
   */
-  
+
 #ifdef __cplusplus
 }
 #endif
@@ -303,11 +303,7 @@ void     SD_LowLevel_DMA_RxConfig(uint32_t *BufferDST, uint32_t BufferSize);
 #endif /* __STM324X9I_EVAL_H */
 /**
   * @}
-  */ 
-
-/**
-  * @}
-  */ 
+  */
 
 /**
   * @}
@@ -315,6 +311,10 @@ void     SD_LowLevel_DMA_RxConfig(uint32_t *BufferDST, uint32_t BufferSize);
 
 /**
   * @}
-  */  
+  */
+
+/**
+  * @}
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

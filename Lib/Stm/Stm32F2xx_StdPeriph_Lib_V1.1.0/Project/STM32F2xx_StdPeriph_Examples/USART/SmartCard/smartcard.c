@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/Smartcard/smartcard.c 
+  * @file    USART/Smartcard/smartcard.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /** @addtogroup STM32F2xx_StdPeriph_Examples
   * @{
@@ -32,7 +32,7 @@
 /** @addtogroup USART_SmartCard
   * @{
   */
-  
+
 /* Includes ------------------------------------------------------------------*/
 #include "smartcard.h"
 
@@ -69,9 +69,9 @@ static ErrorStatus USART_ByteReceive(uint8_t *Data, uint32_t TimeOut);
 /**
   * @brief  Handles all Smartcard states and serves to send and receive all
   *         communication data between Smartcard and reader.
-  * @param  SCState: pointer to an SC_State enumeration that will contain the 
+  * @param  SCState: pointer to an SC_State enumeration that will contain the
   *         Smartcard state.
-  * @param  SC_ADPU: pointer to an SC_ADPU_Commands structure that will be initialized.  
+  * @param  SC_ADPU: pointer to an SC_ADPU_Commands structure that will be initialized.
   * @param  SC_Response: pointer to a SC_ADPU_Responce structure which will be initialized.
   * @retval None
   */
@@ -92,7 +92,7 @@ void SC_Handler(SC_State *SCState, SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *
         {
           SC_ATR_Table[i] = 0;
         }
-        
+
         /* Reset SC_A2R Structure --------------------------------------------*/
         SC_A2R.TS = 0;
         SC_A2R.T0 = 0;
@@ -106,7 +106,7 @@ void SC_Handler(SC_State *SCState, SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *
         }
         SC_A2R.Tlength = 0;
         SC_A2R.Hlength = 0;
-        
+
         /* Next State --------------------------------------------------------*/
         *SCState = SC_RESET_LOW;
       }
@@ -126,7 +126,7 @@ void SC_Handler(SC_State *SCState, SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *
         else
         {
           (*SCState) = SC_POWER_OFF;
-        } 
+        }
       }
     break;
 
@@ -139,7 +139,7 @@ void SC_Handler(SC_State *SCState, SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *
         }
         else
         {
-          (*SCState) = SC_POWER_OFF; 
+          (*SCState) = SC_POWER_OFF;
         }
       }
     break;
@@ -158,7 +158,7 @@ void SC_Handler(SC_State *SCState, SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *
 
 /**
   * @brief  Enables or disables the power to the Smartcard.
-  * @param  NewState: new state of the Smartcard power supply. 
+  * @param  NewState: new state of the Smartcard power supply.
   *         This parameter can be: ENABLE or DISABLE.
   * @retval None
   */
@@ -171,12 +171,12 @@ void SC_PowerCmd(FunctionalState NewState)
   else
   {
     GPIO_SetBits(SC_CMDVCC_GPIO_PORT, SC_CMDVCC_PIN);
-  } 
+  }
 }
 
 /**
   * @brief  Sets or clears the Smartcard reset pin.
-  * @param  ResetState: this parameter specifies the state of the Smartcard 
+  * @param  ResetState: this parameter specifies the state of the Smartcard
   *         reset pin. BitVal must be one of the BitAction enum values:
   *                 @arg Bit_RESET: to clear the port pin.
   *                 @arg Bit_SET: to set the port pin.
@@ -197,7 +197,7 @@ void SC_ParityErrorHandler(void)
   USART_SendData(SC_USART, SCData);
   while(USART_GetFlagStatus(SC_USART, USART_FLAG_TC) == RESET)
   {
-  } 
+  }
 }
 
 /**
@@ -219,9 +219,9 @@ void SC_PTSConfig(void)
   apbclock /= ((SC_USART->GTPR & (uint16_t)0x00FF) * 2);
 
   /* Enable the DMA Receive (Set DMAR bit only) to enable interrupt generation
-     in case of a framing error FE */  
+     in case of a framing error FE */
   USART_DMACmd(SC_USART, USART_DMAReq_Rx, ENABLE);
-  
+
   if((SC_A2R.T0 & (uint8_t)0x10) == 0x10)
   {
     if(SC_A2R.T[0] != 0x11)
@@ -241,22 +241,22 @@ void SC_PTSConfig(void)
       }
 
       /* Send PTS1 */
-      SCData = SC_A2R.T[0]; 
+      SCData = SC_A2R.T[0];
       USART_SendData(SC_USART, SCData);
       while(USART_GetFlagStatus(SC_USART, USART_FLAG_TC) == RESET)
       {
       }
 
       /* Send PCK */
-      SCData = (uint8_t)0xFF^(uint8_t)0x10^(uint8_t)SC_A2R.T[0]; 
+      SCData = (uint8_t)0xFF^(uint8_t)0x10^(uint8_t)SC_A2R.T[0];
       USART_SendData(SC_USART, SCData);
       while(USART_GetFlagStatus(SC_USART, USART_FLAG_TC) == RESET)
       {
       }
 
-      /* Disable the DMA Receive (Reset DMAR bit only) */  
+      /* Disable the DMA Receive (Reset DMAR bit only) */
       USART_DMACmd(SC_USART, USART_DMAReq_Rx, DISABLE);
-   
+
       if((USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT)) == SUCCESS)
       {
         if(locData != 0xFF)
@@ -310,13 +310,13 @@ void SC_PTSConfig(void)
         USART_Init(SC_USART, &USART_InitStructure);
       }
     }
-  }  
+  }
 }
 
 /**
   * @brief  Manages the Smartcard transport layer: send APDU commands and receives
   *   the APDU responce.
-  * @param  SC_ADPU: pointer to a SC_ADPU_Commands structure which will be initialized.  
+  * @param  SC_ADPU: pointer to a SC_ADPU_Commands structure which will be initialized.
   * @param  SC_Response: pointer to a SC_ADPU_Responce structure which will be initialized.
   * @retval None
   */
@@ -330,12 +330,12 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Responce
   {
     SC_ResponceStatus->Data[i] = 0;
   }
-  
+
   SC_ResponceStatus->SW1 = 0;
   SC_ResponceStatus->SW2 = 0;
 
   /* Enable the DMA Receive (Set DMAR bit only) to enable interrupt generation
-     in case of a framing error FE */  
+     in case of a framing error FE */
   USART_DMACmd(SC_USART, USART_DMAReq_Rx, ENABLE);
 
   /* Send header -------------------------------------------------------------*/
@@ -343,25 +343,25 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Responce
   USART_SendData(SC_USART, SCData);
   while(USART_GetFlagStatus(SC_USART, USART_FLAG_TC) == RESET)
   {
-  }  
-  
+  }
+
   SCData = SC_ADPU->Header.INS;
   USART_SendData(SC_USART, SCData);
   while(USART_GetFlagStatus(SC_USART, USART_FLAG_TC) == RESET)
   {
   }
-   
+
   SCData = SC_ADPU->Header.P1;
   USART_SendData(SC_USART, SCData);
   while(USART_GetFlagStatus(SC_USART, USART_FLAG_TC) == RESET)
   {
-  } 
-  
+  }
+
   SCData = SC_ADPU->Header.P2;
   USART_SendData(SC_USART, SCData);
   while(USART_GetFlagStatus(SC_USART, USART_FLAG_TC) == RESET)
   {
-  }   
+  }
 
   /* Send body length to/from SC ---------------------------------------------*/
   if(SC_ADPU->Body.LC)
@@ -370,15 +370,15 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Responce
     USART_SendData(SC_USART, SCData);
     while(USART_GetFlagStatus(SC_USART, USART_FLAG_TC) == RESET)
     {
-    }     
+    }
   }
   else if(SC_ADPU->Body.LE)
-  { 
+  {
     SCData = SC_ADPU->Body.LE;
     USART_SendData(SC_USART, SCData);
     while(USART_GetFlagStatus(SC_USART, USART_FLAG_TC) == RESET)
     {
-    }     
+    }
   }
   /* Flush the SC_USART DR */
   (void)USART_ReceiveData(SC_USART);
@@ -419,15 +419,15 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Responce
       for(i = 0; i < SC_ADPU->Body.LC; i++)
       {
         SCData = SC_ADPU->Body.Data[i];
-        
+
         USART_SendData(SC_USART, SCData);
         while(USART_GetFlagStatus(SC_USART, USART_FLAG_TC) == RESET)
         {
-        } 
+        }
       }
       /* Flush the SC_USART DR */
       (void)USART_ReceiveData(SC_USART);
-      /* Disable the DMA Receive (Reset DMAR bit only) */  
+      /* Disable the DMA Receive (Reset DMAR bit only) */
       USART_DMACmd(SC_USART, USART_DMAReq_Rx, DISABLE);
     }
 
@@ -456,7 +456,7 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Responce
         i++;
       }
     }
-    /* Wait SW2 ------------------------------------------------------------*/   
+    /* Wait SW2 ------------------------------------------------------------*/
     i = 0;
     while(i < 10)
     {
@@ -510,13 +510,13 @@ static void SC_AnswerReq(SC_State *SCState, uint8_t *card, uint8_t length)
     case SC_RESET_HIGH:
       /* Check responce with reset high --------------------------------------*/
       SC_Reset(Bit_SET); /* Reset High */
-  
+
       while(length--)
       {
         if((USART_ByteReceive(&Data, SC_RECEIVE_TIMEOUT)) == SUCCESS)
         {
           *card++ = Data; /* Receive data for timeout = SC_RECEIVE_TIMEOUT */
-        }       
+        }
       }
       if(card[0])
       {
@@ -530,7 +530,7 @@ static void SC_AnswerReq(SC_State *SCState, uint8_t *card, uint8_t length)
 
     case SC_ACTIVE:
     break;
-    
+
     case SC_POWER_OFF:
       /* Close Connection if no answer received ------------------------------*/
       SC_Reset(Bit_SET); /* Reset high - a bit is used as level shifter from 3.3 to 5 V */
@@ -591,7 +591,7 @@ static uint8_t SC_decode_Answer2reset(uint8_t *card)
     {
       SC_A2R.Tlength = SC_A2R.Tlength + (((SC_A2R.T[buf - 1] & (uint8_t)0xF0) >> (4 + i)) & (uint8_t)0x1);
     }
-	
+
     for (i = 0;i < SC_A2R.Tlength; i++)
     {
       SC_A2R.T[buf + i] = card[i + 2 + buf];
@@ -616,20 +616,20 @@ static void SC_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
   USART_InitTypeDef USART_InitStructure;
-  USART_ClockInitTypeDef USART_ClockInitStructure;  
+  USART_ClockInitTypeDef USART_ClockInitStructure;
   NVIC_InitTypeDef NVIC_InitStructure;
-  
+
   /* Enable GPIO clocks */
   RCC_AHB1PeriphClockCmd(SC_USART_TX_GPIO_CLK | SC_USART_CK_GPIO_CLK, ENABLE);
-                         
+
   /* Enable SC_USART clock */
   SC_USART_APBPERIPHCLOCK(SC_USART_CLK, ENABLE);
 
   /* Connect PXx to SC_USART_TX */
   GPIO_PinAFConfig(SC_USART_TX_GPIO_PORT, SC_USART_TX_SOURCE, SC_USART_TX_AF);
-  
+
   /* Connect PXx to SC_USART_CK */
-  GPIO_PinAFConfig(SC_USART_CK_GPIO_PORT, SC_USART_CK_SOURCE, SC_USART_CK_AF); 
+  GPIO_PinAFConfig(SC_USART_CK_GPIO_PORT, SC_USART_CK_SOURCE, SC_USART_CK_AF);
 
   /* Configure USART Tx and Rx as alternate function push-pull */
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
@@ -638,7 +638,7 @@ static void SC_Init(void)
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
   GPIO_InitStructure.GPIO_Pin = SC_USART_CK_PIN;
   GPIO_Init(SC_USART_CK_GPIO_PORT, &GPIO_InitStructure);
-  
+
   /* Configure USART Tx pin as alternate function open-drain */
   GPIO_InitStructure.GPIO_Pin = SC_USART_TX_PIN;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
@@ -648,9 +648,9 @@ static void SC_Init(void)
   NVIC_InitStructure.NVIC_IRQChannel = SC_USART_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;    
+  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
-    
+
 /* SC_USART configuration ----------------------------------------------------*/
   /* SC_USART configured as follow:
         - Word Length = 9 Bits
@@ -664,10 +664,10 @@ static void SC_Init(void)
 
   /* USART Clock set to 6 MHz (PCLK2 (60 MHz) / 10) */
   USART_SetPrescaler(SC_USART, 0x05);
-  
+
   /* USART Guard Time set to 16 Bit */
   USART_SetGuardTime(SC_USART, 16);
-  
+
   USART_ClockInitStructure.USART_Clock = USART_Clock_Enable;
   USART_ClockInitStructure.USART_CPOL = USART_CPOL_Low;
   USART_ClockInitStructure.USART_CPHA = USART_CPHA_1Edge;
@@ -681,7 +681,7 @@ static void SC_Init(void)
   USART_InitStructure.USART_Parity = USART_Parity_Even;
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
   USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-  USART_Init(SC_USART, &USART_InitStructure); 
+  USART_Init(SC_USART, &USART_InitStructure);
 
   /* Enable the SC_USART Parity Error Interrupt */
   USART_ITConfig(SC_USART, USART_IT_PE, ENABLE);
@@ -697,8 +697,8 @@ static void SC_Init(void)
 
   /* Enable the Smartcard Interface */
   USART_SmartCardCmd(SC_USART, ENABLE);
-  
-  /* Set RSTIN HIGH */  
+
+  /* Set RSTIN HIGH */
   SC_Reset(Bit_SET);
 }
 
@@ -714,7 +714,7 @@ static void SC_DeInit(void)
 
   /* Deinitializes the SC_USART */
   USART_DeInit(SC_USART);
-                         
+
   /* Disable SC_USART clock */
   SC_USART_APBPERIPHCLOCK(SC_USART_CLK, DISABLE);
 }
@@ -731,14 +731,14 @@ static void SC_VoltageConfig(uint32_t SC_Voltage)
 {
   if(SC_Voltage == SC_VOLTAGE_5V)
   {
-    /* Select Smartcard 5V */  
+    /* Select Smartcard 5V */
     GPIO_SetBits(SC_3_5V_GPIO_PORT, SC_3_5V_PIN);
   }
   else
   {
-    /* Select Smartcard 3V */      
+    /* Select Smartcard 3V */
     GPIO_ResetBits(SC_3_5V_GPIO_PORT, SC_3_5V_PIN);
-  } 
+  }
 }
 
 /**
@@ -753,7 +753,7 @@ void SC_IOConfig(void)
   NVIC_InitTypeDef NVIC_InitStructure;
 
   /* Enable GPIO clock */
-  RCC_AHB1PeriphClockCmd(SC_OFF_GPIO_CLK | SC_CMDVCC_GPIO_CLK | 
+  RCC_AHB1PeriphClockCmd(SC_OFF_GPIO_CLK | SC_CMDVCC_GPIO_CLK |
                          SC_3_5V_GPIO_CLK | SC_RESET_GPIO_CLK, ENABLE);
 
   /* Enable SYSCFG clock */
@@ -762,7 +762,7 @@ void SC_IOConfig(void)
   /* Configure Smartcard CMDVCC pin */
   GPIO_InitStructure.GPIO_Pin = SC_CMDVCC_PIN;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; 
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_Init(SC_CMDVCC_GPIO_PORT, &GPIO_InitStructure);
 
@@ -774,26 +774,26 @@ void SC_IOConfig(void)
   GPIO_InitStructure.GPIO_Pin = SC_3_5V_PIN;
   GPIO_Init(SC_3_5V_GPIO_PORT, &GPIO_InitStructure);
 
-  /* Select 5V */ 
+  /* Select 5V */
   SC_VoltageConfig(SC_VOLTAGE_5V);
 
   /* Disable CMDVCC */
   SC_PowerCmd(DISABLE);
 
-  /* Set RSTIN HIGH */  
+  /* Set RSTIN HIGH */
   SC_Reset(Bit_SET);
-    						                                
+
   /* Configure Smartcard OFF pin */
   GPIO_InitStructure.GPIO_Pin = SC_OFF_PIN;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
   GPIO_Init(SC_OFF_GPIO_PORT, &GPIO_InitStructure);
-  
+
   /* Configure EXTI line connected to Smartcard OFF Pin */
   SYSCFG_EXTILineConfig(SC_OFF_EXTI_PORT_SOURCE, SC_OFF_EXTI_PIN_SOURCE);
 
   EXTI_ClearITPendingBit(SC_OFF_EXTI_LINE);
-  
+
   EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
   EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
   EXTI_InitStructure.EXTI_Line = SC_OFF_EXTI_LINE;
@@ -806,12 +806,12 @@ void SC_IOConfig(void)
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);    
+  NVIC_Init(&NVIC_InitStructure);
 }
 
 /**
   * @brief  Detects whether the Smartcard is present or not.
-  * @param  None. 
+  * @param  None.
   * @retval 0 - Smartcard inserted
   *         1 - Smartcard not inserted
   */
@@ -839,9 +839,9 @@ static ErrorStatus USART_ByteReceive(uint8_t *Data, uint32_t TimeOut)
   if(Counter != TimeOut)
   {
     *Data = (uint8_t)USART_ReceiveData(SC_USART);
-    return SUCCESS;    
+    return SUCCESS;
   }
-  else 
+  else
   {
     return ERROR;
   }

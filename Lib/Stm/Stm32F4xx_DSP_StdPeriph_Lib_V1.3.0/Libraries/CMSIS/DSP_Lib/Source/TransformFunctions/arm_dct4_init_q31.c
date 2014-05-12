@@ -1,24 +1,24 @@
-/* ----------------------------------------------------------------------    
-* Copyright (C) 2010-2013 ARM Limited. All rights reserved.    
-*    
-* $Date:        17. January 2013  
-* $Revision: 	V1.4.1  
-*    
-* Project: 	    CMSIS DSP Library    
-* Title:	    arm_dct4_init_q31.c    
-*    
-* Description:	Initialization function of DCT-4 & IDCT4 Q31    
-*    
+/* ----------------------------------------------------------------------
+* Copyright (C) 2010-2013 ARM Limited. All rights reserved.
+*
+* $Date:        17. January 2013
+* $Revision:    V1.4.1
+*
+* Project:      CMSIS DSP Library
+* Title:        arm_dct4_init_q31.c
+*
+* Description:  Initialization function of DCT-4 & IDCT4 Q31
+*
 * Target Processor: Cortex-M4/Cortex-M3/Cortex-M0
-*  
-* Redistribution and use in source and binary forms, with or without 
+*
+* Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *   - Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   - Redistributions in binary form must reproduce the above copyright
 *     notice, this list of conditions and the following disclaimer in
-*     the documentation and/or other materials provided with the 
+*     the documentation and/or other materials provided with the
 *     distribution.
 *   - Neither the name of ARM LIMITED nor the names of its contributors
 *     may be used to endorse or promote products derived from this
@@ -27,7 +27,7 @@
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
 * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
 * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
@@ -35,43 +35,43 @@
 * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-* POSSIBILITY OF SUCH DAMAGE.    
+* POSSIBILITY OF SUCH DAMAGE.
 * -------------------------------------------------------------------- */
 
 
 #include "arm_math.h"
 
-/**    
- * @ingroup groupTransforms    
+/**
+ * @ingroup groupTransforms
  */
 
-/**    
- * @addtogroup DCT4_IDCT4    
- * @{    
+/**
+ * @addtogroup DCT4_IDCT4
+ * @{
  */
 
-/*    
-* @brief  Weights Table    
+/*
+* @brief  Weights Table
 */
 
-/**    
-* \par    
-* Weights tables are generated using the formula : <pre>weights[n] = e^(-j*n*pi/(2*N))</pre>    
-* \par    
-* C command to generate the table    
-* <pre>    
-* for(i = 0; i< N; i++)    
-* {    
-*   weights[2*i]= cos(i*c);    
-*   weights[(2*i)+1]= -sin(i * c);    
-* } </pre>    
-* \par    
-* where <code>N</code> is the Number of weights to be calculated and <code>c</code> is <code>pi/(2*N)</code>    
-* \par    
-* Convert the output to q31 format by multiplying with 2^31 and saturated if required.    
-* \par    
-* In the tables below the real and imaginary values are placed alternatively, hence the    
-* array length is <code>2*N</code>.    
+/**
+* \par
+* Weights tables are generated using the formula : <pre>weights[n] = e^(-j*n*pi/(2*N))</pre>
+* \par
+* C command to generate the table
+* <pre>
+* for(i = 0; i< N; i++)
+* {
+*   weights[2*i]= cos(i*c);
+*   weights[(2*i)+1]= -sin(i * c);
+* } </pre>
+* \par
+* where <code>N</code> is the Number of weights to be calculated and <code>c</code> is <code>pi/(2*N)</code>
+* \par
+* Convert the output to q31 format by multiplying with 2^31 and saturated if required.
+* \par
+* In the tables below the real and imaginary values are placed alternatively, hence the
+* array length is <code>2*N</code>.
 */
 
 static const q31_t WeightsQ31_128[256] = {
@@ -5527,20 +5527,20 @@ static const q31_t WeightsQ31_8192[16384] = {
 
 };
 
-/**    
-* \par    
-* cosFactor tables are generated using the formula : <pre>cos_factors[n] = 2 * cos((2n+1)*pi/(4*N))</pre>    
-* \par    
-* C command to generate the table    
-* <pre>    
-* for(i = 0; i< N; i++)    
-* {    
-*   cos_factors[i]= 2 * cos((2*i+1)*c/2);    
-* } </pre>    
-* \par    
-* where <code>N</code> is the number of factors to generate and <code>c</code> is <code>pi/(2*N)</code>    
-* \par    
-* Then converted to q31 format by multiplying with 2^31 and saturated if required.    
+/**
+* \par
+* cosFactor tables are generated using the formula : <pre>cos_factors[n] = 2 * cos((2n+1)*pi/(4*N))</pre>
+* \par
+* C command to generate the table
+* <pre>
+* for(i = 0; i< N; i++)
+* {
+*   cos_factors[i]= 2 * cos((2*i+1)*c/2);
+* } </pre>
+* \par
+* where <code>N</code> is the number of factors to generate and <code>c</code> is <code>pi/(2*N)</code>
+* \par
+* Then converted to q31 format by multiplying with 2^31 and saturated if required.
 */
 
 
@@ -8277,19 +8277,19 @@ static const q31_t cos_factorsQ31_8192[8192] = {
 
 };
 
-/**    
- * @brief  Initialization function for the Q31 DCT4/IDCT4.   
- * @param[in,out] *S         points to an instance of Q31 DCT4/IDCT4 structure.   
- * @param[in]     *S_RFFT    points to an instance of Q31 RFFT/RIFFT structure   
- * @param[in]     *S_CFFT    points to an instance of Q31 CFFT/CIFFT structure   
- * @param[in]     N          length of the DCT4.   
- * @param[in]     Nby2       half of the length of the DCT4.   
- * @param[in]     normalize  normalizing factor.   
- * @return		  arm_status function returns ARM_MATH_SUCCESS if initialization is successful or ARM_MATH_ARGUMENT_ERROR if <code>N</code> is not a supported transform length.   
- * \par Normalizing factor:    
- * The normalizing factor is <code>sqrt(2/N)</code>, which depends on the size of transform <code>N</code>.    
- * Normalizing factors in 1.31 format are mentioned in the table below for different DCT sizes:    
- * \image html dct4NormalizingQ31Table.gif    
+/**
+ * @brief  Initialization function for the Q31 DCT4/IDCT4.
+ * @param[in,out] *S         points to an instance of Q31 DCT4/IDCT4 structure.
+ * @param[in]     *S_RFFT    points to an instance of Q31 RFFT/RIFFT structure
+ * @param[in]     *S_CFFT    points to an instance of Q31 CFFT/CIFFT structure
+ * @param[in]     N          length of the DCT4.
+ * @param[in]     Nby2       half of the length of the DCT4.
+ * @param[in]     normalize  normalizing factor.
+ * @return        arm_status function returns ARM_MATH_SUCCESS if initialization is successful or ARM_MATH_ARGUMENT_ERROR if <code>N</code> is not a supported transform length.
+ * \par Normalizing factor:
+ * The normalizing factor is <code>sqrt(2/N)</code>, which depends on the size of transform <code>N</code>.
+ * Normalizing factors in 1.31 format are mentioned in the table below for different DCT sizes:
+ * \image html dct4NormalizingQ31Table.gif
  */
 
 arm_status arm_dct4_init_q31(
@@ -8359,6 +8359,6 @@ arm_status arm_dct4_init_q31(
   return (status);
 }
 
-/**    
-   * @} end of DCT4_IDCT4 group    
+/**
+   * @} end of DCT4_IDCT4 group
    */

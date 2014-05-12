@@ -2,12 +2,12 @@
 * Copyright (C) 2010-2013 ARM Limited. All rights reserved.
 *
 * $Date:        17. January 2013
-* $Revision: 	V1.4.1
+* $Revision:    V1.4.1
 *
-* Project: 	    CMSIS DSP Library
-* Title:	    arm_rfft_f32.c
+* Project:      CMSIS DSP Library
+* Title:        arm_rfft_f32.c
 *
-* Description:	RFFT & RIFFT Floating point process function
+* Description:  RFFT & RIFFT Floating point process function
 *
 * Target Processor: Cortex-M4/Cortex-M3/Cortex-M0
 *
@@ -44,17 +44,17 @@ void stage_rfft_f32(
   arm_rfft_fast_instance_f32 * S,
   float32_t * p, float32_t * pOut)
 {
-   uint32_t  k;								   /* Loop Counter                     */
-   float32_t twR, twI;						   /* RFFT Twiddle coefficients        */
+   uint32_t  k;                                /* Loop Counter                     */
+   float32_t twR, twI;                         /* RFFT Twiddle coefficients        */
    float32_t * pCoeff = S->pTwiddleRFFT;  /* Points to RFFT Twiddle factors   */
-   float32_t *pA = p;						   /* increasing pointer               */
-   float32_t *pB = p;						   /* decreasing pointer               */
-   float32_t xAR, xAI, xBR, xBI;				/* temporary variables              */
-   float32_t t1a, t1b;				         /* temporary variables              */
-   float32_t p0, p1, p2, p3;				   /* temporary variables              */
+   float32_t *pA = p;                          /* increasing pointer               */
+   float32_t *pB = p;                          /* decreasing pointer               */
+   float32_t xAR, xAI, xBR, xBI;                /* temporary variables              */
+   float32_t t1a, t1b;                       /* temporary variables              */
+   float32_t p0, p1, p2, p3;                   /* temporary variables              */
 
 
-   k = (S->Sint).fftLen - 1;					
+   k = (S->Sint).fftLen - 1;
 
    /* Pack first and last sample of the frequency domain together */
 
@@ -65,10 +65,10 @@ void stage_rfft_f32(
 
    twR = *pCoeff++ ;
    twI = *pCoeff++ ;
-   
+
    // U1 = XA(1) + XB(1); % It is real
    t1a = xBR + xAR  ;
-   
+
    // U2 = XB(1) - XA(1); % It is imaginary
    t1b = xBI + xAI  ;
 
@@ -130,15 +130,15 @@ void merge_rfft_f32(
 arm_rfft_fast_instance_f32 * S,
 float32_t * p, float32_t * pOut)
 {
-   uint32_t  k;								/* Loop Counter                     */
-   float32_t twR, twI;						/* RFFT Twiddle coefficients        */
-   float32_t *pCoeff = S->pTwiddleRFFT;		/* Points to RFFT Twiddle factors   */
-   float32_t *pA = p;						/* increasing pointer               */
-   float32_t *pB = p;						/* decreasing pointer               */
-   float32_t xAR, xAI, xBR, xBI;			/* temporary variables              */
-   float32_t t1a, t1b, r, s, t, u;			/* temporary variables              */
+   uint32_t  k;                             /* Loop Counter                     */
+   float32_t twR, twI;                      /* RFFT Twiddle coefficients        */
+   float32_t *pCoeff = S->pTwiddleRFFT;     /* Points to RFFT Twiddle factors   */
+   float32_t *pA = p;                       /* increasing pointer               */
+   float32_t *pB = p;                       /* decreasing pointer               */
+   float32_t xAR, xAI, xBR, xBI;            /* temporary variables              */
+   float32_t t1a, t1b, r, s, t, u;          /* temporary variables              */
 
-   k = (S->Sint).fftLen - 1;					
+   k = (S->Sint).fftLen - 1;
 
    xAR = pA[0];
    xAI = pA[1];
@@ -149,7 +149,7 @@ float32_t * p, float32_t * pOut)
    *pOut++ = 0.5f * ( xAR - xAI );
 
    pB  =  p + 2*k ;
-   pA +=  2	   ;
+   pA +=  2    ;
 
    while(k > 0u)
    {
@@ -210,12 +210,12 @@ float32_t * p, float32_t * pOut)
  * X[0] and X[N/2] all the data is complex. In other words, the first complex sample
  * contains two real values packed.
  * \par
- * The input for the inverse RFFT should keep the same format as the output of the 
+ * The input for the inverse RFFT should keep the same format as the output of the
  * forward RFFT. A first processing stage pre-process the data to later perform an
  * inverse CFFT.
- * \par    
- * \image html RIFFT.gif "Real Inverse Fast Fourier Transform"    
- * \par    
+ * \par
+ * \image html RIFFT.gif "Real Inverse Fast Fourier Transform"
+ * \par
  * The algorithms for floating-point, Q15, and Q31 data are slightly different
  * and we describe each algorithm in turn.
  * \par Floating-point
@@ -231,12 +231,12 @@ float32_t * p, float32_t * pOut)
  *X[0] - real data
  *X[1] - complex data
  *X[2] - complex data
- *... 
+ *...
  *X[fftLen/2-1] - complex data
  *X[fftLen/2] - real data
  *X[fftLen/2+1] - conjugate of X[fftLen/2-1]
  *X[fftLen/2+2] - conjugate of X[fftLen/2-2]
- *... 
+ *...
  *X[fftLen-1] - conjugate of X[1]
  * </pre>
  * Looking at the data, we see that we can uniquely represent the FFT using only
@@ -245,7 +245,7 @@ float32_t * p, float32_t * pOut)
  *X[0] - real data
  *X[1] - complex data
  *X[2] - complex data
- *... 
+ *...
  *X[fftLen/2-1] - complex data
  *X[fftLen/2] - real data
  * </pre>
@@ -256,13 +256,13 @@ float32_t * p, float32_t * pOut)
  *X[0],X[N/2] - packed real data: X[0] + jX[N/2]
  *X[1] - complex data
  *X[2] - complex data
- *... 
+ *...
  *X[fftLen/2-1] - complex data
  * </pre>
  * The real FFT functions pack the frequency domain data in this fashion.  The
  * forward transform outputs the data in this form and the inverse transform
  * expects input data in this form.  The function always performs the needed
- * bitreversal so that the input and output data is always in normal order.  The 
+ * bitreversal so that the input and output data is always in normal order.  The
  * functions support lengths of [32, 64, 128, ..., 4096] samples.
  * \par
  * The forward and inverse real FFT functions apply the standard FFT scaling; no
@@ -279,23 +279,23 @@ float32_t * p, float32_t * pOut)
  * The complex transforms used internally include scaling to prevent fixed-point
  * overflows.  The overall scaling equals 1/(fftLen/2).
  * \par
- * A separate instance structure must be defined for each transform used but 
+ * A separate instance structure must be defined for each transform used but
  * twiddle factor and bit reversal tables can be reused.
  * \par
- * There is also an associated initialization function for each data type. 
+ * There is also an associated initialization function for each data type.
  * The initialization function performs the following operations:
- * - Sets the values of the internal structure fields.   
+ * - Sets the values of the internal structure fields.
  * - Initializes twiddle factor table and bit reversal table pointers.
  * - Initializes the internal complex FFT data structure.
- * \par   
- * Use of the initialization function is optional.   
- * However, if the initialization function is used, then the instance structure 
- * cannot be placed into a const data section. To place an instance structure 
- * into a const data section, the instance structure should be manually 
+ * \par
+ * Use of the initialization function is optional.
+ * However, if the initialization function is used, then the instance structure
+ * cannot be placed into a const data section. To place an instance structure
+ * into a const data section, the instance structure should be manually
  * initialized as follows:
  * <pre>
- *arm_rfft_instance_q31 S = {fftLenReal, fftLenBy2, ifftFlagR, bitReverseFlagR, twidCoefRModifier, pTwiddleAReal, pTwiddleBReal, pCfft};    
- *arm_rfft_instance_q15 S = {fftLenReal, fftLenBy2, ifftFlagR, bitReverseFlagR, twidCoefRModifier, pTwiddleAReal, pTwiddleBReal, pCfft};    
+ *arm_rfft_instance_q31 S = {fftLenReal, fftLenBy2, ifftFlagR, bitReverseFlagR, twidCoefRModifier, pTwiddleAReal, pTwiddleBReal, pCfft};
+ *arm_rfft_instance_q15 S = {fftLenReal, fftLenBy2, ifftFlagR, bitReverseFlagR, twidCoefRModifier, pTwiddleAReal, pTwiddleBReal, pCfft};
  * </pre>
  * where <code>fftLenReal</code> is the length of the real transform;
  * <code>fftLenBy2</code> length of  the internal complex transform.
@@ -304,11 +304,11 @@ float32_t * p, float32_t * pOut)
  * output (=1).
  * <code>twidCoefRModifier</code> stride modifier for the twiddle factor table.
  * The value is based on the FFT length;
- * <code>pTwiddleAReal</code>points to the A array of twiddle coefficients; 
- * <code>pTwiddleBReal</code>points to the B array of twiddle coefficients;    
+ * <code>pTwiddleAReal</code>points to the A array of twiddle coefficients;
+ * <code>pTwiddleBReal</code>points to the B array of twiddle coefficients;
  * <code>pCfft</code> points to the CFFT Instance structure. The CFFT structure
- * must also be initialized.  Refer to arm_cfft_radix4_f32() for details regarding    
- * static initialization of the complex FFT instance structure.    
+ * must also be initialized.  Refer to arm_cfft_radix4_f32() for details regarding
+ * static initialization of the complex FFT instance structure.
  */
 
 /**
@@ -346,7 +346,7 @@ uint8_t ifftFlag)
    {
       /* Calculation of RFFT of input */
       arm_cfft_f32( Sint, p, ifftFlag, 1);
-   
+
       /*  Real FFT extraction */
       stage_rfft_f32(S, p, pOut);
    }

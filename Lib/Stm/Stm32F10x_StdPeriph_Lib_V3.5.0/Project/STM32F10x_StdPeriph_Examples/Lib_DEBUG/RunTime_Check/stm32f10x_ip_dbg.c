@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Lib_DEBUG/RunTime_Check/stm32f10x_ip_dbg.c 
+  * @file    Lib_DEBUG/RunTime_Check/stm32f10x_ip_dbg.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_ip_dbg.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup Lib_DEBUG_RunTime_Check
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -93,7 +93,7 @@ DMA_Channel_TypeDef     *DMA2_Channel5_DBG;
 RCC_TypeDef             *RCC_DBG;
 CRC_TypeDef             *CRC_DBG;
 FLASH_TypeDef           *FLASH_DBG;
-OB_TypeDef              *OB_DBG;  
+OB_TypeDef              *OB_DBG;
 FSMC_Bank1_TypeDef      *FSMC_Bank1_DBG;
 FSMC_Bank1E_TypeDef     *FSMC_Bank1E_DBG;
 FSMC_Bank2_TypeDef      *FSMC_Bank2_DBG;
@@ -124,12 +124,12 @@ void debug(void)
 /************************************* BKP ************************************/
   BKP_DBG = (BKP_TypeDef *)  BKP_BASE;
 
-/************************************* CAN ************************************/			
-  CAN1_DBG = (CAN_TypeDef *)  CAN1_BASE;			
+/************************************* CAN ************************************/
+  CAN1_DBG = (CAN_TypeDef *)  CAN1_BASE;
 
-/************************************* CEC ************************************/			
-  CEC_DBG = (CEC_TypeDef *)  CEC_BASE;	
-  
+/************************************* CEC ************************************/
+  CEC_DBG = (CEC_TypeDef *)  CEC_BASE;
+
 /************************************* CRC ************************************/
   CRC_DBG = (CRC_TypeDef *)  CRC_BASE;
 
@@ -177,8 +177,8 @@ void debug(void)
 
 /************************************* FSMC ***********************************/
   FSMC_Bank1_DBG = (FSMC_Bank1_TypeDef *)    FSMC_Bank1_R_BASE;
-  FSMC_Bank1E_DBG = (FSMC_Bank1E_TypeDef *)  FSMC_Bank1E_R_BASE;  
-  FSMC_Bank2_DBG = (FSMC_Bank2_TypeDef *)    FSMC_Bank2_R_BASE; 
+  FSMC_Bank1E_DBG = (FSMC_Bank1E_TypeDef *)  FSMC_Bank1E_R_BASE;
+  FSMC_Bank2_DBG = (FSMC_Bank2_TypeDef *)    FSMC_Bank2_R_BASE;
   FSMC_Bank3_DBG = (FSMC_Bank3_TypeDef *)    FSMC_Bank3_R_BASE;
   FSMC_Bank4_DBG = (FSMC_Bank4_TypeDef *)    FSMC_Bank4_R_BASE;
 
@@ -196,7 +196,7 @@ void debug(void)
   GPIOF_DBG = (GPIO_TypeDef *)  GPIOF_BASE;
 
   GPIOG_DBG = (GPIO_TypeDef *)  GPIOG_BASE;
-  
+
   AFIO_DBG = (AFIO_TypeDef *)  AFIO_BASE;
 
 /************************************* I2C ************************************/
@@ -249,12 +249,12 @@ void debug(void)
   TIM7_DBG = (TIM_TypeDef *)  TIM7_BASE;
 
   TIM8_DBG = (TIM_TypeDef *)  TIM8_BASE;
-  
+
   TIM15_DBG = (TIM_TypeDef *)  TIM15_BASE;
 
   TIM16_DBG = (TIM_TypeDef *)  TIM16_BASE;
 
-  TIM17_DBG = (TIM_TypeDef *)  TIM17_BASE;      
+  TIM17_DBG = (TIM_TypeDef *)  TIM17_BASE;
 
 /************************************* USART **********************************/
   USART1_DBG = (USART_TypeDef *) USART1_BASE;
@@ -278,5 +278,5 @@ void debug(void)
 /**
   * @}
   */
-  
+
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

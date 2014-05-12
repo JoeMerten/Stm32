@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM10_PWMOutput/main.c 
+  * @file    TIM/TIM10_PWMOutput/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup TIM10_PWMOutput
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -52,13 +52,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* GPIO Configuration */
   GPIO_Configuration();
 
@@ -115,8 +115,8 @@ void GPIO_Configuration(void)
                          RCC_APB2Periph_AFIO, ENABLE);
 
   /* Remap TIM10_CH1 on PF6 pin */
-  GPIO_PinRemapConfig(GPIO_Remap_TIM10, ENABLE);	
-  
+  GPIO_PinRemapConfig(GPIO_Remap_TIM10, ENABLE);
+
   /* GPIOF Configuration: TIM10 Channel1 as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
@@ -147,10 +147,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

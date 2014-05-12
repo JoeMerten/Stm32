@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CortexM3/Mode_Privilege/main.c 
+  * @file    CortexM3/Mode_Privilege/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup CortexM3_Mode_Privilege
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -38,11 +38,11 @@
 #define THREAD_MODE_PRIVILEGED      0x00   /* Thread mode has privileged access */
 #define THREAD_MODE_UNPRIVILEGED    0x01   /* Thread mode has unprivileged access */
 
-/* Private macro -------------------------------------------------------------*/ 
+/* Private macro -------------------------------------------------------------*/
 #if defined ( __CC_ARM   )
-__ASM void __SVC(void) 
-{ 
-  SVC 0x01 
+__ASM void __SVC(void)
+{
+  SVC 0x01
   BX R14
 }
 #elif defined ( __ICCARM__ )
@@ -66,13 +66,13 @@ __IO uint32_t Index = 0, PSPValue = 0, CurrentStack = 0, ThreadMode = 0;
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
 /* Switch Thread mode Stack from Main to Process -----------------------------*/
   /* Initialize memory reserved for Process Stack */
   for(Index = 0; Index < SP_PROCESS_SIZE; Index++)
@@ -80,9 +80,9 @@ int main(void)
     PSPMemAlloc[Index] = 0x00;
   }
 
-  /* Set Process stack value */ 
+  /* Set Process stack value */
   __set_PSP((uint32_t)PSPMemAlloc + SP_PROCESS_SIZE);
-  
+
   /* Select Process Stack as Thread mode Stack */
   __set_CONTROL(SP_PROCESS);
 
@@ -98,9 +98,9 @@ int main(void)
     CurrentStack = SP_PROCESS;
 
     /* Get process stack pointer value */
-    PSPValue = __get_PSP();	
+    PSPValue = __get_PSP();
   }
-  
+
 /* Switch Thread mode from privileged to unprivileged ------------------------*/
   /* Thread mode has unprivileged access */
   __set_CONTROL(THREAD_MODE_UNPRIVILEGED | SP_PROCESS);
@@ -121,7 +121,7 @@ int main(void)
     ThreadMode = THREAD_MODE_UNPRIVILEGED;
   }
 
-/* Switch back Thread mode from unprivileged to privileged -------------------*/  
+/* Switch back Thread mode from unprivileged to privileged -------------------*/
   /* Try to switch back Thread mode to privileged (Not possible, this can be
      done only in Handler mode) */
   __set_CONTROL(THREAD_MODE_PRIVILEGED | SP_PROCESS);
@@ -157,7 +157,7 @@ int main(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -171,10 +171,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
