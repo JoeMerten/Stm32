@@ -357,7 +357,7 @@ function Test_GetFileExt {
 ########################################################################################################################
 
 declare TAB=$'\t'
-declare CR=$'\t'
+declare CR=$'\r'
 
 function CheckLineend {
     local filename="$1"
@@ -433,7 +433,7 @@ function CheckTrailingWhitespace {
     # Quelle: http://stackoverflow.com/questions/9264893/how-to-removing-trailing-whitespace-of-all-files-of-selective-file-types-in-a-di
     # -i = Modify inplace
     # -p = eine art While-Schleife? (http://stackoverflow.com/questions/2476919/what-does-perls-p-command-line-switch-do)
-    perl -p -i -e "s/[ \t]*$//g" ${filename}
+    perl -p -i -e "s/[ \t]*$//g" "${filename}"
 }
 
 function CheckAnsiCodes {
@@ -489,6 +489,8 @@ function DoFile {
         "UTF-8 Unicode English text, with CRLF line terminators");;
 
         "ASCII English text, with CRLF, LF line terminators");;
+
+        "Python script, ASCII text executable");;  # Hmm, komischerweise wird "Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Utilities/STM32_EVAL/Common/fonts.c" als solchiges erkannt
 
         "UTF-8 Unicode C program text");;
         "UTF-8 Unicode C program text, with CRLF line terminators");;
@@ -634,6 +636,7 @@ done
 
 
 DIRS="Lib"
+#DIRS="Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Libraries"
 FILE_PATTERNS="("
 FILE_PATTERNS="${FILE_PATTERNS}.*\.h|"
 FILE_PATTERNS="${FILE_PATTERNS}.*\.c|"
@@ -650,5 +653,6 @@ FILE_PATTERNS="${FILE_PATTERNS}DUMMY_EINTRAG)"
 
 #FILE_PATTERNS="(Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/startup/gcc_ride7/startup_stm32f10x_ld.s|.*\.md)"
 #FILE_PATTERNS="(.*/startup_stm32f10x_ld.s|.*\.md)"
+#FILE_PATTERNS="(Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c)"
 
 DoAllFiles
