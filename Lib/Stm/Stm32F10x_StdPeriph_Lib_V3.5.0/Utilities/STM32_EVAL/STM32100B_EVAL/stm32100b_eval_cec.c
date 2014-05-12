@@ -16,7 +16,7 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
+  ******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -28,12 +28,12 @@
 
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM32100B_EVAL
   * @{
   */
-  
+
 /** @defgroup STM32100B_EVAL_CEC
   * @brief This file includes the CEC Stack driver for HDMI-CEC Module
   *        of STM32100B-EVAL board.
@@ -174,10 +174,10 @@ HDMI_CEC_Error HDMI_CEC_Init(void)
   GPIO_Init(HDMI_CEC_I2C_GPIO_PORT, &GPIO_InitStructure);
 
 /* This configuration is only when the HDMI CEC is configured as source.
-   The HDMI source has to provide the +5V Power signal to the sink. 
+   The HDMI source has to provide the +5V Power signal to the sink.
    On STM32100B-EVAL borad, you have to solder the SB4 Solder bridge.
    Then, the source will wait for HPD signal to be asserted from the sink.
-   Once the HPD signal is detected the source shall read the EDID structure 
+   Once the HPD signal is detected the source shall read the EDID structure
    throuhgh the DDC channel. */
   /* Configure CEC_HPD_GPIO as Input pull down */
   GPIO_InitStructure.GPIO_Pin = HDMI_CEC_HPD_PIN;
@@ -186,7 +186,7 @@ HDMI_CEC_Error HDMI_CEC_Init(void)
 
 
 /* This configuration is only when the HDMI CEC is configured as sink.
-   The HDMI sink has to wait for the +5V Power signal from the source. 
+   The HDMI sink has to wait for the +5V Power signal from the source.
    On STM32100B-EVAL borad, SB4 Solder bridge should be open (default configuration).
    Then, the sink will assert the HPD signal to inform the source that the EDID
    is ready for read through DDC channel. In this implementation, the EDID structure
@@ -196,7 +196,7 @@ HDMI_CEC_Error HDMI_CEC_Init(void)
   GPIO_Init(HDMI_CEC_HPD_GPIO_PORT, &GPIO_InitStructure);
 
   HDMI_CEC_HPD_HIGH(); // Set the Hot plug detect signal */
-  
+
   /* Enable CEC_I2C */
   I2C_Cmd(HDMI_CEC_I2C, ENABLE);
 
@@ -251,7 +251,7 @@ HDMI_CEC_Error HDMI_CEC_Init(void)
   }
 
   HDMI_CEC_CheckConnectedDevices();
-  
+
   /* Set the CEC initiator address */
   CEC_OwnAddressConfig(MyLogicalAddress);
 
@@ -432,7 +432,7 @@ void HDMI_CEC_ProcessIRQSrc(void)
         HDMI_CEC_RX_MessageStructPrivate.Opcode = CEC_ReceiveDataByte();
         RxCounter++;
       }
-      
+
     }
     /* Clear all reception flags */
     CEC_ClearFlag(CEC_FLAG_RSOM | CEC_FLAG_REOM  | CEC_FLAG_RBTF);
@@ -503,7 +503,7 @@ HDMI_CEC_Error HDMI_CEC_ReportPhysicalAddress(void)
   * @brief  Handle CEC command receive callback.
   *         When receiving the STANDBY Opcode commande, the system is entred in
   *         Stop mode and when wakeup, the PLL is configured as system clock and
-  *         the HSI is selected as PLL source.      
+  *         the HSI is selected as PLL source.
   * @param  None
   * @retval None
   */
@@ -534,7 +534,7 @@ void HDMI_CEC_CommandCallBack(void)
       EXTI_ClearITPendingBit(EXTI_Line8);
       EXTI_InitStructure.EXTI_Line = EXTI_Line8;
       EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-      EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;  
+      EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
       EXTI_InitStructure.EXTI_LineCmd = ENABLE;
       EXTI_Init(&EXTI_InitStructure);
       /* Request to enter Stop mode */
@@ -546,7 +546,7 @@ void HDMI_CEC_CommandCallBack(void)
       /* Configure the PLL Source */
       RCC_PLLConfig(RCC_PLLSource_HSI_Div2, RCC_PLLMul_6);
 
-      /* Enable PLL */ 
+      /* Enable PLL */
       RCC_PLLCmd(ENABLE);
 
       /* Wait till PLL is ready */
@@ -672,7 +672,7 @@ HDMI_CEC_Error HDMI_CEC_CheckConnectedDevices(void)
 {
   HDMI_CEC_Error errorstatus = HDMI_CEC_OK;
   uint32_t count = 0, i = 1;
- 
+
   /*----------------------------- TV device  ---------------------------*/
   CEC_OwnAddressConfig(MyLogicalAddress); /* Own address = MyLogicalAddress */
 
@@ -1104,14 +1104,14 @@ static HDMI_CEC_Error PhysicalAddressDiscovery(void)
     /* The HDMI-CEC here is configured as sink or as a repeater. The configuration
        of the +5V power signal and the HPD should be well configured.
        Implement here the EDID Structure to be sent to the HDMI source.
-       For more details please refer to the HDMI specification. 
+       For more details please refer to the HDMI specification.
        The EDID structure should be sent to the device source using the DDC Channel
        and using the HPD signal. */
   }
   else
   {
-  
-#ifdef HDMI_CEC_USE_DDC  
+
+#ifdef HDMI_CEC_USE_DDC
     /* The HDMI-CEC here is configured as source or as a repeater. The configuration
        of the +5V power signal and the HPD should be well configured.
        The source should wait for HPD and then read the EDID structure. */
@@ -1130,18 +1130,18 @@ static HDMI_CEC_Error PhysicalAddressDiscovery(void)
     while(I2C_GetFlagStatus(HDMI_CEC_I2C, I2C_FLAG_BUSY))
     {
     }
-  
+
     /*!< Send START condition */
     I2C_GenerateSTART(HDMI_CEC_I2C, ENABLE);
-  
+
     /*!< Test on EV5 and clear it */
     while(!I2C_CheckEvent(HDMI_CEC_I2C, I2C_EVENT_MASTER_MODE_SELECT))
     {
     }
-   
+
     /*!< Send EEPROM address for write */
     I2C_Send7bitAddress(HDMI_CEC_I2C, 0xA0, I2C_Direction_Transmitter);
- 
+
 
     /*!< Test on EV6 and clear it */
     while(!I2C_CheckEvent(HDMI_CEC_I2C, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))
@@ -1149,24 +1149,24 @@ static HDMI_CEC_Error PhysicalAddressDiscovery(void)
     }
 
     /*!< Send the EEPROM's internal address to read from: Only one byte address */
-    I2C_SendData(HDMI_CEC_I2C, 0x00);  
+    I2C_SendData(HDMI_CEC_I2C, 0x00);
 
     /*!< Test on EV8 and clear it */
     while(!I2C_CheckEvent(HDMI_CEC_I2C, I2C_EVENT_MASTER_BYTE_TRANSMITTED))
     {
     }
-  
-    /*!< Send STRAT condition a second time */  
+
+    /*!< Send STRAT condition a second time */
     I2C_GenerateSTART(HDMI_CEC_I2C, ENABLE);
-  
+
     /*!< Test on EV5 and clear it */
     while(!I2C_CheckEvent(HDMI_CEC_I2C, I2C_EVENT_MASTER_MODE_SELECT))
     {
     }
-  
+
     /*!< Send EEPROM address for read */
     I2C_Send7bitAddress(HDMI_CEC_I2C, 0xA1, I2C_Direction_Receiver);
-  
+
     /*!< Test on EV6 and clear it */
     while(!I2C_CheckEvent(HDMI_CEC_I2C, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED))
     {
@@ -1715,7 +1715,7 @@ static HDMI_CEC_Error LogicalAddressAllocation(void)
 
 /**
   * @}
-  */  
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
 

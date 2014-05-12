@@ -5,23 +5,23 @@
   * @version V1.3.0
   * @date    13-November-2013
   * @brief   This file provides a set of functions needed to manage the SPI M25Pxxx
-  *          FLASH memory. 
-  *            
-  *          ===================================================================      
-  *          Notes: 
-  *           - There is no SPI FLASH memory available in STM324xG-EVAL board,
-  *             to use this driver you have to build your own hardware.     
+  *          FLASH memory.
+  *
   *          ===================================================================
-  *   
-  *          It implements a high level communication layer for read and write 
-  *          from/to this memory. The needed STM32 hardware resources (SPI and 
-  *          GPIO) are defined in spi_flash.h file, and the initialization is 
+  *          Notes:
+  *           - There is no SPI FLASH memory available in STM324xG-EVAL board,
+  *             to use this driver you have to build your own hardware.
+  *          ===================================================================
+  *
+  *          It implements a high level communication layer for read and write
+  *          from/to this memory. The needed STM32 hardware resources (SPI and
+  *          GPIO) are defined in spi_flash.h file, and the initialization is
   *          performed in sFLASH_LowLevel_Init() function.
-  *            
+  *
   *          You can easily tailor this driver to any development board, by just
   *          adapting the defines for hardware resources and sFLASH_LowLevel_Init()
   *          function.
-  *            
+  *
   *          +-----------------------------------------------------------+
   *          |                     Pin assignment                        |
   *          +-----------------------------+---------------+-------------+
@@ -34,8 +34,8 @@
   *          | sFLASH_SPI_MOSI_PIN / MOSI  |   DataIn(D)   |    5        |
   *          | sFLASH_SPI_SCK_PIN / SCK    |   Clock(C)    |    6        |
   *          |                             |    VCC        |    7 (3.3 V)|
-  *          |                             |    VCC        |    8 (3.3 V)|  
-  *          +-----------------------------+---------------+-------------+  
+  *          |                             |    VCC        |    8 (3.3 V)|
+  *          +-----------------------------+---------------+-------------+
   ******************************************************************************
   * @attention
   *
@@ -47,8 +47,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -65,7 +65,7 @@
 
 /** @addtogroup SPI_FLASH
   * @{
-  */  
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -73,7 +73,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 void sFLASH_LowLevel_DeInit(void);
-void sFLASH_LowLevel_Init(void); 
+void sFLASH_LowLevel_Init(void);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -97,7 +97,7 @@ void sFLASH_Init(void)
   SPI_InitTypeDef  SPI_InitStructure;
 
   sFLASH_LowLevel_Init();
-    
+
   /*!< Deselect the FLASH: Chip Select high */
   sFLASH_CS_HIGH();
 
@@ -169,7 +169,7 @@ void sFLASH_EraseBulk(void)
 }
 
 /**
-  * @brief  Writes more than one byte to the FLASH with a single WRITE cycle 
+  * @brief  Writes more than one byte to the FLASH with a single WRITE cycle
   *         (Page WRITE sequence).
   * @note   The number of byte can't exceed the FLASH page size.
   * @param  pBuffer: pointer to the buffer  containing the data to be written
@@ -497,12 +497,12 @@ void sFLASH_LowLevel_Init(void)
   sFLASH_SPI_CLK_INIT(sFLASH_SPI_CLK, ENABLE);
 
   /*!< Enable GPIO clocks */
-  RCC_AHB1PeriphClockCmd(sFLASH_SPI_SCK_GPIO_CLK | sFLASH_SPI_MISO_GPIO_CLK | 
+  RCC_AHB1PeriphClockCmd(sFLASH_SPI_SCK_GPIO_CLK | sFLASH_SPI_MISO_GPIO_CLK |
                          sFLASH_SPI_MOSI_GPIO_CLK | sFLASH_CS_GPIO_CLK, ENABLE);
-  
+
   /*!< SPI pins configuration *************************************************/
 
-  /*!< Connect SPI pins to AF5 */  
+  /*!< Connect SPI pins to AF5 */
   GPIO_PinAFConfig(sFLASH_SPI_SCK_GPIO_PORT, sFLASH_SPI_SCK_SOURCE, sFLASH_SPI_SCK_AF);
   GPIO_PinAFConfig(sFLASH_SPI_MISO_GPIO_PORT, sFLASH_SPI_MISO_SOURCE, sFLASH_SPI_MISO_AF);
   GPIO_PinAFConfig(sFLASH_SPI_MOSI_GPIO_PORT, sFLASH_SPI_MOSI_SOURCE, sFLASH_SPI_MOSI_AF);
@@ -511,7 +511,7 @@ void sFLASH_LowLevel_Init(void)
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_DOWN;
-        
+
   /*!< SPI SCK pin configuration */
   GPIO_InitStructure.GPIO_Pin = sFLASH_SPI_SCK_PIN;
   GPIO_Init(sFLASH_SPI_SCK_GPIO_PORT, &GPIO_InitStructure);
@@ -544,13 +544,13 @@ void sFLASH_LowLevel_DeInit(void)
 
   /*!< Disable the sFLASH_SPI  ************************************************/
   SPI_Cmd(sFLASH_SPI, DISABLE);
-  
+
   /*!< DeInitializes the sFLASH_SPI *******************************************/
   SPI_I2S_DeInit(sFLASH_SPI);
-  
+
   /*!< sFLASH_SPI Periph clock disable ****************************************/
   sFLASH_SPI_CLK_INIT(sFLASH_SPI_CLK, DISABLE);
-      
+
   /*!< Configure all pins used by the SPI as input floating *******************/
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;

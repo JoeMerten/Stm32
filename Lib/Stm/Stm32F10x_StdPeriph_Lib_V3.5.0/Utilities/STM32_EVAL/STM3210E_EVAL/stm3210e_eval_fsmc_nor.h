@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V4.5.0
   * @date    07-March-2011
-  * @brief   This file contains all the functions prototypes for the 
+  * @brief   This file contains all the functions prototypes for the
   *          stm3210e_eval_fsmc_nor firmware driver.
   ******************************************************************************
   * @attention
@@ -17,9 +17,9 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
-  
+  ******************************************************************************
+  */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM3210E_EVAL_FSMC_NOR_H
 #define __STM3210E_EVAL_FSMC_NOR_H
@@ -34,18 +34,18 @@
 /** @addtogroup Utilities
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM3210E_EVAL
   * @{
   */
-  
+
 /** @addtogroup STM3210E_EVAL_FSMC_NOR
   * @{
-  */  
+  */
 
 /** @defgroup STM3210E_EVAL_FSMC_NOR_Exported_Types
   * @{
@@ -65,28 +65,28 @@ typedef enum
   NOR_ONGOING,
   NOR_ERROR,
   NOR_TIMEOUT
-}NOR_Status;  
+}NOR_Status;
 /**
   * @}
   */
-  
+
 /** @defgroup STM3210E_EVAL_FSMC_NOR_Exported_Constants
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
-  
+  */
+
 /** @defgroup STM3210E_EVAL_FSMC_NOR_Exported_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM3210E_EVAL_FSMC_NOR_Exported_Functions
   * @{
-  */ 
+  */
 void NOR_Init(void);
 void NOR_ReadID(NOR_IDTypeDef* NOR_ID);
 NOR_Status NOR_EraseBlock(uint32_t BlockAddr);
@@ -119,10 +119,10 @@ NOR_Status NOR_GetStatus(uint32_t Timeout);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

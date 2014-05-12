@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Project/STM32F2xx_StdPeriph_Template/main.c 
+  * @file    Project/STM32F2xx_StdPeriph_Template/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -34,9 +34,9 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define MESSAGE1   "     STM32F2xx      " 
-#define MESSAGE2   " Device running on  " 
-#define MESSAGE3   "   STM322xG-EVAL    " 
+#define MESSAGE1   "     STM32F2xx      "
+#define MESSAGE2   " Device running on  "
+#define MESSAGE3   "   STM322xG-EVAL    "
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -54,12 +54,12 @@ int main(void)
 {
   RCC_ClocksTypeDef RCC_Clocks;
 
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
-     */  
+     */
 
   /* SysTick end of count event each 10ms */
   RCC_GetClocksFreq(&RCC_Clocks);
@@ -75,7 +75,7 @@ int main(void)
   STM322xG_LCD_Init();
 
   /* Display message on STM322xG-EVAL LCD *************************************/
-  /* Clear the LCD */ 
+  /* Clear the LCD */
   LCD_Clear(White);
 
   /* Set the LCD Back Color */
@@ -132,7 +132,7 @@ void Delay(__IO uint32_t nTime)
 void TimingDelay_Decrement(void)
 {
   if (TimingDelay != 0x00)
-  { 
+  {
     TimingDelay--;
   }
 }
@@ -147,7 +147,7 @@ void TimingDelay_Decrement(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

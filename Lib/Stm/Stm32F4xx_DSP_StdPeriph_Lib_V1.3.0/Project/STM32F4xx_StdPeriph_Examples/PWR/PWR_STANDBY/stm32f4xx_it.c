@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/PWR_STANDBY/stm32f4xx_it.c 
+  * @file    PWR/PWR_STANDBY/stm32f4xx_it.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -167,7 +167,7 @@ void EXTI15_10_IRQHandler(void)
 {
   if(EXTI_GetITStatus(KEY_BUTTON_EXTI_LINE) != RESET)
   {
-   
+
     /* Clear the SEL Button EXTI line pending bit */
     EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
 
@@ -185,15 +185,15 @@ void EXTI15_10_IRQHandler(void)
     RTC_AlarmStructure.RTC_AlarmDateWeekDaySel = RTC_AlarmDateWeekDaySel_Date;
     RTC_AlarmStructure.RTC_AlarmMask = RTC_AlarmMask_DateWeekDay | RTC_AlarmMask_Hours | RTC_AlarmMask_Minutes;
     RTC_SetAlarm(RTC_Format_BIN, RTC_Alarm_A, &RTC_AlarmStructure);
-  
+
     /* Enable RTC Alarm A Interrupt: this Interrupt will wake-up the system from
        STANDBY mode (RTC Alarm IT not enabled in NVIC) */
     RTC_ITConfig(RTC_IT_ALRA, ENABLE);
-  
+
     /* Enable the Alarm A */
     RTC_AlarmCmd(RTC_Alarm_A, ENABLE);
 
-    /* Clear RTC Alarm Flag */ 
+    /* Clear RTC Alarm Flag */
     RTC_ClearFlag(RTC_FLAG_ALRAF);
 
     /* Request to enter STANDBY mode (Wake Up flag is cleared in PWR_EnterSTANDBYMode function) */
@@ -203,10 +203,10 @@ void EXTI15_10_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    GPIO/GPIO_IOToggle/main.c 
+  * @file    GPIO/GPIO_IOToggle/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup GPIO_IOToggle
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 GPIO_InitTypeDef  GPIO_InitStructure;
@@ -52,13 +52,13 @@ GPIO_InitTypeDef  GPIO_InitStructure;
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
-     */  
+     */
 
   /* GPIOG Peripheral clock enable */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOG, ENABLE);
@@ -71,11 +71,11 @@ int main(void)
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
   GPIO_Init(GPIOG, &GPIO_InitStructure);
 
-  /* To achieve GPIO toggling maximum frequency, the following  sequence is mandatory. 
-     You can monitor PG6 or PG8 on the scope to measure the output signal. 
-     If you need to fine tune this frequency, you can add more GPIO set/reset 
+  /* To achieve GPIO toggling maximum frequency, the following  sequence is mandatory.
+     You can monitor PG6 or PG8 on the scope to measure the output signal.
+     If you need to fine tune this frequency, you can add more GPIO set/reset
      cycles to minimize more the infinite loop timing.
-     This code needs to be compiled with high speed optimization option.  */  
+     This code needs to be compiled with high speed optimization option.  */
   while (1)
   {
     /* Set PG6 and PG8 */
@@ -140,7 +140,7 @@ int main(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -153,10 +153,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

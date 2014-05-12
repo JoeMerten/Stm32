@@ -1,9 +1,9 @@
 /**
   @page DMA_EXAMPLES DMA_EXAMPLES
-  
+
   @verbatim
   ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
-  * @file    DMA/readme.txt 
+  * @file    DMA/readme.txt
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   ******************************************************************************
    @endverbatim
-   
+
 In addition to these examples, there are other examples using the DMA peripheral:
 
   * <ul>
@@ -25,29 +25,29 @@ In addition to these examples, there are other examples using the DMA peripheral
   * - @subpage ADC_3ADCs_DMA
   * - @subpage ADC_ADC1_DMA
   * - @subpage ADC_ExtLinesTrigger
-  * - @subpage ADC_RegSimul_DualMode 
+  * - @subpage ADC_RegSimul_DualMode
   * - @subpage ADC_TIMTrigger_AutoInjection
-  * - @subpage DAC_DualModeDMA_SineWave 
-  * - @subpage DAC_OneChannelDMA_Escalator     
+  * - @subpage DAC_DualModeDMA_SineWave
+  * - @subpage DAC_OneChannelDMA_Escalator
   * - @subpage I2C_EEPROM
   * - @subpage I2C_TSENSOR
   * - @subpage IOExpander_Example
-  * - @subpage NVIC_DMA_WFIMode 
-  * - @subpage SDIO_Example   
+  * - @subpage NVIC_DMA_WFIMode
+  * - @subpage SDIO_Example
   * - @subpage SPI_DMA
-  * - @subpage TIM_DMA 
+  * - @subpage TIM_DMA
   * - @subpage USART_DMA_Interrupt
-  * - @subpage USART_DMA_Polling 
-  * </ul>  
+  * - @subpage USART_DMA_Polling
+  * </ul>
 
 @note
- - Low-density Value line devices are STM32F100xx microcontrollers where the 
+ - Low-density Value line devices are STM32F100xx microcontrollers where the
    Flash memory density ranges between 16 and 32 Kbytes.
- - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+ - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx
    microcontrollers where the Flash memory density ranges between 16 and 32 Kbytes.
  - Medium-density Value line devices are STM32F100xx microcontrollers where
-   the Flash memory density ranges between 64 and 128 Kbytes.  
- - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   the Flash memory density ranges between 64 and 128 Kbytes.
+ - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density Value line devices are STM32F100xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
@@ -58,4 +58,4 @@ In addition to these examples, there are other examples using the DMA peripheral
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
 
  * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
- */ 
+ */

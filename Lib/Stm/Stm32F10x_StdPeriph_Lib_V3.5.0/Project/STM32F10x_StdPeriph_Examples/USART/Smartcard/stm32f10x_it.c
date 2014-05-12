@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/Smartcard/stm32f10x_it.c 
+  * @file    USART/Smartcard/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -31,13 +31,13 @@
 
 /** @addtogroup USART_Smartcard
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern __IO uint32_t CardInserted; 
+extern __IO uint32_t CardInserted;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -154,15 +154,15 @@ void SysTick_Handler(void)
   */
 void EXTI9_5_IRQHandler(void)
 {
-  /* Select Smart Card CMDVCC */  
+  /* Select Smart Card CMDVCC */
   GPIO_ResetBits(GPIO_CMDVCC, SC_CMDVCC);
 
-  /* Set RSTIN LOW */  
+  /* Set RSTIN LOW */
   GPIO_ResetBits(GPIO_RESET, SC_RESET);
 
-  /* Set RSTIN HIGH */  
+  /* Set RSTIN HIGH */
   GPIO_SetBits(GPIO_RESET, SC_RESET);
-    
+
   /* Clear SC EXTIT Line Pending Bit */
   EXTI_ClearITPendingBit(SC_EXTI);
 
@@ -185,7 +185,7 @@ void SC_USART_IRQHandler(void)
     /* Flush the SC_USART DR register */
     USART_ReceiveData(SC_USART);
   }
-  
+
   if(USART_GetITStatus(SC_USART, USART_IT_RXNE) != RESET)
   {
     /* Disable SC_USART RXNE Interrupt */
@@ -201,15 +201,15 @@ void SC_USART_IRQHandler(void)
   */
 void EXTI15_10_IRQHandler(void)
 {
-  /* Select Smart Card CMDVCC */  
+  /* Select Smart Card CMDVCC */
   GPIO_ResetBits(GPIO_CMDVCC, SC_CMDVCC);
 
-  /* Set RSTIN LOW */  
+  /* Set RSTIN LOW */
   GPIO_ResetBits(GPIO_RESET, SC_RESET);
 
-  /* Set RSTIN HIGH */  
+  /* Set RSTIN HIGH */
   GPIO_SetBits(GPIO_RESET, SC_RESET);
-    
+
   /* Clear SC EXTIT Line Pending Bit */
   EXTI_ClearITPendingBit(SC_EXTI);
 
@@ -235,7 +235,7 @@ void EXTI15_10_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 
 /**

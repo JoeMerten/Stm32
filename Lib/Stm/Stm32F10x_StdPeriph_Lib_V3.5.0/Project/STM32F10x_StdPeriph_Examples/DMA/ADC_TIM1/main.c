@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DMA/ADC_TIM1/main.c 
+  * @file    DMA/ADC_TIM1/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup DMA_ADC_TIM1
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -41,11 +41,11 @@ ADC_InitTypeDef           ADC_InitStructure;
 TIM_TimeBaseInitTypeDef   TIM_TimeBaseStructure;
 TIM_OCInitTypeDef         TIM_OCInitStructure;
 DMA_InitTypeDef           DMA_InitStructure;
-  
+
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
 void GPIO_Configuration(void);
-   
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -55,13 +55,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -94,24 +94,24 @@ int main(void)
   ADC_InitStructure.ADC_NbrOfChannel = 1;
   ADC_Init(ADC1, &ADC_InitStructure);
 
-  /* ADC1 RegularChannelConfig Test */ 
+  /* ADC1 RegularChannelConfig Test */
   ADC_RegularChannelConfig(ADC1, ADC_Channel_14, 1, ADC_SampleTime_55Cycles5);
 
   /* TIM1 configuration ------------------------------------------------------*/
   /* Time Base configuration */
-  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure); 
+  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
   TIM_TimeBaseStructure.TIM_Period = 0xFF0;
   TIM_TimeBaseStructure.TIM_Prescaler = 0x0;
   TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;
   TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
   TIM_TimeBaseInit(TIM1, &TIM_TimeBaseStructure);
   /* Channel1 Configuration in PWM mode */
-  TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; 
+  TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
   TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
   TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
   TIM_OC1Init(TIM1, &TIM_OCInitStructure);
 
-  /* Enable TIM1 */  
+  /* Enable TIM1 */
   TIM_Cmd(TIM1, ENABLE);
   /* Enable TIM1 outputs */
   TIM_CtrlPWMOutputs(TIM1, ENABLE);
@@ -132,7 +132,7 @@ int main(void)
   /* Check the end of ADC1 calibration */
   while(ADC_GetCalibrationStatus(ADC1));
 
-  /* Start ADC1 conversion */ 
+  /* Start ADC1 conversion */
   ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 
   while (1)
@@ -148,7 +148,7 @@ int main(void)
 void RCC_Configuration(void)
 {
   /* ADCCLK = PCLK2/8 */
-  RCC_ADCCLKConfig(RCC_PCLK2_Div8);   
+  RCC_ADCCLKConfig(RCC_PCLK2_Div8);
 
   /* Enable peripheral clocks ------------------------------------------------*/
   /* Enable DMA1 clock */
@@ -189,7 +189,7 @@ void GPIO_Configuration(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -203,10 +203,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

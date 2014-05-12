@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    EXTI/EXTI_Config/main.c 
+  * @file    EXTI/EXTI_Config/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup EXTI_Config
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -52,17 +52,17 @@ void EXTI9_5_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-         
-  /* Initialize LED1 and Key Button mounted on STM3210X-EVAL board */       
+     */
+
+  /* Initialize LED1 and Key Button mounted on STM3210X-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
-  
+
   /* Configure PA.00 in interrupt mode */
   EXTI0_Config();
 
@@ -71,7 +71,7 @@ int main(void)
 
   /* Generate software interrupt: simulate a falling edge applied on EXTI0 line */
   EXTI_GenerateSWInterrupt(EXTI_Line0);
-          
+
   while (1)
   {
   }
@@ -86,7 +86,7 @@ void EXTI0_Config(void)
 {
   /* Enable GPIOA clock */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-  
+
   /* Configure PA.00 pin as input floating */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
@@ -101,7 +101,7 @@ void EXTI0_Config(void)
   /* Configure EXTI0 line */
   EXTI_InitStructure.EXTI_Line = EXTI_Line0;
   EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;  
+  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
   EXTI_InitStructure.EXTI_LineCmd = ENABLE;
   EXTI_Init(&EXTI_InitStructure);
 
@@ -189,7 +189,7 @@ void EXTI9_5_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -203,10 +203,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

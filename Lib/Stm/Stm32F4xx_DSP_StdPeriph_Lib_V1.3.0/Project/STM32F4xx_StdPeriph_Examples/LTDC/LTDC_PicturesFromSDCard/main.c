@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup LTDC_PicturesFromSDCard
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -68,30 +68,30 @@ static void SDCard_Config(void);
   {
     uint32_t counter = 0, transparency = 0;
     uint8_t str[30];
-     
-  /*!< At this stage the microcontroller clock setting is already configured, 
+
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f429_439xx.s) before to branch to application main.
-     */ 
-    
+     */
+
     /* TAMPER button will be used */
-    STM_EVAL_PBInit(BUTTON_TAMPER, BUTTON_MODE_GPIO); 
-    
+    STM_EVAL_PBInit(BUTTON_TAMPER, BUTTON_MODE_GPIO);
+
     /* SysTick end of count event each 10ms */
     SysTick_Config(SystemCoreClock / 1000);
 
     /* Configure LCD */
     LCD_Config();
-    
+
     /* SD Card Configuration */
-    SDCard_Config();    
-        
+    SDCard_Config();
+
     /* Configure the File System */
-    FileSystem_Config();    
-      
+    FileSystem_Config();
+
     /* Get the BMP file names on root directory */
     ubNumberOfFiles = Storage_GetDirectoryBitmapFiles("/PICT", pDirectoryFiles);
-    
+
     if (ubNumberOfFiles == 0)
     {
       for (counter = 0; counter < MAX_BMP_FILES; counter++)
@@ -103,114 +103,114 @@ static void SDCard_Config(void);
       {
       }
     }
-      
+
     while(1)
-    {     
+    {
       counter = 0;
-       
+
       while ((counter) < ubNumberOfFiles)
       {
-        /* Step1 : Display on Foreground layer -------------------------------*/ 
+        /* Step1 : Display on Foreground layer -------------------------------*/
         /* Format the string */
         sprintf ((char*)str, "PICT/%-11.11s", pDirectoryFiles[counter]);
-         
-        if (Storage_CheckBitmapFile((const char*)str, &uwBmplen) == 0) 
-        {  
-          /* Format the string */        
+
+        if (Storage_CheckBitmapFile((const char*)str, &uwBmplen) == 0)
+        {
+          /* Format the string */
           sprintf ((char*)str, "PICT/%-11.11s", pDirectoryFiles[counter]);
-            
+
           /* Set LCD foreground Layer */
           LCD_SetLayer(LCD_FOREGROUND_LAYER);
-            
+
           /* Open a file and copy its content to an internal buffer */
           Storage_OpenReadFile(uwInternelBuffer, (const char*)str);
-            
+
           /* Write bmp file on LCD frame buffer */
-          LCD_WriteBMP(uwInternelBuffer);  
-          
+          LCD_WriteBMP(uwInternelBuffer);
+
           /* Configure the transparency for background layer : Increase the transparency */
           for (transparency = 0; transparency < 255; (transparency++))
-          {        
+          {
             LCD_SetTransparency(transparency);
-            
+
             /* Insert a delay of display */
             Delay(5);
           }
-            
+
           /* Wait for tamper button pressed */
           while (STM_EVAL_PBGetState(BUTTON_TAMPER) == Bit_SET)
           {
           }
-            
+
           /* Configure the transparency for foreground layer : decrease the transparency */
           for (transparency = 255; transparency > 0; transparency--)
-          {        
+          {
             LCD_SetTransparency(transparency);
-            
+
             /* Insert a delay of display */
             Delay(5);
           }
-           
-          /* Jump to the next image */  
+
+          /* Jump to the next image */
           counter++;
-          
+
           /* Step2 : Display on Background layer -----------------------------*/
-          /* Format the string */  
+          /* Format the string */
           sprintf ((char*)str, "PICT/%-11.11s", pDirectoryFiles[counter]);
-          
+
           if ((Storage_CheckBitmapFile((const char*)str, &uwBmplen) == 0) || (counter < (ubNumberOfFiles)))
-          {         
+          {
             /* Connect the Output Buffer to LCD Background Layer  */
             LCD_SetLayer(LCD_BACKGROUND_LAYER);
-            
-            /* Format the string */  
+
+            /* Format the string */
             sprintf ((char*)str, "PICT/%-11.11s", pDirectoryFiles[counter]);
-              
+
             /* Open a file and copy its content to an internal buffer */
             Storage_OpenReadFile(uwInternelBuffer, (const char*)str);
-             
+
             /* Write bmp file on LCD frame buffer */
             LCD_WriteBMP(uwInternelBuffer);
-              
-            /* Configure the transparency for background layer : decrease the transparency */  
+
+            /* Configure the transparency for background layer : decrease the transparency */
             for (transparency = 0; transparency < 255; (transparency++))
-            {        
+            {
               LCD_SetTransparency(transparency);
-              
+
               /* Insert a delay of display */
               Delay(5);
             }
-              
+
             /* wait for tamper button pressed */
             while (STM_EVAL_PBGetState(BUTTON_TAMPER) == Bit_SET)
             {
             }
-            
-            /* Step3 : -------------------------------------------------------*/              
+
+            /* Step3 : -------------------------------------------------------*/
             /* Configure the transparency for background layer : Increase the transparency */
             for (transparency = 255; transparency > 0; transparency--)
-            {        
+            {
               LCD_SetTransparency(transparency);
-            
+
               /* Insert a delay of display */
               Delay(5);
             }
-            counter++;   
+            counter++;
           }
           else if (Storage_CheckBitmapFile((const char*)str, &uwBmplen) == 0)
           {
             /* Set the Text Color */
-            LCD_SetTextColor(LCD_COLOR_RED); 
-        
-            LCD_DisplayStringLine(LCD_LINE_7, (uint8_t *) str);        
-            LCD_DisplayStringLine(LCD_LINE_8, (uint8_t*)"    File type not supported. "); 
+            LCD_SetTextColor(LCD_COLOR_RED);
+
+            LCD_DisplayStringLine(LCD_LINE_7, (uint8_t *) str);
+            LCD_DisplayStringLine(LCD_LINE_8, (uint8_t*)"    File type not supported. ");
             while(1)
             {
-            }      
-          }        
-        }  
-      }      
-    }      
+            }
+          }
+        }
+      }
+    }
   }
 
 /**
@@ -221,28 +221,28 @@ static void SDCard_Config(void);
 
 static void LCD_Config(void)
 {
-  /* LCD Initialization */ 
+  /* LCD Initialization */
   LCD_Init();
 
-  /* LCD Initialization */ 
+  /* LCD Initialization */
   LCD_LayerInit();
 
-  /* Enable the LCD */ 
-  LCD_DisplayOn(); 
-  
+  /* Enable the LCD */
+  LCD_DisplayOn();
+
   /* Connect the Output Buffer to LCD Background Layer  */
   LCD_SetLayer(LCD_BACKGROUND_LAYER);
-  /* Clear the Background Layer */ 
+  /* Clear the Background Layer */
   LCD_Clear(LCD_COLOR_BLACK);
-  
+
   /* Configure the transparency for background : Increase the transparency */
   LCD_SetTransparency(0);
-   
+
   /* Connect the Output Buffer to LCD Foreground Layer  */
   LCD_SetLayer(LCD_FOREGROUND_LAYER);
-  /* Clear the Background Layer */ 
+  /* Clear the Background Layer */
   LCD_Clear(LCD_COLOR_BLACK);
-  
+
   /* Configure the transparency for foreground : Increase the transparency */
   LCD_SetTransparency(100);
 }
@@ -256,20 +256,20 @@ static void LCD_Config(void)
 static void FileSystem_Config(void)
 {
   uint32_t counter = 0;
-  
+
   /* Check the mounted device */
   if ( f_mount(0, &microSD_fatfs ) != FR_OK )
   {
     /* Set the Text Color */
     LCD_SetTextColor(LCD_COLOR_RED);
-    
+
     LCD_DisplayStringLine(LCD_LINE_8, (uint8_t*)"    Cannot mount FATFS on Drive");
-  }  
-      
+  }
+
   /* Initialize the Directory Files pointers (heap) */
   for (counter = 0; counter < MAX_BMP_FILES; counter++)
   {
-    pDirectoryFiles[counter] = malloc(11); 
+    pDirectoryFiles[counter] = malloc(11);
   }
 }
 
@@ -282,23 +282,23 @@ static void SDCard_Config(void)
 {
   uint32_t error = 0;
   uint32_t counter = 0x100;
-  
+
   /* Configure the IO Expander */
   if (IOE16_Config() != IOE16_OK)
   {
     /* Set the Text Color */
     LCD_SetTextColor(LCD_COLOR_RED);
-      
+
     LCD_DisplayStringLine(LCD_LINE_6, (uint8_t*)"    IO Expander FAILED         ");
-    LCD_DisplayStringLine(LCD_LINE_7, (uint8_t*)"    Please Reset the board and ");   
+    LCD_DisplayStringLine(LCD_LINE_7, (uint8_t*)"    Please Reset the board and ");
     LCD_DisplayStringLine(LCD_LINE_8, (uint8_t*)"    Start again...             ");
     while(1)
     {
     }
-  }   
+  }
   /* SDCard initialisation */
   SD_Init();
-  
+
   /* Configure the SD detect pin */
   IOE16_IOPinConfig(SD_DETECT_PIN, Direction_IN);
 
@@ -311,14 +311,14 @@ static void SDCard_Config(void)
 
     while (SD_Detect() == SD_NOT_PRESENT)
     {
-    }       
+    }
   }
-  
+
   /* FAT Initialization */
   do
   {
     /* SDCARD Initialisation */
-    error = Storage_Init();                                                    
+    error = Storage_Init();
   }
   while ((error != 0) && (counter-- != 0));
 
@@ -356,7 +356,7 @@ void Delay(__IO uint32_t nTime)
 void TimingDelay_Decrement(void)
 {
   if (TimingDelay != 0x00)
-  { 
+  {
     TimingDelay--;
   }
 }

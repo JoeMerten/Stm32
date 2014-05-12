@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -31,7 +31,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -44,15 +44,15 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 
 /* Exported define ------------------------------------------------------------*/
 /* Uncomment the line below if you will use the SPI peripheral as a Master */
-/* #define SPI_MASTER */  
+/* #define SPI_MASTER */
 /* Uncomment the line below if you will use the SPI peripheral as a Slave */
-#define SPI_SLAVE 
+#define SPI_SLAVE
 
 /* USER_TIMEOUT value for waiting loops. This timeout is just guarantee that the
-   application will not remain stuck if the USART communication is corrupted. 
+   application will not remain stuck if the USART communication is corrupted.
    You may modify this timeout value depending on CPU frequency and application
    conditions (interrupts routines, number of data to transfer, baudrate, CPU
-   frequency...). */ 
+   frequency...). */
 #define USER_TIMEOUT                    ((uint32_t)0x64) /* Waiting 1s */
 
 /* SPIx Communication boards Interface */
@@ -88,9 +88,9 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 #define CMD_LEFT                         0xAA
 #define CMD_UP                           0x33
 #define CMD_DOWN                         0xCC
-#define CMD_SEL                          0xFF 
+#define CMD_SEL                          0xFF
 #define CMD_NONE                         0x00
-#define CMD_ACK                          0x66 
+#define CMD_ACK                          0x66
 
 /* Define numbers of bytes to transmit from TxBuffer */
 #define CMD_RIGHT_SIZE                   0x01

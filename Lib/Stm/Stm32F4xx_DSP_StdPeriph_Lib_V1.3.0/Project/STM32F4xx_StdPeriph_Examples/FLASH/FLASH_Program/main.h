@@ -16,15 +16,15 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
   */
-  
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -33,12 +33,12 @@
 #if defined (USE_STM324xG_EVAL)
   #include "stm324xg_eval.h"
 
-#elif defined (USE_STM324x7I_EVAL) 
+#elif defined (USE_STM324x7I_EVAL)
   #include "stm324x7i_eval.h"
 
-#elif defined (USE_STM324x9I_EVAL) 
+#elif defined (USE_STM324x9I_EVAL)
   #include "stm324x9i_eval.h"
-  
+
 #else
  #error "Please select first the Evaluation board used in your application (in Project Options)"
 #endif
@@ -52,9 +52,9 @@
 
 #else /* USE_STM324x7I_EVAL or USE_STM324x9I_EVAL */
 #define FLASH_USER_END_ADDR     ADDR_FLASH_SECTOR_23  /* End address of user Flash area */
-#endif 
+#endif
 
-/* Base address of the Flash sectors */ 
+/* Base address of the Flash sectors */
 #define ADDR_FLASH_SECTOR_0     ((uint32_t)0x08000000) /* Base address of Sector 0, 16 Kbytes   */
 #define ADDR_FLASH_SECTOR_1     ((uint32_t)0x08004000) /* Base address of Sector 1, 16 Kbytes   */
 #define ADDR_FLASH_SECTOR_2     ((uint32_t)0x08008000) /* Base address of Sector 2, 16 Kbytes   */
@@ -68,7 +68,7 @@
 #define ADDR_FLASH_SECTOR_10    ((uint32_t)0x080C0000) /* Base address of Sector 10, 128 Kbytes */
 #define ADDR_FLASH_SECTOR_11    ((uint32_t)0x080E0000) /* Base address of Sector 11, 128 Kbytes */
 
-#if defined (USE_STM324x7I_EVAL) || defined (USE_STM324x9I_EVAL) 
+#if defined (USE_STM324x7I_EVAL) || defined (USE_STM324x9I_EVAL)
 #define ADDR_FLASH_SECTOR_12     ((uint32_t)0x08100000) /* Base address of Sector 12, 16 Kbytes  */
 #define ADDR_FLASH_SECTOR_13     ((uint32_t)0x08104000) /* Base address of Sector 13, 16 Kbytes  */
 #define ADDR_FLASH_SECTOR_14     ((uint32_t)0x08108000) /* Base address of Sector 14, 16 Kbytes  */

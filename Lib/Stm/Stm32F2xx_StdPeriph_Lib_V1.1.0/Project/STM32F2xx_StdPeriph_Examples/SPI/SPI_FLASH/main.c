@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    SPI/SPI_FLASH/main.c 
+  * @file    SPI/SPI_FLASH/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm322xg_eval.h"
@@ -35,7 +35,7 @@
 
 /** @addtogroup SPI_FLASH
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -67,13 +67,13 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
-     */     
-       
+     */
+
   /* Initialize Leds mounted on STM322xG-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
@@ -83,7 +83,7 @@ int main(void)
 
   /* Get SPI Flash ID */
   FlashID = sFLASH_ReadID();
-  
+
   /* Check the SPI Flash ID */
   if (FlashID == sFLASH_M25P64_ID)
   {
@@ -130,7 +130,7 @@ int main(void)
     /* Error: Turn on LD2 */
     STM_EVAL_LEDOn(LED2);
   }
-  
+
   while (1)
   {}
 }
@@ -180,10 +180,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 #endif
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

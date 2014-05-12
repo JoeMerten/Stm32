@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -40,7 +40,7 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
-/* M25P SPI Flash supported commands */  
+/* M25P SPI Flash supported commands */
 #define sFLASH_CMD_WRITE          0x02  /* Write to Memory instruction */
 #define sFLASH_CMD_WRSR           0x01  /* Write Status Register instruction */
 #define sFLASH_CMD_WREN           0x06  /* Write enable instruction */
@@ -57,8 +57,8 @@
 
 #define sFLASH_M25P128_ID         0x202018
 #define sFLASH_M25P64_ID          0x202017
-  
-/* M25P FLASH SPI Interface pins  */  
+
+/* M25P FLASH SPI Interface pins  */
 #define sFLASH_SPI                           SPI2
 #define sFLASH_SPI_CLK                       RCC_APB1Periph_SPI2
 #define sFLASH_SPI_CLK_INIT                  RCC_APB1PeriphClockCmd
@@ -89,7 +89,7 @@
 /* Select sFLASH: Chip Select pin low */
 #define sFLASH_CS_LOW()       GPIO_ResetBits(sFLASH_CS_GPIO_PORT, sFLASH_CS_PIN)
 /* Deselect sFLASH: Chip Select pin high */
-#define sFLASH_CS_HIGH()      GPIO_SetBits(sFLASH_CS_GPIO_PORT, sFLASH_CS_PIN)   
+#define sFLASH_CS_HIGH()      GPIO_SetBits(sFLASH_CS_GPIO_PORT, sFLASH_CS_PIN)
 
 /* Exported functions ------------------------------------------------------- */
 

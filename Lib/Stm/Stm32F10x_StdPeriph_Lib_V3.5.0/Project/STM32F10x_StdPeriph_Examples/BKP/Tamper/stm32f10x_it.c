@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BKP/Tamper/stm32f10x_it.c 
+  * @file    BKP/Tamper/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -31,7 +31,7 @@
 
 /** @addtogroup BKP_Tamper
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -146,7 +146,7 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief  This function handles Tamper interrupt request. 
+  * @brief  This function handles Tamper interrupt request.
   * @param  None
   * @retval None
   */
@@ -176,10 +176,10 @@ void TAMPER_IRQHandler(void)
 
     /* Disable Tamper pin */
     BKP_TamperPinCmd(DISABLE);
-    
+
     /* Enable Tamper pin */
     BKP_TamperPinCmd(ENABLE);
-      
+
   }
 }
 
@@ -201,10 +201,10 @@ void TAMPER_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

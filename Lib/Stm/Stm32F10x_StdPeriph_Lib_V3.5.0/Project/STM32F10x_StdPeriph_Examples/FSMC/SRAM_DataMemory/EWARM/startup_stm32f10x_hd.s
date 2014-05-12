@@ -3,12 +3,12 @@
 ;* Author             : MCD Application Team
 ;* Version            : V3.5.0
 ;* Date               : 08-April-2011
-;* Description        : STM32F10x High Density Devices vector table for EWARM 
+;* Description        : STM32F10x High Density Devices vector table for EWARM
 ;*                      toolchain.
 ;*                      This module performs:
 ;*                      - Set the initial SP
-;*                      - Configure the clock system and the external SRAM 
-;*                        mounted on STM3210E-EVAL board to be used as data 
+;*                      - Configure the clock system and the external SRAM
+;*                        mounted on STM3210E-EVAL board to be used as data
 ;*                        memory (optional, to be enabled by user)
 ;*                      - Set the initial PC == __iar_program_start,
 ;*                      - Set the vector table entries with the exceptions ISR address,
@@ -37,25 +37,25 @@
 ; table register (VTOR) is initialized to this address if != 0.
 ;
 ; Cortex-M version
-;  
-   
+;
+
 __initial_spTop EQU    0x20000400                 ; stack used for SystemInit & SystemInit_ExtMemCtl
-  
+
     MODULE  ?cstartup
-        
+
         ;; Forward declaration of sections.
         SECTION CSTACK:DATA:NOROOT(3)
 
         SECTION .intvec:CODE:NOROOT(2)
 
         EXTERN  __iar_program_start
-        EXTERN  SystemInit        
+        EXTERN  SystemInit
         PUBLIC  __vector_table
 
         DATA
-       
+
 __vector_table
-        DCD     __initial_spTop           ; Use internal RAM for stack for calling SystemInit. 
+        DCD     __initial_spTop           ; Use internal RAM for stack for calling SystemInit.
         DCD     Reset_Handler             ; Reset Handler
         DCD     NMI_Handler               ; NMI Handler
         DCD     HardFault_Handler         ; Hard Fault Handler
@@ -144,12 +144,12 @@ __vector_table
 Reset_Handler
 
         LDR     R0, =SystemInit
-        BLX     R0   
+        BLX     R0
         LDR     R0, =sfe(CSTACK)          ; restore original stack pointer
-        MSR     MSP, R0             
+        MSR     MSP, R0
         LDR     R0, =__iar_program_start
-        BX      R0                 
-               
+        BX      R0
+
         PUBWEAK NMI_Handler
         SECTION .text:CODE:REORDER(1)
 NMI_Handler
@@ -494,8 +494,8 @@ DMA2_Channel3_IRQHandler
         SECTION .text:CODE:REORDER(1)
 DMA2_Channel4_5_IRQHandler
         B DMA2_Channel4_5_IRQHandler
-        
-        
+
+
         END
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

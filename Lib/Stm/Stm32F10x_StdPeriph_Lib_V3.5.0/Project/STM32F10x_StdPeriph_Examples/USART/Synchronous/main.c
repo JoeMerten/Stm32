@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/Synchronous/main.c 
+  * @file    USART/Synchronous/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup USART_Synchronous
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -44,7 +44,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 
 /* Private variables ---------------------------------------------------------*/
 USART_InitTypeDef USART_InitStructure;
-USART_ClockInitTypeDef USART_ClockInitStructure; 
+USART_ClockInitTypeDef USART_ClockInitStructure;
 
 uint8_t TxBuffer1[] = "USART Synchronous Example: USARTy -> SPIy using TXE and RXNE Flags";
 uint8_t TxBuffer2[] = "USART Synchronous Example: SPIy -> USARTy using TXE and RXNE Flags";
@@ -54,7 +54,7 @@ __IO uint8_t NbrOfDataToRead1 = TxBufferSize2;
 __IO uint8_t NbrOfDataToRead2 = TxBufferSize1;
 __IO uint8_t TxCounter1 = 0, RxCounter1 = 0;
 __IO uint8_t TxCounter2 = 0, RxCounter2 = 0;
-volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED; 
+volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED;
 
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
@@ -71,13 +71,13 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -89,7 +89,7 @@ int main(void)
 
 /* USARTy configuration ------------------------------------------------------*/
   /* USARTy configured as follow:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -97,8 +97,8 @@ int main(void)
         - Receive and transmit enabled
         - USART Clock Enabled
         - USART CPOL: Clock is active High
-        - USART CPHA: Data is captured on the second edge 
-        - USART LastBit: The clock pulse of the last data bit is output to 
+        - USART CPHA: Data is captured on the second edge
+        - USART LastBit: The clock pulse of the last data bit is output to
                          the SCLK pin
   */
   USART_ClockInitStructure.USART_Clock = USART_Clock_Enable;
@@ -114,7 +114,7 @@ int main(void)
   USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
   USART_Init(USARTy, &USART_InitStructure);
-  
+
   /* Configure the USARTy */
   USART_Init(USARTy, &USART_InitStructure);
 
@@ -129,7 +129,7 @@ int main(void)
     while(USART_GetFlagStatus(USARTy, USART_FLAG_TC) == RESET)
     {
     }
-    /* Wait the byte is entirely received by SPIy */  
+    /* Wait the byte is entirely received by SPIy */
     while(SPI_I2S_GetFlagStatus(SPIy, SPI_I2S_FLAG_RXNE) == RESET)
     {
     }
@@ -149,7 +149,7 @@ int main(void)
     /* Write one byte in the SPIy Transmit Data Register */
     SPI_I2S_SendData(SPIy, TxBuffer2[TxCounter2++]);
 
-    /* Send a Dummy byte to generate clock to slave */ 
+    /* Send a Dummy byte to generate clock to slave */
     USART_SendData(USARTy, DYMMY_BYTE);
     /* Wait until end of transmit */
     while(USART_GetFlagStatus(USARTy, USART_FLAG_TC) == RESET)
@@ -162,17 +162,17 @@ int main(void)
     /* Store the received byte in the RxBuffer1 */
     RxBuffer1[RxCounter1++] = USART_ReceiveData(USARTy);
   }
-  
+
   /* Check the received data with the send ones */
   TransferStatus1 = Buffercmp(TxBuffer1, RxBuffer2, TxBufferSize1);
-  /* TransferStatus = PASSED, if the data transmitted from USARTy and  
+  /* TransferStatus = PASSED, if the data transmitted from USARTy and
      received by SPIy are the same */
-  /* TransferStatus = FAILED, if the data transmitted from USARTy and 
+  /* TransferStatus = FAILED, if the data transmitted from USARTy and
      received by SPIy are different */
   TransferStatus2 = Buffercmp(TxBuffer2, RxBuffer1, TxBufferSize2);
-  /* TransferStatus = PASSED, if the data transmitted from SPIy and  
+  /* TransferStatus = PASSED, if the data transmitted from SPIy and
      received by USARTy are the same */
-  /* TransferStatus = FAILED, if the data transmitted from SPIy and 
+  /* TransferStatus = FAILED, if the data transmitted from SPIy and
      received by USARTy are different */
 
   while (1)
@@ -186,14 +186,14 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{   
+{
   /* Enable GPIO clock */
   RCC_APB2PeriphClockCmd(USARTy_GPIO_CLK | SPIy_GPIO_CLK | RCC_APB2Periph_AFIO, ENABLE);
 
   /* Enable USARTy Clock */
-  RCC_APB2PeriphClockCmd(USARTy_CLK, ENABLE); 
+  RCC_APB2PeriphClockCmd(USARTy_CLK, ENABLE);
   /* Enable SPIy Clock */
-  RCC_APB2PeriphClockCmd(SPIy_CLK, ENABLE);    
+  RCC_APB2PeriphClockCmd(SPIy_CLK, ENABLE);
 }
 
 /**
@@ -242,7 +242,7 @@ void SPI_Configuration(void)
   SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
   SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
   SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_LSB;
-  
+
   /* Configure SPIy */
   SPI_Init(SPIy, &SPI_InitStructure);
 
@@ -283,7 +283,7 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -297,10 +297,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file     DAC/DAC_SignalsGeneration/stm32f2xx_it.c 
+  * @file     DAC/DAC_SignalsGeneration/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -36,7 +36,7 @@
   */
 /** @addtogroup DAC_SignalsGeneration
   * @{
-  */ 
+  */
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -170,7 +170,7 @@ void SysTick_Handler(void)
 void EXTI15_10_IRQHandler(void)
 {
   if(EXTI_GetITStatus(KEY_BUTTON_EXTI_LINE) != RESET)
-  { 
+  {
     /* Change the wave */
     KeyPressed = 1;
 
@@ -183,9 +183,9 @@ void EXTI15_10_IRQHandler(void)
 }
 /**
   * @}
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

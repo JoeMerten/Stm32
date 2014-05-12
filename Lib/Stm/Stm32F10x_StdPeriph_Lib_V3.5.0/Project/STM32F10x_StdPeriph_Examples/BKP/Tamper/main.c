@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BKP/Tamper/main.c 
+  * @file    BKP/Tamper/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -28,12 +28,12 @@
 
 /** @addtogroup BKP_Tamper
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #if defined USE_STM3210B_EVAL || defined USE_STM32100B_EVAL
-  #define BKP_DR_NUMBER              10   
+  #define BKP_DR_NUMBER              10
 #else
   #define BKP_DR_NUMBER              42
 #endif /* USE_STM3210B_EVAL or USE_STM32100B_EVAL */
@@ -55,7 +55,7 @@ uint16_t BKPDataReg[BKP_DR_NUMBER] =
     BKP_DR25, BKP_DR26, BKP_DR27, BKP_DR28, BKP_DR29, BKP_DR30, BKP_DR31, BKP_DR32,
     BKP_DR33, BKP_DR34, BKP_DR35, BKP_DR36, BKP_DR37, BKP_DR38, BKP_DR39, BKP_DR40,
     BKP_DR41, BKP_DR42
-  };  
+  };
 #endif /* USE_STM3210B_EVAL or USE_STM32100B_EVAL */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -73,16 +73,16 @@ uint32_t CheckBackupReg(uint16_t FirstBackupData);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* NVIC configuration */
   NVIC_Configuration();
-    
+
   /* Initialize Leds mounted on STM3210X-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
@@ -97,7 +97,7 @@ int main(void)
 
   /* Disable Tamper pin */
   BKP_TamperPinCmd(DISABLE);
-  
+
   /* Disable Tamper interrupt */
   BKP_ITConfig(DISABLE);
 
@@ -112,10 +112,10 @@ int main(void)
 
   /* Enable Tamper pin */
   BKP_TamperPinCmd(ENABLE);
-   
+
   /* Write data to Backup DRx registers */
   WriteToBackupReg(0xA53C);
-  
+
   /* Check if the written data are correct */
   if(CheckBackupReg(0xA53C) == 0x00)
   {
@@ -127,9 +127,9 @@ int main(void)
     /* Turn on LED2 */
     STM_EVAL_LEDOn(LED2);
   }
-        
+
   while (1)
-  {    
+  {
   }
 }
 
@@ -162,13 +162,13 @@ void WriteToBackupReg(uint16_t FirstBackupData)
   for (index = 0; index < BKP_DR_NUMBER; index++)
   {
     BKP_WriteBackupRegister(BKPDataReg[index], FirstBackupData + (index * 0x5A));
-  }  
+  }
 }
 
 /**
   * @brief  Checks if the Backup DRx registers values are correct or not.
   * @param  FirstBackupData: data to be compared with Backup data registers.
-  * @retval 
+  * @retval
   *         - 0: All Backup DRx registers values are correct
   *         - Value different from 0: Number of the first Backup register
   *           which value is not correct
@@ -185,13 +185,13 @@ uint32_t CheckBackupReg(uint16_t FirstBackupData)
     }
   }
 
-  return 0;  
+  return 0;
 }
 
 /**
   * @brief  Checks if the Backup DRx registers are reset or not.
   * @param  None
-  * @retval 
+  * @retval
   *          - 0: All Backup DRx registers are reset
   *          - Value different from 0: Number of the first Backup register
   *            not reset
@@ -208,7 +208,7 @@ uint32_t IsBackupRegReset(void)
     }
   }
 
-  return 0;  
+  return 0;
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -221,7 +221,7 @@ uint32_t IsBackupRegReset(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -235,10 +235,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

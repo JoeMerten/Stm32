@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    RTC/Tamper/stm32f2xx_it.c 
+  * @file    RTC/Tamper/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -159,7 +159,7 @@ void SysTick_Handler(void)
 void TAMP_STAMP_IRQHandler(void)
 {
   if(RTC_GetFlagStatus(RTC_FLAG_TAMP1F) != RESET)
-  { 
+  {
     /* Tamper 1 detection event occurred */
     /* Check if RTC Backup Data registers are cleared */
     if(IsBackupRegReset() == 0)
@@ -174,7 +174,7 @@ void TAMP_STAMP_IRQHandler(void)
       /* Toggle LED4 */
       STM_EVAL_LEDToggle(LED4);
     }
-    
+
     /* Clear Tamper 1 pin Event(TAMP1F) pending flag */
     RTC_ClearFlag(RTC_FLAG_TAMP1F);
 
@@ -182,7 +182,7 @@ void TAMP_STAMP_IRQHandler(void)
     RTC_TamperCmd(RTC_Tamper_1, DISABLE);
 
     /* Enable Tamper pin */
-    RTC_TamperCmd(RTC_Tamper_1, ENABLE); 
+    RTC_TamperCmd(RTC_Tamper_1, ENABLE);
   }
 }
 

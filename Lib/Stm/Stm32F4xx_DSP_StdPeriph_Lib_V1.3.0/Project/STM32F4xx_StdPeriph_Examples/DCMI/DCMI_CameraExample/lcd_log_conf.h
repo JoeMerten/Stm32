@@ -5,7 +5,7 @@
   * @version V1.3.0
   * @date    13-November-2013
   * @brief   lcd_log configuration template file.
-  *          This file should be copied to the application folder and modified 
+  *          This file should be copied to the application folder and modified
   *          as follows:
   *            - Rename it to 'lcd_log_conf.h'.
   *            - Update the name of the LCD header file depending on the EVAL board
@@ -21,8 +21,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -40,26 +40,26 @@
 #if defined (USE_STM324xG_EVAL)
   #include "stm324xg_eval_lcd.h"
 
-#elif defined (USE_STM324x7I_EVAL) 
+#elif defined (USE_STM324x7I_EVAL)
   #include "stm324x7i_eval_lcd.h"
 
 #else
  #error "Please select first the Evaluation board used in your application (in Project Options)"
-#endif    
+#endif
 
 /** @addtogroup LCD_LOG
   * @{
   */
-  
+
 /** @defgroup LCD_LOG
-  * @brief This file is the 
+  * @brief This file is the
   * @{
-  */ 
+  */
 
 
 /** @defgroup LCD_LOG_CONF_Exported_Defines
   * @{
-  */ 
+  */
 /* Comment the line below to disable the scroll back and forward features */
 #define LCD_SCROLL_ENABLED
 
@@ -76,47 +76,47 @@
 
 /** @defgroup LCD_LOG_CONF_Exported_TypesDefinitions
   * @{
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup LCD_LOG_Exported_Macros
   * @{
-  */ 
+  */
 
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup LCD_LOG_CONF_Exported_Variables
   * @{
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup LCD_LOG_CONF_Exported_FunctionsPrototype
   * @{
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 
 #endif /* __LCD_LOG_H__ */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CAN/DualCAN/main.c 
+  * @file    CAN/DualCAN/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32_eval.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup CAN_DualCAN
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -38,10 +38,10 @@
 /* #define CAN_BAUDRATE  500*/  /* 500kBps */
 /* #define CAN_BAUDRATE  250*/  /* 250kBps */
 /* #define CAN_BAUDRATE  125*/  /* 125kBps */
-/* #define CAN_BAUDRATE  100*/  /* 100kBps */ 
-/* #define CAN_BAUDRATE  50*/   /* 50kBps  */ 
-/* #define CAN_BAUDRATE  20*/   /* 20kBps  */ 
-/* #define CAN_BAUDRATE  10*/   /* 10kBps  */ 
+/* #define CAN_BAUDRATE  100*/  /* 100kBps */
+/* #define CAN_BAUDRATE  50*/   /* 50kBps  */
+/* #define CAN_BAUDRATE  20*/   /* 20kBps  */
+/* #define CAN_BAUDRATE  10*/   /* 10kBps  */
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 CAN_InitTypeDef        CAN_InitStructure;
@@ -64,13 +64,13 @@ void Delay(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
      */
-        
+
   /* NVIC configuration */
   NVIC_Config();
 
@@ -88,7 +88,7 @@ int main(void)
   LCD_SetBackColor(LCD_COLOR_RED);
   /* Set the LCD Text Color */
   LCD_SetTextColor(LCD_COLOR_GREEN);
-  
+
   LCD_DisplayStringLine(LCD_LINE_0, "   STM3210C-EVAL    ");
   LCD_DisplayStringLine(LCD_LINE_1, " STM32F10x Dual CAN ");
   LCD_DisplayStringLine(LCD_LINE_2, "To start Press on:  ");
@@ -115,21 +115,21 @@ int main(void)
   LCD_DisplayStringLine(LCD_LINE_4, " BAUDRATE = 10kBps   ");
 #endif
   /* Set the LCD Text Color */
-  LCD_SetTextColor(LCD_COLOR_WHITE);   
-    
+  LCD_SetTextColor(LCD_COLOR_WHITE);
+
   /* Configure BUTTON_KEY */
-  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_GPIO); 
-  
+  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_GPIO);
+
   /* Configure BUTTON_TAMPER */
-  STM_EVAL_PBInit(BUTTON_TAMPER, BUTTON_MODE_GPIO); 
-   
+  STM_EVAL_PBInit(BUTTON_TAMPER, BUTTON_MODE_GPIO);
+
   /* CANs configuration */
   CAN_Config();
 
-  /* IT Configuration for CAN1 */  
+  /* IT Configuration for CAN1 */
   CAN_ITConfig(CAN1, CAN_IT_FMP0, ENABLE);
 
-  /* IT Configuration for CAN2 */  
+  /* IT Configuration for CAN2 */
   CAN_ITConfig(CAN2, CAN_IT_FMP0, ENABLE);
 
   /* turn off all leds*/
@@ -137,7 +137,7 @@ int main(void)
   STM_EVAL_LEDOff(LED2);
   STM_EVAL_LEDOff(LED3);
   STM_EVAL_LEDOff(LED4);
- 
+
   /* Infinite loop */
   while(1)
   {
@@ -180,12 +180,12 @@ void CAN_Config(void)
   /* Configure CAN1 and CAN2 IOs **********************************************/
   /* GPIOB, GPIOD and AFIO clocks enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO | RCC_APB2Periph_GPIOD | RCC_APB2Periph_GPIOB, ENABLE);
-     
+
   /* Configure CAN1 RX pin */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
   GPIO_Init(GPIOD, &GPIO_InitStructure);
-   
+
   /* Configure CAN2 RX pin */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
@@ -204,10 +204,10 @@ void CAN_Config(void)
   GPIO_PinRemapConfig(GPIO_Remap2_CAN1 , ENABLE);
   GPIO_PinRemapConfig(GPIO_Remap_CAN2, ENABLE);
 
-  /* Configure CAN1 and CAN2 **************************************************/  
+  /* Configure CAN1 and CAN2 **************************************************/
   /* CAN1 and CAN2 Periph clocks enable */
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1 | RCC_APB1Periph_CAN2, ENABLE);  
-  
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1 | RCC_APB1Periph_CAN2, ENABLE);
+
    /* CAN1 and CAN2 register init */
   CAN_DeInit(CAN1);
   CAN_DeInit(CAN2);
@@ -223,10 +223,10 @@ void CAN_Config(void)
   CAN_InitStructure.CAN_RFLM = DISABLE;
   CAN_InitStructure.CAN_TXFP = ENABLE;
   CAN_InitStructure.CAN_Mode = CAN_Mode_Normal;
-  CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;  
+  CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;
   CAN_InitStructure.CAN_BS1 = CAN_BS1_3tq;
   CAN_InitStructure.CAN_BS2 = CAN_BS2_2tq;
- 
+
 #if CAN_BAUDRATE == 1000 /* 1MBps */
   CAN_InitStructure.CAN_Prescaler =6;
 #elif CAN_BAUDRATE == 500 /* 500KBps */
@@ -247,7 +247,7 @@ void CAN_Config(void)
    #error "Please select first the CAN Baudrate in Private defines in main.c "
 #endif  /* CAN_BAUDRATE == 1000 */
 
-  
+
   /*Initializes the CAN1  and CAN2 */
   CAN_Init(CAN1, &CAN_InitStructure);
   CAN_Init(CAN2, &CAN_InitStructure);
@@ -263,18 +263,18 @@ void CAN_Config(void)
   CAN_FilterInitStructure.CAN_FilterFIFOAssignment = 0;
   CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
   CAN_FilterInit(&CAN_FilterInitStructure);
-  
+
   /* CAN2 filter init */
   CAN_FilterInitStructure.CAN_FilterIdHigh =0x2460;
   CAN_FilterInitStructure.CAN_FilterNumber = 15;
   CAN_FilterInit(&CAN_FilterInitStructure);
-  
+
   /* Transmit */
   TxMessage.StdId = 0x321;
   TxMessage.ExtId = 0x01;
   TxMessage.RTR = CAN_RTR_DATA;
   TxMessage.IDE = CAN_ID_STD;
-  TxMessage.DLC = 1;  
+  TxMessage.DLC = 1;
 }
 
 /**
@@ -307,7 +307,7 @@ void NVIC_Config(void)
   NVIC_InitTypeDef  NVIC_InitStructure;
 
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
- 
+
   NVIC_InitStructure.NVIC_IRQChannel = CAN1_RX0_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x0;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0;
@@ -321,7 +321,7 @@ void NVIC_Config(void)
 
 /**
   * @brief  Turn ON/OFF the dedicate led.
-  * @param  Ledstatus: Communication status. 
+  * @param  Ledstatus: Communication status.
   * @retval None
   */
 void LED_Display(uint8_t Ledstatus)
@@ -330,42 +330,42 @@ void LED_Display(uint8_t Ledstatus)
 
   switch(Ledstatus)
   {
-    case(1): 
+    case(1):
       STM_EVAL_LEDOn(LED1);
       LCD_DisplayStringLine(LCD_LINE_5, "CAN1 send Frame     ");
       LCD_DisplayStringLine(LCD_LINE_6, "                    ");
       break;
-   
-    case(2): 
+
+    case(2):
       STM_EVAL_LEDOn(LED2);
       LCD_DisplayStringLine(LCD_LINE_5, "                    ");
       LCD_DisplayStringLine(LCD_LINE_6, "CAN2 send Frame     ");
       break;
-            
-    case(3): 
+
+    case(3):
       STM_EVAL_LEDOff(LED1);
       STM_EVAL_LEDOn(LED3);
       LCD_DisplayStringLine(LCD_LINE_5, "CAN1 receive Passed ");
       break;
-     
-    case(4): 
+
+    case(4):
       STM_EVAL_LEDOff(LED2);
       STM_EVAL_LEDOn(LED4);
       LCD_DisplayStringLine(LCD_LINE_6, "CAN2 receive Passed ");
       break;
 
-    case(5): 
+    case(5):
       STM_EVAL_LEDOff(LED1);
       STM_EVAL_LEDOff(LED3);
       LCD_DisplayStringLine(LCD_LINE_7, "Communication Failed ");
       break;
 
-    case(6): 
+    case(6):
       STM_EVAL_LEDOff(LED2);
       STM_EVAL_LEDOff(LED4);
       LCD_DisplayStringLine(LCD_LINE_7, "Communication Failed ");
       break;
-      
+
     default:
       break;
   }
@@ -395,7 +395,7 @@ void Delay(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

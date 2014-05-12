@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CAN/Networking/main.c 
+  * @file    CAN/Networking/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup CAN_Networking
   * @{
-  */ 
+  */
 
 
 /* Private typedef -----------------------------------------------------------*/
@@ -79,13 +79,13 @@ void Delay(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* NVIC configuration */
   NVIC_Config();
 
@@ -94,13 +94,13 @@ int main(void)
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
-  
+
   /* Configure Push button key */
-  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_GPIO); 
-   
+  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_GPIO);
+
   /* CAN configuration */
   CAN_Config();
-  
+
   CAN_ITConfig(CANx, CAN_IT_FMP0, ENABLE);
 
   /* turn off all leds*/
@@ -108,13 +108,13 @@ int main(void)
   STM_EVAL_LEDOff(LED2);
   STM_EVAL_LEDOff(LED3);
   STM_EVAL_LEDOff(LED4);
- 
+
   /* Infinite loop */
   while(1)
   {
     while(STM_EVAL_PBGetState(BUTTON_KEY) == KEY_PRESSED)
     {
-      if(KeyNumber == 0x4) 
+      if(KeyNumber == 0x4)
       {
         KeyNumber = 0x00;
       }
@@ -124,7 +124,7 @@ int main(void)
         TxMessage.Data[0] = KeyNumber;
         CAN_Transmit(CANx, &TxMessage);
         Delay();
-        
+
         while(STM_EVAL_PBGetState(BUTTON_KEY) != KEY_NOT_PRESSED)
         {
         }
@@ -141,7 +141,7 @@ int main(void)
 void CAN_Config(void)
 {
   GPIO_InitTypeDef  GPIO_InitStructure;
-  
+
   /* GPIO clock enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
 #ifdef  __CAN1_USED__
@@ -154,15 +154,15 @@ void CAN_Config(void)
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_CAN_RX;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
   GPIO_Init(GPIO_CAN, &GPIO_InitStructure);
-  
+
   /* Configure CAN pin: TX */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_CAN_TX;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(GPIO_CAN, &GPIO_InitStructure);
-  
+
   GPIO_PinRemapConfig(GPIO_Remapping_CAN , ENABLE);
-  
+
   /* CANx Periph clock enable */
 #ifdef  __CAN1_USED__
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
@@ -170,8 +170,8 @@ void CAN_Config(void)
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN2, ENABLE);
 #endif  /* __CAN1_USED__ */
-  
-  
+
+
   /* CAN register init */
   CAN_DeInit(CANx);
   CAN_StructInit(&CAN_InitStructure);
@@ -184,7 +184,7 @@ void CAN_Config(void)
   CAN_InitStructure.CAN_RFLM = DISABLE;
   CAN_InitStructure.CAN_TXFP = DISABLE;
   CAN_InitStructure.CAN_Mode = CAN_Mode_Normal;
-  
+
   /* CAN Baudrate = 1MBps*/
   CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;
   CAN_InitStructure.CAN_BS1 = CAN_BS1_3tq;
@@ -207,7 +207,7 @@ void CAN_Config(void)
   CAN_FilterInitStructure.CAN_FilterFIFOAssignment = 0;
   CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
   CAN_FilterInit(&CAN_FilterInitStructure);
-  
+
   /* Transmit */
   TxMessage.StdId = 0x321;
   TxMessage.ExtId = 0x01;
@@ -226,7 +226,7 @@ void NVIC_Config(void)
   NVIC_InitTypeDef  NVIC_InitStructure;
 
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-  
+
 #ifndef STM32F10X_CL
 #ifdef  __CAN1_USED__
   NVIC_InitStructure.NVIC_IRQChannel = USB_LP_CAN1_RX0_IRQn;
@@ -235,7 +235,7 @@ void NVIC_Config(void)
    #error "CAN2 is implemented only in Connectivity line devices"
 #endif /*__CAN1_USED__*/
 #else
-#ifdef  __CAN1_USED__ 
+#ifdef  __CAN1_USED__
   NVIC_InitStructure.NVIC_IRQChannel = CAN1_RX0_IRQn;
 #else  /*__CAN2_USED__*/
   NVIC_InitStructure.NVIC_IRQChannel = CAN2_RX0_IRQn;
@@ -280,22 +280,22 @@ void LED_Display(uint8_t Ledstatus)
   STM_EVAL_LEDOff(LED2);
   STM_EVAL_LEDOff(LED3);
   STM_EVAL_LEDOff(LED4);
-  
+
   switch(Ledstatus)
   {
-    case(1): 
+    case(1):
       STM_EVAL_LEDOn(LED1);
       break;
-   
-    case(2): 
+
+    case(2):
       STM_EVAL_LEDOn(LED2);
       break;
- 
-    case(3): 
+
+    case(3):
       STM_EVAL_LEDOn(LED3);
       break;
 
-    case(4): 
+    case(4):
       STM_EVAL_LEDOn(LED4);
       break;
     default:
@@ -327,7 +327,7 @@ void Delay(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

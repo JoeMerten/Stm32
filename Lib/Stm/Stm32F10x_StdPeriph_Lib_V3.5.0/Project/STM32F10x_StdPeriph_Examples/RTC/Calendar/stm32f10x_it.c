@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RTC/Calendar/stm32f10x_it.c 
+  * @file    RTC/Calendar/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -31,7 +31,7 @@
 
 /** @addtogroup RTC_Calendar
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -163,7 +163,7 @@ void RTC_IRQHandler(void)
 
     /* Wait until last write operation on RTC registers has finished */
     RTC_WaitForLastTask();
-    
+
   }
 }
 
@@ -185,10 +185,10 @@ void RTC_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

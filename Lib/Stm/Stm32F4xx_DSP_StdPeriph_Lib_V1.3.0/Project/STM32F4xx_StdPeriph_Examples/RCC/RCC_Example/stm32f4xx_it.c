@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    RCC/RCC_Example/stm32f4xx_it.c 
+  * @file    RCC/RCC_Example/stm32f4xx_it.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -37,7 +37,7 @@
 
 /** @addtogroup RCC_Example
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -184,33 +184,33 @@ void SysTick_Handler(void)
 }*/
 
 /**
-  * @brief  This function handles RCC interrupt request. 
+  * @brief  This function handles RCC interrupt request.
   * @param  None
   * @retval None
   */
 void RCC_IRQHandler(void)
 {
   if(RCC_GetITStatus(RCC_IT_HSERDY) != RESET)
-  { 
+  {
     /* Clear HSERDY interrupt pending bit */
     RCC_ClearITPendingBit(RCC_IT_HSERDY);
 
     /* Check if the HSE clock is still available */
     if (RCC_GetFlagStatus(RCC_FLAG_HSERDY) != RESET)
-    { 
-      /* Enable PLL: once the PLL is ready the PLLRDY interrupt is generated */ 
-      RCC_PLLCmd(ENABLE);     
+    {
+      /* Enable PLL: once the PLL is ready the PLLRDY interrupt is generated */
+      RCC_PLLCmd(ENABLE);
     }
   }
 
   if(RCC_GetITStatus(RCC_IT_PLLRDY) != RESET)
-  { 
+  {
     /* Clear PLLRDY interrupt pending bit */
     RCC_ClearITPendingBit(RCC_IT_PLLRDY);
 
     /* Check if the PLL is still locked */
     if (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) != RESET)
-    { 
+    {
       /* Select PLL as system clock source */
       RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
     }
@@ -219,10 +219,10 @@ void RCC_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

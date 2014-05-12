@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CortexM/MPU/main.c 
+  * @file    CortexM/MPU/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -36,7 +36,7 @@
 /** @addtogroup CortexM_MPU
   * @{
   */
-  
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define ACCESS_PERMISSION
@@ -55,31 +55,31 @@ void Delay (uint32_t nCount);
   */
 int main(void)
 {
-  
-  /*!< At this stage the microcontroller clock setting is already configured, 
+
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
-     */  
- 
+     */
+
   /* Initialize LEDs mounted on EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
-  
+
   /* Set MPU regions */
   MPU_Config();
 
 #ifdef ACCESS_PERMISSION
   MPU_AccessPermConfig();
-#endif  
+#endif
 
   /* Infinite loop */
   while (1)
   {
     /* Toggle LED1 */
-    STM_EVAL_LEDToggle(LED1); 
+    STM_EVAL_LEDToggle(LED1);
 
     /* Insert a delay */
     Delay(0x7FFFF);
@@ -109,7 +109,7 @@ void Delay(__IO uint32_t nCount)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

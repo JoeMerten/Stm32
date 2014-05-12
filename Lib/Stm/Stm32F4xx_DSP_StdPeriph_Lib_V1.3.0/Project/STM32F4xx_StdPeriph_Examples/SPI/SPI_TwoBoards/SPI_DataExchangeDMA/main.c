@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -62,30 +62,30 @@ static TestStatus Buffercmp(uint8_t* pBuffer1, __IO uint8_t* pBuffer2, uint16_t 
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
        before to branch to application main.
-     */ 
-  
+     */
+
   /* SPI configuration */
   SPI_Config();
-  
+
   /* SysTick configuration */
   SysTickConfig();
-  
-  /* Initialize LEDs mounted on EVAL board */     
+
+  /* Initialize LEDs mounted on EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
-  
+
 #ifdef SPI_MASTER
-  /* Master board configuration */    
+  /* Master board configuration */
   /* Initializes the SPI communication */
   SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
   SPI_Init(SPIx, &SPI_InitStructure);
-  
+
   /* The Data transfer is performed in the SPI using Direct Memory Access */
 
   /* Enable DMA SPI TX Stream */
@@ -99,18 +99,18 @@ int main(void)
 
   /* Enable SPI DMA RX Requsts */
   SPI_I2S_DMACmd(SPIx, SPI_I2S_DMAReq_Rx, ENABLE);
-  
+
   /* Configure the Tamper Button */
   STM_EVAL_PBInit(BUTTON_TAMPER,BUTTON_MODE_GPIO);
-  
+
   /* Wait until Tamper Button is pressed */
   while (STM_EVAL_PBGetState(BUTTON_TAMPER));
-  
+
   /* Enable the SPI peripheral */
   SPI_Cmd(SPIx, ENABLE);
-  
+
 #endif /* SPI_MASTER */
-  
+
 #ifdef SPI_SLAVE
   /* Slave board configuration */
   /* Initializes the SPI communication */
@@ -121,8 +121,8 @@ int main(void)
   DMA_Cmd(SPIx_TX_DMA_STREAM,ENABLE);
 
   /* Enable DMA SPI RX Stream */
-  DMA_Cmd(SPIx_RX_DMA_STREAM,ENABLE);  
-  
+  DMA_Cmd(SPIx_RX_DMA_STREAM,ENABLE);
+
   /* Enable SPI DMA TX Requsts */
   SPI_I2S_DMACmd(SPIx, SPI_I2S_DMAReq_Tx, ENABLE);
 
@@ -131,23 +131,23 @@ int main(void)
 
   /* Enable the SPI peripheral */
   SPI_Cmd(SPIx, ENABLE);
- 
+
 #endif /* SPI_SLAVE */
 
   /* Waiting the end of Data transfer */
   while (DMA_GetFlagStatus(SPIx_TX_DMA_STREAM,SPIx_TX_DMA_FLAG_TCIF)==RESET);
   while (DMA_GetFlagStatus(SPIx_RX_DMA_STREAM,SPIx_RX_DMA_FLAG_TCIF)==RESET);
-  
+
   /* Clear DMA Transfer Complete Flags */
   DMA_ClearFlag(SPIx_TX_DMA_STREAM,SPIx_TX_DMA_FLAG_TCIF);
-  DMA_ClearFlag(SPIx_RX_DMA_STREAM,SPIx_RX_DMA_FLAG_TCIF);  
-  
+  DMA_ClearFlag(SPIx_RX_DMA_STREAM,SPIx_RX_DMA_FLAG_TCIF);
+
   /* Disable DMA SPI TX Stream */
   DMA_Cmd(SPIx_TX_DMA_STREAM,DISABLE);
 
   /* Disable DMA SPI RX Stream */
-  DMA_Cmd(SPIx_RX_DMA_STREAM,DISABLE);  
-  
+  DMA_Cmd(SPIx_RX_DMA_STREAM,DISABLE);
+
   /* Disable SPI DMA TX Requsts */
   SPI_I2S_DMACmd(SPIx, SPI_I2S_DMAReq_Tx, DISABLE);
 
@@ -155,9 +155,9 @@ int main(void)
   SPI_I2S_DMACmd(SPIx, SPI_I2S_DMAReq_Rx, DISABLE);
 
   /* Disable the SPI peripheral */
-  SPI_Cmd(SPIx, DISABLE);  
-  
-  if (Buffercmp(aTxBuffer, aRxBuffer, BUFFERSIZE) != FAILED) 
+  SPI_Cmd(SPIx, DISABLE);
+
+  if (Buffercmp(aTxBuffer, aRxBuffer, BUFFERSIZE) != FAILED)
   {
     /* Turn ON LED1 and LED3 */
     STM_EVAL_LEDOn(LED1);
@@ -173,13 +173,13 @@ int main(void)
     STM_EVAL_LEDOff(LED3);
     /* Turn ON LED2 and LED4 */
     STM_EVAL_LEDOn(LED2);
-    STM_EVAL_LEDOn(LED4);    
-  } 
-  
+    STM_EVAL_LEDOn(LED4);
+  }
+
   /* Infinite Loop */
   while (1)
-  { 
-  }  
+  {
+  }
 }
 
 /**
@@ -195,10 +195,10 @@ static void SPI_Config(void)
   /* Peripheral Clock Enable -------------------------------------------------*/
   /* Enable the SPI clock */
   SPIx_CLK_INIT(SPIx_CLK, ENABLE);
-  
+
   /* Enable GPIO clocks */
   RCC_AHB1PeriphClockCmd(SPIx_SCK_GPIO_CLK | SPIx_MISO_GPIO_CLK | SPIx_MOSI_GPIO_CLK, ENABLE);
-  
+
   /* Enable DMA clock */
   RCC_AHB1PeriphClockCmd(SPIx_DMA_CLK, ENABLE);
 
@@ -207,10 +207,10 @@ static void SPI_Config(void)
   GPIO_DeInit(SPIx_SCK_GPIO_PORT);
   GPIO_DeInit(SPIx_MISO_GPIO_PORT);
   GPIO_DeInit(SPIx_MOSI_GPIO_PORT);
-  
-  /* Connect SPI pins to AF5 */  
+
+  /* Connect SPI pins to AF5 */
   GPIO_PinAFConfig(SPIx_SCK_GPIO_PORT, SPIx_SCK_SOURCE, SPIx_SCK_AF);
-  GPIO_PinAFConfig(SPIx_MISO_GPIO_PORT, SPIx_MISO_SOURCE, SPIx_MISO_AF);    
+  GPIO_PinAFConfig(SPIx_MISO_GPIO_PORT, SPIx_MISO_SOURCE, SPIx_MISO_AF);
   GPIO_PinAFConfig(SPIx_MOSI_GPIO_PORT, SPIx_MOSI_SOURCE, SPIx_MOSI_AF);
 
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
@@ -221,15 +221,15 @@ static void SPI_Config(void)
   /* SPI SCK pin configuration */
   GPIO_InitStructure.GPIO_Pin = SPIx_SCK_PIN;
   GPIO_Init(SPIx_SCK_GPIO_PORT, &GPIO_InitStructure);
-  
+
   /* SPI  MISO pin configuration */
   GPIO_InitStructure.GPIO_Pin =  SPIx_MISO_PIN;
-  GPIO_Init(SPIx_MISO_GPIO_PORT, &GPIO_InitStructure);  
+  GPIO_Init(SPIx_MISO_GPIO_PORT, &GPIO_InitStructure);
 
   /* SPI  MOSI pin configuration */
   GPIO_InitStructure.GPIO_Pin =  SPIx_MOSI_PIN;
   GPIO_Init(SPIx_MOSI_GPIO_PORT, &GPIO_InitStructure);
- 
+
   /* SPI configuration -------------------------------------------------------*/
   SPI_I2S_DeInit(SPIx);
   SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
@@ -240,12 +240,12 @@ static void SPI_Config(void)
   SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_256;
   SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
   SPI_InitStructure.SPI_CRCPolynomial = 7;
-  
+
   /* DMA configuration -------------------------------------------------------*/
   /* Deinitialize DMA Streams */
   DMA_DeInit(SPIx_TX_DMA_STREAM);
   DMA_DeInit(SPIx_RX_DMA_STREAM);
-  
+
   /* Configure DMA Initialization Structure */
   DMA_InitStructure.DMA_BufferSize = BUFFERSIZE ;
   DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable ;
@@ -267,9 +267,9 @@ static void SPI_Config(void)
   /* Configure RX DMA */
   DMA_InitStructure.DMA_Channel = SPIx_RX_DMA_CHANNEL ;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory ;
-  DMA_InitStructure.DMA_Memory0BaseAddr =(uint32_t)aRxBuffer ; 
+  DMA_InitStructure.DMA_Memory0BaseAddr =(uint32_t)aRxBuffer ;
   DMA_Init(SPIx_RX_DMA_STREAM, &DMA_InitStructure);
-  
+
 }
 
 /**

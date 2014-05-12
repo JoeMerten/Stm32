@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Project/STM32F10x_StdPeriph_Template/main.c 
+  * @file    Project/STM32F10x_StdPeriph_Template/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */  
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 #elif defined USE_STM3210B_EVAL
  #include "stm3210b_eval_lcd.h"
 #elif defined USE_STM3210E_EVAL
- #include "stm3210e_eval_lcd.h" 
+ #include "stm3210e_eval_lcd.h"
 #elif defined USE_STM3210C_EVAL
  #include "stm3210c_eval_lcd.h"
 #elif defined USE_STM32100E_EVAL
@@ -43,29 +43,29 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #ifdef USE_STM32100B_EVAL
-  #define MESSAGE1   "STM32 MD Value Line " 
-  #define MESSAGE2   " Device running on  " 
-  #define MESSAGE3   "  STM32100B-EVAL    " 
+  #define MESSAGE1   "STM32 MD Value Line "
+  #define MESSAGE2   " Device running on  "
+  #define MESSAGE3   "  STM32100B-EVAL    "
 #elif defined (USE_STM3210B_EVAL)
-  #define MESSAGE1   "STM32 Medium Density" 
-  #define MESSAGE2   " Device running on  " 
-  #define MESSAGE3   "   STM3210B-EVAL    " 
+  #define MESSAGE1   "STM32 Medium Density"
+  #define MESSAGE2   " Device running on  "
+  #define MESSAGE3   "   STM3210B-EVAL    "
 #elif defined (STM32F10X_XL) && defined (USE_STM3210E_EVAL)
-  #define MESSAGE1   "  STM32 XL Density  " 
-  #define MESSAGE2   " Device running on  " 
+  #define MESSAGE1   "  STM32 XL Density  "
+  #define MESSAGE2   " Device running on  "
   #define MESSAGE3   "   STM3210E-EVAL    "
 #elif defined (USE_STM3210E_EVAL)
-  #define MESSAGE1   " STM32 High Density " 
-  #define MESSAGE2   " Device running on  " 
-  #define MESSAGE3   "   STM3210E-EVAL    " 
+  #define MESSAGE1   " STM32 High Density "
+  #define MESSAGE2   " Device running on  "
+  #define MESSAGE3   "   STM3210E-EVAL    "
 #elif defined (USE_STM3210C_EVAL)
-  #define MESSAGE1   " STM32 Connectivity " 
-  #define MESSAGE2   " Line Device running" 
+  #define MESSAGE1   " STM32 Connectivity "
+  #define MESSAGE2   " Line Device running"
   #define MESSAGE3   " on STM3210C-EVAL   "
 #elif defined (USE_STM32100E_EVAL)
-  #define MESSAGE1   "STM32 HD Value Line " 
-  #define MESSAGE2   " Device running on  " 
-  #define MESSAGE3   "  STM32100E-EVAL    "   
+  #define MESSAGE1   "STM32 HD Value Line "
+  #define MESSAGE2   " Device running on  "
+  #define MESSAGE3   "  STM32100E-EVAL    "
 #endif
 
 /* Private macro -------------------------------------------------------------*/
@@ -90,12 +90,12 @@
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
+     */
 
   /* Initialize LEDs, Key Button, LCD and COM port(USART) available on
      STM3210X-EVAL board ******************************************************/
@@ -105,7 +105,7 @@ int main(void)
   STM_EVAL_LEDInit(LED4);
 
   /* USARTx configured as follow:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -131,11 +131,11 @@ int main(void)
 #elif defined (USE_STM3210C_EVAL)
   STM3210C_LCD_Init();
 #elif defined (USE_STM32100E_EVAL)
-  STM32100E_LCD_Init();  
+  STM32100E_LCD_Init();
 #endif
 
   /* Display message on STM3210X-EVAL LCD *************************************/
-  /* Clear the LCD */ 
+  /* Clear the LCD */
   LCD_Clear(LCD_COLOR_WHITE);
 
   /* Set the LCD Back Color */
@@ -195,7 +195,7 @@ PUTCHAR_PROTOTYPE
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

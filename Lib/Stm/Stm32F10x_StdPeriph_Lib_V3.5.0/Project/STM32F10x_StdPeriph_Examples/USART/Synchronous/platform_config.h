@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/Synchronous/platform_config.h 
+  * @file    USART/Synchronous/platform_config.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __PLATFORM_CONFIG_H
@@ -32,8 +32,8 @@
 #if !defined (USE_STM32100B_EVAL) && !defined (USE_STM3210B_EVAL) &&  !defined (USE_STM3210E_EVAL) &&  !defined (USE_STM32100E_EVAL)
  //#define USE_STM32100B_EVAL
  //#define USE_STM3210B_EVAL
- //#define USE_STM32100E_EVAL 
- #define USE_STM3210E_EVAL 
+ //#define USE_STM32100E_EVAL
+ #define USE_STM3210E_EVAL
 #endif
 
 /* Define the STM32F10x hardware depending on the used evaluation board */
@@ -46,7 +46,7 @@
   #define USARTy_RxPin             GPIO_Pin_10
   #define USARTy_TxPin             GPIO_Pin_9
   #define USARTy_ClkPin            GPIO_Pin_8
-  
+
   #define SPIy                     SPI1
   #define SPIy_GPIO                GPIOA
   #define SPIy_CLK                 RCC_APB2Periph_SPI1
@@ -64,7 +64,7 @@
   #define USARTy_RxPin             GPIO_Pin_10
   #define USARTy_TxPin             GPIO_Pin_9
   #define USARTy_ClkPin            GPIO_Pin_8
-  
+
   #define SPIy                     SPI1
   #define SPIy_GPIO                GPIOA
   #define SPIy_CLK                 RCC_APB2Periph_SPI1

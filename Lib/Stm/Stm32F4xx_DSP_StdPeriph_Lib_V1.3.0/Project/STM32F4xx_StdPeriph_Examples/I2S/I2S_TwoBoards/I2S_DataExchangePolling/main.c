@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -78,7 +78,7 @@ static void Fill_Buffer(__IO uint8_t *pBuffer, uint16_t BufferLength);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
        before to branch to application main.
@@ -96,7 +96,7 @@ int main(void)
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
 
-#ifdef I2S_MASTER  
+#ifdef I2S_MASTER
   /* Master full Duplex configuration ----------------------------------------*/
   /* Clear the Rx Master Buffer */
   Fill_Buffer((uint8_t*)aRxMasterBuffer, (TX_MASTER_BUFFERSIZE*2));
@@ -104,13 +104,13 @@ int main(void)
   /* Configure I2Sx in Master Transmitter Mode */
   I2S_InitStructure.I2S_Mode = I2S_Mode_MasterTx;
   I2S_Init(I2Sx, &I2S_InitStructure);
-  
+
   /* Configure the I2Sx_ext (the second instance) in Slave Receiver Mode */
   I2S_FullDuplexConfig(I2Sxext, &I2S_InitStructure);
-  
+
   /* Enable the I2Sx peripheral */
   I2S_Cmd(I2Sx, ENABLE);
-  /* Enable the I2Sx_ext peripheral for Full Duplex mode */ 
+  /* Enable the I2Sx_ext peripheral for Full Duplex mode */
   I2S_Cmd(I2Sxext, ENABLE);
 
   /* Master full Duplex Communication ----------------------------------------*/
@@ -121,19 +121,19 @@ int main(void)
     /* Data to transmitted through I2Sx SD pin */
     while (SPI_I2S_GetFlagStatus(I2Sx, SPI_I2S_FLAG_TXE ) != SET);
     SPI_I2S_SendData(I2Sx, aTxMasterBuffer[ubBufferCounter]);
-   
-    /* Data Received through I2Sx_ext SD pin */ 
+
+    /* Data Received through I2Sx_ext SD pin */
     while (SPI_I2S_GetFlagStatus(I2Sxext, SPI_I2S_FLAG_RXNE ) != SET);
     aRxMasterBuffer[ubBufferCounter] = SPI_I2S_ReceiveData(I2Sxext);
     ubBufferCounter++;
-    
+
   }
   /* Communication Full Duplex Finished */
   I2S_Cmd(I2Sx, DISABLE);
   I2S_Cmd(I2Sxext, DISABLE);
- 
+
   /* Check Communication Result ----------------------------------------------*/
-  if (Buffercmp((uint8_t*)aRxMasterBuffer, (uint8_t*)aTxSlaveBuffer, (TX_SLAVE_BUFFERSIZE*2)) != FAILED) 
+  if (Buffercmp((uint8_t*)aRxMasterBuffer, (uint8_t*)aTxSlaveBuffer, (TX_SLAVE_BUFFERSIZE*2)) != FAILED)
   {
     /* Turn ON LED2 and LED4 */
     STM_EVAL_LEDOn(LED2);
@@ -142,22 +142,22 @@ int main(void)
 #endif /* I2S_MASTER */
 
 #ifdef I2S_SLAVE
-  /* Slave full Duplex configuration ----------------------------------------*/ 
+  /* Slave full Duplex configuration ----------------------------------------*/
   /* Clear the RxBuffer */
   Fill_Buffer((uint8_t*)aRxSlaveBuffer, (TX_SLAVE_BUFFERSIZE*2));
-    
+
   /* Configure I2Sx in Slave Receiver Mode */
   I2S_InitStructure.I2S_Mode = I2S_Mode_SlaveRx;
   I2S_Init(I2Sx, &I2S_InitStructure);
-  
+
   /* Configure the I2Sx_ext (the second instance) in Slave Transmitter Mode */
   I2S_FullDuplexConfig(I2Sxext, &I2S_InitStructure);
-  
-  /* Enable the I2Sx_ext peripheral for Full Duplex mode */ 
+
+  /* Enable the I2Sx_ext peripheral for Full Duplex mode */
   I2S_Cmd(I2Sxext, ENABLE);
   /* Enable the I2Sx peripheral */
   I2S_Cmd(I2Sx, ENABLE);
- 
+
   /* Slave full Duplex Communication -----------------------------------------*/
   /* Communication Full Duplex Started */
   ubBufferCounter = 0;
@@ -166,25 +166,25 @@ int main(void)
     /* Data to transmitted through I2Sx_ext SD pin */
     while (SPI_I2S_GetFlagStatus(I2Sxext, SPI_I2S_FLAG_TXE ) != SET);
     SPI_I2S_SendData(I2Sxext, aTxSlaveBuffer[ubBufferCounter]);
-    
-    /* Data Received through I2Sx SD pin */ 
+
+    /* Data Received through I2Sx SD pin */
     while (SPI_I2S_GetFlagStatus(I2Sx, SPI_I2S_FLAG_RXNE ) != SET);
     aRxSlaveBuffer[ubBufferCounter] = SPI_I2S_ReceiveData(I2Sx);
     ubBufferCounter++;
-    
+
   }
   /* Communication full duplex Finished */
   I2S_Cmd(I2Sx, DISABLE);
   I2S_Cmd(I2Sxext, DISABLE);
 
   /* Check Communication Results ---------------------------------------------*/
-  if (Buffercmp((uint8_t*)aRxSlaveBuffer, (uint8_t*)aTxMasterBuffer, (TX_SLAVE_BUFFERSIZE*2)) != FAILED) 
+  if (Buffercmp((uint8_t*)aRxSlaveBuffer, (uint8_t*)aTxMasterBuffer, (TX_SLAVE_BUFFERSIZE*2)) != FAILED)
   {
     /* Turn ON LED3 */
     STM_EVAL_LEDOn(LED3);
   }
 #endif /* I2S_SLAVE */
-        
+
   while(1)
   {
   }
@@ -202,13 +202,13 @@ static void I2S_Config(void)
   /* Peripheral Clock Enable -------------------------------------------------*/
   /* Enable the I2Sx/I2Sx_ext clock */
   I2Sx_CLK_INIT(I2Sx_CLK, ENABLE);
-  
+
   /* Enable GPIO clocks */
   RCC_AHB1PeriphClockCmd(I2Sx_WS_GPIO_CLK | I2Sx_CK_GPIO_CLK | \
                          I2Sx_SD_GPIO_CLK | I2Sxext_SD_GPIO_CLK, ENABLE);
 
   /* I2S GPIO Configuration --------------------------------------------------*/
-  /* Connect I2S pins to Alternate functions */  
+  /* Connect I2S pins to Alternate functions */
   GPIO_PinAFConfig(I2Sx_WS_GPIO_PORT, I2Sx_WS_SOURCE, I2Sx_WS_AF);
   GPIO_PinAFConfig(I2Sx_CK_GPIO_PORT, I2Sx_CK_SOURCE, I2Sx_CK_AF);
   GPIO_PinAFConfig(I2Sx_SD_GPIO_PORT, I2Sx_SD_SOURCE, I2Sx_SD_AF);
@@ -226,7 +226,7 @@ static void I2S_Config(void)
   /* I2S CK pin configuration */
   GPIO_InitStructure.GPIO_Pin =  I2Sx_CK_PIN;
   GPIO_Init(I2Sx_CK_GPIO_PORT, &GPIO_InitStructure);
-  
+
   /* I2S SD pin configuration */
   GPIO_InitStructure.GPIO_Pin = I2Sx_SD_PIN;
   GPIO_Init(I2Sx_SD_GPIO_PORT, &GPIO_InitStructure);
@@ -234,7 +234,7 @@ static void I2S_Config(void)
   /* I2S Extended SD pin configuration */
   GPIO_InitStructure.GPIO_Pin =  I2Sxext_SD_PIN;
   GPIO_Init(I2Sxext_SD_GPIO_PORT, &GPIO_InitStructure);
- 
+
   /* I2S configuration -------------------------------------------------------*/
   /* Initialize  I2Sx and I2Sxext peripherals */
   SPI_I2S_DeInit(I2Sx);

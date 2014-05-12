@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_InputCapture/main.c 
+  * @file    TIM/TIM_InputCapture/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup TIM_InputCapture
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -54,21 +54,21 @@ static void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
-     */     
-       
+     */
+
   /* TIM1 Configuration */
   TIM_Config();
 
   /* TIM1 configuration: Input Capture mode ---------------------
-     The external signal is connected to TIM1 CH2 pin (PE.11)  
+     The external signal is connected to TIM1 CH2 pin (PE.11)
      The Rising edge is used as active edge,
-     The TIM1 CCR2 is used to compute the frequency value 
+     The TIM1 CCR2 is used to compute the frequency value
   ------------------------------------------------------------ */
 
   TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;
@@ -78,7 +78,7 @@ int main(void)
   TIM_ICInitStructure.TIM_ICFilter = 0x0;
 
   TIM_ICInit(TIM1, &TIM_ICInitStructure);
-  
+
   /* TIM enable counter */
   TIM_Cmd(TIM1, ENABLE);
 
@@ -97,13 +97,13 @@ static void TIM_Config(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
   NVIC_InitTypeDef NVIC_InitStructure;
-  
+
   /* TIM1 clock enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
 
   /* GPIOA clock enable */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
-  
+
   /* TIM1 channel 2 pin (PE.11) configuration */
   GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_11;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
@@ -114,14 +114,14 @@ static void TIM_Config(void)
 
   /* Connect TIM pins to AF2 */
   GPIO_PinAFConfig(GPIOE, GPIO_PinSource11, GPIO_AF_TIM1);
-  
+
   /* Enable the TIM1 global Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = TIM1_CC_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
-  
+
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -146,10 +146,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

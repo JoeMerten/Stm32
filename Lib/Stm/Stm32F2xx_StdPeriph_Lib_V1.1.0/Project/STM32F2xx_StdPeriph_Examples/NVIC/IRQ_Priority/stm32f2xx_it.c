@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    NVIC/IRQ_Priority/stm32f2xx_it.c 
+  * @file    NVIC/IRQ_Priority/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -37,14 +37,14 @@
 
 /** @addtogroup IRQ_Priority
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern __IO uint8_t PreemptionOccured;
-extern __IO uint8_t PreemptionPriorityValue; 
+extern __IO uint8_t PreemptionPriorityValue;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -181,11 +181,11 @@ void EXTI0_IRQHandler(void)
 {
   /* Generate SysTick exception */
   SCB->ICSR |= 0x04000000;
-  
+
   /* Clear WAKEUP_BUTTON_EXTI_LINE pending bit */
   EXTI_ClearITPendingBit(WAKEUP_BUTTON_EXTI_LINE);
 }
- 
+
 /**
   * @brief  This function handles External lines 15 to 10 interrupt request.
   * @param  None
@@ -194,7 +194,7 @@ void EXTI0_IRQHandler(void)
 void EXTI15_10_IRQHandler(void)
 {
   NVIC_InitTypeDef NVIC_InitStructure;
-  
+
   if(EXTI_GetITStatus(KEY_BUTTON_EXTI_LINE) != RESET)
   {
     PreemptionPriorityValue = !PreemptionPriorityValue;
@@ -206,9 +206,9 @@ void EXTI15_10_IRQHandler(void)
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
-    
+
     /* Configure the SysTick Handler Priority: Preemption priority and subpriority */
-    NVIC_SetPriority(SysTick_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), !PreemptionPriorityValue, 0));    
+    NVIC_SetPriority(SysTick_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), !PreemptionPriorityValue, 0));
 
     /* Clear KEY_BUTTON_EXTI_LINE pending bit */
     EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
@@ -217,10 +217,10 @@ void EXTI15_10_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

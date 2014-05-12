@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -35,10 +35,10 @@
 #if defined (USE_STM324xG_EVAL)
   #include "stm324xg_eval.h"
 
-#elif defined (USE_STM324x7I_EVAL) 
+#elif defined (USE_STM324x7I_EVAL)
   #include "stm324x7i_eval.h"
 
-#elif defined (USE_STM324x9I_EVAL) 
+#elif defined (USE_STM324x9I_EVAL)
   #include "stm324x9i_eval.h"
 
 #else
@@ -47,23 +47,23 @@
 
 /* Exported typedef ----------------------------------------------------------*/
 /* Exported define -----------------------------------------------------------*/
-   
+
 /* Definition for USARTx_IRQHANDLER *******************************************/
 #if defined (USE_STM324xG_EVAL)
   #define USARTx_IRQHANDLER   USART3_IRQHandler
-  
+
 #endif /* USE_STM324xG_EVAL */
-   
+
 #if defined (USE_STM324x7I_EVAL)
   #define USARTx_IRQHANDLER   USART3_IRQHandler
-  
+
 #endif /* USE_STM324x7I_EVAL */
-   
+
 #if defined (USE_STM324x9I_EVAL)
   #define USARTx_IRQHANDLER   USART1_IRQHandler
-  
+
 #endif /* USE_STM324x9I_EVAL */
-   
+
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/

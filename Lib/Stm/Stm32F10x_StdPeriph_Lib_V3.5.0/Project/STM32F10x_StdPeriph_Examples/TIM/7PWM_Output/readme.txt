@@ -1,9 +1,9 @@
 /**
   @page TIM_7PWM_Output TIM 7 PWM Output example
-  
+
   @verbatim
   ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
-  * @file    TIM/7PWM_Output/readme.txt 
+  * @file    TIM/7PWM_Output/readme.txt
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -18,9 +18,9 @@
   ******************************************************************************
    @endverbatim
 
-@par Example Description 
+@par Example Description
 
-This example shows how to configure the TIM1 peripheral to generate 7 PWM signals 
+This example shows how to configure the TIM1 peripheral to generate 7 PWM signals
 with 4 different duty cycles (50%, 37.5%, 25% and 12.5%).
 
 TIM1CLK = SystemCoreClock, Prescaler = 0, TIM1 counter clock = SystemCoreClock
@@ -39,64 +39,64 @@ The Timer pulse is calculated as follows:
 
 The TIM1 waveform can be displayed using an oscilloscope.
 
-@par Directory contents 
+@par Directory contents
 
   - TIM/7PWM_Output/stm32f10x_conf.h    Library Configuration file
   - TIM/7PWM_Output/stm32f10x_it.c      Interrupt handlers
   - TIM/7PWM_Output/stm32f10x_it.h      Interrupt handlers header file
   - TIM/7PWM_Output/main.c              Main program
   - TIM/7PWM_Output/system_stm32f10x.c  STM32F10x system source file
-  
-@par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, High-Density 
-    Value line, Medium-Density, XL-Density, Medium-Density Value line, Low-Density 
+@par Hardware and Software environment
+
+  - This example runs on STM32F10x Connectivity line, High-Density, High-Density
+    Value line, Medium-Density, XL-Density, Medium-Density Value line, Low-Density
     and Low-Density Value line Devices.
-  
+
   - This example has been tested with STMicroelectronics STM32100E-EVAL (High-Density
-    Value line), STM32100B-EVAL (Medium-Density Value line), STM3210C-EVAL (Connectivity line), 
-    STM3210E-EVAL (High-Density and XL-Density) and STM3210B-EVAL (Medium-Density) 
-    evaluation boards and can be easily tailored to any other supported device 
+    Value line), STM32100B-EVAL (Medium-Density Value line), STM3210C-EVAL (Connectivity line),
+    STM3210E-EVAL (High-Density and XL-Density) and STM3210B-EVAL (Medium-Density)
+    evaluation boards and can be easily tailored to any other supported device
     and development board.
-    
 
-  - STM3210C-EVAL Set-up 
+
+  - STM3210C-EVAL Set-up
     - Connect the TIM1 pins(TIM1 full remapped pins) to an oscilloscope to monitor the different waveforms:
-      - TIM1_CH1  pin (PE.08)  
-      - TIM1_CH1N pin (PE.09)  
-      - TIM1_CH2  pin (PE.10)  
-      - TIM1_CH2N pin (PE.11)  
-      - TIM1_CH3  pin (PE.12)  
+      - TIM1_CH1  pin (PE.08)
+      - TIM1_CH1N pin (PE.09)
+      - TIM1_CH2  pin (PE.10)
+      - TIM1_CH2N pin (PE.11)
+      - TIM1_CH3  pin (PE.12)
       - TIM1_CH3N pin (PE.13)
-      - TIM1_CH4  pin (PE.14)      
+      - TIM1_CH4  pin (PE.14)
 
-  - STM3210E-EVAL, STM3210B-EVAL, STM32100B-EVAL and STM32100E-EVAL Set-up 
+  - STM3210E-EVAL, STM3210B-EVAL, STM32100B-EVAL and STM32100E-EVAL Set-up
     - Connect the TIM1 pins to an oscilloscope to monitor the different waveforms:
-      - TIM1_CH1  pin (PA.08)  
-      - TIM1_CH1N pin (PB.13)  
-      - TIM1_CH2  pin (PA.09)  
-      - TIM1_CH2N pin (PB.14)  
-      - TIM1_CH3  pin (PA.10)  
+      - TIM1_CH1  pin (PA.08)
+      - TIM1_CH1N pin (PB.13)
+      - TIM1_CH2  pin (PA.09)
+      - TIM1_CH2N pin (PB.14)
+      - TIM1_CH3  pin (PA.10)
       - TIM1_CH3N pin (PB.15)
-      - TIM1_CH4  pin (PA.11)    
-  
-@par How to use it ? 
+      - TIM1_CH4  pin (PA.11)
+
+@par How to use it ?
 
 In order to make the program work, you must do the following :
  - Copy all source files from this example folder to the template folder under
    Project\STM32F10x_StdPeriph_Template
- - Open your preferred toolchain 
+ - Open your preferred toolchain
  - Rebuild all files and load your image into target memory
- - Run the example 
+ - Run the example
 
 @note
- - Low-density Value line devices are STM32F100xx microcontrollers where the 
+ - Low-density Value line devices are STM32F100xx microcontrollers where the
    Flash memory density ranges between 16 and 32 Kbytes.
- - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+ - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx
    microcontrollers where the Flash memory density ranges between 16 and 32 Kbytes.
  - Medium-density Value line devices are STM32F100xx microcontrollers where
-   the Flash memory density ranges between 64 and 128 Kbytes.  
- - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   the Flash memory density ranges between 64 and 128 Kbytes.
+ - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density Value line devices are STM32F100xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
@@ -105,6 +105,6 @@ In order to make the program work, you must do the following :
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
-   
+
  * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

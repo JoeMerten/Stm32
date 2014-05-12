@@ -17,8 +17,8 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
+  ******************************************************************************
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32100E_EVAL_CEC_H
@@ -38,11 +38,11 @@ extern "C"
 
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM32100E_EVAL
   * @{
-  */  
+  */
 
 /** @defgroup STM32100E_EVAL_CEC
   * @{
@@ -139,18 +139,18 @@ typedef struct
 /**
   * @brief  HDMI CEC Root (Mainly for TV with a fixed physical address (0.0.0.0))
   *         If you want to configure the STM32100E-EVAL board as CEC Root (Sink)
-  *         change the following define to 0x1    
+  *         change the following define to 0x1
   */
 #define HDMI_CEC_ROOT                                       0x00
 
 /**
   * @brief  To select if the DDC Channel will be used for physical address discovery
   *         or not. To use the DDC Channel to read the EDID structure uncomment
-  *         the following line.   
+  *         the following line.
   *         If the device is configured as HMDI source it should read his own physical
-  *         address from the sink that is connected to.         
+  *         address from the sink that is connected to.
   */
-/* #define HDMI_CEC_USE_DDC */                                    
+/* #define HDMI_CEC_USE_DDC */
 
 /**
   * @brief  CEC version: V1.3a
@@ -285,6 +285,6 @@ HDMI_CEC_Error HDMI_CEC_CheckConnectedDevices(void);
 /**
   * @}
   */
-  
+
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
 

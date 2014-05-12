@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2C/EEPROM/main.c 
+  * @file    I2C/EEPROM/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm322xg_eval_i2c_ee.h"
@@ -35,7 +35,7 @@
 
 /** @addtogroup I2C_EEPROM
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -109,67 +109,67 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
-     */     
+     */
 
 #ifdef ENABLE_LCD_MSG_DISPLAY
   /* Initialize the LCD screen for information display */
   STM322xG_LCD_Init();
-  LCD_Clear(LCD_COLOR_BLUE);  
+  LCD_Clear(LCD_COLOR_BLUE);
   LCD_SetBackColor(LCD_COLOR_BLUE);
   LCD_SetTextColor(LCD_COLOR_WHITE);
   LCD_DisplayStringLine(LCD_LINE_0, (uint8_t *)"SMT32F2xx FW Library");
   LCD_DisplayStringLine(LCD_LINE_1, (uint8_t *)"   EEPROM Example   ");
-#endif /* ENABLE_LCD_MSG_DISPLAY */  
-  
+#endif /* ENABLE_LCD_MSG_DISPLAY */
+
   /* Initialize the I2C EEPROM driver ----------------------------------------*/
-  sEE_Init();  
+  sEE_Init();
 
   /* First write in the memory followed by a read of the written data --------*/
   /* Write on I2C EEPROM from sEE_WRITE_ADDRESS1 */
-  sEE_WriteBuffer(Tx1_Buffer, sEE_WRITE_ADDRESS1, BUFFER_SIZE1); 
+  sEE_WriteBuffer(Tx1_Buffer, sEE_WRITE_ADDRESS1, BUFFER_SIZE1);
 
   /* Wait for EEPROM standby state */
-  sEE_WaitEepromStandbyState();  
-  
+  sEE_WaitEepromStandbyState();
+
   /* Set the Number of data to be read */
   NumDataRead = BUFFER_SIZE1;
-  
+
   /* Read from I2C EEPROM from sEE_READ_ADDRESS1 */
-  sEE_ReadBuffer(Rx1_Buffer, sEE_READ_ADDRESS1, (uint16_t *)(&NumDataRead)); 
+  sEE_ReadBuffer(Rx1_Buffer, sEE_READ_ADDRESS1, (uint16_t *)(&NumDataRead));
 
 
-  /* Starting from this point, if the requested number of data is higher than 1, 
-     then only the DMA is managing the data transfer. Meanwhile, CPU is free to 
+  /* Starting from this point, if the requested number of data is higher than 1,
+     then only the DMA is managing the data transfer. Meanwhile, CPU is free to
      perform other tasks:
-  
-    // Add your code here: 
+
+    // Add your code here:
     //...
     //...
 
-     For simplicity reasons, this example is just waiting till the end of the 
+     For simplicity reasons, this example is just waiting till the end of the
      transfer. */
- 
-#ifdef ENABLE_LCD_MSG_DISPLAY  
+
+#ifdef ENABLE_LCD_MSG_DISPLAY
   LCD_DisplayStringLine(LCD_LINE_3, (uint8_t *)" Transfer 1 Ongoing ");
-#endif /* ENABLE_LCD_MSG_DISPLAY */ 
-  
-  /* Wait till DMA transfer is complete (Transfer complete interrupt handler 
+#endif /* ENABLE_LCD_MSG_DISPLAY */
+
+  /* Wait till DMA transfer is complete (Transfer complete interrupt handler
     resets the variable holding the number of data to be read) */
   while (NumDataRead > 0)
-  {}  
-  
+  {}
+
   /* Check if the data written to the memory is read correctly */
   TransferStatus1 = Buffercmp(Tx1_Buffer, Rx1_Buffer, BUFFER_SIZE1);
-  /* TransferStatus1 = PASSED, if the transmitted and received data 
+  /* TransferStatus1 = PASSED, if the transmitted and received data
      to/from the EEPROM are the same */
-  /* TransferStatus1 = FAILED, if the transmitted and received data 
+  /* TransferStatus1 = FAILED, if the transmitted and received data
      to/from the EEPROM are different */
-#ifdef ENABLE_LCD_MSG_DISPLAY  
+#ifdef ENABLE_LCD_MSG_DISPLAY
   if (TransferStatus1 == PASSED)
   {
     LCD_DisplayStringLine(LCD_LINE_3, (uint8_t *)" Transfer 1 PASSED  ");
@@ -177,50 +177,50 @@ int main(void)
   else
   {
     LCD_DisplayStringLine(LCD_LINE_3, (uint8_t *)" Transfer 1 FAILED  ");
-  }  
-#endif /* ENABLE_LCD_MSG_DISPLAY */  
+  }
+#endif /* ENABLE_LCD_MSG_DISPLAY */
 
   /* Second write in the memory followed by a read of the written data -------*/
   /* Write on I2C EEPROM from sEE_WRITE_ADDRESS2 */
-  sEE_WriteBuffer(Tx2_Buffer, sEE_WRITE_ADDRESS2, BUFFER_SIZE2); 
+  sEE_WriteBuffer(Tx2_Buffer, sEE_WRITE_ADDRESS2, BUFFER_SIZE2);
 
   /* Wait for EEPROM standby state */
-  sEE_WaitEepromStandbyState();  
-  
+  sEE_WaitEepromStandbyState();
+
   /* Set the Number of data to be read */
-  NumDataRead = BUFFER_SIZE2;  
-  
+  NumDataRead = BUFFER_SIZE2;
+
   /* Read from I2C EEPROM from sEE_READ_ADDRESS2 */
   sEE_ReadBuffer(Rx2_Buffer, sEE_READ_ADDRESS2, (uint16_t *)(&NumDataRead));
 
 
-  /* Starting from this point, if the requested number of data is higher than 1, 
-     then only the DMA is managing the data transfer. Meanwhile, CPU is free to 
+  /* Starting from this point, if the requested number of data is higher than 1,
+     then only the DMA is managing the data transfer. Meanwhile, CPU is free to
      perform other tasks:
-     
-    // Add your code here: 
+
+    // Add your code here:
     //...
     //...
 
-     For simplicity reasons, this example is just waiting till the end of the 
+     For simplicity reasons, this example is just waiting till the end of the
      transfer. */
 
-#ifdef ENABLE_LCD_MSG_DISPLAY   
+#ifdef ENABLE_LCD_MSG_DISPLAY
   LCD_DisplayStringLine(LCD_LINE_5, (uint8_t *)" Transfer 2 Ongoing ");
-#endif /* ENABLE_LCD_MSG_DISPLAY */  
-  
-  /* Wait till DMA transfer is complete (Transfer complete interrupt handler 
+#endif /* ENABLE_LCD_MSG_DISPLAY */
+
+  /* Wait till DMA transfer is complete (Transfer complete interrupt handler
     resets the variable holding the number of data to be read) */
   while (NumDataRead > 0)
   {}
-  
+
   /* Check if the data written to the memory is read correctly */
   TransferStatus2 = Buffercmp(Tx2_Buffer, Rx2_Buffer, BUFFER_SIZE2);
-  /* TransferStatus2 = PASSED, if the transmitted and received data 
+  /* TransferStatus2 = PASSED, if the transmitted and received data
      to/from the EEPROM are the same */
-  /* TransferStatus2 = FAILED, if the transmitted and received data 
+  /* TransferStatus2 = FAILED, if the transmitted and received data
      to/from the EEPROM are different */
-#ifdef ENABLE_LCD_MSG_DISPLAY   
+#ifdef ENABLE_LCD_MSG_DISPLAY
   if (TransferStatus1 == PASSED)
   {
     LCD_DisplayStringLine(LCD_LINE_5, (uint8_t *)" Transfer 2 PASSED  ");
@@ -228,9 +228,9 @@ int main(void)
   else
   {
     LCD_DisplayStringLine(LCD_LINE_5, (uint8_t *)" Transfer 2 FAILED  ");
-  }  
+  }
 #endif /* ENABLE_LCD_MSG_DISPLAY */
-  
+
   /* Free all used resources */
   sEE_DeInit();
 
@@ -250,22 +250,22 @@ uint32_t sEE_TIMEOUT_UserCallback(void)
   /* Use application may try to recover the communication by resetting I2C
     peripheral (calling the function I2C_SoftwareResetCmd()) then restart
     the transmission/reception from a previously stored recover point.
-    For simplicity reasons, this example only shows a basic way for errors 
+    For simplicity reasons, this example only shows a basic way for errors
     managements which consists of stopping all the process and requiring system
     reset. */
-  
-#ifdef ENABLE_LCD_MSG_DISPLAY   
+
+#ifdef ENABLE_LCD_MSG_DISPLAY
   /* Display error message on screen */
-  LCD_Clear(LCD_COLOR_RED);  
+  LCD_Clear(LCD_COLOR_RED);
   LCD_DisplayStringLine(LCD_LINE_4, (uint8_t *)"Communication ERROR!");
   LCD_DisplayStringLine(LCD_LINE_5, (uint8_t *)"Try again after res-");
   LCD_DisplayStringLine(LCD_LINE_6, (uint8_t *)"  etting the Board  ");
 #endif /* ENABLE_LCD_MSG_DISPLAY */
-  
+
   /* Block communication and all processes */
   while (1)
-  {   
-  }  
+  {
+  }
 }
 #endif /* USE_DEFAULT_TIMEOUT_CALLBACK */
 
@@ -284,12 +284,12 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
     {
       return FAILED;
     }
-    
+
     pBuffer1++;
     pBuffer2++;
   }
 
-  return PASSED;  
+  return PASSED;
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -302,7 +302,7 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -315,10 +315,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

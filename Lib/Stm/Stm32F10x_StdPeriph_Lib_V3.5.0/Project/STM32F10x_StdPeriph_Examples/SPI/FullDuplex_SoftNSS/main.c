@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    SPI/FullDuplex_SoftNSS/main.c 
+  * @file    SPI/FullDuplex_SoftNSS/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup SPI_FullDuplex_SoftNSS
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -47,7 +47,7 @@ uint8_t SPIy_Buffer_Tx[BufferSize] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                                       0x1D, 0x1E, 0x1F, 0x20};
 uint8_t SPIz_Buffer_Tx[BufferSize] = {0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57,
                                       0x58, 0x59, 0x5A, 0x5B, 0x5C, 0x5D, 0x5E,
-                                      0x5F, 0x60, 0x61, 0x62, 0x63, 0x64, 0x65, 
+                                      0x5F, 0x60, 0x61, 0x62, 0x63, 0x64, 0x65,
                                       0x66, 0x67, 0x68, 0x69, 0x6A, 0x6B, 0x6C,
                                       0x6D, 0x6E, 0x6F, 0x70};
 uint8_t SPIy_Buffer_Rx[BufferSize], SPIz_Buffer_Rx[BufferSize];
@@ -67,20 +67,20 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System clocks configuration ---------------------------------------------*/
   RCC_Configuration();
 
   /* 1st phase: SPIy Master and SPIz Slave */
   /* GPIO configuration ------------------------------------------------------*/
   GPIO_Configuration(SPI_Mode_Master, SPI_Mode_Slave);
-  
+
   /* SPIy Config -------------------------------------------------------------*/
   SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
   SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
@@ -132,7 +132,7 @@ int main(void)
   /* 2nd phase: SPIy Slave and SPIz Master */
   /* GPIO configuration ------------------------------------------------------*/
   GPIO_Configuration(SPI_Mode_Slave , SPI_Mode_Master);
-  
+
   /* SPIy Re-configuration ---------------------------------------------------*/
   SPI_InitStructure.SPI_Mode = SPI_Mode_Slave;
   SPI_Init(SPIy, &SPI_InitStructure);
@@ -186,7 +186,7 @@ int main(void)
 void RCC_Configuration(void)
 {
   /* PCLK2 = HCLK/2 */
-  RCC_PCLK2Config(RCC_HCLK_Div2); 
+  RCC_PCLK2Config(RCC_HCLK_Div2);
 
 /* Enable peripheral clocks --------------------------------------------------*/
 #ifdef USE_STM3210C_EVAL
@@ -195,7 +195,7 @@ void RCC_Configuration(void)
 
   /* Enable SPIy Periph clock */
   RCC_APB1PeriphClockCmd(SPIy_CLK, ENABLE);
-                           
+
 #else
   /* Enable SPIy clock and GPIO clock for SPIy and SPIz */
   RCC_APB2PeriphClockCmd(SPIy_GPIO_CLK | SPIz_GPIO_CLK | SPIy_CLK, ENABLE);
@@ -206,14 +206,14 @@ void RCC_Configuration(void)
 
 /**
   * @brief  Configures the different SPIy and SPIz GPIO ports.
-  * @param  SPIy_Mode: Specifies the SPIy operating mode. 
+  * @param  SPIy_Mode: Specifies the SPIy operating mode.
   *            This parameter can be:
   *              -  SPIy_Mode_Master
-  *              -  SPIy_Mode_Slave                 
-  * @param  SPIz_Mode: Specifies the SPIz operating mode. 
+  *              -  SPIy_Mode_Slave
+  * @param  SPIz_Mode: Specifies the SPIz operating mode.
   *            This parameter can be:
   *              -  SPIz_Mode_Master
-  *              -  SPIz_Mode_Slave 
+  *              -  SPIz_Mode_Slave
   * @retval None
   */
 void GPIO_Configuration(uint16_t SPIy_Mode, uint16_t SPIz_Mode)
@@ -254,7 +254,7 @@ void GPIO_Configuration(uint16_t SPIy_Mode, uint16_t SPIz_Mode)
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   }
   GPIO_Init(SPIy_GPIO, &GPIO_InitStructure);
-  
+
   /* Configure SPIz pins: SCK, MISO and MOSI ---------------------------------*/
   GPIO_InitStructure.GPIO_Pin = SPIz_PIN_SCK | SPIz_PIN_MOSI;
 
@@ -264,7 +264,7 @@ void GPIO_Configuration(uint16_t SPIy_Mode, uint16_t SPIz_Mode)
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   }
   else
-  { 
+  {
     /* Configure SCK and MOSI pins as Alternate Function Push Pull */
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   }
@@ -327,10 +327,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 #endif
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

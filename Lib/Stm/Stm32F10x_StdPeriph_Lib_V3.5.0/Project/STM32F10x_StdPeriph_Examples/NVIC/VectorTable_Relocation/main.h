@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    NVIC/VectorTable_Relocation/main.h 
+  * @file    NVIC/VectorTable_Relocation/main.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011

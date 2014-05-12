@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    HASH/HASH_ContextSwap/main.c 
+  * @file    HASH/HASH_ContextSwap/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup HASH_ContextSwap
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -46,10 +46,10 @@ const uint8_t Sha1Input[SHA1_INPUT_TAB_SIZE] = {0x74,0x65,0x73,0x74,0x69,
                                                 0x6e,0x67,0x31,0x32,0x33};
 
 
-/* 
-3 x 
+/*
+3 x
    "The hash processor is a fully compliant implementation of the secure
-    hash algorithm (SHA-1), the MD5 (message-digest algorithm 5) hash 
+    hash algorithm (SHA-1), the MD5 (message-digest algorithm 5) hash
     algorithm and the HMAC (keyed-hash message authentication code)
     algorithm suitable for a variety of applications.*** STM32 ***"
 */
@@ -182,7 +182,7 @@ static void Display_SHA1Digest(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
        before to branch to application main.
@@ -207,7 +207,7 @@ int main(void)
   printf(">>> Start \n\r");
 
   /* MD5 Digest Computation *******************************/
-  HASH_MD5((uint8_t*)Md5Input, MD5_INPUT_TAB_SIZE,Md5output); 
+  HASH_MD5((uint8_t*)Md5Input, MD5_INPUT_TAB_SIZE,Md5output);
   printf(">>> Done \n\r");
 
   /* Display the MD5 digest */
@@ -217,7 +217,7 @@ int main(void)
   printf(">>> Start \n\r");
 
   /* SHA1 Digest Computation */
-  HASH_SHA1((uint8_t*)Sha1Input, SHA1_INPUT_TAB_SIZE, Sha1output); 
+  HASH_SHA1((uint8_t*)Sha1Input, SHA1_INPUT_TAB_SIZE, Sha1output);
   printf(">>> Done \n\r");
 
   /* Display the SHA1 digest */
@@ -233,7 +233,7 @@ int main(void)
   TIM_Cmd(TIM6, ENABLE);
 
   /* MD5 Digest Computation */
-  HASH_MD5((uint8_t*)Md5Input, MD5_INPUT_TAB_SIZE, Md5output); 
+  HASH_MD5((uint8_t*)Md5Input, MD5_INPUT_TAB_SIZE, Md5output);
 
   /* Disable TIM2 : no more interrupts */
   TIM_Cmd(TIM6, DISABLE);
@@ -249,7 +249,7 @@ int main(void)
   /* Display the SHA1 digest */
   Display_SHA1Digest();
 
-  while(1);  
+  while(1);
 }
 
 /**
@@ -275,7 +275,7 @@ static void Display_MainMessage(void)
   printf(" ---------------------------------------\n\r");
   for(BufferCounter=0; BufferCounter<SHA1_INPUT_TAB_SIZE; BufferCounter++)
   {
-    printf("%c", Sha1Input[BufferCounter]);    
+    printf("%c", Sha1Input[BufferCounter]);
   }
 }
 
@@ -341,14 +341,14 @@ static void Display_MD5Digest(void)
 }
 
 /**
-  * @brief  USART configuration 
+  * @brief  USART configuration
   * @param  None
   * @retval None
   */
 static void USART_Config(void)
 {
   /* USARTx configured as follows:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -369,9 +369,9 @@ static void USART_Config(void)
 
 /**
   * @brief  TIM6 configuration to get a regular interrupt rate (280KHz)
-  *  
-  * @note   TIM6CLK = (HCLK/4)x2 = (168 MHz/4)x2 = 84 MHz 
-  *         so TIM6 update interrupt = TIM6CLK/((Precaler+1) x Period) 
+  *
+  * @note   TIM6CLK = (HCLK/4)x2 = (168 MHz/4)x2 = 84 MHz
+  *         so TIM6 update interrupt = TIM6CLK/((Precaler+1) x Period)
   *                                  = 84 MHz / (2x150) = 280 KHz
   *
   * @param  None
@@ -441,7 +441,7 @@ PUTCHAR_PROTOTYPE
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -454,10 +454,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    NVIC/NVIC_WFIMode/stm32f4xx_it.c 
+  * @file    NVIC/NVIC_WFIMode/stm32f4xx_it.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -37,7 +37,7 @@
 
 /** @addtogroup NVIC_WFIMode
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -231,17 +231,17 @@ void EXTI15_10_IRQHandler(void)
   if(EXTI_GetITStatus(BUTTON_EXTI_LINE) != RESET)
   {
     EXTI_ClearITPendingBit(BUTTON_EXTI_LINE);
-  
+
     uwLowPowerMode = 1;
-  }  
+  }
 }
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

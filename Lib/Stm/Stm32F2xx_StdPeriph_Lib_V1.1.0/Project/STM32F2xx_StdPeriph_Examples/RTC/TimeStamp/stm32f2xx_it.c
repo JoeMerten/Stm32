@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    RTC/TimeStamp/stm32f2xx_it.c 
+  * @file    RTC/TimeStamp/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -172,7 +172,7 @@ void EXTI0_IRQHandler(void)
     EXTI_ClearITPendingBit(WAKEUP_BUTTON_EXTI_LINE);
   }
 }
- 
+
 /**
   * @brief  This function handles External lines 15 to 10 interrupt request.
   * @param  None
@@ -187,7 +187,7 @@ void EXTI15_10_IRQHandler(void)
     STM_EVAL_LEDOn(LED4);
     printf("\r\n******************** TimeStamp Event Occurred ********************");
     /* Clear the TAMPER Button EXTI line pending bit */
-    EXTI_ClearITPendingBit(TAMPER_BUTTON_EXTI_LINE); 
+    EXTI_ClearITPendingBit(TAMPER_BUTTON_EXTI_LINE);
   }
 
   /* To display Current RTC Time and Date Calendar */
@@ -197,7 +197,7 @@ void EXTI15_10_IRQHandler(void)
     STM_EVAL_LEDOn(LED4);
 
     /* Clear the KEY Button EXTI line pending bit */
-    EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE); 
+    EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
 
     /* Display the Time */
     RTC_TimeShow();

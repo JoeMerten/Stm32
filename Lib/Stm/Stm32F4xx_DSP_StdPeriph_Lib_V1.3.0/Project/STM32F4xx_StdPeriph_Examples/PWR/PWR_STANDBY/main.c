@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/PWR_STANDBY/main.c 
+  * @file    PWR/PWR_STANDBY/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup PWR_STANDBY
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -63,18 +63,18 @@ static void SysTick_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
-     */     
+     */
 
   /* Initialize LEDs mounted on EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
-  
+
   /* Initialize Key Button mounted on EVAL board */
   STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI);
 
@@ -129,18 +129,18 @@ static void RTC_Config(void)
     RCC_BackupResetCmd(DISABLE);
 
 #if defined (RTC_CLOCK_SOURCE_LSI)  /* LSI used as RTC source clock*/
-/* The RTC Clock may varies due to LSI frequency dispersion. */   
-    /* Enable the LSI OSC */ 
+/* The RTC Clock may varies due to LSI frequency dispersion. */
+    /* Enable the LSI OSC */
     RCC_LSICmd(ENABLE);
 
-    /* Wait till LSI is ready */  
+    /* Wait till LSI is ready */
     while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET)
     {
     }
 
     /* Select the RTC Clock Source */
     RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
-  
+
     SynchPrediv = 0xFF;
     AsynchPrediv = 0x7F;
 
@@ -148,14 +148,14 @@ static void RTC_Config(void)
     /* Enable the LSE OSC */
     RCC_LSEConfig(RCC_LSE_ON);
 
-    /* Wait till LSE is ready */  
+    /* Wait till LSE is ready */
     while(RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)
     {
     }
 
     /* Select the RTC Clock Source */
     RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
-  
+
     SynchPrediv = 0xFF;
     AsynchPrediv = 0x7F;
 
@@ -178,7 +178,7 @@ static void RTC_Config(void)
     {
       /* Turn on LED2 */
       STM_EVAL_LEDOn(LED2);
-      
+
       /* User can add here some code to deal with this error */
       while(1);
     }
@@ -187,19 +187,19 @@ static void RTC_Config(void)
     RTC_TimeStructure.RTC_H12     = RTC_H12_AM;
     RTC_TimeStructure.RTC_Hours   = 0x01;
     RTC_TimeStructure.RTC_Minutes = 0x00;
-    RTC_TimeStructure.RTC_Seconds = 0x00;  
-  
+    RTC_TimeStructure.RTC_Seconds = 0x00;
+
     if(RTC_SetTime(RTC_Format_BCD, &RTC_TimeStructure) == ERROR)
     {
       /* Turn on LED2 */
       STM_EVAL_LEDOn(LED2);
-      
+
       /* User can add here some code to deal with this error */
       while(1);
     }
   }
 
-  /* Clear RTC Alarm Flag */ 
+  /* Clear RTC Alarm Flag */
   RTC_ClearFlag(RTC_FLAG_ALRAF);
 }
 
@@ -212,8 +212,8 @@ static void SysTick_Configuration(void)
 {
   /* SysTick interrupt each 250 ms */
   if (SysTick_Config((SystemCoreClock/8) / 4))
-  { 
-    /* Capture error */ 
+  {
+    /* Capture error */
     while (1);
   }
 
@@ -235,7 +235,7 @@ static void SysTick_Configuration(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -248,10 +248,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

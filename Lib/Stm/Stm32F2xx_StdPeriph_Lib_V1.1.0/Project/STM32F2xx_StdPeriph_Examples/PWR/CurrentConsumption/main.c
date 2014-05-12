@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/CurrentConsumption/main.c 
+  * @file    PWR/CurrentConsumption/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -36,7 +36,7 @@
 
 /** @addtogroup PWR_CurrentConsumption
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -54,13 +54,13 @@ __IO uint32_t Counter = 0;
   */
 int main(void)
 {
-  
-  /*!< At this stage the microcontroller clock setting is already configured, 
+
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
-     */  
+     */
 
   /* Enable PWR APB1 Clock */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
@@ -71,13 +71,13 @@ int main(void)
   /* Reset RTC Domain */
   RCC_BackupResetCmd(ENABLE);
   RCC_BackupResetCmd(DISABLE);
-  
-  /* Check that the system was resumed from StandBy mode */ 
+
+  /* Check that the system was resumed from StandBy mode */
   if(PWR_GetFlagStatus(PWR_FLAG_SB) != RESET)
   {
     /* Clear SB Flag */
     PWR_ClearFlag(PWR_FLAG_SB);
-    
+
     /* Initialize LED1 on STM322xG-EVAL board */
     STM_EVAL_LEDInit(LED1);
 
@@ -105,7 +105,7 @@ int main(void)
   }
 
 #if defined (SLEEP_MODE)
-  /* Sleep Mode Entry 
+  /* Sleep Mode Entry
       - System Running at PLL (120MHz)
       - Flash 3 wait state
       - Prefetch and Cache enabled
@@ -115,24 +115,24 @@ int main(void)
    */
   SleepMode_Measure();
 #elif defined (STOP_MODE)
-  /* STOP Mode Entry 
+  /* STOP Mode Entry
       - RTC Clocked by LSE/LSI
       - Regulator in LP mode
-      - HSI, HSE OFF and LSI OFF if not used as RTC Clock source  
+      - HSI, HSE OFF and LSI OFF if not used as RTC Clock source
       - No IWDG
       - FLASH in deep power down mode
       - Automatic Wakeup using RTC clocked by LSE/LSI (after ~20s)
    */
   StopMode_Measure();
 #elif defined (STANDBY_MODE)
-  /* STANDBY Mode Entry 
+  /* STANDBY Mode Entry
       - Backup SRAM and RTC OFF
       - IWDG and LSI OFF
       - Wakeup using WakeUp Pin (PA.00)
    */
   StandbyMode_Measure();
 #elif defined (STANDBY_RTC_MODE)
-  /* STANDBY Mode with RTC on LSE/LSI Entry 
+  /* STANDBY Mode with RTC on LSE/LSI Entry
       - RTC Clocked by LSE or LSI
       - IWDG OFF and LSI OFF if not used as RTC Clock source
       - Backup SRAM OFF
@@ -140,7 +140,7 @@ int main(void)
    */
   StandbyRTCMode_Measure();
 #elif defined (STANDBY_RTC_BKPSRAM_MODE)
-  /* STANDBY Mode with RTC on LSE/LSI Entry 
+  /* STANDBY Mode with RTC on LSE/LSI Entry
       - RTC Clocked by LSE/LSI
       - Backup SRAM ON
       - IWDG OFF
@@ -151,7 +151,7 @@ int main(void)
 
   /* Initialize LED1 on STM322xG-EVAL board */
   STM_EVAL_LEDInit(LED1);
-  
+
   /* Infinite loop */
   while (1)
   {
@@ -174,7 +174,7 @@ int main(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -187,10 +187,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

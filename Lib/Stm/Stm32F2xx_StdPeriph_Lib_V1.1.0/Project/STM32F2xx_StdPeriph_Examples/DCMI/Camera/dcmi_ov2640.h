@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __DCMI_OV2640_H
@@ -44,7 +44,7 @@ typedef struct
 /* Exported constants --------------------------------------------------------*/
 
 /* Use this define to set the maximum delay timeout for the I2C DCMI_OV2640_SingleRandomWrite()
-   and DCMI_OV2640_SingleRandomRead() operations. Exeeding this timeout delay, 
+   and DCMI_OV2640_SingleRandomRead() operations. Exeeding this timeout delay,
    the read/write functions will be aborted and return error code (0xFF).
    The period of the delay will depend on the system operating frequency. The following
    value has been set for system running at 168 MHz. */

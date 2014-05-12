@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/PWR_CurrentConsumption/stm32f4xx_it.c 
+  * @file    PWR/PWR_CurrentConsumption/stm32f4xx_it.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -166,18 +166,18 @@ void RTC_WKUP_IRQHandler(void)
     STM_EVAL_LEDToggle(LED1);
     RTC_ClearITPendingBit(RTC_IT_WUT);
     EXTI_ClearITPendingBit(EXTI_Line22);
-  } 
+  }
 }
- 
+
 /**
   * @brief  This function handles EXTI Lines 10 to 15 interrupts requests.
   * @param  None
   * @retval None
   */
 void EXTI15_10_IRQHandler(void)
-{   
+{
   if(EXTI_GetITStatus(KEY_BUTTON_EXTI_LINE) != RESET)
-  {    
+  {
     /* Clear the Key Button EXTI line pending bit */
     EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
   }
@@ -185,10 +185,10 @@ void EXTI15_10_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

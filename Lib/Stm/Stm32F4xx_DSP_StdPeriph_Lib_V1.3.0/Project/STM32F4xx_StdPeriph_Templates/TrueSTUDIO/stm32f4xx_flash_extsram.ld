@@ -44,7 +44,7 @@ MEMORY
 {
   FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 1024K
   RAM (xrw)       : ORIGIN = 0x64000000, LENGTH = 2048K
-  CCMRAM (xrw)    : ORIGIN = 0x10000000, LENGTH = 64K  
+  CCMRAM (xrw)    : ORIGIN = 0x10000000, LENGTH = 64K
   MEMORY_B1 (rx)  : ORIGIN = 0x60000000, LENGTH = 0K
 }
 
@@ -166,6 +166,6 @@ SECTIONS
     libm.a ( * )
     libgcc.a ( * )
   }
-  
+
   .ARM.attributes 0 : { *(.ARM.attributes) }
 }

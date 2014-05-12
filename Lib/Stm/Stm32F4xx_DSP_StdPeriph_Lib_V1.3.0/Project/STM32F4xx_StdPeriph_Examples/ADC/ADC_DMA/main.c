@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    ADC/ADC_DMA/main.c 
+  * @file    ADC/ADC_DMA/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,23 +34,23 @@
 
 /** @addtogroup ADC_DMA
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 
 #if defined (USE_STM324xG_EVAL)
-  #define MESSAGE1   " ADC conversion w/DMA transfer example  " 
-  #define MESSAGE2   "ADC Ch7 Conv @2.4Msps" 
+  #define MESSAGE1   " ADC conversion w/DMA transfer example  "
+  #define MESSAGE2   "ADC Ch7 Conv @2.4Msps"
   #define MESSAGE3   "  Turn RV1(PF.09)    "
   #define MESSAGE4   "   Potentiometer     "
   #define MESSAGE5   "   ADC = %d,%d V   "
   #define LINENUM            0x13
   #define FONTSIZE         Font8x12
 
-#elif defined (USE_STM324x7I_EVAL)   
+#elif defined (USE_STM324x7I_EVAL)
   #define MESSAGE1    " ADC conversion w/DMA transfer example  "
-  #define MESSAGE2   "ADC Ch7 Conv @2.4Msps" 
+  #define MESSAGE2   "ADC Ch7 Conv @2.4Msps"
   #define MESSAGE3   "  Turn RV1(PF.09)    "
   #define MESSAGE4   "   Potentiometer     "
   #define MESSAGE5   "   ADC = %d,%d V   "
@@ -59,7 +59,7 @@
 
 #else
   #define MESSAGE1   " ADC conversion w/DMA transfer example  "
-  #define MESSAGE2   "    ADC Ch7 Conv @2.4Msps     " 
+  #define MESSAGE2   "    ADC Ch7 Conv @2.4Msps     "
   #define MESSAGE3   "       Turn RV1(PF.09)        "
   #define MESSAGE4   "        Potentiometer         "
   #define MESSAGE5   "         ADC = %d,%d V          "
@@ -89,10 +89,10 @@ static void Display(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
      */
@@ -105,7 +105,7 @@ int main(void)
   /* ADC configuration */
   ADC_Config();
 
-  /* Start ADC Software Conversion */ 
+  /* Start ADC Software Conversion */
   ADC_SoftwareStartConv(ADCx);
 
   while (1)
@@ -120,11 +120,11 @@ int main(void)
 
 /**
   * @brief  ADC3 channel07 with DMA configuration
-  * @note   This function Configure the ADC peripheral  
+  * @note   This function Configure the ADC peripheral
             1) Enable peripheral clocks
             2) DMA2_Stream0 channel2 configuration
             3) Configure ADC Channel7 pin as analog input
-            4) Configure ADC3 Channel7 
+            4) Configure ADC3 Channel7
   * @param  None
   * @retval None
   */
@@ -135,14 +135,14 @@ static void ADC_Config(void)
   DMA_InitTypeDef       DMA_InitStructure;
   GPIO_InitTypeDef      GPIO_InitStructure;
 
-  /* Enable ADCx, DMA and GPIO clocks ****************************************/ 
+  /* Enable ADCx, DMA and GPIO clocks ****************************************/
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2, ENABLE);
-  RCC_AHB1PeriphClockCmd(ADCx_CHANNEL_GPIO_CLK, ENABLE);  
+  RCC_AHB1PeriphClockCmd(ADCx_CHANNEL_GPIO_CLK, ENABLE);
   RCC_APB2PeriphClockCmd(ADCx_CLK, ENABLE);
-  
+
 
   /* DMA2 Stream0 channel2 configuration **************************************/
-  DMA_InitStructure.DMA_Channel = DMA_CHANNELx;  
+  DMA_InitStructure.DMA_Channel = DMA_CHANNELx;
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)ADCx_DR_ADDRESS;
   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)&uhADCxConvertedValue;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
@@ -153,7 +153,7 @@ static void ADC_Config(void)
   DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
   DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
   DMA_InitStructure.DMA_Priority = DMA_Priority_High;
-  DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;         
+  DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
   DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull;
   DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
   DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
@@ -224,21 +224,21 @@ static void Display_Init(void)
 {
   /* Initialize the LCD */
   LCD_Init();
-  
+
   /* Display message on LCD ***************************************************/
-#if defined (USE_STM324x9I_EVAL) 
+#if defined (USE_STM324x9I_EVAL)
   /* Initialize the LCD Layers */
   LCD_LayerInit();
-  
+
   /* Enable The Display */
-  LCD_DisplayOn(); 
- 
+  LCD_DisplayOn();
+
   /* Set LCD Background Layer  */
   LCD_SetLayer(LCD_BACKGROUND_LAYER);
- 
-  /* Clear the Background Layer */ 
+
+  /* Clear the Background Layer */
   LCD_Clear(LCD_COLOR_WHITE);
-  
+
   /* Set LCD Foreground Layer  */
   LCD_SetLayer(LCD_FOREGROUND_LAYER);
 
@@ -246,34 +246,34 @@ static void Display_Init(void)
   LCD_SetTransparency(100);
 #endif /* USE_STM324x9I_EVAL */
 
-  /* Clear the Background Layer */ 
+  /* Clear the Background Layer */
   LCD_Clear(LCD_COLOR_WHITE);
-  
+
   /* Set the LCD Back Color */
   LCD_SetBackColor(LCD_COLOR_BLUE);
- 
+
   /* Set the LCD Text Color */
   LCD_SetTextColor(LCD_COLOR_WHITE);
- 
+
   /* Set the LCD Text size */
   LCD_SetFont(&FONTSIZE);
-  
+
   /* Display LCD Footer Message */
   LCD_DisplayStringLine(LINE(LINENUM), (uint8_t*)MESSAGE1);
   LCD_DisplayStringLine(LINE(0x16), (uint8_t*)"                                        ");
 
   /* Set the LCD Text size */
   LCD_SetFont(&Font16x24);
- 
+
   /* Display Configuration Messages */
   LCD_DisplayStringLine(LCD_LINE_0, (uint8_t*)MESSAGE2);
 
   /* Set the LCD Back Color */
   LCD_SetBackColor(LCD_COLOR_WHITE);
-  
+
   /* Set the LCD Text Color */
   LCD_SetTextColor(LCD_COLOR_BLUE);
-  
+
   /* Display */
   LCD_DisplayStringLine(LCD_LINE_2, (uint8_t*)MESSAGE3);
   LCD_DisplayStringLine(LCD_LINE_4, (uint8_t*)MESSAGE4);
@@ -290,7 +290,7 @@ static void Display_Init(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -303,10 +303,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    DMA/DMA_FLASHToRAM/stm32f4xx_it.c 
+  * @file    DMA/DMA_FLASHToRAM/stm32f4xx_it.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -36,7 +36,7 @@
 
 /** @addtogroup DMA_FLASHToRAM
   * @{
-  */  
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -164,8 +164,8 @@ void DMA_STREAM_IRQHANDLER(void)
   if(DMA_GetITStatus(DMA_STREAM, DMA_IT_TCIF))
   {
     /* Clear DMA Stream Transfer Complete interrupt pending bit */
-    DMA_ClearITPendingBit(DMA_STREAM, DMA_IT_TCIF);  
-    
+    DMA_ClearITPendingBit(DMA_STREAM, DMA_IT_TCIF);
+
     /* Turn LED3 on: End of Transfer */
     STM_EVAL_LEDOn(LED3);
   }
@@ -173,7 +173,7 @@ void DMA_STREAM_IRQHANDLER(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}

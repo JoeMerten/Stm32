@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -36,7 +36,7 @@
 
 /** @addtogroup HASH_SHA1_MD5
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -45,13 +45,13 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 
-/* 
+/*
   "The hash processor is a fully compliant implementation of the secure
-   hash algorithm (SHA-1), the MD5 (message-digest algorithm 5) hash 
+   hash algorithm (SHA-1), the MD5 (message-digest algorithm 5) hash
    algorithm and the HMAC (keyed-hash message authentication code)
    algorithm suitable for a variety of applications.*** STM32 ***"
 */
-const uint8_t Input[INPUT_TAB_SIZE] = 
+const uint8_t Input[INPUT_TAB_SIZE] =
                         {0x54,0x68,0x65,0x20,0x68,0x61,0x73,0x68,
                          0x20,0x70,0x72,0x6f,0x63,0x65,0x73,0x73,
                          0x6f,0x72,0x20,0x69,0x73,0x20,0x61,0x20,
@@ -85,7 +85,7 @@ const uint8_t Input[INPUT_TAB_SIZE] =
                          0x63,0x61,0x74,0x69,0x6f,0x6e,0x73,0x2e,
                          0x2a,0x2a,0x2a,0x20,0x53,0x54,0x4d,0x33,
                          0x32,0x20,0x2a,0x2a,0x2a};
- 
+
 uint8_t Md5output[16];
 uint8_t Sha1output[20];
 
@@ -112,7 +112,7 @@ void Display_MD5Digest(void);
   */
 int main(void)
 {
-/*!< At this stage the microcontroller clock setting is already configured, 
+/*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
@@ -144,7 +144,7 @@ int main(void)
 ==============================================================================*/
 
   /*  MD5 Digest Computation */
-  HASH_MD5((uint8_t *)Input, INPUT_TAB_SIZE, Md5output); 
+  HASH_MD5((uint8_t *)Input, INPUT_TAB_SIZE, Md5output);
 
   /* Display the  MD5 digest */
   Display_MD5Digest();
@@ -153,14 +153,14 @@ int main(void)
 }
 
 /**
-  * @brief  USART configuration 
+  * @brief  USART configuration
   * @param  None
   * @retval None
   */
 void USART_Config(void)
 {
   /* USARTx configured as follow:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -186,7 +186,7 @@ void USART_Config(void)
 void Display_MainMessage(uint32_t Len)
 {
   uint32_t BufferCounter = 0;
-  
+
   printf("\n\r ======================================\n\r");
   printf(" ====         HASH Example         ====\n\r");
   printf(" ======================================\n\r");
@@ -289,7 +289,7 @@ PUTCHAR_PROTOTYPE
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -302,10 +302,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

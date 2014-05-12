@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/Interrupt/main.c 
+  * @file    USART/Interrupt/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup USART_Interrupt
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum { FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -51,13 +51,13 @@ uint8_t RxBuffer1[RxBufferSize1];
 uint8_t RxBuffer2[RxBufferSize2];
 __IO uint8_t TxCounter1 = 0x00;
 __IO uint8_t TxCounter2 = 0x00;
-__IO uint8_t RxCounter1 = 0x00; 
+__IO uint8_t RxCounter1 = 0x00;
 __IO uint8_t RxCounter2 = 0x00;
 uint8_t NbrOfDataToTransfer1 = TxBufferSize1;
 uint8_t NbrOfDataToTransfer2 = TxBufferSize2;
 uint8_t NbrOfDataToRead1 = RxBufferSize1;
 uint8_t NbrOfDataToRead2 = RxBufferSize2;
-__IO TestStatus TransferStatus1 = FAILED; 
+__IO TestStatus TransferStatus1 = FAILED;
 __IO TestStatus TransferStatus2 = FAILED;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -75,16 +75,16 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
-       
+
   /* NVIC configuration */
   NVIC_Configuration();
 
@@ -93,7 +93,7 @@ int main(void)
 
 /* USARTy and USARTz configuration ------------------------------------------------------*/
   /* USARTy and USARTz configured as follow:
-        - BaudRate = 9600 baud  
+        - BaudRate = 9600 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -111,7 +111,7 @@ int main(void)
   USART_Init(USARTy, &USART_InitStructure);
   /* Configure USARTz */
   USART_Init(USARTz, &USART_InitStructure);
-  
+
   /* Enable USARTy Receive and Transmit interrupts */
   USART_ITConfig(USARTy, USART_IT_RXNE, ENABLE);
   USART_ITConfig(USARTy, USART_IT_TXE, ENABLE);
@@ -134,17 +134,17 @@ int main(void)
   while(RxCounter1 < RxBufferSize1)
   {
   }
-  
+
   /* Check the received data with the send ones */
   TransferStatus1 = Buffercmp(TxBuffer2, RxBuffer1, RxBufferSize1);
-  /* TransferStatus1 = PASSED, if the data transmitted from USARTz and  
+  /* TransferStatus1 = PASSED, if the data transmitted from USARTz and
      received by USARTy are the same */
-  /* TransferStatus1 = FAILED, if the data transmitted from USARTz and 
+  /* TransferStatus1 = FAILED, if the data transmitted from USARTz and
      received by USARTy are different */
   TransferStatus2 = Buffercmp(TxBuffer1, RxBuffer2, RxBufferSize2);
-  /* TransferStatus2 = PASSED, if the data transmitted from USARTy and  
+  /* TransferStatus2 = PASSED, if the data transmitted from USARTy and
      received by USARTz are the same */
-  /* TransferStatus2 = FAILED, if the data transmitted from USARTy and 
+  /* TransferStatus2 = FAILED, if the data transmitted from USARTy and
      received by USARTz are different */
 
   while (1)
@@ -158,19 +158,19 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{   
+{
   /* Enable GPIO clock */
   RCC_APB2PeriphClockCmd(USARTy_GPIO_CLK | USARTz_GPIO_CLK | RCC_APB2Periph_AFIO, ENABLE);
 
 #ifndef USE_STM3210C_EVAL
   /* Enable USARTy Clock */
-  RCC_APB2PeriphClockCmd(USARTy_CLK, ENABLE); 
+  RCC_APB2PeriphClockCmd(USARTy_CLK, ENABLE);
 #else
   /* Enable USARTy Clock */
-  RCC_APB1PeriphClockCmd(USARTy_CLK, ENABLE); 
+  RCC_APB1PeriphClockCmd(USARTy_CLK, ENABLE);
 #endif
   /* Enable USARTz Clock */
-  RCC_APB1PeriphClockCmd(USARTz_CLK, ENABLE);  
+  RCC_APB1PeriphClockCmd(USARTz_CLK, ENABLE);
 }
 
 /**
@@ -185,9 +185,9 @@ void GPIO_Configuration(void)
 #ifdef USE_STM3210C_EVAL
   /* Enable the USART3 Pins Software Remapping */
   GPIO_PinRemapConfig(GPIO_PartialRemap_USART3, ENABLE);
-  
+
   /* Enable the USART2 Pins Software Remapping */
-  GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);  
+  GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
 #elif defined USE_STM3210B_EVAL || defined USE_STM32100B_EVAL
   /* Enable the USART2 Pins Software Remapping */
   GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
@@ -197,11 +197,11 @@ void GPIO_Configuration(void)
   GPIO_InitStructure.GPIO_Pin = USARTy_RxPin;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   GPIO_Init(USARTy_GPIO, &GPIO_InitStructure);
-  
+
   /* Configure USARTz Rx as input floating */
   GPIO_InitStructure.GPIO_Pin = USARTz_RxPin;
-  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure);  
-  
+  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure);
+
   /* Configure USARTy Tx as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin = USARTy_TxPin;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -210,7 +210,7 @@ void GPIO_Configuration(void)
 
   /* Configure USARTz Tx as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin = USARTz_TxPin;
-  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure);  
+  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure);
 }
 
 /**
@@ -222,9 +222,9 @@ void NVIC_Configuration(void)
 {
   NVIC_InitTypeDef NVIC_InitStructure;
 
-  /* Configure the NVIC Preemption Priority Bits */  
+  /* Configure the NVIC Preemption Priority Bits */
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-  
+
   /* Enable the USARTy Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = USARTy_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
@@ -271,7 +271,7 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -285,10 +285,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

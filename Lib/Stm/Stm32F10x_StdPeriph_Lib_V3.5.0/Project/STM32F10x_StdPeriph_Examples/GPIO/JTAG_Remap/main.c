@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    GPIO/JTAG_Remap/main.c 
+  * @file    GPIO/JTAG_Remap/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -50,20 +50,20 @@ void Delay(__IO uint32_t nCount);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* Configure the system clocks */
   RCC_Configuration();
-    
-  /* Initialize LEDs and Key Button mounted on STM3210X-EVAL board */       
+
+  /* Initialize LEDs and Key Button mounted on STM3210X-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
-       
+
   STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_GPIO);
 
   /* Test if Key Button GPIO Pin level is low (Key push-button on Eval Board pressed) */
@@ -76,7 +76,7 @@ int main(void)
     /* Disable the Serial Wire Jtag Debug Port SWJ-DP */
     GPIO_PinRemapConfig(GPIO_Remap_SWJ_Disable, ENABLE);
 
-    /* Configure PA.13 (JTMS/SWDAT), PA.14 (JTCK/SWCLK) and PA.15 (JTDI) as 
+    /* Configure PA.13 (JTMS/SWDAT), PA.14 (JTCK/SWCLK) and PA.15 (JTDI) as
        output push-pull */
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -132,7 +132,7 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{  
+{
   /* Enable GPIOA, GPIOB, RCC_APB2Periph_GPIO_KEY_BUTTON and AFIO clocks */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB |
                          RCC_APB2Periph_AFIO, ENABLE);
@@ -158,7 +158,7 @@ void Delay(__IO uint32_t nCount)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

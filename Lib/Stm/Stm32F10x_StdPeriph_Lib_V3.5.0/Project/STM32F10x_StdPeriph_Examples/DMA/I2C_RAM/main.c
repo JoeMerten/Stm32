@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DMA/I2C_RAM/main.c 
+  * @file    DMA/I2C_RAM/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup DMA_I2C_RAM
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum { FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -49,12 +49,12 @@ uint8_t I2C1_Buffer_Tx[BufferSize] = {1, 2, 3, 4, 5, 6, 7, 8};
 uint8_t I2C2_Buffer_Rx[BufferSize];
 uint8_t Tx_Idx = 0, Rx_Idx = 0;
 volatile TestStatus TransferStatus;
-    
+
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
 void GPIO_Configuration(void);
 TestStatus Buffercmp(uint8_t* pBuffer, uint8_t* pBuffer1, uint16_t BufferLength);
-    
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -64,16 +64,16 @@ TestStatus Buffercmp(uint8_t* pBuffer, uint8_t* pBuffer1, uint16_t BufferLength)
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
-       
+
   /* Configure the GPIO ports */
   GPIO_Configuration();
 
@@ -115,18 +115,18 @@ int main(void)
   /* I2C2 configuration ------------------------------------------------------*/
   I2C_InitStructure.I2C_OwnAddress1 = I2C2_SLAVE_ADDRESS7;
   I2C_Init(I2C2, &I2C_InitStructure);
-  
+
   /*----- Transmission Phase -----*/
   /* Send I2C1 START condition */
   I2C_GenerateSTART(I2C1, ENABLE);
   /* Test on I2C1 EV5 and clear it */
-  while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));  
+  while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
   /* Send I2C2 slave Address for write */
   I2C_Send7bitAddress(I2C1, I2C2_SLAVE_ADDRESS7, I2C_Direction_Transmitter);
   /* Test on I2C2 EV1 and clear it */
-  while(!I2C_CheckEvent(I2C2, I2C_EVENT_SLAVE_RECEIVER_ADDRESS_MATCHED));  
+  while(!I2C_CheckEvent(I2C2, I2C_EVENT_SLAVE_RECEIVER_ADDRESS_MATCHED));
   /* Test on I2C1 EV6 and clear it */
-  while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));  
+  while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
 
   /* Enable I2C2 DMA */
   I2C_DMACmd(I2C2, ENABLE);
@@ -146,8 +146,8 @@ int main(void)
   /* Send I2C1 STOP Condition */
   I2C_GenerateSTOP(I2C1, ENABLE);
   /* Test on I2C2 EV4 */
-  while(!I2C_CheckEvent(I2C2, I2C_EVENT_SLAVE_STOP_DETECTED)); 
-  /* Clear I2C2 STOPF flag: read operation to I2C_SR1 followed by a 
+  while(!I2C_CheckEvent(I2C2, I2C_EVENT_SLAVE_STOP_DETECTED));
+  /* Clear I2C2 STOPF flag: read operation to I2C_SR1 followed by a
   write operation to I2C_CR1 */
   (void)(I2C_GetFlagStatus(I2C2, I2C_FLAG_STOPF));
   I2C_Cmd(I2C2, ENABLE);
@@ -155,9 +155,9 @@ int main(void)
 
   /* Check if the transmitted and received data are equal */
   TransferStatus = Buffercmp(I2C1_Buffer_Tx, I2C2_Buffer_Rx, BufferSize);
-  /* TransferStatus = PASSED, if the transmitted and received data 
+  /* TransferStatus = PASSED, if the transmitted and received data
      are the same */
-  /* TransferStatus = FAILED, if the transmitted and received data 
+  /* TransferStatus = FAILED, if the transmitted and received data
      are different */
 
   while (1)
@@ -215,12 +215,12 @@ TestStatus Buffercmp(uint8_t* pBuffer, uint8_t* pBuffer1, uint16_t BufferLength)
     {
       return FAILED;
     }
-    
+
     pBuffer++;
     pBuffer1++;
   }
 
-  return PASSED;  
+  return PASSED;
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -233,7 +233,7 @@ TestStatus Buffercmp(uint8_t* pBuffer, uint8_t* pBuffer1, uint16_t BufferLength)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -247,7 +247,7 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}

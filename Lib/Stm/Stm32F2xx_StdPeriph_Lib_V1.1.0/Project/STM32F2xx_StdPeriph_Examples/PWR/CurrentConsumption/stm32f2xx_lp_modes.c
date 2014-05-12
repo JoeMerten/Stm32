@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    PWR/CurrentConsumption/stm32f2xx_lp_modes.c 
+  * @file    PWR/CurrentConsumption/stm32f2xx_lp_modes.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
-  * @brief   This file provides firmware functions to manage the following 
+  * @brief   This file provides firmware functions to manage the following
   *          functionalities of the STM32F2xx Low Power Modes:
   *           - Sleep Mode
   *           - STOP mode with RTC
@@ -22,14 +22,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_lp_modes.h"
@@ -41,14 +41,14 @@
 
 /** @addtogroup PWR_CurrentConsumption
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Uncomment the corresponding line to select the RTC Clock source */
 #define RTC_CLOCK_SOURCE_LSE   /* LSE used as RTC source clock */
 /* #define RTC_CLOCK_SOURCE_LSI */ /* LSI used as RTC source clock. The RTC Clock
-                                      may varies due to LSI frequency dispersion. */ 
+                                      may varies due to LSI frequency dispersion. */
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -59,7 +59,7 @@
   * @brief  This function configures the system to enter Sleep mode for
   *         current consumption measurement purpose.
   *         Sleep Mode
-  *         ==========  
+  *         ==========
   *            - System Running at PLL (120MHz)
   *            - Flash 3 wait state
   *            - Prefetch and Cache enabled
@@ -91,7 +91,7 @@ void SleepMode_Measure(void)
   GPIO_Init(GPIOG, &GPIO_InitStructure);
   GPIO_Init(GPIOH, &GPIO_InitStructure);
   GPIO_Init(GPIOI, &GPIO_InitStructure);
-  GPIO_Init(GPIOA, &GPIO_InitStructure); 
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
   GPIO_Init(GPIOB, &GPIO_InitStructure);
 
   /* Disable GPIOs clock */
@@ -120,10 +120,10 @@ void SleepMode_Measure(void)
 }
 
 /**
-  * @brief  This function configures the system to enter Stop mode with RTC 
+  * @brief  This function configures the system to enter Stop mode with RTC
   *         clocked by LSE or LSI  for current consumption measurement purpose.
   *         STOP Mode with RTC clocked by LSE/LSI
-  *         =====================================   
+  *         =====================================
   *           - RTC Clocked by LSE or LSI
   *           - Regulator in LP mode
   *           - HSI, HSE OFF and LSI OFF if not used as RTC Clock source
@@ -139,16 +139,16 @@ void StopMode_Measure(void)
   GPIO_InitTypeDef GPIO_InitStructure;
   NVIC_InitTypeDef  NVIC_InitStructure;
   EXTI_InitTypeDef  EXTI_InitStructure;
-  
+
   /* Allow access to RTC */
   PWR_BackupAccessCmd(ENABLE);
 
 #if defined (RTC_CLOCK_SOURCE_LSI)  /* LSI used as RTC source clock*/
-/* The RTC Clock may varies due to LSI frequency dispersion. */   
-  /* Enable the LSI OSC */ 
+/* The RTC Clock may varies due to LSI frequency dispersion. */
+  /* Enable the LSI OSC */
   RCC_LSICmd(ENABLE);
 
-  /* Wait till LSI is ready */  
+  /* Wait till LSI is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET)
   {
   }
@@ -160,14 +160,14 @@ void StopMode_Measure(void)
   /* Enable the LSE OSC */
   RCC_LSEConfig(RCC_LSE_ON);
 
-  /* Wait till LSE is ready */  
+  /* Wait till LSE is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)
   {
   }
 
   /* Select the RTC Clock Source */
   RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
-  
+
 #else
   #error Please select the RTC Clock source inside the main.c file
 #endif /* RTC_CLOCK_SOURCE_LSI */
@@ -203,7 +203,7 @@ void StopMode_Measure(void)
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOB | RCC_AHB1Periph_GPIOC |
                          RCC_AHB1Periph_GPIOD | RCC_AHB1Periph_GPIOE | RCC_AHB1Periph_GPIOF |
                          RCC_AHB1Periph_GPIOG | RCC_AHB1Periph_GPIOH | RCC_AHB1Periph_GPIOI, DISABLE);
- 
+
   /* EXTI configuration *******************************************************/
   EXTI_ClearITPendingBit(EXTI_Line22);
   EXTI_InitStructure.EXTI_Line = EXTI_Line22;
@@ -211,16 +211,16 @@ void StopMode_Measure(void)
   EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
   EXTI_InitStructure.EXTI_LineCmd = ENABLE;
   EXTI_Init(&EXTI_InitStructure);
-  
+
   /* Enable the RTC Wakeup Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = RTC_WKUP_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
-  
+
   /* RTC Wakeup Interrupt Generation: Clock Source: RTCCLK_Div16, Wakeup Time Base: ~20s
-     RTC Clock Source LSE 32.768KHz or LSI ~32KHz  
+     RTC Clock Source LSE 32.768KHz or LSI ~32KHz
 
      Wakeup Time Base = (16 / (LSE or LSI)) * WakeUpCounter
   */
@@ -271,7 +271,7 @@ void StandbyMode_Measure(void)
 
   /* Request to enter STANDBY mode (Wake Up flag is cleared in PWR_EnterSTANDBYMode function) */
   PWR_EnterSTANDBYMode();
-  
+
   /* Infinite loop */
   while (1)
   {
@@ -279,7 +279,7 @@ void StandbyMode_Measure(void)
 }
 
 /**
-  * @brief  This function configures the system to enter Standby mode with RTC 
+  * @brief  This function configures the system to enter Standby mode with RTC
   *         clocked by LSE or LSI for current consumption measurement purpose.
   *         STANDBY Mode with RTC clocked by LSE/LSI
   *         ========================================
@@ -296,11 +296,11 @@ void StandbyRTCMode_Measure(void)
   PWR_BackupAccessCmd(ENABLE);
 
 #if defined (RTC_CLOCK_SOURCE_LSI)  /* LSI used as RTC source clock*/
-/* The RTC Clock may varies due to LSI frequency dispersion. */   
-  /* Enable the LSI OSC */ 
+/* The RTC Clock may varies due to LSI frequency dispersion. */
+  /* Enable the LSI OSC */
   RCC_LSICmd(ENABLE);
 
-  /* Wait till LSI is ready */  
+  /* Wait till LSI is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET)
   {
   }
@@ -312,14 +312,14 @@ void StandbyRTCMode_Measure(void)
   /* Enable the LSE OSC */
   RCC_LSEConfig(RCC_LSE_ON);
 
-  /* Wait till LSE is ready */  
+  /* Wait till LSE is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)
   {
   }
 
   /* Select the RTC Clock Source */
   RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
-  
+
 #else
   #error Please select the RTC Clock source inside the main.c file
 #endif /* RTC_CLOCK_SOURCE_LSI */
@@ -331,25 +331,25 @@ void StandbyRTCMode_Measure(void)
   RTC_WaitForSynchro();
 
   /* RTC Wakeup Interrupt Generation: Clock Source: RTCCLK_Div16, Wakeup Time Base: ~20s
-     RTC Clock Source LSE 32.768KHz or LSI ~32KHz 
+     RTC Clock Source LSE 32.768KHz or LSI ~32KHz
 
      Wakeup Time Base = (16 / (LSE or LSI)) * WakeUpCounter
   */
   RTC_WakeUpClockConfig(RTC_WakeUpClock_RTCCLK_Div16);
   RTC_SetWakeUpCounter(0xA000-1);
-  
+
   /* Enable the Wakeup Interrupt */
-  RTC_ITConfig(RTC_IT_WUT, ENABLE); 
+  RTC_ITConfig(RTC_IT_WUT, ENABLE);
 
   /* Enable Wakeup Counter */
   RTC_WakeUpCmd(ENABLE);
 
   /* Clear WakeUp (WUTF) pending flag */
   RTC_ClearFlag(RTC_FLAG_WUTF);
-    
+
   /* Request to enter STANDBY mode (Wake Up flag is cleared in PWR_EnterSTANDBYMode function) */
   PWR_EnterSTANDBYMode();
-  
+
   /* Infinite loop */
   while (1)
   {
@@ -357,8 +357,8 @@ void StandbyRTCMode_Measure(void)
 }
 
 /**
-  * @brief  This function configures the system to enter Standby mode with RTC 
-  *         clocked by LSE or LSI and with Backup SRAM ON for current consumption 
+  * @brief  This function configures the system to enter Standby mode with RTC
+  *         clocked by LSE or LSI and with Backup SRAM ON for current consumption
   *         measurement purpose.
   *         STANDBY Mode with RTC clocked by LSE/LSI and BKPSRAM
   *         ====================================================
@@ -370,16 +370,16 @@ void StandbyRTCMode_Measure(void)
   * @retval None
   */
 void StandbyRTCBKPSRAMMode_Measure(void)
-{   
+{
   /* Allow access to RTC */
   PWR_BackupAccessCmd(ENABLE);
 
 #if defined (RTC_CLOCK_SOURCE_LSI)  /* LSI used as RTC source clock*/
-/* The RTC Clock may varies due to LSI frequency dispersion. */   
-  /* Enable the LSI OSC */ 
+/* The RTC Clock may varies due to LSI frequency dispersion. */
+  /* Enable the LSI OSC */
   RCC_LSICmd(ENABLE);
 
-  /* Wait till LSI is ready */  
+  /* Wait till LSI is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET)
   {
   }
@@ -391,14 +391,14 @@ void StandbyRTCBKPSRAMMode_Measure(void)
   /* Enable the LSE OSC */
   RCC_LSEConfig(RCC_LSE_ON);
 
-  /* Wait till LSE is ready */  
+  /* Wait till LSE is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)
   {
   }
 
   /* Select the RTC Clock Source */
   RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
-  
+
 #else
   #error Please select the RTC Clock source inside the main.c file
 #endif /* RTC_CLOCK_SOURCE_LSI */
@@ -412,7 +412,7 @@ void StandbyRTCBKPSRAMMode_Measure(void)
 /*  Backup SRAM ***************************************************************/
   /* Enable BKPRAM Clock */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_BKPSRAM, ENABLE);
-  
+
   /* Enable the Backup SRAM low power Regulator */
   PWR_BackupRegulatorCmd(ENABLE);
 
@@ -420,27 +420,27 @@ void StandbyRTCBKPSRAMMode_Measure(void)
   while(PWR_GetFlagStatus(PWR_FLAG_BRR) == RESET)
   {
   }
-  
-  /* RTC Wakeup Interrupt Generation: Clock Source: RTCCLK_Div16, Wakeup Time Base: ~20s 
-     RTC Clock Source LSE 32.768KHz or LSI ~32KHz  
+
+  /* RTC Wakeup Interrupt Generation: Clock Source: RTCCLK_Div16, Wakeup Time Base: ~20s
+     RTC Clock Source LSE 32.768KHz or LSI ~32KHz
 
      Wakeup Time Base = (16 / (LSE or LSI)) * WakeUpCounter
   */
   RTC_WakeUpClockConfig(RTC_WakeUpClock_RTCCLK_Div16);
   RTC_SetWakeUpCounter(0xA000-1);
-  
+
   /* Enable the Wakeup Interrupt */
   RTC_ITConfig(RTC_IT_WUT, ENABLE);
 
   /* Enable Wakeup Counter */
-  RTC_WakeUpCmd(ENABLE); 
+  RTC_WakeUpCmd(ENABLE);
 
   /* Clear WakeUp (WUTF) pending flag */
   RTC_ClearFlag(RTC_FLAG_WUTF);
 
   /* Request to enter STANDBY mode (Wake Up flag is cleared in PWR_EnterSTANDBYMode function) */
   PWR_EnterSTANDBYMode();
-  
+
   /* Infinite loop */
   while (1)
   {
@@ -450,10 +450,10 @@ void StandbyRTCBKPSRAMMode_Measure(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

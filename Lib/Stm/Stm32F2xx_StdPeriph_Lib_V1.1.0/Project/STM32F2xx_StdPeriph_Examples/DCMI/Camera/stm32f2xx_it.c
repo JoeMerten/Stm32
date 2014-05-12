@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    DCMI/Camera/stm32f2xx_it.c 
+  * @file    DCMI/Camera/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -37,7 +37,7 @@
 
 /** @addtogroup DCMI_Camera
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -165,48 +165,48 @@ void EXTI2_IRQHandler(void)
     {
       /* Get the Joystick State */
       JoyState = IOE_JoyStickGetState();
-      
+
       switch (JoyState)
       {
         case JOY_NONE:
         break;
-        
+
         case JOY_UP:
         {
-          PressedKey =  UP;     
-          break;        
-        } 
+          PressedKey =  UP;
+          break;
+        }
         case JOY_DOWN:
         {
           PressedKey =  DOWN;
-          break;    
+          break;
         }
         case JOY_RIGHT :
         {
           PressedKey =  JOY_NONE;
-          break;    
+          break;
         }
         case JOY_LEFT:
         {
           PressedKey =  JOY_NONE;
-          break;    
-        }         
+          break;
+        }
         case JOY_CENTER:
         {
           PressedKey =  SEL;
-          break;    
+          break;
         }
         default:
         {
-          PressedKey =  JOY_NONE; 
+          PressedKey =  JOY_NONE;
           LCD_DisplayStringLine(LINE(17), (uint8_t*)"     JOY  ERROR     ");
-          break;           
+          break;
         }
-      } 
+      }
     }
-    /* Clear the interrupt pending bits */    
+    /* Clear the interrupt pending bits */
     IOE_ClearGITPending(IOE_2_ADDR, IOE_GIT_GPIO);
-    IOE_ClearIOITPending(IOE_2_ADDR, IOE_JOY_IT);  
+    IOE_ClearIOITPending(IOE_2_ADDR, IOE_JOY_IT);
   }
   /* Clear interrupt pending bit */
   EXTI_ClearITPendingBit(IOE_IT_EXTI_LINE);
@@ -232,10 +232,10 @@ void EXTI2_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

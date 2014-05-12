@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -90,7 +90,7 @@ int main(void)
   /* Enable peripheral clocks */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2 | RCC_AHB1Periph_GPIOC, ENABLE);
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1 | RCC_APB2Periph_ADC2, ENABLE);
-  
+
   /* Configure ADC Channel 12 pin as analog input */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
@@ -98,7 +98,7 @@ int main(void)
   GPIO_Init(GPIOC, &GPIO_InitStructure);
 
   /* DMA2 Stream0 channel0 configuration */
-  DMA_InitStructure.DMA_Channel = DMA_Channel_0;  
+  DMA_InitStructure.DMA_Channel = DMA_Channel_0;
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)ADC_CDR_ADDRESS;
   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)&ADCDualConvertedValue;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
@@ -127,20 +127,20 @@ int main(void)
   ADC_CommonInitStructure.ADC_TwoSamplingDelay = ADC_TwoSamplingDelay_6Cycles;
   ADC_CommonInitStructure.ADC_DMAAccessMode = ADC_DMAAccessMode_3;
   ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div2;
-  ADC_CommonInit(&ADC_CommonInitStructure);  
-  
+  ADC_CommonInit(&ADC_CommonInitStructure);
+
   /* DMA mode 3 is used in interleaved mode in 6-bit or 8-bit resolutions */
   ADC_InitStructure.ADC_Resolution = ADC_Resolution_8b;
 
   /* ADC1 regular channel 12 configuration ************************************/
   ADC_InitStructure.ADC_ScanConvMode = DISABLE;
   ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
-  ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;  
+  ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
   ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC1;
   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
   ADC_InitStructure.ADC_NbrOfConversion = 1;
   ADC_Init(ADC1, &ADC_InitStructure);
-  /* ADC1 regular channel12 configuration */ 
+  /* ADC1 regular channel12 configuration */
   ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 1, ADC_SampleTime_3Cycles);
 
   /* ADC2 regular channel 12 configuration ************************************/
@@ -212,8 +212,8 @@ void Display_Init(void)
 
 /* Initialize the LCD */
   STM322xG_LCD_Init();
-  
-  /* Clear the LCD */ 
+
+  /* Clear the LCD */
   LCD_Clear(White);
 
   /* Set the LCD Text size */
@@ -234,7 +234,7 @@ void Display_Init(void)
 
   /* Set the LCD Back Color and Text Color*/
   LCD_SetBackColor(White);
-  LCD_SetTextColor(Blue); 
+  LCD_SetTextColor(Blue);
 
   LCD_DisplayStringLine(LINE(2)," Connect voltage to ");
   LCD_DisplayStringLine(LINE(3),"  ADC Ch12 (PC.02)  ");
@@ -265,10 +265,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

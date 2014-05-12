@@ -3,12 +3,12 @@
 ;* Author             : MCD Application Team
 ;* Version            : V3.5.0
 ;* Date               : 11-March-2011
-;* Description        : STM32F10x High Density Devices vector table for EWARM 
+;* Description        : STM32F10x High Density Devices vector table for EWARM
 ;*                      toolchain.
 ;*                      This module performs:
 ;*                      - Set the initial SP
-;*                      - Configure the clock system and the external SRAM 
-;*                        mounted on STM3210E-EVAL board to be used as data 
+;*                      - Configure the clock system and the external SRAM
+;*                        mounted on STM3210E-EVAL board to be used as data
 ;*                        memory (optional, to be enabled by user)
 ;*                      - Set the initial PC == __iar_program_start,
 ;*                      - Set the vector table entries with the exceptions ISR address,
@@ -37,21 +37,21 @@
 ; table register (VTOR) is initialized to this address if != 0.
 ;
 ; Cortex-M version
-;     
-  
+;
+
     MODULE  ?cstartup
-        
+
         ;; Forward declaration of sections.
         SECTION CSTACK:DATA:NOROOT(3)
 
         SECTION .intvec:CODE:NOROOT(2)
 
         EXTERN  __iar_program_start
-        EXTERN  SystemInit        
+        EXTERN  SystemInit
         PUBLIC  __vector_table
 
         DATA
-       
+
 __vector_table
         DCD     sfe(CSTACK)
         DCD     Reset_Handler             ; Reset Handler
@@ -144,7 +144,7 @@ Reset_Handler
         BLX     R0
         LDR     R0, =__iar_program_start
         BX      R0
-               
+
         PUBWEAK NMI_Handler
         SECTION .text:CODE:REORDER(1)
 NMI_Handler
@@ -489,8 +489,8 @@ DMA2_Channel3_IRQHandler
         SECTION .text:CODE:REORDER(1)
 DMA2_Channel4_5_IRQHandler
         B DMA2_Channel4_5_IRQHandler
-        
-        
+
+
         END
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

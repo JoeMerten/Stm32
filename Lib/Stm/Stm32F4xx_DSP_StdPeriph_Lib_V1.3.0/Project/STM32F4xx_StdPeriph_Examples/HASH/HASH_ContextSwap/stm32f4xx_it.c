@@ -5,7 +5,7 @@
   * @version V1.3.0
   * @date    13-November-2013
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -36,7 +36,7 @@
 
 /** @addtogroup HASH_ContextSwap
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -184,9 +184,9 @@ void TIM6_DAC_IRQHandler(void)
     ContextSwapCounter++;
 
 /*=============================================================================
-   SHA1 Digest Computation 
+   SHA1 Digest Computation
 ==============================================================================*/
-    HASH_SHA1((uint8_t*)Sha1Input, SHA1_INPUT_TAB_SIZE, Sha1output); 
+    HASH_SHA1((uint8_t*)Sha1Input, SHA1_INPUT_TAB_SIZE, Sha1output);
 
 /*=============================================================================
    Restore MD5 Digest Computation context
@@ -200,10 +200,10 @@ void TIM6_DAC_IRQHandler(void)
 
 /**
   * @}
-  */ 
-  
+  */
+
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

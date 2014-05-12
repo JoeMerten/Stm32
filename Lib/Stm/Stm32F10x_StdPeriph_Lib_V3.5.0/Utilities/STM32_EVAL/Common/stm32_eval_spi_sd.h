@@ -17,7 +17,7 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
+  ******************************************************************************
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -34,22 +34,22 @@
 /** @addtogroup Utilities
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup Common
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL_SPI_SD
   * @{
-  */  
+  */
 
 /** @defgroup STM32_EVAL_SPI_SD_Exported_Types
   * @{
-  */ 
+  */
 
 typedef enum
 {
@@ -75,9 +75,9 @@ typedef enum
   SD_DATA_OTHER_ERROR       = (0xFF)
 } SD_Error;
 
-/** 
-  * @brief  Card Specific Data: CSD Register   
-  */ 
+/**
+  * @brief  Card Specific Data: CSD Register
+  */
 typedef struct
 {
   __IO uint8_t  CSDStruct;            /*!< CSD structure */
@@ -119,8 +119,8 @@ typedef struct
   __IO uint8_t  Reserved4;            /*!< always 1*/
 } SD_CSD;
 
-/** 
-  * @brief  Card Identification Data: CID Register   
+/**
+  * @brief  Card Identification Data: CID Register
   */
 typedef struct
 {
@@ -136,8 +136,8 @@ typedef struct
   __IO uint8_t  Reserved2;            /*!< always 1 */
 } SD_CID;
 
-/** 
-  * @brief SD Card information 
+/**
+  * @brief SD Card information
   */
 typedef struct
 {
@@ -150,11 +150,11 @@ typedef struct
 /**
   * @}
   */
-  
+
 /** @defgroup STM32_EVAL_SPI_SD_Exported_Constants
   * @{
-  */ 
-    
+  */
+
 /**
   * @brief  Block Size
   */
@@ -167,8 +167,8 @@ typedef struct
 
 /**
   * @brief  Start Data tokens:
-  *         Tokens (necessary because at nop/idle (and CS active) only 0xff is 
-  *         on the data/command line)  
+  *         Tokens (necessary because at nop/idle (and CS active) only 0xff is
+  *         on the data/command line)
   */
 #define SD_START_DATA_SINGLE_BLOCK_READ    0xFE  /*!< Data token start byte, Start Single Block Read */
 #define SD_START_DATA_MULTIPLE_BLOCK_READ  0xFE  /*!< Data token start byte, Start Multiple Block Read */
@@ -212,27 +212,27 @@ typedef struct
 
 /**
   * @}
-  */ 
-  
+  */
+
 /** @defgroup STM32_EVAL_SPI_SD_Exported_Macros
   * @{
   */
-/** 
-  * @brief  Select SD Card: ChipSelect pin low   
-  */  
+/**
+  * @brief  Select SD Card: ChipSelect pin low
+  */
 #define SD_CS_LOW()     GPIO_ResetBits(SD_CS_GPIO_PORT, SD_CS_PIN)
-/** 
-  * @brief  Deselect SD Card: ChipSelect pin high   
-  */ 
+/**
+  * @brief  Deselect SD Card: ChipSelect pin high
+  */
 #define SD_CS_HIGH()    GPIO_SetBits(SD_CS_GPIO_PORT, SD_CS_PIN)
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM32_EVAL_SPI_SD_Exported_Functions
   * @{
-  */ 
-void SD_DeInit(void);  
+  */
+void SD_DeInit(void);
 SD_Error SD_Init(void);
 uint8_t SD_Detect(void);
 SD_Error SD_GetCardInfo(SD_CardInfo *cardinfo);
@@ -271,10 +271,10 @@ uint8_t SD_ReadByte(void);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */    
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

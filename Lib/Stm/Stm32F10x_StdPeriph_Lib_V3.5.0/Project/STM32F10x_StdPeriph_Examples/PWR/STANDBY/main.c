@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/STANDBY/main.c 
+  * @file    PWR/STANDBY/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -49,14 +49,14 @@ void SysTick_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
+     */
 
-  /* Initialize LEDs and Key Button mounted on STM3210X-EVAL board */       
+  /* Initialize LEDs and Key Button mounted on STM3210X-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI);
@@ -78,7 +78,7 @@ int main(void)
 
   /* Configure the SysTick to generate an interrupt each 250 ms */
   SysTick_Configuration();
- 
+
   while (1)
   {
   }
@@ -112,7 +112,7 @@ void RTC_Configuration(void)
     /* RTC clock source configuration ----------------------------------------*/
     /* Reset Backup Domain */
     BKP_DeInit();
-  
+
     /* Enable LSE OSC */
     RCC_LSEConfig(RCC_LSE_ON);
     /* Wait till LSE is ready */
@@ -131,7 +131,7 @@ void RTC_Configuration(void)
     RTC_WaitForSynchro();
 
     /* Set the RTC time base to 1s */
-    RTC_SetPrescaler(32767);  
+    RTC_SetPrescaler(32767);
     /* Wait until last write operation on RTC registers has finished */
     RTC_WaitForLastTask();
   }
@@ -146,8 +146,8 @@ void SysTick_Configuration(void)
 {
   /* SysTick interrupt each 250 ms with SysTick Clock equal to (HCLK/8) */
   if (SysTick_Config((SystemCoreClock/8) / 4))
-  { 
-    /* Capture error */ 
+  {
+    /* Capture error */
     while (1);
   }
 
@@ -168,7 +168,7 @@ void SysTick_Configuration(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -186,6 +186,6 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    GPIO/JTAG_Remap/stm32f10x_it.h 
+  * @file    GPIO/JTAG_Remap/stm32f10x_it.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011

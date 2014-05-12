@@ -6,16 +6,16 @@
   * @date    07-March-2011
   * @brief   This file provides a set of functions needed to manage the SPI M25Pxxx
   *          FLASH memory mounted on STM32xx-EVAL board (refer to stm32_eval.h
-  *          to know about the boards supporting this memory). 
-  *          It implements a high level communication layer for read and write 
-  *          from/to this memory. The needed STM32 hardware resources (SPI and 
-  *          GPIO) are defined in stm32xx_eval.h file, and the initialization is 
-  *          performed in sFLASH_LowLevel_Init() function declared in stm32xx_eval.c 
+  *          to know about the boards supporting this memory).
+  *          It implements a high level communication layer for read and write
+  *          from/to this memory. The needed STM32 hardware resources (SPI and
+  *          GPIO) are defined in stm32xx_eval.h file, and the initialization is
+  *          performed in sFLASH_LowLevel_Init() function declared in stm32xx_eval.c
   *          file.
-  *          You can easily tailor this driver to any other development board, 
-  *          by just adapting the defines for hardware resources and 
+  *          You can easily tailor this driver to any other development board,
+  *          by just adapting the defines for hardware resources and
   *          sFLASH_LowLevel_Init() function.
-  *            
+  *
   *          +-----------------------------------------------------------+
   *          |                     Pin assignment                        |
   *          +-----------------------------+---------------+-------------+
@@ -28,8 +28,8 @@
   *          | sFLASH_SPI_MOSI_PIN / MOSI  |   DataIn(D)   |    5        |
   *          | sFLASH_SPI_SCK_PIN / SCLK   |   Clock(C)    |    6        |
   *          |                             |    VCC        |    7 (3.3 V)|
-  *          |                             |    VCC        |    8 (3.3 V)|  
-  *          +-----------------------------+---------------+-------------+  
+  *          |                             |    VCC        |    8 (3.3 V)|
+  *          +-----------------------------+---------------+-------------+
   ******************************************************************************
   * @attention
   *
@@ -41,8 +41,8 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
+  ******************************************************************************
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32_eval_spi_flash.h"
@@ -50,62 +50,62 @@
 /** @addtogroup Utilities
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup Common
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL_SPI_FLASH
   * @brief      This file includes the M25Pxxx SPI FLASH driver of STM32-EVAL boards.
   * @{
-  */  
+  */
 
 /** @defgroup STM32_EVAL_SPI_FLASH_Private_Types
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32_EVAL_SPI_FLASH_Private_Defines
   * @{
-  */  
+  */
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM32_EVAL_SPI_FLASH_Private_Macros
   * @{
   */
 /**
   * @}
-  */ 
-  
+  */
+
 
 /** @defgroup STM32_EVAL_SPI_FLASH_Private_Variables
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32_EVAL_SPI_FLASH_Private_Function_Prototypes
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32_EVAL_SPI_FLASH_Private_Functions
   * @{
-  */ 
+  */
 
 /**
   * @brief  DeInitializes the peripherals used by the SPI FLASH driver.
@@ -127,7 +127,7 @@ void sFLASH_Init(void)
   SPI_InitTypeDef  SPI_InitStructure;
 
   sFLASH_LowLevel_Init();
-    
+
   /*!< Deselect the FLASH: Chip Select high */
   sFLASH_CS_HIGH();
 
@@ -203,7 +203,7 @@ void sFLASH_EraseBulk(void)
 }
 
 /**
-  * @brief  Writes more than one byte to the FLASH with a single WRITE cycle 
+  * @brief  Writes more than one byte to the FLASH with a single WRITE cycle
   *         (Page WRITE sequence).
   * @note   The number of byte can't exceed the FLASH page size.
   * @param  pBuffer: pointer to the buffer  containing the data to be written
@@ -536,6 +536,6 @@ void sFLASH_WaitForWriteEnd(void)
 
 /**
   * @}
-  */  
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

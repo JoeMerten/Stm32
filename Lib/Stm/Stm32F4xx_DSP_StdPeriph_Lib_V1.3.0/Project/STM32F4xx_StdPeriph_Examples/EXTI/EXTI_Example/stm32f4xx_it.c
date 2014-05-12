@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    EXTI/EXTI_Example/stm32f4xx_it.c 
+  * @file    EXTI/EXTI_Example/stm32f4xx_it.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -37,7 +37,7 @@
 
 /** @addtogroup EXTI_Example
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -174,7 +174,7 @@ void EXTI0_IRQHandler(void)
   {
     /* Toggle LED1 */
     STM_EVAL_LEDToggle(LED1);
-    
+
     /* Clear the EXTI line 0 pending bit */
     EXTI_ClearITPendingBit(EXTI_Line0);
   }
@@ -191,7 +191,7 @@ void EXTI15_10_IRQHandler(void)
   {
     /* Toggle LED2 */
     STM_EVAL_LEDToggle(LED2);
-    
+
     /* Clear the EXTI line 15 pending bit */
     EXTI_ClearITPendingBit(EXTI_Line15);
   }
@@ -199,7 +199,7 @@ void EXTI15_10_IRQHandler(void)
   {
     /* Toggle LED2 */
     STM_EVAL_LEDToggle(LED2);
-    
+
     /* Clear the EXTI line 15 pending bit */
     EXTI_ClearITPendingBit(EXTI_Line13);
   }
@@ -207,10 +207,10 @@ void EXTI15_10_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TimeBase/main.c 
+  * @file    TIM/TimeBase/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -35,7 +35,7 @@
 
 /** @addtogroup TIM_TimeBase
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -61,7 +61,7 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
@@ -70,38 +70,38 @@ int main(void)
 
   /* TIM Configuration */
   TIM_Config();
-  
+
   /* -----------------------------------------------------------------------
     TIM3 Configuration: Output Compare Timing Mode:
-    
-    In this example TIM3 input clock (TIM3CLK) is set to 2 * APB1 clock (PCLK1), 
-    since APB1 prescaler is different from 1.   
-      TIM3CLK = 2 * PCLK1  
-      PCLK1 = HCLK / 4 
+
+    In this example TIM3 input clock (TIM3CLK) is set to 2 * APB1 clock (PCLK1),
+    since APB1 prescaler is different from 1.
+      TIM3CLK = 2 * PCLK1
+      PCLK1 = HCLK / 4
       => TIM3CLK = HCLK / 2 = SystemCoreClock /2
-          
+
     To get TIM3 counter clock at 6 MHz, the prescaler is computed as follows:
        Prescaler = (TIM3CLK / TIM3 counter clock) - 1
        Prescaler = ((SystemCoreClock /2) /6 MHz) - 1
-                                              
+
     CC1 update rate = TIM3 counter clock / CCR1_Val = 146.48 Hz
     ==> Toggling frequency = 73.24 Hz
-    
+
     C2 update rate = TIM3 counter clock / CCR2_Val = 219.7 Hz
     ==> Toggling frequency = 109.8 Hz
-    
+
     CC3 update rate = TIM3 counter clock / CCR3_Val = 439.4 Hz
     ==> Toggling frequency = 219.7 Hz
-    
+
     CC4 update rate = TIM3 counter clock / CCR4_Val = 878.9 Hz
     ==> Toggling frequency = 439.4 Hz
 
-    Note: 
+    Note:
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f2xx.c file.
      Each time the core clock (HCLK) changes, user had to call SystemCoreClockUpdate()
      function to update SystemCoreClock variable value. Otherwise, any configuration
-     based on this variable will be incorrect.    
-  ----------------------------------------------------------------------- */   
+     based on this variable will be incorrect.
+  ----------------------------------------------------------------------- */
 
 
   /* Compute the prescaler value */
@@ -151,7 +151,7 @@ int main(void)
   TIM_OC4Init(TIM3, &TIM_OCInitStructure);
 
   TIM_OC4PreloadConfig(TIM3, TIM_OCPreload_Disable);
-   
+
   /* TIM Interrupts enable */
   TIM_ITConfig(TIM3, TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3 | TIM_IT_CC4, ENABLE);
 
@@ -214,10 +214,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

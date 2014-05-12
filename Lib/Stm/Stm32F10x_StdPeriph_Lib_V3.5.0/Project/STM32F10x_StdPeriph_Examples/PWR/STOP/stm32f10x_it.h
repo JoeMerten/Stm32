@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/STOP/stm32f10x_it.h 
+  * @file    PWR/STOP/stm32f10x_it.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2C/I2C_EEPROM/main.h 
+  * @file    I2C/I2C_EEPROM/main.h
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,15 +16,15 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
   */
-  
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -34,7 +34,7 @@
   #include "stm324xg_eval_lcd.h"
   #include "stm324xg_eval_i2c_ee.h"
 
-#elif defined (USE_STM324x7I_EVAL) 
+#elif defined (USE_STM324x7I_EVAL)
   #include "stm324x7i_eval_lcd.h"
   #include "stm324x7i_eval_i2c_ee.h"
 
@@ -45,7 +45,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Used to display the transfer status on LCD */
 #define USE_LCD
-  
+
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/

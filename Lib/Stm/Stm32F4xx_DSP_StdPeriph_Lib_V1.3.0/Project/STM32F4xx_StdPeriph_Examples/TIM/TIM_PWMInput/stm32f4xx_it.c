@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_PWMInput/stm32f4xx_it.c 
+  * @file    TIM/TIM_PWMInput/stm32f4xx_it.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -36,7 +36,7 @@
 
 /** @addtogroup TIM_PWMInput
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -170,7 +170,7 @@ void TIM4_IRQHandler(void)
     /* Duty cycle computation */
     DutyCycle = (TIM_GetCapture1(TIM4) * 100) / IC2Value;
 
-    /* Frequency computation 
+    /* Frequency computation
        TIM4 counter clock = (RCC_Clocks.HCLK_Frequency)/2 */
 
     Frequency = (RCC_Clocks.HCLK_Frequency)/2 / IC2Value;
@@ -184,10 +184,10 @@ void TIM4_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

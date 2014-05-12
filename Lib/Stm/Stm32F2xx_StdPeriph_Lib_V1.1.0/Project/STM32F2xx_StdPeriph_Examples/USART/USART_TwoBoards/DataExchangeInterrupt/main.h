@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -31,7 +31,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -45,15 +45,15 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Exported define ------------------------------------------------------------*/
 
 /* USER_TIMEOUT value for waiting loops. This timeout is just guarantee that the
-   application will not remain stuck if the USART communication is corrupted. 
+   application will not remain stuck if the USART communication is corrupted.
    You may modify this timeout value depending on CPU frequency and application
    conditions (interrupts routines, number of data to transfer, baudrate, frequence
-   CPU...). */ 
+   CPU...). */
 #define USER_TIMEOUT                    ((uint32_t)0x64) /* Waiting 1s */
 
 /* USART Mode Selected */
 #define USART_MODE_TRANSMITTER           0x00
-#define USART_MODE_RECEIVER              0x01      
+#define USART_MODE_RECEIVER              0x01
 
 /* USART Transaction Type */
 #define USART_TRANSACTIONTYPE_CMD        0x00
@@ -67,14 +67,14 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 #define USARTx_IRQn                      USART3_IRQn
 #define USARTx_IRQHandler                USART3_IRQHandler
 
-#define USARTx_TX_PIN                    GPIO_Pin_10                
-#define USARTx_TX_GPIO_PORT              GPIOC                       
+#define USARTx_TX_PIN                    GPIO_Pin_10
+#define USARTx_TX_GPIO_PORT              GPIOC
 #define USARTx_TX_GPIO_CLK               RCC_AHB1Periph_GPIOC
 #define USARTx_TX_SOURCE                 GPIO_PinSource10
 #define USARTx_TX_AF                     GPIO_AF_USART3
 
-#define USARTx_RX_PIN                    GPIO_Pin_11                
-#define USARTx_RX_GPIO_PORT              GPIOC                    
+#define USARTx_RX_PIN                    GPIO_Pin_11
+#define USARTx_RX_GPIO_PORT              GPIOC
 #define USARTx_RX_GPIO_CLK               RCC_AHB1Periph_GPIOC
 #define USARTx_RX_SOURCE                 GPIO_PinSource11
 #define USARTx_RX_AF                     GPIO_AF_USART3
@@ -91,9 +91,9 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 #define CMD_LEFT                         0xAA
 #define CMD_UP                           0x33
 #define CMD_DOWN                         0xCC
-#define CMD_SEL                          0xFF 
+#define CMD_SEL                          0xFF
 
-#define CMD_ACK                          0x66 
+#define CMD_ACK                          0x66
 
 /* Number of data bytes for each command */
 #define CMD_RIGHT_SIZE                   0x01

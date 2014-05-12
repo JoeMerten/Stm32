@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM1_Synchro/main.c 
+  * @file    TIM/TIM1_Synchro/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -34,7 +34,7 @@
 
 /** @addtogroup TIM_TIM1_Synchro
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -56,42 +56,42 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
-     */     
-       
+     */
+
   /* TIM1 Configuration */
   TIM_Config();
-  
+
   /* ---------------------------------------------------------------------------
     TIM1 and Timers(TIM3 and TIM4) synchronisation in parallel mode.
      1/TIM1 is configured as Master Timer:
          - PWM Mode is used
          - The TIM1 Update event is used as Trigger Output
-    
+
      2/TIM3 and TIM4 are slaves for TIM1,
          - PWM Mode is used
          - The ITR0(TIM1) is used as input trigger for both slaves
          - Gated mode is used, so starts and stops of slaves counters
            are controlled by the Master trigger output signal(update event).
-    
-    In this example TIM1 input clock (TIM1CLK) is set to 2 * APB2 clock (PCLK2), 
-    since APB2 prescaler is different from 1.   
-      TIM1CLK = 2 * PCLK2  
-      PCLK2 = HCLK / 2 
+
+    In this example TIM1 input clock (TIM1CLK) is set to 2 * APB2 clock (PCLK2),
+    since APB2 prescaler is different from 1.
+      TIM1CLK = 2 * PCLK2
+      PCLK2 = HCLK / 2
       => TIM1CLK = HCLK = SystemCoreClock
-          
+
     The TIM1 counter clock is equal to SystemCoreClock = 120 Mhz.
-                                                               
+
     The Master Timer TIM1 is running at:
     TIM1 frequency = TIM1 counter clock / (TIM1_Period + 1) = 468.750 KHz
     TIM1_Period = (TIM1 counter clock / TIM1 frequency) - 1 = 255
     and the duty cycle is equal to: TIM1_CCR1/(TIM1_ARR + 1) = 50%
 
-    The TIM3 is running at: 
+    The TIM3 is running at:
     (TIM1 frequency)/ ((TIM3 period +1)* (Repetition_Counter+1)) = 31.250 KHz and
     a duty cycle equal to TIM3_CCR1/(TIM3_ARR + 1) = 33.3%
 
@@ -99,12 +99,12 @@ int main(void)
     (TIM1 frequency)/ ((TIM4 period +1)* (Repetition_Counter+1)) = 46.875 KHz and
     a duty cycle equal to TIM4_CCR1/(TIM4_ARR + 1) = 50%
 
-    Note: 
+    Note:
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f2xx.c file.
      Each time the core clock (HCLK) changes, user had to call SystemCoreClockUpdate()
      function to update SystemCoreClock variable value. Otherwise, any configuration
-     based on this variable will be incorrect.    
-  --------------------------------------------------------------------------- */   
+     based on this variable will be incorrect.
+  --------------------------------------------------------------------------- */
 
 
   /* TIM3 Peripheral Configuration ----------------------------------------*/
@@ -125,7 +125,7 @@ int main(void)
   /* Slave Mode selection: TIM3 */
   TIM_SelectSlaveMode(TIM3, TIM_SlaveMode_Gated);
   TIM_SelectInputTrigger(TIM3, TIM_TS_ITR0);
-  
+
   /* TIM4 Peripheral Configuration ----------------------------------------*/
   /* TIM4 Slave Configuration: PWM1 Mode */
   TIM_TimeBaseStructure.TIM_Period = 1;
@@ -144,7 +144,7 @@ int main(void)
   /* Slave Mode selection: TIM4 */
   TIM_SelectSlaveMode(TIM4, TIM_SlaveMode_Gated);
   TIM_SelectInputTrigger(TIM4, TIM_TS_ITR0);
-  
+
   /* TIM1 Peripheral Configuration ----------------------------------------*/
   /* Time Base configuration */
   TIM_TimeBaseStructure.TIM_Prescaler = 0;
@@ -183,7 +183,7 @@ int main(void)
 
   /* Select the Master Slave Mode */
   TIM_SelectMasterSlaveMode(TIM1, TIM_MasterSlaveMode_Enable);
-  
+
   /* TIM1 counter enable */
   TIM_Cmd(TIM1, ENABLE);
 
@@ -209,10 +209,10 @@ void TIM_Config(void)
 
   /* GPIOA, GPIOB and GPIOC clocks enable */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOB | RCC_AHB1Periph_GPIOC, ENABLE);
-  
+
   /* TIM1 clock enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
-                         
+
   /* TIM3 and TIM4 clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3 | RCC_APB1Periph_TIM4, ENABLE);
 
@@ -234,10 +234,10 @@ void TIM_Config(void)
 
   /* Connect TIM pins to AF1 */
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource8, GPIO_AF_TIM1);
-  
+
   /* Connect TIM pins to AF2 */
   GPIO_PinAFConfig(GPIOC, GPIO_PinSource6, GPIO_AF_TIM3);
-  GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_TIM4);  
+  GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_TIM4);
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -262,10 +262,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

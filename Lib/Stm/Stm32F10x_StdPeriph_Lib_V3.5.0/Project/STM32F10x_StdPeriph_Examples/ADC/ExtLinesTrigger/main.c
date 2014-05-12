@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    ADC/ExtLinesTrigger/main.c 
+  * @file    ADC/ExtLinesTrigger/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup ADC_ExtLinesTrigger
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -55,13 +55,13 @@ void EXTI_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System clocks configuration ---------------------------------------------*/
   RCC_Configuration();
 
@@ -88,10 +88,10 @@ int main(void)
   DMA_InitStructure.DMA_Priority = DMA_Priority_High;
   DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
   DMA_Init(DMA1_Channel1, &DMA_InitStructure);
-  
+
   /* Enable DMA1 channel1 */
   DMA_Cmd(DMA1_Channel1, ENABLE);
-  
+
   /* ADC1 configuration ------------------------------------------------------*/
   ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
   ADC_InitStructure.ADC_ScanConvMode = ENABLE;
@@ -101,7 +101,7 @@ int main(void)
   ADC_InitStructure.ADC_NbrOfChannel = 2;
   ADC_Init(ADC1, &ADC_InitStructure);
 
-  /* ADC1 regular channels configuration */ 
+  /* ADC1 regular channels configuration */
   ADC_RegularChannelConfig(ADC1, ADC_Channel_4, 1, ADC_SampleTime_28Cycles5);
   ADC_RegularChannelConfig(ADC1, ADC_Channel_14, 2, ADC_SampleTime_28Cycles5);
 
@@ -110,12 +110,12 @@ int main(void)
   /* Enable regular discontinuous mode */
   ADC_DiscModeCmd(ADC1, ENABLE);
 
-  /* Enable ADC1 external trigger conversion */ 
+  /* Enable ADC1 external trigger conversion */
   ADC_ExternalTrigConvCmd(ADC1, ENABLE);
 
   /* Set injected sequencer length */
   ADC_InjectedSequencerLengthConfig(ADC1, 2);
-  /* ADC1 injected channel configuration */ 
+  /* ADC1 injected channel configuration */
   ADC_InjectedChannelConfig(ADC1, ADC_Channel_11, 1, ADC_SampleTime_28Cycles5);
   ADC_InjectedChannelConfig(ADC1, ADC_Channel_12, 2, ADC_SampleTime_28Cycles5);
   /* ADC1 injected external trigger configuration */
@@ -128,11 +128,11 @@ int main(void)
 
   /* Enable ADC1 DMA */
   ADC_DMACmd(ADC1, ENABLE);
-  
-  /* Enable ADC1 */
-  ADC_Cmd(ADC1, ENABLE);  
 
-  /* Enable ADC1 reset calibration register */   
+  /* Enable ADC1 */
+  ADC_Cmd(ADC1, ENABLE);
+
+  /* Enable ADC1 reset calibration register */
   ADC_ResetCalibration(ADC1);
   /* Check the end of ADC1 reset calibration register */
   while(ADC_GetResetCalibrationStatus(ADC1));
@@ -159,14 +159,14 @@ void RCC_Configuration(void)
   RCC_ADCCLKConfig(RCC_PCLK2_Div2);
 #else
   /* ADCCLK = PCLK2/4 */
-  RCC_ADCCLKConfig(RCC_PCLK2_Div4); 
+  RCC_ADCCLKConfig(RCC_PCLK2_Div4);
 #endif
   /* Enable peripheral clocks ------------------------------------------------*/
   /* Enable DMA1 clock */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 
   /* Enable GPIOs and ADC1 clock */
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOC | 
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOC |
                          RCC_APB2Periph_GPIOE | RCC_APB2Periph_AFIO |
                          RCC_APB2Periph_ADC1, ENABLE);
 }
@@ -186,7 +186,7 @@ void EXTI_Configuration(void)
   GPIO_EXTILineConfig(GPIO_PortSourceGPIOE, GPIO_PinSource11);
 #endif
 
-  /* EXTI line11 configuration -----------------------------------------------*/  
+  /* EXTI line11 configuration -----------------------------------------------*/
   EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Event;
   EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
   EXTI_InitStructure.EXTI_Line = EXTI_Line11;
@@ -195,7 +195,7 @@ void EXTI_Configuration(void)
 
   /* Select the EXTI Line15 the GPIO pin source */
   GPIO_EXTILineConfig(GPIO_PortSourceGPIOE, GPIO_PinSource15);
-  /* EXTI line15 configuration -----------------------------------------------*/  
+  /* EXTI line15 configuration -----------------------------------------------*/
   EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Event;
   EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
   EXTI_InitStructure.EXTI_Line = EXTI_Line15;
@@ -226,7 +226,7 @@ void GPIO_Configuration(void)
   /* Configure EXTI line11 ---------------------------------------------------*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-#ifdef STM32F10X_HD_VL 
+#ifdef STM32F10X_HD_VL
   GPIO_Init(GPIOF, &GPIO_InitStructure);
 #else
   GPIO_Init(GPIOE, &GPIO_InitStructure);
@@ -269,7 +269,7 @@ void NVIC_Configuration(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -283,10 +283,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

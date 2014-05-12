@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    NVIC/NVIC_WFIMode/main.h 
+  * @file    NVIC/NVIC_WFIMode/main.h
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,15 +16,15 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
   */
-  
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -33,10 +33,10 @@
 #if defined (USE_STM324xG_EVAL)
   #include "stm324xg_eval.h"
 
-#elif defined (USE_STM324x7I_EVAL) 
+#elif defined (USE_STM324x7I_EVAL)
   #include "stm324x7i_eval.h"
 
-#elif defined (USE_STM324x9I_EVAL) 
+#elif defined (USE_STM324x9I_EVAL)
   #include "stm324x9i_eval.h"
 
 #else
@@ -45,7 +45,7 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-#ifdef USE_STM324x9I_EVAL 
+#ifdef USE_STM324x9I_EVAL
  #define BUTTON             BUTTON_TAMPER
  #define BUTTON_EXTI_LINE   TAMPER_BUTTON_EXTI_LINE
  #define RCC_AHB1Periph_DMA RCC_AHB1Periph_DMA2
@@ -59,7 +59,7 @@
  #define RCC_AHB1Periph_DMA RCC_AHB1Periph_DMA1
  #define USART_DR_ADDRESS   ((uint32_t)0x40004804)
  #define DMA_Stream         DMA1_Stream1
- #define DMA_Stream_IRQn    DMA1_Stream1_IRQn 
+ #define DMA_Stream_IRQn    DMA1_Stream1_IRQn
 #endif /* USE_STM324x9I_EVAL */
 
 /* Exported macro ------------------------------------------------------------*/

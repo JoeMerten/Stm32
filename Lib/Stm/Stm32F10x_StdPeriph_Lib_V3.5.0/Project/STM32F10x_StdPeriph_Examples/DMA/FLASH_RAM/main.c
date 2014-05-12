@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DMA/FLASH_RAM/main.c 
+  * @file    DMA/FLASH_RAM/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup DMA_FLASH_RAM
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -58,7 +58,7 @@ uint32_t DST_Buffer[BufferSize];
 void RCC_Configuration(void);
 void NVIC_Configuration(void);
 TestStatus Buffercmp(const uint32_t* pBuffer, uint32_t* pBuffer1, uint16_t BufferLength);
-    
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -68,16 +68,16 @@ TestStatus Buffercmp(const uint32_t* pBuffer, uint32_t* pBuffer1, uint16_t Buffe
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
-       
+
   /* NVIC configuration */
   NVIC_Configuration();
 
@@ -109,12 +109,12 @@ int main(void)
   while (CurrDataCounterEnd != 0)
   {
   }
-  
+
   /* Check if the transmitted and received data are equal */
   TransferStatus = Buffercmp(SRC_Const_Buffer, DST_Buffer, BufferSize);
-  /* TransferStatus = PASSED, if the transmitted and received data 
+  /* TransferStatus = PASSED, if the transmitted and received data
      are the same */
-  /* TransferStatus = FAILED, if the transmitted and received data 
+  /* TransferStatus = FAILED, if the transmitted and received data
      are different */
 
   while (1)
@@ -142,7 +142,7 @@ void RCC_Configuration(void)
 void NVIC_Configuration(void)
 {
   NVIC_InitTypeDef NVIC_InitStructure;
-  
+
   /* Enable DMA1 channel6 IRQ Channel */
   NVIC_InitStructure.NVIC_IRQChannel = DMA1_Channel6_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
@@ -166,12 +166,12 @@ TestStatus Buffercmp(const uint32_t* pBuffer, uint32_t* pBuffer1, uint16_t Buffe
     {
       return FAILED;
     }
-    
+
     pBuffer++;
     pBuffer1++;
   }
 
-  return PASSED;  
+  return PASSED;
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -184,7 +184,7 @@ TestStatus Buffercmp(const uint32_t* pBuffer, uint32_t* pBuffer1, uint16_t Buffe
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -197,10 +197,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 #endif
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

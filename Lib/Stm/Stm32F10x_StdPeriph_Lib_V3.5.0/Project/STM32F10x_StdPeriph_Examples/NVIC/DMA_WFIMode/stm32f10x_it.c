@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    NVIC/DMA_WFIMode/stm32f10x_it.c 
+  * @file    NVIC/DMA_WFIMode/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -212,9 +212,9 @@ void EXTI9_5_IRQHandler(void)
   if(EXTI_GetITStatus(KEY_BUTTON_EXTI_LINE) != RESET)
   {
     EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
-  
+
     LowPowerMode = 1;
-  }  
+  }
 }
 
 /******************************************************************************/

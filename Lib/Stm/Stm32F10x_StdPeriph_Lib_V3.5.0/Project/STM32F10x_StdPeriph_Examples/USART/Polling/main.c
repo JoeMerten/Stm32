@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/Polling/main.c 
+  * @file    USART/Polling/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup USART_Polling
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum { FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -44,15 +44,15 @@ typedef enum { FAILED = 0, PASSED = !FAILED} TestStatus;
 USART_InitTypeDef USART_InitStructure;
 uint8_t TxBuffer[] = "Buffer Send from USARTy to USARTz using Flags";
 uint8_t RxBuffer[TxBufferSize];
-__IO uint8_t TxCounter = 0, RxCounter = 0;  
-volatile TestStatus TransferStatus = FAILED;  
+__IO uint8_t TxCounter = 0, RxCounter = 0;
+volatile TestStatus TransferStatus = FAILED;
 
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
 void GPIO_Configuration(void);
 TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 __IO uint8_t index = 0;
-  
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -62,13 +62,13 @@ __IO uint8_t index = 0;
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -77,7 +77,7 @@ int main(void)
 
 /* USARTy and USARTz configuration ------------------------------------------------------*/
   /* USARTy and USARTz configured as follow:
-        - BaudRate = 230400 baud  
+        - BaudRate = 230400 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - Even parity
@@ -90,12 +90,12 @@ int main(void)
   USART_InitStructure.USART_Parity = USART_Parity_Even;
   USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-  
+
   /* Configure USARTy */
   USART_Init(USARTy, &USART_InitStructure);
   /* Configure USARTz */
   USART_Init(USARTz, &USART_InitStructure);
-  
+
   /* Enable the USARTy */
   USART_Cmd(USARTy, ENABLE);
 
@@ -103,29 +103,29 @@ int main(void)
   USART_Cmd(USARTz, ENABLE);
 
   while(TxCounter < TxBufferSize)
-  {   
+  {
     /* Send one byte from USARTy to USARTz */
     USART_SendData(USARTy, TxBuffer[TxCounter++]);
-    
-    /* Loop until USARTy DR register is empty */ 
+
+    /* Loop until USARTy DR register is empty */
     while(USART_GetFlagStatus(USARTy, USART_FLAG_TXE) == RESET)
     {
     }
-    
+
     /* Loop until the USARTz Receive Data Register is not empty */
     while(USART_GetFlagStatus(USARTz, USART_FLAG_RXNE) == RESET)
     {
     }
 
     /* Store the received byte in RxBuffer */
-    RxBuffer[RxCounter++] = (USART_ReceiveData(USARTz) & 0x7F);  
-    
-  } 
+    RxBuffer[RxCounter++] = (USART_ReceiveData(USARTz) & 0x7F);
+
+  }
   /* Check the received data with the send ones */
   TransferStatus = Buffercmp(TxBuffer, RxBuffer, TxBufferSize);
-  /* TransferStatus = PASSED, if the data transmitted from USARTy and  
+  /* TransferStatus = PASSED, if the data transmitted from USARTy and
      received by USARTz are the same */
-  /* TransferStatus = FAILED, if the data transmitted from USARTy and 
+  /* TransferStatus = FAILED, if the data transmitted from USARTy and
      received by USARTz are different */
 
   while (1)
@@ -139,19 +139,19 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{    
+{
   /* Enable GPIO clock */
   RCC_APB2PeriphClockCmd(USARTy_GPIO_CLK | USARTz_GPIO_CLK | RCC_APB2Periph_AFIO, ENABLE);
 
 #ifndef USE_STM3210C_EVAL
   /* Enable USARTy Clock */
-  RCC_APB2PeriphClockCmd(USARTy_CLK, ENABLE); 
+  RCC_APB2PeriphClockCmd(USARTy_CLK, ENABLE);
 #else
   /* Enable USARTy Clock */
-  RCC_APB1PeriphClockCmd(USARTy_CLK, ENABLE); 
+  RCC_APB1PeriphClockCmd(USARTy_CLK, ENABLE);
 #endif
   /* Enable USARTz Clock */
-  RCC_APB1PeriphClockCmd(USARTz_CLK, ENABLE);  
+  RCC_APB1PeriphClockCmd(USARTz_CLK, ENABLE);
 }
 
 /**
@@ -166,9 +166,9 @@ void GPIO_Configuration(void)
 #ifdef USE_STM3210C_EVAL
   /* Enable the USART3 Pins Software Remapping */
   GPIO_PinRemapConfig(GPIO_PartialRemap_USART3, ENABLE);
-  
+
   /* Enable the USART2 Pins Software Remapping */
-  GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);  
+  GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
 #elif defined(USE_STM3210B_EVAL) || defined(USE_STM32100B_EVAL)
   /* Enable the USART2 Pins Software Remapping */
   GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
@@ -178,11 +178,11 @@ void GPIO_Configuration(void)
   GPIO_InitStructure.GPIO_Pin = USARTy_RxPin;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   GPIO_Init(USARTy_GPIO, &GPIO_InitStructure);
-  
+
   /* Configure USARTz Rx as input floating */
   GPIO_InitStructure.GPIO_Pin = USARTz_RxPin;
-  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure);  
-  
+  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure);
+
   /* Configure USARTy Tx as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin = USARTy_TxPin;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -191,7 +191,7 @@ void GPIO_Configuration(void)
 
   /* Configure USARTz Tx as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin = USARTz_TxPin;
-  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure); 
+  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure);
 }
 
 /**
@@ -209,12 +209,12 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
     {
       return FAILED;
     }
-    
+
     pBuffer1++;
     pBuffer2++;
   }
 
-  return PASSED;  
+  return PASSED;
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -227,7 +227,7 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -241,10 +241,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

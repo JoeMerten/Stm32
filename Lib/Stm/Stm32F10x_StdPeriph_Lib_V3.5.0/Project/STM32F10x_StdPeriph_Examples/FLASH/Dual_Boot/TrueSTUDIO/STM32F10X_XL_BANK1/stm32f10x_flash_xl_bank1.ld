@@ -3,7 +3,7 @@
 **
 **  File        : stm32f10x_flash_xl_bank1.ld
 **
-**  Abstract    : Linker script for loading program in BANK1 of STM32F103ZG flash 
+**  Abstract    : Linker script for loading program in BANK1 of STM32F103ZG flash
 **                memory.
 **
 **                Set heap size, stack size and stack location according

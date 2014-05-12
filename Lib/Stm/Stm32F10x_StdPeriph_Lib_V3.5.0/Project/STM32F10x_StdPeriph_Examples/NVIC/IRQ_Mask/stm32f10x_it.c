@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    NVIC/IRQ_Mask/stm32f10x_it.c 
+  * @file    NVIC/IRQ_Mask/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -31,7 +31,7 @@
 
 /** @addtogroup IRQ_Mask
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -158,25 +158,25 @@ void EXTI0_IRQHandler(void)
   {
     if(index == 0)
     {
-      /* Configure the BASEPRI register to 0x40 (Preemption priority = 1). 
-         Only IRQ with higher preemption priority than 1 are permitted. 
+      /* Configure the BASEPRI register to 0x40 (Preemption priority = 1).
+         Only IRQ with higher preemption priority than 1 are permitted.
          This will mask TIM3 and TIM4 IRQ from generation. */
       __set_BASEPRI(0x40);
       index++;
     }
     else
     {
-      /* Configure the BASEPRI register to 0x00 (Preemption priority = 0). 
-         When this BASEPRI register is set to 0, it has no effect on the current 
+      /* Configure the BASEPRI register to 0x00 (Preemption priority = 0).
+         When this BASEPRI register is set to 0, it has no effect on the current
          priority.
          TIM2, TIM3 and TIM4 generation is controlled by NVIC priority registers. */
       __set_BASEPRI(0x00);
       index = 0;
     }
     /* Clears the SEL Button EXTI line pending bits. */
-    EXTI_ClearITPendingBit(WAKEUP_BUTTON_EXTI_LINE);  
+    EXTI_ClearITPendingBit(WAKEUP_BUTTON_EXTI_LINE);
   }
-} 
+}
 
 /**
   * @brief  This function handles TIM2 global interrupt request.
@@ -187,7 +187,7 @@ void TIM2_IRQHandler(void)
 {
   /* Clear TIM2 update interrupt */
   TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
-  
+
   /* Toggle LED1 */
   STM_EVAL_LEDToggle(LED1);
 }
@@ -201,7 +201,7 @@ void TIM3_IRQHandler(void)
 {
   /* Clear TIM3 update interrupt */
   TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
-  
+
   /* Toggle LED2 */
   STM_EVAL_LEDToggle(LED2);
 }
@@ -215,7 +215,7 @@ void TIM4_IRQHandler(void)
 {
   /* Clear TIM4 update interrupt */
   TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
-  
+
   /* Toggle LED3 */
   STM_EVAL_LEDToggle(LED3);
 }

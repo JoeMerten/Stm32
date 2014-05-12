@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -98,7 +98,7 @@ uint32_t BytesRead = 0;
 uint32_t Storage_Init(void)
 {
   SD_Init();
-  
+
   /****************** FatFs Volume Acess ******************************/
   if (f_mount(0, &fs))
   {
@@ -128,14 +128,14 @@ uint32_t Storage_OpenReadFile(uint32_t Address, const char* BmpName)
 
   /* Read bitmap size */
   size = *(uint16_t *) (BmpAddress + 2);
-  size |= (*(uint16_t *) (BmpAddress + 4)) << 16;  
- 
+  size |= (*(uint16_t *) (BmpAddress + 4)) << 16;
+
   /* Get bitmap data address offset */
   index = *(uint16_t *) (BmpAddress + 10);
-  index |= (*(uint16_t *) (BmpAddress + 12)) << 16;  
-  
+  index |= (*(uint16_t *) (BmpAddress + 12)) << 16;
+
   f_close (&F1);
-  
+
   f_open (&F1, BmpName, FA_READ);
 
   do
@@ -154,17 +154,17 @@ uint32_t Storage_OpenReadFile(uint32_t Address, const char* BmpName)
     for (index = 0; index < i1; index++)
     {
       *(__IO uint8_t*) (Address) = *(__IO uint8_t *)BmpAddress;
-      
-      BmpAddress++;  
+
+      BmpAddress++;
       Address++;
-    }  
-    
+    }
+
     BmpAddress = (uint32_t)sector;
   }
   while (size > 0);
 
   f_close (&F1);
-  
+
   return 1;
 }
 
@@ -204,7 +204,7 @@ uint32_t Storage_CheckBitmapFile(const char* BmpName, uint32_t *FileLen)
   */
 uint32_t Storage_GetDirectoryBitmapFiles (const char* DirName, char* Files[])
 {
-  
+
   FATFS fs;
   FILINFO fno;
   DIR dir;
@@ -219,7 +219,7 @@ uint32_t Storage_GetDirectoryBitmapFiles (const char* DirName, char* Files[])
 
   /* Open directory */
   res = f_opendir(&dir, DirName);
-  
+
   if (res == FR_OK)
   {
     for (;;)

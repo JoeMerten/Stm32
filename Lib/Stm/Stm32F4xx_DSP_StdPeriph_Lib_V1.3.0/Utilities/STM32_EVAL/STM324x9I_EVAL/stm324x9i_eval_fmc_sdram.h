@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.3
   * @date    13-November-2013
-  * @brief   This file contains all the functions prototypes for the 
+  * @brief   This file contains all the functions prototypes for the
   *          stm324x9i_eval_fmc_sdram.c driver.
   ******************************************************************************
   * @attention
@@ -17,14 +17,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */   
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM324X9I_EVAL_FMC_SDRAM_H
@@ -44,59 +44,59 @@
 
 /**
   * @brief  FMC SDRAM Bank address
-  */   
+  */
 #define SDRAM_BANK_ADDR     ((uint32_t)0xC0000000)
 /**
   * @}
-  */  
-  
+  */
+
 /**
   * @brief  FMC SDRAM Memory Width
-  */  
+  */
 /* #define SDRAM_MEMORY_WIDTH   FMC_SDMemory_Width_8b  */
 /* #define SDRAM_MEMORY_WIDTH    FMC_SDMemory_Width_16b */
 #define SDRAM_MEMORY_WIDTH    FMC_SDMemory_Width_32b  /* Default configuration used with LCD */
 /**
   * @}
-  */  
+  */
 
 /**
   * @brief  FMC SDRAM Memory clock period
-  */  
+  */
 #define SDCLOCK_PERIOD    FMC_SDClock_Period_2        /* Default configuration used with LCD */
 /* #define SDCLOCK_PERIOD    FMC_SDClock_Period_3 */
 /**
   * @}
-  */  
+  */
 
 
 /**
   * @brief  FMC SDRAM Bank Remap
-  */    
-/* #define SDRAM_BANK_REMAP */   
+  */
+/* #define SDRAM_BANK_REMAP */
 /**
   * @}
-  */ 
+  */
 
 /**
   * @brief  FMC SDRAM Timeout
-  */    
-#define SDRAM_TIMEOUT     ((uint32_t)0xFFFF)  
+  */
+#define SDRAM_TIMEOUT     ((uint32_t)0xFFFF)
 /**
   * @}
   */
 /**
   * @}
-  */       
-  
+  */
+
 
 
 /**
  * @brief Uncomment the line below if you want to use user defined Delay function
  *        (for precise timing), otherwise default _delay_ function defined within
- *         this driver is used (less precise timing).  
+ *         this driver is used (less precise timing).
  */
- 
+
 /* #define USE_Delay */
 
 #ifdef USE_Delay
@@ -108,7 +108,7 @@
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @brief  FMC SDRAM Mode definition register defines
@@ -122,16 +122,16 @@
 #define SDRAM_MODEREG_CAS_LATENCY_2              ((uint16_t)0x0020)
 #define SDRAM_MODEREG_CAS_LATENCY_3              ((uint16_t)0x0030)
 #define SDRAM_MODEREG_OPERATING_MODE_STANDARD    ((uint16_t)0x0000)
-#define SDRAM_MODEREG_WRITEBURST_MODE_PROGRAMMED ((uint16_t)0x0000) 
-#define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE     ((uint16_t)0x0200)      
+#define SDRAM_MODEREG_WRITEBURST_MODE_PROGRAMMED ((uint16_t)0x0000)
+#define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE     ((uint16_t)0x0200)
 
 /**
   * @}
-  */  
+  */
 
 /** @defgroup STM324x9I_EVAL_FMC_SDRAM_Exported_Functions
   * @{
-  */ 
+  */
 void  SDRAM_Init(void);
 void  SDRAM_GPIOConfig(void);
 void  SDRAM_InitSequence(void);
@@ -150,8 +150,8 @@ static void delay(__IO uint32_t nCount);
 
 /**
   * @}
-  */ 
-  
-  
+  */
+
+
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

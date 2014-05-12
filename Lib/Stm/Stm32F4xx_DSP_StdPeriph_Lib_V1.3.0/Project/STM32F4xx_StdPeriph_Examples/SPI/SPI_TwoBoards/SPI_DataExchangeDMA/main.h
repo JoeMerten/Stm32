@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -31,7 +31,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
@@ -39,9 +39,9 @@
 #if defined (USE_STM324xG_EVAL)
   #include "stm324xg_eval.h"
 
-#elif defined (USE_STM324x7I_EVAL) 
+#elif defined (USE_STM324x7I_EVAL)
   #include "stm324x7i_eval.h"
-   
+
 #else
  #error "Please select first the Evaluation board used in your application (in Project Options)"
 #endif
@@ -54,13 +54,13 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Uncomment the line below if you will use the SPI peripheral as a Master */
 /* #define SPI_MASTER */
 /* Uncomment the line below if you will use the SPI peripheral as a Slave */
- #define SPI_SLAVE  
+ #define SPI_SLAVE
 
 /* USER_TIMEOUT value for waiting loops. This timeout is just guarantee that the
-   application will not remain stuck if the USART communication is corrupted. 
+   application will not remain stuck if the USART communication is corrupted.
    You may modify this timeout value depending on CPU frequency and application
    conditions (interrupts routines, number of data to transfer, baudrate, CPU
-   frequency...). */ 
+   frequency...). */
 #define USER_TIMEOUT                    ((uint32_t)0x64) /* Waiting 1s */
 
 /* SPIx Communication boards Interface */
@@ -100,7 +100,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 
 #endif /* USE_STM324xG_EVAL */
 
-#if defined (USE_STM324x7I_EVAL) 
+#if defined (USE_STM324x7I_EVAL)
   #define SPIx                           SPI2
   #define SPIx_CLK                       RCC_APB1Periph_SPI2
   #define SPIx_CLK_INIT                  RCC_APB1PeriphClockCmd

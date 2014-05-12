@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/7PWM_Output/main.c 
+  * @file    TIM/7PWM_Output/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup TIM_7PWM_Output
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -52,13 +52,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -71,7 +71,7 @@ int main(void)
    SystemCoreClock is set to 72 MHz for Low-density, Medium-density, High-density
    and Connectivity line devices and to 24 MHz for Low-Density Value line and
    Medium-Density Value line devices
-   
+
    The objective is to generate 7 PWM signal at 17.57 KHz:
      - TIM1_Period = (SystemCoreClock / 17570) - 1
    The channel 1 and channel 1N duty cycle is set to 50%
@@ -163,7 +163,7 @@ void GPIO_Configuration(void)
   GPIO_Init(GPIOE, &GPIO_InitStructure);
 
   /* TIM1 Full remapping pins */
-  GPIO_PinRemapConfig(GPIO_FullRemap_TIM1, ENABLE); 
+  GPIO_PinRemapConfig(GPIO_FullRemap_TIM1, ENABLE);
 
 #else
   /* GPIOA Configuration: Channel 1, 2 and 3 as alternate function push-pull */
@@ -201,10 +201,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

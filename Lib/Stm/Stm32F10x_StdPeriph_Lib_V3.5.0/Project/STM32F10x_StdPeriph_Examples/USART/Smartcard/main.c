@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/Smartcard/main.c 
+  * @file    USART/Smartcard/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -25,7 +25,7 @@
 
 /* Private define ------------------------------------------------------------*/
 #define T0_PROTOCOL           0x00 /* T0 PROTOCOL */
-#define SETUP_LENGHT          20 
+#define SETUP_LENGHT          20
 #define HIST_LENGHT           20
 #define SC_Receive_Timeout    0x4000 /* direction to reader */
 
@@ -35,11 +35,11 @@
 
 /** @addtogroup USART_Smartcard
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* ATR STRUCTURE - ANSWER TO RESET */
-typedef  struct 
+typedef  struct
 {
   uint8_t TS; /* Bit Convention */
   uint8_t T0; /* High Nibble = N. of setup byte; low nibble = N. of historical byte */
@@ -54,7 +54,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 USART_InitTypeDef USART_InitStructure;
-USART_ClockInitTypeDef USART_ClockInitStructure; 
+USART_ClockInitTypeDef USART_ClockInitStructure;
 SC_ATR  SC_A2R;
 __IO uint32_t index = 0, Counter = 0;
 volatile TestStatus ATRDecodeStatus = FAILED;
@@ -80,16 +80,16 @@ uint8_t SC_decode_Answer2reset(__IO uint8_t *card);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
-       
+
   /* NVIC configuration */
   NVIC_Configuration();
 
@@ -118,7 +118,7 @@ int main(void)
   USART_SetPrescaler(SC_USART, 0x04);
   /* SC_USART Guard Time set to 2 Bit */
   USART_SetGuardTime(SC_USART, 0x2);
-  
+
   USART_ClockInitStructure.USART_Clock = USART_Clock_Enable;
   USART_ClockInitStructure.USART_CPOL = USART_CPOL_Low;
   USART_ClockInitStructure.USART_CPHA = USART_CPHA_1Edge;
@@ -131,7 +131,7 @@ int main(void)
   USART_InitStructure.USART_Parity = USART_Parity_Even;
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
   USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-  USART_Init(SC_USART, &USART_InitStructure);  
+  USART_Init(SC_USART, &USART_InitStructure);
 
   /* Enable the SC_USART Parity Error Interrupt */
   USART_ITConfig(SC_USART, USART_IT_PE, ENABLE);
@@ -145,12 +145,12 @@ int main(void)
   /* Enable the Smartcard Interface */
   USART_SmartCardCmd(SC_USART, ENABLE);
 
-  /* Loop while no Smartcard is detected */  
+  /* Loop while no Smartcard is detected */
   while(CardInserted == 0)
   {
   }
 
-  /* Read Smartcard ATR response */ 
+  /* Read Smartcard ATR response */
   for(index = 0; index < 40; index++, Counter = 0)
   {
     while((USART_GetFlagStatus(SC_USART, USART_FLAG_RXNE) == RESET) && (Counter != SC_Receive_Timeout))
@@ -173,14 +173,14 @@ int main(void)
     /* Inserted card is ISO7816-3 T=0 compatible */
     ATRDecodeStatus = PASSED;
   }
-  else 
-  { 
+  else
+  {
     /* Inserted Smartcard is not ISO7816-3 T=0 compatible */
     ATRDecodeStatus = FAILED;
-  } 
+  }
 
   while (1)
-  {   
+  {
   }
 }
 
@@ -190,10 +190,10 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{  
-  /* Enable GPIO_3_5V, SC_USART_GPIO_CLK, GPIO_CMDVCC, GPIO_RESET, GPIO_OFF and 
+{
+  /* Enable GPIO_3_5V, SC_USART_GPIO_CLK, GPIO_CMDVCC, GPIO_RESET, GPIO_OFF and
      AFIO clocks */
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_3_5V | SC_USART_GPIO_CLK | RCC_APB2Periph_RESET | 
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_3_5V | SC_USART_GPIO_CLK | RCC_APB2Periph_RESET |
                          RCC_APB2Periph_CMDVCC | RCC_APB2Periph_OFF | RCC_APB2Periph_AFIO, ENABLE);
 
   /* Enable SC_USART clocks */
@@ -229,21 +229,21 @@ void GPIO_Configuration(void)
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_Init(GPIO_RESET, &GPIO_InitStructure);
 
-  /* Set RSTIN HIGH */  
+  /* Set RSTIN HIGH */
   GPIO_SetBits(GPIO_RESET, SC_RESET);
 
   /* Configure Smartcard 3/5V  */
   GPIO_InitStructure.GPIO_Pin = SC_3_5V;
   GPIO_Init(GPIO_3_5V, &GPIO_InitStructure);
 
-  /* Select 5 V */  
+  /* Select 5 V */
   GPIO_SetBits(GPIO_3_5V, SC_3_5V);
 
   /* Configure Smartcard CMDVCC  */
   GPIO_InitStructure.GPIO_Pin = SC_CMDVCC;
   GPIO_Init(GPIO_CMDVCC, &GPIO_InitStructure);
 
-  /* Select Smartcard CMDVCC */ 
+  /* Select Smartcard CMDVCC */
   GPIO_SetBits(GPIO_CMDVCC, SC_CMDVCC);
 
   /* Select Smartcard OFF */
@@ -341,9 +341,9 @@ uint8_t SC_decode_Answer2reset(__IO uint8_t *card)
     SC_A2R.T[i] = card[i + 2];
   }
 
-  protocol = SC_A2R.T[SC_A2R.Tlenght - 1] & 0x0F; 
+  protocol = SC_A2R.T[SC_A2R.Tlenght - 1] & 0x0F;
 
-  while(flag) 
+  while(flag)
   {
     if ((SC_A2R.T[SC_A2R.Tlenght-1] & 0x80)== 0x80)
     {
@@ -371,7 +371,7 @@ uint8_t SC_decode_Answer2reset(__IO uint8_t *card)
   {
     SC_A2R.H[i] = card[i + 2 + SC_A2R.Tlenght];
   }
-  
+
   return ((uint8_t)protocol);
 }
 
@@ -385,7 +385,7 @@ uint8_t SC_decode_Answer2reset(__IO uint8_t *card)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -399,10 +399,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

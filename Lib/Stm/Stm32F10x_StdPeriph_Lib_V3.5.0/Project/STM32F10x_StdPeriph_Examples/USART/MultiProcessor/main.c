@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/MultiProcessor/main.c 
+  * @file    USART/MultiProcessor/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup USART_MultiProcessor
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -50,30 +50,30 @@ void Delay(__IO uint32_t nCount);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
-       
+
   /* Configure the GPIO ports */
   GPIO_Configuration();
 
-  /* Initialize Leds, Wakeup and Key Buttons mounted on STM3210X-EVAL board */ 
+  /* Initialize Leds, Wakeup and Key Buttons mounted on STM3210X-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
-  STM_EVAL_PBInit(BUTTON_WAKEUP, BUTTON_MODE_EXTI);          
-  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI);  
+  STM_EVAL_PBInit(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
+  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI);
 
 /* USARTy and USARTz configuration -------------------------------------------*/
   /* USARTy and USARTz configured as follow:
-        - BaudRate = 9600 baud  
+        - BaudRate = 9600 baud
         - Word Length = 9 Bits
         - One Stop Bit
         - No parity
@@ -86,12 +86,12 @@ int main(void)
   USART_InitStructure.USART_Parity = USART_Parity_No;
   USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-  
+
   /* Configure USARTy */
   USART_Init(USARTy, &USART_InitStructure);
   /* Configure USARTz */
   USART_Init(USARTz, &USART_InitStructure);
-  
+
   /* Enable the USARTy */
   USART_Cmd(USARTy, ENABLE);
   /* Enable the USARTz */
@@ -104,17 +104,17 @@ int main(void)
 
   /* Select the USARTz WakeUp Method */
   USART_WakeUpConfig(USARTz, USART_WakeUp_AddressMark);
-  
+
   while (1)
   {
     /* Send one byte from USARTy to USARTz */
     USART_SendData(USARTy, 0x33);
-    
+
     /* Wait while USART1 TXE = 0 */
     while(USART_GetFlagStatus(USARTz, USART_FLAG_TXE) == RESET)
     {
     }
-    
+
     if(USART_GetFlagStatus(USARTz, USART_FLAG_RXNE) != RESET)
     {
       if(USART_ReceiveData(USARTz) == 0x33)
@@ -144,13 +144,13 @@ void RCC_Configuration(void)
 
 #ifndef USE_STM3210C_EVAL
   /* Enable USARTy Clock */
-  RCC_APB2PeriphClockCmd(USARTy_CLK, ENABLE); 
+  RCC_APB2PeriphClockCmd(USARTy_CLK, ENABLE);
 #else
   /* Enable USARTy Clock */
-  RCC_APB1PeriphClockCmd(USARTy_CLK, ENABLE); 
+  RCC_APB1PeriphClockCmd(USARTy_CLK, ENABLE);
 #endif
   /* Enable USARTz Clock */
-  RCC_APB1PeriphClockCmd(USARTz_CLK, ENABLE);  
+  RCC_APB1PeriphClockCmd(USARTz_CLK, ENABLE);
 }
 
 /**
@@ -165,9 +165,9 @@ void GPIO_Configuration(void)
 #ifdef USE_STM3210C_EVAL
   /* Enable the USART3 Pins Software Remapping */
   GPIO_PinRemapConfig(GPIO_PartialRemap_USART3, ENABLE);
-  
+
   /* Enable the USART2 Pins Software Remapping */
-  GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);  
+  GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
 #elif defined(USE_STM3210B_EVAL) || defined(USE_STM32100B_EVAL)
   /* Enable the USART2 Pins Software Remapping */
   GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
@@ -177,11 +177,11 @@ void GPIO_Configuration(void)
   GPIO_InitStructure.GPIO_Pin = USARTy_RxPin;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   GPIO_Init(USARTy_GPIO, &GPIO_InitStructure);
-  
+
   /* Configure USARTz Rx as input floating */
   GPIO_InitStructure.GPIO_Pin = USARTz_RxPin;
-  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure);  
-  
+  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure);
+
   /* Configure USARTy Tx as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin = USARTy_TxPin;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -190,7 +190,7 @@ void GPIO_Configuration(void)
 
   /* Configure USARTz Tx as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin = USARTz_TxPin;
-  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure);  
+  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure);
 }
 
 /**
@@ -214,7 +214,7 @@ void Delay(__IO uint32_t nCount)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -228,10 +228,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

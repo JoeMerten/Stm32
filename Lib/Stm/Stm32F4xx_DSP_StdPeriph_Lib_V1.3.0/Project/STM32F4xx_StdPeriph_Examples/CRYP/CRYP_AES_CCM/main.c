@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CRYP/CRYP_AES_CCM/main.c 
+  * @file    CRYP/CRYP_AES_CCM/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup CRYP_AES_CCM
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -82,14 +82,14 @@ static char PressToContinue(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
        before to branch to application main.
-     */     
-       
+     */
+
   /* USARTx configured as follows:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -97,19 +97,19 @@ int main(void)
         - Receive and transmit enabled
   */
   USART_Config();
-  
+
   /* Enable CRYP clock */
   RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_CRYP, ENABLE);
-  
+
   while(1)
-  { 
+  {
     /* Display Plain Text */
     Display_PlainData(PLAINTEXT_SIZE);
 
     /********************************************************************/
     /* !!!! This example runs only on STM32F437x/STM32F439x Devices !!! */
     /********************************************************************/
-    
+
     /* Encrypt the plaintext message */
     if(CRYP_AES_CCM(MODE_ENCRYPT, Nonce, NonceSize, AES128key, KEY_SIZE, PlainText, PLAINTEXT_SIZE, HeaderMessage, HEADER_SIZE, HBuffer, OutputText, MAC, MAC_SIZE) == SUCCESS)
     {
@@ -118,7 +118,7 @@ int main(void)
       /* Display computed MAC */
       Display_MAC(MAC, MAC_SIZE);
     }
-    
+
     /* Decrypt the cyphertext message */
     if(CRYP_AES_CCM(MODE_DECRYPT, Nonce, NonceSize, AES128key, KEY_SIZE, ExpectedCypherText, PLAINTEXT_SIZE, HeaderMessage, HEADER_SIZE, HBuffer, OutputText, MAC, MAC_SIZE) == SUCCESS)
     {
@@ -127,14 +127,14 @@ int main(void)
       /* Display computed MAC */
       Display_MAC(MAC, MAC_SIZE);
     }
-    
+
     PressToContinue();
     printf("\n\r Example restarted...\n ");
   }
 }
 
 /**
-  * @brief  Displays Plain Data 
+  * @brief  Displays Plain Data
   * @param  datalength: length of the data to display
   * @retval None
   */
@@ -142,21 +142,21 @@ static void Display_PlainData(uint32_t datalength)
 {
   uint32_t buffercounter =0;
   uint32_t count = 0;
-  
+
   printf("\n\r =============================================================\n\r");
   printf(" ================= AES using CCM mode ===================\n\r");
   printf(" ============================================================\n\r");
   printf(" ---------------------------------------\n\r");
   printf(" Plain Data :\n\r");
   printf(" ---------------------------------------\n\r");
-  
+
   for(buffercounter = 0; buffercounter < datalength; buffercounter++)
   {
     printf("[0x%02X]", PlainText[buffercounter]);
     count++;
 
     if(count == 16)
-    { 
+    {
       count = 0;
       printf("  Block %d \n\r", buffercounter/16);
     }
@@ -164,7 +164,7 @@ static void Display_PlainData(uint32_t datalength)
 }
 
 /**
-  * @brief  Displays Encrypted Data 
+  * @brief  Displays Encrypted Data
   * @param  mode: chaining mode
   * @param  keysize: AES key size used
   * @param  datalength: length of the data to display
@@ -182,14 +182,14 @@ static void Display_EncryptedData(uint8_t mode, uint16_t keysize, uint32_t datal
     printf("CCM\n\r");
   }
   printf(" ---------------------------------------\n\r");
-  
+
   for(buffercounter = 0; buffercounter < datalength; buffercounter++)
   {
     printf("[0x%02X]", OutputText[buffercounter]);
 
     count++;
     if(count == 16)
-    { 
+    {
       count = 0;
       printf(" Block %d \n\r", buffercounter/16);
     }
@@ -197,7 +197,7 @@ static void Display_EncryptedData(uint8_t mode, uint16_t keysize, uint32_t datal
 }
 
 /**
-  * @brief  Displays Decrypted Data 
+  * @brief  Displays Decrypted Data
   * @param  mode: chaining mode
   * @param  keysize: AES key size used
   * @param  datalength: length of the data to display
@@ -209,20 +209,20 @@ static void Display_DecryptedData(uint8_t mode, uint16_t keysize, uint32_t datal
   uint32_t count = 0;
 
   printf("\n\r =======================================\n\r");
-  printf(" Decrypted Data with AES %d  Mode  ",keysize ); 
+  printf(" Decrypted Data with AES %d  Mode  ",keysize );
   if(mode == AES_MODE_CCM)
   {
     printf("CCM\n\r");
   }
   printf(" ---------------------------------------\n\r");
-  
+
   for(buffercounter = 0; buffercounter < datalength; buffercounter++)
   {
     printf("[0x%02X]", OutputText[buffercounter]);
     count++;
 
     if(count == 16)
-    { 
+    {
       count = 0;
       printf(" Block %d \n\r", buffercounter/16);
     }
@@ -241,16 +241,16 @@ static void Display_MAC(uint8_t* MAC, uint32_t MACSize)
   uint32_t count = 0;
 
   printf("\n\r =======================================\n\r");
-  printf(" Message Authentication Code (MAC):\n\r  "); 
+  printf(" Message Authentication Code (MAC):\n\r  ");
   printf("---------------------------------------\n\r");
-  
+
   for(buffercounter = 0; buffercounter < MACSize; buffercounter++)
   {
     printf("[0x%02X]", MAC[buffercounter]);
     count++;
 
     if(count == 16)
-    { 
+    {
       count = 0;
       printf(" Block %d \n\r", MACSize/16);
     }
@@ -258,14 +258,14 @@ static void Display_MAC(uint8_t* MAC, uint32_t MACSize)
 }
 
 /**
-  * @brief  USART configuration 
+  * @brief  USART configuration
   * @param  None
   * @retval None
   */
 static void USART_Config(void)
 {
   USART_InitTypeDef USART_InitStructure;
-  
+
   USART_InitStructure.USART_BaudRate = 115200;
   USART_InitStructure.USART_WordLength = USART_WordLength_8b;
   USART_InitStructure.USART_StopBits = USART_StopBits_1;
@@ -283,7 +283,7 @@ static void USART_Config(void)
   */
 static char PressToContinue(void)
 {
-  char c; 
+  char c;
   printf("\n\r Press any key to continue...\n\r ");
 
   while (USART_GetFlagStatus(EVAL_COM1, USART_FLAG_RXNE) == RESET)
@@ -323,7 +323,7 @@ PUTCHAR_PROTOTYPE
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -336,10 +336,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

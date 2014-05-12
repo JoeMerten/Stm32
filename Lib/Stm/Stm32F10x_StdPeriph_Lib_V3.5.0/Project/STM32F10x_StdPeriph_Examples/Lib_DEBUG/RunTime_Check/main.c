@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Lib_DEBUG/RunTime_Check/main.c 
+  * @file    Lib_DEBUG/RunTime_Check/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -31,7 +31,7 @@
 
 /** @addtogroup Lib_DEBUG_RunTime_Check
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -57,17 +57,17 @@
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   GPIO_InitTypeDef GPIOA_InitStructure;
 
   /* USARTx configured as follow:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -85,7 +85,7 @@ int main(void)
 
   /* Initialize all peripherals pointers */
   debug();
-  
+
   printf("\r\n STM32F10x Firmware Library compiled with FULL ASSERT function... \n\r");
   printf("...Run-time checking enabled  \n\r");
 
@@ -93,13 +93,13 @@ int main(void)
   /* To enable SPI1 clock, RCC_APB2PeriphClockCmd function must be used and
      not RCC_APB1PeriphClockCmd */
   RCC_APB1PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
-  
+
   /* Some member of GPIOA_InitStructure structure are not initialized */
   GPIOA_InitStructure.GPIO_Pin = GPIO_Pin_6;
   GPIOA_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
   /* GPIOA_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; */
   GPIO_Init(GPIOA, &GPIOA_InitStructure);
-  
+
   while (1)
   {
   }
@@ -116,13 +116,13 @@ int main(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number */
 
   printf("\n\r Wrong parameter value detected on\r\n");
   printf("       file  %s\r\n", file);
   printf("       line  %d\r\n", line);
-    
+
   /* Infinite loop */
   /* while (1)
   {

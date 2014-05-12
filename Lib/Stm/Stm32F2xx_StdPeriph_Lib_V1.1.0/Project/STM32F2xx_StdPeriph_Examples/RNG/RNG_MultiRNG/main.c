@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -37,7 +37,7 @@
 
 /** @addtogroup RNG_MultiRNG
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 
@@ -59,7 +59,7 @@ void Display(uint32_t rng, uint8_t line);
 #else
   #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
 #endif /* __GNUC__ */
-  
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -72,7 +72,7 @@ int main(void)
  uint32_t random32bit = 0;
  uint8_t Counter = 0;
 
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
@@ -81,10 +81,10 @@ int main(void)
 
   /* Display init (LCD or/and USART)*/
   Display_Init();
-  
+
   /* Key Button configuration */
   STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_GPIO);
-  
+
   /* RNG configuration */
   RNG_Config();
 
@@ -106,7 +106,7 @@ int main(void)
       {
       }
 
-      /* Get a 32bit Random number */       
+      /* Get a 32bit Random number */
       random32bit = RNG_GetRandomNumber();
 
       /* Display the Random number value on the LCD or/and USART */
@@ -121,7 +121,7 @@ int main(void)
   * @retval None
   */
 void RNG_Config(void)
-{  
+{
  /* Enable RNG clock source */
   RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_RNG, ENABLE);
 
@@ -136,11 +136,11 @@ void RNG_Config(void)
   */
 void Display_Init(void)
 {
-#ifdef PRINT_ON_USART 
+#ifdef PRINT_ON_USART
 
  USART_InitTypeDef USART_InitStructure;
   /* USARTx configured as follow:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -162,11 +162,11 @@ void Display_Init(void)
   printf("\n\r  Press key button to generate 8 x 32bit random number\n");
 #endif
 
-#ifdef PRINT_ON_LCD  
+#ifdef PRINT_ON_LCD
 /* Initialize the LCD */
   STM322xG_LCD_Init();
 
-  /* Clear the LCD */ 
+  /* Clear the LCD */
   LCD_Clear(White);
 
   /* Set the LCD Text size */
@@ -185,7 +185,7 @@ void Display_Init(void)
 
   /* Set the LCD Back Color and Text Color*/
   LCD_SetBackColor(White);
-  LCD_SetTextColor(Blue); 
+  LCD_SetTextColor(Blue);
 
   LCD_DisplayStringLine(LINE(3),"  Press KEY button ");
   LCD_DisplayStringLine(LINE(5),"     to START     ");
@@ -204,10 +204,10 @@ void Display(uint32_t rnumber, uint8_t line)
   uint8_t text[50];
 #endif
 
-#ifdef PRINT_ON_USART  
+#ifdef PRINT_ON_USART
   printf("\r [ 0x%08x ]\n", rnumber);
   if (line == 8)
-  {  
+  {
     printf("\n\r  Press key button to generate 8 x 32bit random number\n");
   }
 #endif
@@ -246,7 +246,7 @@ PUTCHAR_PROTOTYPE
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -263,6 +263,6 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

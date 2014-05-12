@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    WWDG/WWDG_Reset/main.c 
+  * @file    WWDG/WWDG_Reset/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 
 /* Includes ------------------------------------------------------------------*/
@@ -30,7 +30,7 @@
 
 /** @addtogroup WWDG_Reset
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -50,14 +50,14 @@ void Delay(__IO uint32_t nTime);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
+     */
 
-  /* Initialize LED1 and Key Button mounted on STM3210X-EVAL board */       
+  /* Initialize LED1 and Key Button mounted on STM3210X-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI);
@@ -65,7 +65,7 @@ int main(void)
 
   /* Check if the system has resumed from WWDG reset */
   if (RCC_GetFlagStatus(RCC_FLAG_WWDGRST) != RESET)
-  { 
+  {
     /* WWDGRST flag set */
     /* Turn on LED1 */
     STM_EVAL_LEDOn(LED1);
@@ -82,8 +82,8 @@ int main(void)
 
   /* Setup SysTick Timer for 1 msec interrupts  */
   if (SysTick_Config(SystemCoreClock / 1000))
-  { 
-    /* Capture error */ 
+  {
+    /* Capture error */
     while (1);
   }
 
@@ -100,26 +100,26 @@ int main(void)
   WWDG_SetWindowValue(80);
 
   /* - On Value line devices,
-    Enable WWDG and set counter value to 127, WWDG timeout = ~1366 us * 64 = 87.42 ms 
+    Enable WWDG and set counter value to 127, WWDG timeout = ~1366 us * 64 = 87.42 ms
     In this case the refresh window is: ~1366us * (127-80) = 64.20 ms < refresh window < ~1366us * 64 = 87.42ms
      - On other devices
-    Enable WWDG and set counter value to 127, WWDG timeout = ~910 us * 64 = 58.25 ms 
-    In this case the refresh window is: ~910 us * (127-80) = 42.77 ms < refresh window < ~910 us * 64 = 58.25ms     
+    Enable WWDG and set counter value to 127, WWDG timeout = ~910 us * 64 = 58.25 ms
+    In this case the refresh window is: ~910 us * (127-80) = 42.77 ms < refresh window < ~910 us * 64 = 58.25ms
   */
   WWDG_Enable(127);
-   
+
   while (1)
   {
     /* Toggle LED2 */
     STM_EVAL_LEDToggle(LED2);
 
-#if !defined (STM32F10X_LD_VL) && !defined (STM32F10X_MD_VL) && !defined (STM32F10X_HD_VL) 
+#if !defined (STM32F10X_LD_VL) && !defined (STM32F10X_MD_VL) && !defined (STM32F10X_HD_VL)
     /* Insert 44 ms delay */
     Delay(44);
 #else
     /* Insert 66 ms delay */
     Delay(66);
-#endif    
+#endif
 
     /* Update WWDG counter */
     WWDG_SetCounter(127);
@@ -132,7 +132,7 @@ int main(void)
   * @retval None
   */
 void Delay(__IO uint32_t nTime)
-{ 
+{
   TimingDelay = nTime;
   while(TimingDelay != 0)
   {
@@ -162,10 +162,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

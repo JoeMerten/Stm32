@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RTC/TimeStamp/main.c 
+  * @file    RTC/TimeStamp/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -34,14 +34,14 @@
 
 /** @addtogroup RTC_TimeStamp
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Uncomment the corresponding line to select the RTC Clock source */
 #define RTC_CLOCK_SOURCE_LSE   /* LSE used as RTC source clock */
 /* #define RTC_CLOCK_SOURCE_LSI */ /* LSI used as RTC source clock. The RTC Clock
-                                      may varies due to LSI frequency dispersion. */ 
+                                      may varies due to LSI frequency dispersion. */
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -63,14 +63,14 @@ __IO uint32_t AsynchPrediv = 0, SynchPrediv = 0;
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
-     */     
+     */
   /* USARTx configured as follow:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -85,7 +85,7 @@ int main(void)
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 
   STM_EVAL_COMInit(COM1, &USART_InitStructure);
- 
+
   /* Output a message on Hyperterminal using printf function */
   printf("\n\r  *********************** RTC Time Stamp Example ***********************\n\r");
 
@@ -98,7 +98,7 @@ int main(void)
     RTC_InitStructure.RTC_AsynchPrediv = AsynchPrediv;
     RTC_InitStructure.RTC_SynchPrediv = SynchPrediv;
     RTC_InitStructure.RTC_HourFormat = RTC_HourFormat_24;
-   
+
     /* Check on RTC init */
     if (RTC_Init(&RTC_InitStructure) == ERROR)
     {
@@ -106,7 +106,7 @@ int main(void)
     }
 
     /* Configure the time register */
-    RTC_TimeRegulate(); 
+    RTC_TimeRegulate();
   }
   else
   {
@@ -122,7 +122,7 @@ int main(void)
     }
 
     printf("\r\n No need to configure RTC....\n\r");
-    
+
     /* Enable the PWR clock */
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
 
@@ -143,9 +143,9 @@ int main(void)
     RTC_DateShow();
     RTC_TimeStampShow();
   }
-   
+
   /* Configure the external interrupt "WAKEUP", "KEY" and "TAMPER" buttons */
-  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI); 
+  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI);
   STM_EVAL_PBInit(BUTTON_TAMPER , BUTTON_MODE_EXTI);
   STM_EVAL_PBInit(BUTTON_WAKEUP , BUTTON_MODE_EXTI);
 
@@ -173,10 +173,10 @@ void RTC_Config(void)
 
 #if defined (RTC_CLOCK_SOURCE_LSI)  /* LSI used as RTC source clock*/
 /* The RTC Clock may varies due to LSI frequency dispersion. */
-  /* Enable the LSI OSC */ 
+  /* Enable the LSI OSC */
   RCC_LSICmd(ENABLE);
 
-  /* Wait till LSI is ready */  
+  /* Wait till LSI is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET)
   {
   }
@@ -191,7 +191,7 @@ void RTC_Config(void)
   /* Enable the LSE OSC */
   RCC_LSEConfig(RCC_LSE_ON);
 
-  /* Wait till LSE is ready */  
+  /* Wait till LSE is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)
   {
   }
@@ -201,7 +201,7 @@ void RTC_Config(void)
 
   SynchPrediv = 0xFF;
   AsynchPrediv = 0x7F;
-    
+
 #else
   #error Please select the RTC Clock source inside the main.c file
 #endif /* RTC_CLOCK_SOURCE_LSI */
@@ -213,7 +213,7 @@ void RTC_Config(void)
   RTC_WaitForSynchro();
 
   /* Enable The TimeStamp */
-  RTC_TimeStampCmd(RTC_TimeStampEdge_Falling, ENABLE);    
+  RTC_TimeStampCmd(RTC_TimeStampEdge_Falling, ENABLE);
 }
 
 /**
@@ -234,7 +234,7 @@ void RTC_TimeRegulate(void)
     RTC_TimeStructure.RTC_Hours = tmp_hh;
   }
   printf(":  %0.2d\n\r", tmp_hh);
-  
+
   printf("  Please Set Minutes\n\r");
   while (tmp_mm == 0xFF)
   {
@@ -242,7 +242,7 @@ void RTC_TimeRegulate(void)
     RTC_TimeStructure.RTC_Minutes = tmp_mm;
   }
   printf(":  %0.2d\n\r", tmp_mm);
-  
+
   printf("  Please Set Seconds\n\r");
   while (tmp_ss == 0xFF)
   {
@@ -255,7 +255,7 @@ void RTC_TimeRegulate(void)
   if(RTC_SetTime(RTC_Format_BIN, &RTC_TimeStructure) == ERROR)
   {
     printf("\n\r>> !! RTC Set Time failed. !! <<\n\r");
-  } 
+  }
   else
   {
     printf("\n\r>> !! RTC Set Time success. !! <<\n\r");
@@ -263,7 +263,7 @@ void RTC_TimeRegulate(void)
     /* Indicator for the RTC configuration */
     RTC_WriteBackupRegister(RTC_BKP_DR0, 0x32F2);
   }
-  
+
   tmp_hh = 0xFF;
   tmp_mm = 0xFF;
   tmp_ss = 0xFF;
@@ -285,7 +285,7 @@ void RTC_TimeRegulate(void)
     RTC_DateStructure.RTC_Date = tmp_hh;
   }
   printf(":  %0.2d\n\r", tmp_hh);
-  
+
   printf("  Please Set Month (01-12)\n\r");
   while (tmp_mm == 0xFF)
   {
@@ -293,7 +293,7 @@ void RTC_TimeRegulate(void)
     RTC_DateStructure.RTC_Month = tmp_mm;
   }
   printf(":  %0.2d\n\r", tmp_mm);
-  
+
   printf("  Please Set Year (00-99)\n\r");
   while (tmp_ss == 0xFF)
   {
@@ -306,7 +306,7 @@ void RTC_TimeRegulate(void)
   if(RTC_SetDate(RTC_Format_BIN, &RTC_DateStructure) == ERROR)
   {
     printf("\n\r>> !! RTC Set Date failed. !! <<\n\r");
-  } 
+  }
   else
   {
     printf("\n\r>> !! RTC Set Date success. !! <<\n\r");
@@ -423,7 +423,7 @@ PUTCHAR_PROTOTYPE
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -436,10 +436,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

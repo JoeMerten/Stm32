@@ -16,9 +16,9 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
-  
+  ******************************************************************************
+  */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32L152_EVAL_GLASS_LCD_H
 #define __STM32L152_EVAL_GLASS_LCD_H
@@ -33,18 +33,18 @@
 /** @addtogroup Utilities
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM32L152_EVAL
   * @{
   */
-  
+
 /** @addtogroup STM32L152_EVAL_GLASS_LCD
   * @{
-  */ 
+  */
 
 
 /** @defgroup STM32L152_EVAL_GLASS_LCD_Exported_Types
@@ -60,25 +60,25 @@ typedef enum
 {
   APOSTROPHE_OFF = 0,
   APOSTROPHE_ON = 1
-}Apostrophe_Typedef;   
+}Apostrophe_Typedef;
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM32L152_EVAL_GLASS_LCD_Exported_Constants
   * @{
-  */ 
+  */
 
 /**
   * @}
   */
-  
+
 /** @defgroup STM32L152_EVAL_GLASS_LCD_Exported_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32L152_EVAL_GLASS_LCD_Exported_Functions
@@ -95,7 +95,7 @@ void LCD_GLASS_ScrollString(uint8_t* ptr, uint16_t nScroll, uint16_t ScrollSpeed
 /**
   * @}
   */
-  
+
 #ifdef __cplusplus
 }
 #endif
@@ -104,22 +104,22 @@ void LCD_GLASS_ScrollString(uint8_t* ptr, uint16_t nScroll, uint16_t ScrollSpeed
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */   
+  */
 
 /**
   * @}
-  */   
-  
+  */
+
 /**
   * @}
-  */   
- 
+  */
+
 /**
   * @}
-  */   
-  
+  */
+
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

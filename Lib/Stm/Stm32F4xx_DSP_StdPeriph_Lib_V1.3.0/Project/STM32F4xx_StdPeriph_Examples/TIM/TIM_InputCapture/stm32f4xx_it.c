@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_InputCapture/stm32f4xx_it.c 
+  * @file    TIM/TIM_InputCapture/stm32f4xx_it.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -36,7 +36,7 @@
 
 /** @addtogroup TIM_InputCapture
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -153,8 +153,8 @@ void SysTick_Handler(void)
   * @retval None
   */
 void TIM1_CC_IRQHandler(void)
-{ 
-  if(TIM_GetITStatus(TIM1, TIM_IT_CC2) == SET) 
+{
+  if(TIM_GetITStatus(TIM1, TIM_IT_CC2) == SET)
   {
     /* Clear TIM1 Capture compare interrupt pending bit */
     TIM_ClearITPendingBit(TIM1, TIM_IT_CC2);
@@ -167,22 +167,22 @@ void TIM1_CC_IRQHandler(void)
     else if(uhCaptureNumber == 1)
     {
       /* Get the Input Capture value */
-      uhIC3ReadValue2 = TIM_GetCapture2(TIM1); 
-      
+      uhIC3ReadValue2 = TIM_GetCapture2(TIM1);
+
       /* Capture computation */
       if (uhIC3ReadValue2 > uhIC3ReadValue1)
       {
-        uwCapture = (uhIC3ReadValue2 - uhIC3ReadValue1); 
+        uwCapture = (uhIC3ReadValue2 - uhIC3ReadValue1);
       }
       else if (uhIC3ReadValue2 < uhIC3ReadValue1)
       {
-        uwCapture = ((0xFFFF - uhIC3ReadValue1) + uhIC3ReadValue2); 
+        uwCapture = ((0xFFFF - uhIC3ReadValue1) + uhIC3ReadValue2);
       }
       else
       {
         uwCapture = 0;
       }
-      /* Frequency computation */ 
+      /* Frequency computation */
       uwTIM1Freq = (uint32_t) SystemCoreClock / uwCapture;
       uhCaptureNumber = 0;
     }
@@ -207,10 +207,10 @@ void TIM1_CC_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

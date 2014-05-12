@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V4.5.0
   * @date    07-March-2011
-  * @brief   This file provides a set of functions needed to drive the 
+  * @brief   This file provides a set of functions needed to drive the
   *          IS61WV102416BLL SRAM memory mounted on STM32100E-EVAL board.
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
+  ******************************************************************************
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32100e_eval_fsmc_sram.h"
@@ -26,39 +26,39 @@
 /** @addtogroup Utilities
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM32100E_EVAL
   * @{
   */
-  
+
 /** @addtogroup STM32100E_EVAL_FSMC_SRAM
-  * @brief      This file provides a set of functions needed to drive the 
+  * @brief      This file provides a set of functions needed to drive the
   *             IS61WV102416BLL SRAM memory mounted on STM32100E-EVAL board.
   * @{
-  */ 
+  */
 
 /** @defgroup STM32100E_EVAL_FSMC_SRAM_Private_Types
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32100E_EVAL_FSMC_SRAM_Private_Defines
   * @{
-  */ 
-/** 
-  * @brief  FSMC Bank 1 NOR/SRAM3  
   */
-#define Bank1_SRAM3_ADDR    ((uint32_t)0x68000000)     
+/**
+  * @brief  FSMC Bank 1 NOR/SRAM3
+  */
+#define Bank1_SRAM3_ADDR    ((uint32_t)0x68000000)
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32100E_EVAL_FSMC_SRAM_Private_Macros
@@ -66,83 +66,83 @@
   */
 /**
   * @}
-  */ 
-  
+  */
+
 
 /** @defgroup STM32100E_EVAL_FSMC_SRAM_Private_Variables
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32100E_EVAL_FSMC_SRAM_Private_Function_Prototypes
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32100E_EVAL_FSMC_SRAM_Private_Functions
   * @{
-  */ 
+  */
 
 /**
   * @brief  Configures the FSMC and GPIOs to interface with the SRAM memory.
   *         This function must be called before any write/read operation
   *         on the SRAM.
-  * @param  None 
+  * @param  None
   * @retval None
   */
 void SRAM_Init(void)
 {
   FSMC_NORSRAMInitTypeDef  FSMC_NORSRAMInitStructure;
   FSMC_NORSRAMTimingInitTypeDef  p;
-  GPIO_InitTypeDef GPIO_InitStructure; 
-  
+  GPIO_InitTypeDef GPIO_InitStructure;
+
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_GPIOG | RCC_APB2Periph_GPIOE |
                          RCC_APB2Periph_GPIOF, ENABLE);
-  
+
 /*-- GPIO Configuration ------------------------------------------------------*/
   /*!< SRAM Data lines configuration */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_8 | GPIO_Pin_9 |
                                 GPIO_Pin_10 | GPIO_Pin_14 | GPIO_Pin_15;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_Init(GPIOD, &GPIO_InitStructure); 
-  
+  GPIO_Init(GPIOD, &GPIO_InitStructure);
+
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 |
-                                GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | 
+                                GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 |
                                 GPIO_Pin_15;
   GPIO_Init(GPIOE, &GPIO_InitStructure);
-  
+
   /*!< SRAM Address lines configuration */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | 
-                                GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_12 | GPIO_Pin_13 | 
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 |
+                                GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_12 | GPIO_Pin_13 |
                                 GPIO_Pin_14 | GPIO_Pin_15;
   GPIO_Init(GPIOF, &GPIO_InitStructure);
-  
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | 
+
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 |
                                 GPIO_Pin_4 | GPIO_Pin_5;
   GPIO_Init(GPIOG, &GPIO_InitStructure);
-  
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13; 
+
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13;
   GPIO_Init(GPIOD, &GPIO_InitStructure);
-   
-  /*!< NOE and NWE configuration */  
+
+  /*!< NOE and NWE configuration */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 |GPIO_Pin_5;
   GPIO_Init(GPIOD, &GPIO_InitStructure);
-  
+
   /*!< NE3 configuration */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10; 
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
   GPIO_Init(GPIOG, &GPIO_InitStructure);
-  
+
   /*!< NBL0, NBL1 configuration */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1; 
-  GPIO_Init(GPIOE, &GPIO_InitStructure); 
-  
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;
+  GPIO_Init(GPIOE, &GPIO_InitStructure);
+
 /*-- FSMC Configuration ------------------------------------------------------*/
   p.FSMC_AddressSetupTime = 0;
   p.FSMC_AddressHoldTime = 0;
@@ -168,18 +168,18 @@ void SRAM_Init(void)
   FSMC_NORSRAMInitStructure.FSMC_ReadWriteTimingStruct = &p;
   FSMC_NORSRAMInitStructure.FSMC_WriteTimingStruct = &p;
 
-  FSMC_NORSRAMInit(&FSMC_NORSRAMInitStructure); 
+  FSMC_NORSRAMInit(&FSMC_NORSRAMInitStructure);
 
   /*!< Enable FSMC Bank1_SRAM Bank */
-  FSMC_NORSRAMCmd(FSMC_Bank1_NORSRAM3, ENABLE);  
+  FSMC_NORSRAMCmd(FSMC_Bank1_NORSRAM3, ENABLE);
 }
 
 /**
-  * @brief  Writes a Half-word buffer to the FSMC SRAM memory. 
-  * @param  pBuffer : pointer to buffer. 
-  * @param  WriteAddr : SRAM memory internal address from which the data will be 
+  * @brief  Writes a Half-word buffer to the FSMC SRAM memory.
+  * @param  pBuffer : pointer to buffer.
+  * @param  WriteAddr : SRAM memory internal address from which the data will be
   *         written.
-  * @param  NumHalfwordToWrite : number of half-words to write. 
+  * @param  NumHalfwordToWrite : number of half-words to write.
   * @retval None
   */
 void SRAM_WriteBuffer(uint16_t* pBuffer, uint32_t WriteAddr, uint32_t NumHalfwordToWrite)
@@ -188,15 +188,15 @@ void SRAM_WriteBuffer(uint16_t* pBuffer, uint32_t WriteAddr, uint32_t NumHalfwor
   {
     /*!< Transfer data to the memory */
     *(uint16_t *) (Bank1_SRAM3_ADDR + WriteAddr) = *pBuffer++;
-    
-    /*!< Increment the address*/  
+
+    /*!< Increment the address*/
     WriteAddr += 2;
-  }   
+  }
 }
 
 /**
   * @brief  Reads a block of data from the FSMC SRAM memory.
-  * @param  pBuffer : pointer to the buffer that receives the data read from the 
+  * @param  pBuffer : pointer to the buffer that receives the data read from the
   *         SRAM memory.
   * @param  ReadAddr : SRAM memory internal address to read from.
   * @param  NumHalfwordToRead : number of half-words to read.
@@ -209,9 +209,9 @@ void SRAM_ReadBuffer(uint16_t* pBuffer, uint32_t ReadAddr, uint32_t NumHalfwordT
     /*!< Read a half-word from the memory */
     *pBuffer++ = *(__IO uint16_t*) (Bank1_SRAM3_ADDR + ReadAddr);
 
-    /*!< Increment the address*/  
+    /*!< Increment the address*/
     ReadAddr += 2;
-  }  
+  }
 }
 
 /**
@@ -232,6 +232,6 @@ void SRAM_ReadBuffer(uint16_t* pBuffer, uint32_t ReadAddr, uint32_t NumHalfwordT
 
 /**
   * @}
-  */  
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

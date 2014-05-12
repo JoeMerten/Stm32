@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Lib_DEBUG/RunTime_Check/stm32f10x_it.c 
+  * @file    Lib_DEBUG/RunTime_Check/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"

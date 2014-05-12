@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    RTC/HW_Calendar/stm32f2xx_it.c 
+  * @file    RTC/HW_Calendar/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -159,13 +159,13 @@ void SysTick_Handler(void)
 void EXTI0_IRQHandler(void)
 {
   if(EXTI_GetITStatus(WAKEUP_BUTTON_EXTI_LINE) != RESET)
-  {  
+  {
     /* Display the current alarm on the Hyperterminal */
     RTC_AlarmShow();
-     
+
     /* Clear the Wakeup Button EXTI line pending bit */
     EXTI_ClearITPendingBit(WAKEUP_BUTTON_EXTI_LINE);
-  } 
+  }
 }
 
 /**
@@ -176,14 +176,14 @@ void EXTI0_IRQHandler(void)
 void EXTI15_10_IRQHandler(void)
 {
   if(EXTI_GetITStatus(KEY_BUTTON_EXTI_LINE) != RESET)
-  {  
+  {
     /* Display the current time on the Hyperterminal */
     RTC_TimeShow();
-     
+
     /* Clear the Key Button EXTI line pending bit */
     EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
   }
-    
+
   if(EXTI_GetITStatus(TAMPER_BUTTON_EXTI_LINE) != RESET)
   {
     /* Set the new RTC configuration */
@@ -191,7 +191,7 @@ void EXTI15_10_IRQHandler(void)
 
     /* Clear the Tamper Button EXTI line pending bit */
     EXTI_ClearITPendingBit(TAMPER_BUTTON_EXTI_LINE);
-  }  
+  }
 }
 
 /**
@@ -206,7 +206,7 @@ void RTC_Alarm_IRQHandler(void)
     STM_EVAL_LEDToggle(LED1);
     RTC_ClearITPendingBit(RTC_IT_ALRA);
     EXTI_ClearITPendingBit(EXTI_Line17);
-  } 
+  }
 }
 
 /******************************************************************************/

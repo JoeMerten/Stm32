@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    SPI/Simplex_Interrupt/platform_config.h 
+  * @file    SPI/Simplex_Interrupt/platform_config.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __PLATFORM_CONFIG_H
@@ -42,31 +42,31 @@
   #define SPI_MASTER                   SPI1
   #define SPI_MASTER_CLK               RCC_APB2Periph_SPI1
   #define SPI_MASTER_GPIO              GPIOA
-  #define SPI_MASTER_GPIO_CLK          RCC_APB2Periph_GPIOA  
+  #define SPI_MASTER_GPIO_CLK          RCC_APB2Periph_GPIOA
   #define SPI_MASTER_PIN_SCK           GPIO_Pin_5
   #define SPI_MASTER_PIN_MISO          GPIO_Pin_6
   #define SPI_MASTER_PIN_MOSI          GPIO_Pin_7
   #define SPI_MASTER_IRQn              SPI1_IRQn
-  
+
   #define SPI_SLAVE                    SPI2
   #define SPI_SLAVE_CLK                RCC_APB1Periph_SPI2
   #define SPI_SLAVE_GPIO               GPIOB
-  #define SPI_SLAVE_GPIO_CLK           RCC_APB2Periph_GPIOB 
+  #define SPI_SLAVE_GPIO_CLK           RCC_APB2Periph_GPIOB
   #define SPI_SLAVE_PIN_SCK            GPIO_Pin_13
   #define SPI_SLAVE_PIN_MISO           GPIO_Pin_14
-  #define SPI_SLAVE_PIN_MOSI           GPIO_Pin_15 
+  #define SPI_SLAVE_PIN_MOSI           GPIO_Pin_15
   #define SPI_SLAVE_IRQn               SPI2_IRQn
-          
+
 #elif defined (USE_STM3210C_EVAL)
   #define SPI_MASTER                   SPI3   /* SPI pins are remapped by software */
   #define SPI_MASTER_CLK               RCC_APB1Periph_SPI3
   #define SPI_MASTER_GPIO              GPIOC
-  #define SPI_MASTER_GPIO_CLK          RCC_APB2Periph_GPIOC 
+  #define SPI_MASTER_GPIO_CLK          RCC_APB2Periph_GPIOC
   #define SPI_MASTER_PIN_SCK           GPIO_Pin_10
   #define SPI_MASTER_PIN_MISO          GPIO_Pin_11
   #define SPI_MASTER_PIN_MOSI          GPIO_Pin_12
   #define SPI_MASTER_IRQn              SPI3_IRQn
-  
+
   #define SPI_SLAVE                    SPI2
   #define SPI_SLAVE_CLK                RCC_APB1Periph_SPI2
   #define SPI_SLAVE_GPIO               GPIOB

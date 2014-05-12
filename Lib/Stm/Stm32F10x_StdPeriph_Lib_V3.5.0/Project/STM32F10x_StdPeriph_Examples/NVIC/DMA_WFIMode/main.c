@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    NVIC/DMA_WFIMode/main.c 
+  * @file    NVIC/DMA_WFIMode/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -66,29 +66,29 @@ void Delay(__IO uint32_t nCount);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* Configure the system clocks */
   RCC_Configuration();
 
-  /* Initialize Leds and Key Button mounted on STM3210X-EVAL board */       
+  /* Initialize Leds and Key Button mounted on STM3210X-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
-  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI); 
- 
+  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI);
+
   /* Configures the DMA Channel */
   DMA_Configuration();
-  
+
 /* EVAL_COM1 configuration ---------------------------------------------------*/
   /* EVAL_COM1 configured as follow:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -104,9 +104,9 @@ int main(void)
 
   STM_EVAL_COMInit(COM1, &USART_InitStructure);
   USART_DMACmd(EVAL_COM1, USART_DMAReq_Rx, ENABLE);
-  
+
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-  
+
   /* Enable the USARTy_DMA1_IRQn Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = USARTy_DMA1_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
@@ -118,7 +118,7 @@ int main(void)
   NVIC_InitStructure.NVIC_IRQChannel = EXTI9_5_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
   NVIC_Init(&NVIC_InitStructure);
-    
+
   while (1)
   {
     if(LowPowerMode == 1)
@@ -143,7 +143,7 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{ 
+{
   /* DMA1 clock enable */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 }
@@ -174,7 +174,7 @@ void DMA_Configuration(void)
 
   /* Enable USARTy_DMA1_Channel Transfer complete interrupt */
   DMA_ITConfig(USARTy_DMA1_Channel, DMA_IT_TC, ENABLE);
-  
+
   /* USARTy_DMA1_Channel enable */
   DMA_Cmd(USARTy_DMA1_Channel, ENABLE);
 }
@@ -221,7 +221,7 @@ void Delay(__IO uint32_t nCount)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -235,10 +235,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

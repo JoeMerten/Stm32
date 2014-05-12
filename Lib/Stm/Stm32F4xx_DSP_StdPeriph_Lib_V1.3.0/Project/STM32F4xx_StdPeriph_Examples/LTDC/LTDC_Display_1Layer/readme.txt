@@ -1,9 +1,9 @@
 /**
   @page LTDC_Display_1Layer LTDC Display Layer 1 example
-  
+
   @verbatim
   ******************** (C) COPYRIGHT 2013 STMicroelectronics *******************
-  * @file    LTDC/LTDC_Display_1Layer/readme.txt 
+  * @file    LTDC/LTDC_Display_1Layer/readme.txt
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -27,23 +27,23 @@
 
 @par Example Description
 
-This example shows how to configure LTDC peripheral to display BMP image on 
+This example shows how to configure LTDC peripheral to display BMP image on
 LCD using only one layer.
 
-In this basic example the goal is to explain the different fields of the LTDC 
-structure. 
+In this basic example the goal is to explain the different fields of the LTDC
+structure.
 
-After LCD initialization, the LCD layer 1 is configured to display image 
-(modeled by an array) loaded from flash memory. 
+After LCD initialization, the LCD layer 1 is configured to display image
+(modeled by an array) loaded from flash memory.
 
   LCD_TFT synchronous timings configuration :
   -------------------------------------------
- 
+
                                              Total Width
                           <--------------------------------------------------->
                     Hsync width HBP             Active Width                HFP
                           <---><--><--------------------------------------><-->
-                      ____    ____|_______________________________________|____ 
+                      ____    ____|_______________________________________|____
                           |___|   |                                       |    |
                                   |                                       |    |
                       __|         |                                       |    |
@@ -68,10 +68,10 @@ After LCD initialization, the LCD layer 1 is configured to display image
           |     /|\     |                                                      |
           |  VFP |      |                                                      |
          \|/    \|/_____|______________________________________________________|
-         
-         
+
+
   Each LCD device has its specific synchronous timings values.
-  This example uses AM480272H3TMQW-T01H LCD (MB1046 Rev.A) and configures 
+  This example uses AM480272H3TMQW-T01H LCD (MB1046 Rev.A) and configures
   the synchronous timings as follows:
 
   Horizontal Synchronization (Hsync) = 41
@@ -83,24 +83,24 @@ After LCD initialization, the LCD layer 1 is configured to display image
   Vertical Back Porch (VBP)          = 2
   Active Heigh                       = 272
   Vertical Front Porch (VFP)         = 2
-  
+
   LCD_TFT windowing configuration :
   ---------------------------------
 
-  To configure the active display window, this example configures the 
-  horizontal/vertical start and stop. 
+  To configure the active display window, this example configures the
+  horizontal/vertical start and stop.
 
   HorizontalStart = (Offset_X + Hsync + HBP);
-  HorizontalStop  = (Offset_X + Hsync + HBP + Window_Width - 1); 
+  HorizontalStop  = (Offset_X + Hsync + HBP + Window_Width - 1);
   VarticalStart   = (Offset_Y + Vsync + VBP);
   VerticalStop    = (Offset_Y + Vsync + VBP + Window_Heigh - 1);
-  
-  Window_width and Window_heigh should be in line with the image size to be 
+
+  Window_width and Window_heigh should be in line with the image size to be
   displayed.
 
 
 @par Directory contents
-    
+
   - LTDC/LTDC_Display_1Layer/system_stm32f4xx.c   STM32F4xx system clock configuration file
   - LTDC/LTDC_Display_1Layer/stm32f4xx_conf.h     Library Configuration file
   - LTDC/LTDC_Display_1Layer/stm32f4xx_it.c       Interrupt handlers
@@ -110,16 +110,16 @@ After LCD initialization, the LCD layer 1 is configured to display image
   - LTDC/LTDC_Display_1Layer/RGB565_480x272.h     Image to be displayed
 
 
-@par Hardware and Software environment 
- 
+@par Hardware and Software environment
+
   - This example runs on and STM32F429xx/439xx devices.
-    
-  - This example has been tested with STMicroelectronics STM32429I-EVAL 
-    (STM32F429xx/STM32F439xx Devices) evaluation boards and can be easily 
+
+  - This example has been tested with STMicroelectronics STM32429I-EVAL
+    (STM32F429xx/STM32F439xx Devices) evaluation boards and can be easily
     tailored to any other supported device and development board.
-  
+
   - This example has been tested with STM324x9I-EVAL RevB board which includes
-    the MB1046 LCD board. 
+    the MB1046 LCD board.
 
 
 @par How to use it ?
@@ -130,6 +130,6 @@ In order to make the program work, you must do the following:
  - Open your preferred toolchain
  - Rebuild all files and load your image into target memory
  - Run the example
-  
+
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

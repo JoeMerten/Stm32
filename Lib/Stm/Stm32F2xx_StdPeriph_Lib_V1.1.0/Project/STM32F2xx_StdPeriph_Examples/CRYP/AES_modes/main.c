@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CRYP/AES_modes/main.c 
+  * @file    CRYP/AES_modes/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -36,7 +36,7 @@
 
 /** @addtogroup AES_modes
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -61,7 +61,7 @@
  uint8_t IV_1[16] = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,
                      0x08,0x09,0x0a,0x0b,0x0c,0x0d,0x0e,0x0f}; /* initialization vector */
 
- uint8_t Plaintext[AES_TEXT_SIZE] = 
+ uint8_t Plaintext[AES_TEXT_SIZE] =
                         {0x6b,0xc1,0xbe,0xe2,0x2e,0x40,0x9f,0x96,
                          0xe9,0x3d,0x7e,0x11,0x73,0x93,0x17,0x2a,
                          0xae,0x2d,0x8a,0x57,0x1e,0x03,0xac,0x9c,
@@ -71,7 +71,7 @@
                          0xf6,0x9f,0x24,0x45,0xdf,0x4f,0x9b,0x17,
                          0xad,0x2b,0x41,0x7b,0xe6,0x6c,0x37,0x10}; /* plaintext */
 
-uint8_t Ciphertext[AES_TEXT_SIZE] = 
+uint8_t Ciphertext[AES_TEXT_SIZE] =
                         {0x76,0x49,0xab,0xac,0x81,0x19,0xb2,0x46,
                          0xce,0xe9,0x8e,0x9b,0x12,0xe9,0x19,0x7d,
                          0x50,0x86,0xcb,0x9b,0x50,0x72,0x19,0xee,
@@ -111,15 +111,15 @@ char PressToContinue(void);
   */
 int main(void)
 {
-/*!< At this stage the microcontroller clock setting is already configured, 
+/*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
-     */     
-       
+     */
+
   /* USARTx configured as follow:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -132,7 +132,7 @@ int main(void)
   RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_CRYP, ENABLE);
 
   while(1)
-  { 
+  {
 
     /* Display Plain Data*/
     Display_PlainData(AES_TEXT_SIZE);
@@ -142,7 +142,7 @@ int main(void)
 /******************************************************************************/
 
 /*=====================================================
-  Encryption ECB mode                                        
+  Encryption ECB mode
 ======================================================*/
     PressToContinue();
 /****************************************/
@@ -150,7 +150,7 @@ int main(void)
 /****************************************/
     /* Encrypt the plaintext message*/
     CRYP_AES_ECB(MODE_ENCRYPT,AES128key,128,Plaintext,AES_TEXT_SIZE,Encryptedtext);
-  
+
     /* Display encrypted Data*/
     Display_EncryptedData(ECB,128,AES_TEXT_SIZE);
 /****************************************/
@@ -166,36 +166,36 @@ int main(void)
 /****************************************/
     /* Encrypt the plaintext message*/
     CRYP_AES_ECB(MODE_ENCRYPT,AES256key,256,Plaintext,AES_TEXT_SIZE,Encryptedtext);
-  
+
     /* Display encrypted Data*/
     Display_EncryptedData(ECB, 256,AES_TEXT_SIZE);
 
 /*=====================================================
-    Decryption in ECB mode                                       
+    Decryption in ECB mode
 ======================================================*/
    PressToContinue();
 /****************************************/
 /*                           AES 128   **/
 /****************************************/
     /* Decrypt the plaintext message  */
-    CRYP_AES_ECB(MODE_DECRYPT,AES128key,128,Ciphertext,AES_TEXT_SIZE,Decryptedtext); 
-  
+    CRYP_AES_ECB(MODE_DECRYPT,AES128key,128,Ciphertext,AES_TEXT_SIZE,Decryptedtext);
+
     /* Display decrypted data*/
     Display_DecryptedData(ECB,128,AES_TEXT_SIZE);
 /****************************************/
 /*                           AES 192   **/
 /****************************************/
     /* Decrypt the plaintext message  */
-    CRYP_AES_ECB(MODE_DECRYPT,AES192key, 192,Ciphertext, AES_TEXT_SIZE,Decryptedtext); 
-  
+    CRYP_AES_ECB(MODE_DECRYPT,AES192key, 192,Ciphertext, AES_TEXT_SIZE,Decryptedtext);
+
     /* Display decrypted data*/
     Display_DecryptedData(ECB, 192,AES_TEXT_SIZE);
 /****************************************/
 /*                           AES 256   **/
 /****************************************/
     /* Decrypt the plaintext message  */
-    CRYP_AES_ECB(MODE_DECRYPT,AES256key, 256,Ciphertext, AES_TEXT_SIZE,Decryptedtext); 
-  
+    CRYP_AES_ECB(MODE_DECRYPT,AES256key, 256,Ciphertext, AES_TEXT_SIZE,Decryptedtext);
+
     /* Display decrypted data*/
     Display_DecryptedData(ECB,256,AES_TEXT_SIZE);
 
@@ -205,7 +205,7 @@ int main(void)
 /******************************************************************************/
     PressToContinue();
 /*=====================================================
-  Encryption CBC mode                                        
+  Encryption CBC mode
 ======================================================*/
 
 /****************************************/
@@ -213,7 +213,7 @@ int main(void)
 /****************************************/
     /* Encrypt the plaintext message*/
     CRYP_AES_CBC(MODE_ENCRYPT,IV_1,AES128key,128,Plaintext,AES_TEXT_SIZE,Encryptedtext);
-  
+
     /* Display encrypted Data*/
     Display_EncryptedData(CBC,128,AES_TEXT_SIZE);
 /****************************************/
@@ -229,12 +229,12 @@ int main(void)
 /****************************************/
     /* Encrypt the plaintext message*/
     CRYP_AES_CBC(MODE_ENCRYPT,IV_1,AES256key,256,Plaintext,AES_TEXT_SIZE,Encryptedtext);
-  
+
     /* Display encrypted Data*/
     Display_EncryptedData(CBC, 256,AES_TEXT_SIZE);
 
 /*=====================================================
-    Decryption in CBC mode                                       
+    Decryption in CBC mode
 ======================================================*/
     PressToContinue();
     /* Deinitializes the CRYP peripheral */
@@ -243,8 +243,8 @@ int main(void)
 /*                           AES 128   **/
 /****************************************/
     /* Decrypt the plaintext message  */
-    CRYP_AES_CBC(MODE_DECRYPT,IV_1,AES128key,128,Ciphertext,AES_TEXT_SIZE,Decryptedtext); 
-  
+    CRYP_AES_CBC(MODE_DECRYPT,IV_1,AES128key,128,Ciphertext,AES_TEXT_SIZE,Decryptedtext);
+
     /* Display decrypted data*/
     Display_DecryptedData(CBC,128,AES_TEXT_SIZE);
 /****************************************/
@@ -254,8 +254,8 @@ int main(void)
     CRYP_DeInit();
 
     /* Decrypt the plaintext message  */
-    CRYP_AES_CBC(MODE_DECRYPT,IV_1,AES192key, 192,Ciphertext, AES_TEXT_SIZE,Decryptedtext); 
-  
+    CRYP_AES_CBC(MODE_DECRYPT,IV_1,AES192key, 192,Ciphertext, AES_TEXT_SIZE,Decryptedtext);
+
     /* Display decrypted data*/
     Display_DecryptedData(CBC, 192,AES_TEXT_SIZE);
 /****************************************/
@@ -265,8 +265,8 @@ int main(void)
     CRYP_DeInit();
 
     /* Decrypt the plaintext message  */
-    CRYP_AES_CBC(MODE_DECRYPT,IV_1,AES256key, 256,Ciphertext, AES_TEXT_SIZE,Decryptedtext); 
-  
+    CRYP_AES_CBC(MODE_DECRYPT,IV_1,AES256key, 256,Ciphertext, AES_TEXT_SIZE,Decryptedtext);
+
     /* Display decrypted data*/
     Display_DecryptedData(CBC,256,AES_TEXT_SIZE);
 
@@ -276,7 +276,7 @@ int main(void)
 /******************************************************************************/
 
 /*=====================================================
-  Encryption CTR mode                                        
+  Encryption CTR mode
 ======================================================*/
    PressToContinue();
 /****************************************/
@@ -284,7 +284,7 @@ int main(void)
 /****************************************/
     /* Encrypt the plaintext message*/
     CRYP_AES_CTR(MODE_ENCRYPT,IV_1,AES128key,128,Plaintext,AES_TEXT_SIZE,Encryptedtext);
-  
+
     /* Display encrypted Data*/
     Display_EncryptedData(CTR,128, AES_TEXT_SIZE);
 /****************************************/
@@ -300,47 +300,47 @@ int main(void)
 /****************************************/
     /* Encrypt the plaintext message*/
     CRYP_AES_CTR(MODE_ENCRYPT,IV_1,AES256key,256,Plaintext,AES_TEXT_SIZE,Encryptedtext);
-  
+
     /* Display encrypted Data*/
     Display_EncryptedData(CTR, 256, AES_TEXT_SIZE);
 
 /*=====================================================
-    Decryption in CTR mode                                       
+    Decryption in CTR mode
 ======================================================*/
    PressToContinue();
 /****************************************/
 /*                           AES 128   **/
 /****************************************/
     /* Decrypt the plaintext message  */
-    CRYP_AES_CTR(MODE_DECRYPT,IV_1,AES128key,128,Ciphertext,AES_TEXT_SIZE,Decryptedtext); 
-  
+    CRYP_AES_CTR(MODE_DECRYPT,IV_1,AES128key,128,Ciphertext,AES_TEXT_SIZE,Decryptedtext);
+
     /* Display decrypted data*/
     Display_DecryptedData(CTR, 128, AES_TEXT_SIZE);
 /****************************************/
 /*                           AES 192   **/
 /****************************************/
     /* Decrypt the plaintext message  */
-    CRYP_AES_CTR(MODE_DECRYPT,IV_1,AES192key,192,Ciphertext,AES_TEXT_SIZE,Decryptedtext); 
-  
+    CRYP_AES_CTR(MODE_DECRYPT,IV_1,AES192key,192,Ciphertext,AES_TEXT_SIZE,Decryptedtext);
+
     /* Display decrypted data*/
     Display_DecryptedData(CTR, 192, AES_TEXT_SIZE);
 /****************************************/
 /*                           AES 256   **/
 /****************************************/
     /* Decrypt the plaintext message  */
-    CRYP_AES_CTR(MODE_DECRYPT,IV_1,AES256key, 256,Ciphertext, AES_TEXT_SIZE,Decryptedtext); 
-  
+    CRYP_AES_CTR(MODE_DECRYPT,IV_1,AES256key, 256,Ciphertext, AES_TEXT_SIZE,Decryptedtext);
+
     /* Display decrypted data*/
     Display_DecryptedData(CTR, 256, AES_TEXT_SIZE);
 
 /******************************************************************************/
     PressToContinue();
     printf("\n\r Example restarted...\n ");
-  }  
+  }
 }
 
 /**
-  * @brief  Display Plain Data 
+  * @brief  Display Plain Data
   * @param  datalength: length of the data to display
   * @retval None
   */
@@ -348,21 +348,21 @@ void Display_PlainData(uint32_t datalength)
 {
   uint32_t BufferCounter =0;
   uint32_t count = 0;
-  
+
   printf("\n\r =============================================================\n\r");
   printf(" ================= Crypt Using HW Crypto  ====================\n\r");
   printf(" ============================================================\n\r");
   printf(" ---------------------------------------\n\r");
   printf(" Plain Data :\n\r");
   printf(" ---------------------------------------\n\r");
-  
+
   for(BufferCounter = 0; BufferCounter < datalength; BufferCounter++)
   {
     printf("[0x%02X]", Plaintext[BufferCounter]);
     count++;
 
     if(count == 16)
-    { 
+    {
       count = 0;
       printf("  Block %d \n\r", BufferCounter/16);
     }
@@ -370,7 +370,7 @@ void Display_PlainData(uint32_t datalength)
 }
 
 /**
-  * @brief  Display Encrypted Data 
+  * @brief  Display Encrypted Data
   * @param  mode: chaining mode
   * @param  keysize: AES key size used
   * @param  datalength: length of the data to display
@@ -387,25 +387,25 @@ void Display_EncryptedData(uint8_t mode, uint16_t keysize, uint32_t datalength)
   if(mode == ECB)
   {
     printf("ECB\n\r");
-  }    
-  else if(mode == CBC)     
+  }
+  else if(mode == CBC)
   {
     printf("CBC\n\r");
-  }      
-  else /* if(mode == CTR)*/ 
+  }
+  else /* if(mode == CTR)*/
   {
     printf("CTR\n\r");
-  }   
+  }
 
   printf(" ---------------------------------------\n\r");
-  
+
   for(BufferCounter = 0; BufferCounter < datalength; BufferCounter++)
   {
     printf("[0x%02X]", Encryptedtext[BufferCounter]);
 
     count++;
     if(count == 16)
-    { 
+    {
       count = 0;
       printf(" Block %d \n\r", BufferCounter/16);
     }
@@ -413,7 +413,7 @@ void Display_EncryptedData(uint8_t mode, uint16_t keysize, uint32_t datalength)
 }
 
 /**
-  * @brief  Display Decrypted Data 
+  * @brief  Display Decrypted Data
   * @param  mode: chaining mode
   * @param  keysize: AES key size used
   * @param  datalength: length of the data to display
@@ -430,25 +430,25 @@ void Display_DecryptedData(uint8_t mode, uint16_t keysize, uint32_t datalength)
   if(mode == ECB)
   {
     printf("ECB\n\r");
-  }    
-  else if(mode == CBC)     
+  }
+  else if(mode == CBC)
   {
     printf("CBC\n\r");
-  }      
-  else /* if(mode == CTR)*/ 
+  }
+  else /* if(mode == CTR)*/
   {
     printf("CTR\n\r");
-  }   
- 
+  }
+
   printf(" ---------------------------------------\n\r");
-  
+
   for(BufferCounter = 0; BufferCounter < datalength; BufferCounter++)
   {
     printf("[0x%02X]", Decryptedtext[BufferCounter]);
     count++;
 
     if(count == 16)
-    { 
+    {
       count = 0;
       printf(" Block %d \n\r", BufferCounter/16);
     }
@@ -456,14 +456,14 @@ void Display_DecryptedData(uint8_t mode, uint16_t keysize, uint32_t datalength)
 }
 
 /**
-  * @brief  USART configuration 
+  * @brief  USART configuration
   * @param  None
   * @retval None
   */
 void USART_Config(void)
 {
   USART_InitTypeDef USART_InitStructure;
-  
+
   USART_InitStructure.USART_BaudRate = 115200;
   USART_InitStructure.USART_WordLength = USART_WordLength_8b;
   USART_InitStructure.USART_StopBits = USART_StopBits_1;
@@ -481,7 +481,7 @@ void USART_Config(void)
   */
 char PressToContinue(void)
 {
-  char c; 
+  char c;
   printf("\n\r Press any key to continue...\n\r ");
 
   while (USART_GetFlagStatus(EVAL_COM1, USART_FLAG_RXNE) == RESET)
@@ -521,7 +521,7 @@ PUTCHAR_PROTOTYPE
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -534,10 +534,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

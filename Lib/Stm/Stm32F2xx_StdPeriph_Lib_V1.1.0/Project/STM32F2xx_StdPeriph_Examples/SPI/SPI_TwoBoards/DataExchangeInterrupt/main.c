@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -100,22 +100,22 @@ int main(void)
 
 #ifdef SPI_MASTER
   /* Master board configuration ----------------------------------------------*/
-  
+
   /* Initialize push-buttons mounted on STM322xG-EVAL board */
   TimeOut = USER_TIMEOUT;
   while ((IOE_Config() != IOE_OK) && (TimeOut != 0x00))
   {
   }
-  
+
   if(TimeOut == 0)
   {
     TimeOut_UserCallback();
   }
-  
+
   /* Initializes the SPI communication */
   SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
   SPI_Init(SPIx, &SPI_InitStructure);
-  
+
   /* The Data transfer is performed in the SPI interrupt routine */
   /* Enable the SPI peripheral */
   SPI_Cmd(SPIx, ENABLE);
@@ -123,21 +123,21 @@ int main(void)
   while (1)
   {
     /* Prepare Command to be transmitted -------------------------------------*/
-    
-    /* Waiting joystick pressed */  
-    PressedButton = JOY_NONE;  
+
+    /* Waiting joystick pressed */
+    PressedButton = JOY_NONE;
     while (PressedButton == JOY_NONE)
     {
       PressedButton = IOE_JoyStickGetState();
     }
-    
-    /* Waiting joystick released */  
-    ReleasedButton = IOE_JoyStickGetState();  
+
+    /* Waiting joystick released */
+    ReleasedButton = IOE_JoyStickGetState();
     while ((PressedButton == ReleasedButton) && (ReleasedButton != JOY_NONE))
     {
-      ReleasedButton = IOE_JoyStickGetState();    
+      ReleasedButton = IOE_JoyStickGetState();
     }
-    
+
     /* For each joystick state correspond to a Transaction command -----------*/
     CmdTransmitted = CMD_NONE;
     switch (PressedButton)
@@ -147,7 +147,7 @@ int main(void)
         CmdTransmitted = CMD_RIGHT;
         NumberOfByte = CMD_RIGHT_SIZE;
         break;
-      /* JOY_LEFT button pressed */ 
+      /* JOY_LEFT button pressed */
       case JOY_LEFT:
         CmdTransmitted = CMD_LEFT;
         NumberOfByte = CMD_LEFT_SIZE;
@@ -170,7 +170,7 @@ int main(void)
       default:
         break;
     }
-    
+
     /* Master Transmit Command followed by Data Transaction ------------------*/
     CmdStatus = 0x00;
     Tx_Idx = 0;
@@ -178,7 +178,7 @@ int main(void)
     {
       /* Enable the Tx buffer empty interrupt */
       SPI_I2S_ITConfig(SPIx, SPI_I2S_IT_TXE, ENABLE);
-      
+
       /* Waiting the end of Data transfer */
       while (Tx_Idx < GetVar_NbrOfData())
       {
@@ -189,7 +189,7 @@ int main(void)
 
 #ifdef SPI_SLAVE
   /* Slave board configuration -----------------------------------------------*/
-  
+
   /* Initializes the SPI communication */
   SPI_I2S_DeInit(SPIx);
   SPI_InitStructure.SPI_Mode = SPI_Mode_Slave;
@@ -206,12 +206,12 @@ int main(void)
     Rx_Idx = 0;
     /* Clear the RxBuffer */
     Fill_Buffer(RxBuffer, TXBUFFERSIZE);
-    
+
     /* Waiting Transaction Command Byte reception ----------------------------*/
     while (RxBuffer[0] == CMD_NONE)
     {
     }
-    
+
     /* Waiting Transaction Data reception ------------------------------------*/
     TimeOut = 1;
     while (TimeOut != 0x00)
@@ -223,7 +223,7 @@ int main(void)
     {
       /* CMD_RIGHT command received */
       case CMD_RIGHT:
-        if (Buffercmp(TxBuffer, &RxBuffer[1], CMD_RIGHT_SIZE) != FAILED) 
+        if (Buffercmp(TxBuffer, &RxBuffer[1], CMD_RIGHT_SIZE) != FAILED)
         {
           /* Turn ON LED2 and LED3 */
           STM_EVAL_LEDOn(LED2);
@@ -276,7 +276,7 @@ int main(void)
         }
         break;
       default:
-        break;   
+        break;
     }
   }
 #endif /* SPI_SLAVE */
@@ -295,12 +295,12 @@ static void SPI_Config(void)
   /* Peripheral Clock Enable -------------------------------------------------*/
   /* Enable the SPI clock */
   SPIx_CLK_INIT(SPIx_CLK, ENABLE);
-  
+
   /* Enable GPIO clocks */
   RCC_AHB1PeriphClockCmd(SPIx_SCK_GPIO_CLK | SPIx_MISO_GPIO_CLK | SPIx_MOSI_GPIO_CLK, ENABLE);
 
   /* SPI GPIO Configuration --------------------------------------------------*/
-  /* Connect SPI pins to AF5 */  
+  /* Connect SPI pins to AF5 */
   GPIO_PinAFConfig(SPIx_SCK_GPIO_PORT, SPIx_SCK_SOURCE, SPIx_SCK_AF);
   GPIO_PinAFConfig(SPIx_MOSI_GPIO_PORT, SPIx_MOSI_SOURCE, SPIx_MOSI_AF);
 
@@ -316,7 +316,7 @@ static void SPI_Config(void)
   /* SPI  MOSI pin configuration */
   GPIO_InitStructure.GPIO_Pin =  SPIx_MOSI_PIN;
   GPIO_Init(SPIx_MOSI_GPIO_PORT, &GPIO_InitStructure);
- 
+
   /* SPI configuration -------------------------------------------------------*/
   SPI_I2S_DeInit(SPIx);
   SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
@@ -327,10 +327,10 @@ static void SPI_Config(void)
   SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2;
   SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
   SPI_InitStructure.SPI_CRCPolynomial = 7;
-  
-  /* Configure the Priority Group to 1 bit */                
+
+  /* Configure the Priority Group to 1 bit */
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-  
+
   /* Configure the SPI interrupt priority */
   NVIC_InitStructure.NVIC_IRQChannel = SPIx_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;

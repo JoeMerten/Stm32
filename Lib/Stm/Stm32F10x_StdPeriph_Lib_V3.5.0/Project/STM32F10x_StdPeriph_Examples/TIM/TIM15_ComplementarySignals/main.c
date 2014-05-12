@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM15_ComplementarySignals/main.c 
+  * @file    TIM/TIM15_ComplementarySignals/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup TIM15_ComplementarySignals
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -52,13 +52,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -72,13 +72,13 @@ int main(void)
   TIM15CLK = 24 MHz, Prescaler = 0, TIM15 counter clock = 24 MHz
   TIM15 frequency = TIM15CLK/(TIM15_Period + 1) = 366 Hz
 
-  TIM15 Channel1 duty cycle = TIM15->CCR1 / TIM15_Period = 50% 
+  TIM15 Channel1 duty cycle = TIM15->CCR1 / TIM15_Period = 50%
   TIM15 Channel1N duty cycle = (TIM15_Period - TIM15_CCR1) / (TIM15_Period + 1) = 50%
 
   2/ Insert a dead time equal to 1.62 us
-  3/ Configure the break feature, active at High level, and using the automatic 
+  3/ Configure the break feature, active at High level, and using the automatic
      output enable feature
-  4/ Use the Locking parameters level1. 
+  4/ Use the Locking parameters level1.
   ----------------------------------------------------------------------- */
 
   /* Time Base configuration */
@@ -132,7 +132,7 @@ int main(void)
 void RCC_Configuration(void)
 {
   /* TIM15, GPIOA, GPIOB and AFIO clocks enable */
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM15 | RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB 
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM15 | RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB
                          | RCC_APB2Periph_AFIO, ENABLE);
 }
 
@@ -158,7 +158,7 @@ void GPIO_Configuration(void)
   /* GPIOA Configuration: BKIN pin */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-  GPIO_Init(GPIOB, &GPIO_InitStructure);  
+  GPIO_Init(GPIOB, &GPIO_InitStructure);
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -183,10 +183,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

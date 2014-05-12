@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    RTC/RTC_Timer/stm32f4xx_it.c 
+  * @file    RTC/RTC_Timer/stm32f4xx_it.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 /** @addtogroup STM32F4xx_StdPeriph_Examples
   * @{
   */
-  
+
 /** @addtogroup RTC_Timer
   * @{
   */
@@ -177,18 +177,18 @@ void EXTI15_10_IRQHandler(void)
     RTC_AlarmCmd(RTC_Alarm_A, ENABLE);
 
     /* Clear the LEFT EXTI  pending bit */
-    EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);  
+    EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
   }
   else if((EXTI_GetITStatus(TAMPER_BUTTON_EXTI_LINE) != RESET))
   {
     /* Disable the RTC Clock */
     RCC_RTCCLKCmd(DISABLE);
-    
+
     /* Wait for RTC APB registers synchronisation */
     RTC_WaitForSynchro();
-    
+
     /* Clear the TAMPER EXTI pending bit */
-    EXTI_ClearITPendingBit(TAMPER_BUTTON_EXTI_LINE);  
+    EXTI_ClearITPendingBit(TAMPER_BUTTON_EXTI_LINE);
   }
 }
 
@@ -203,33 +203,33 @@ void EXTI0_IRQHandler(void)
   {
     /* Set the LCD Back Color */
     LCD_SetBackColor(White);
-    
+
     /* Clear the LCD line 2 */
     LCD_ClearLine(Line2);
-   
+
     /* Disable the RTC Clock */
     RCC_RTCCLKCmd(DISABLE);
-   
+
     /* Reset Counter*/
     uwRTCAlarmCount = 0;
-    
+
     /* Disable the alarm */
     RTC_AlarmCmd(RTC_Alarm_A, DISABLE);
-    
+
     /* Set the LCD Back Color */
     LCD_SetBackColor(White);
-  
+
     /* Display a Full rectangle on the LCD */
     LCD_DrawFullRect(80, 290,240, 25 );
-    
+
     /* Set LCD text color */
     LCD_SetTextColor(Red);
 
     /* Display rectangle on the LCD */
     LCD_DrawRect(80, 290, 25, 240 );
-    
+
     /* Clear the WAKEUP EXTI  pending bit */
-    EXTI_ClearITPendingBit(WAKEUP_BUTTON_EXTI_LINE);  
+    EXTI_ClearITPendingBit(WAKEUP_BUTTON_EXTI_LINE);
   }
 
 }
@@ -242,10 +242,10 @@ void EXTI0_IRQHandler(void)
 void RTC_Alarm_IRQHandler(void)
 {
   uint32_t tmp = 0;
-  
+
   /* Check on the Alarm A flag and on the number of interrupts per Second (60*8) */
-  if(RTC_GetITStatus(RTC_IT_ALRA) != RESET) 
-  { 
+  if(RTC_GetITStatus(RTC_IT_ALRA) != RESET)
+  {
     /* Clear RTC AlarmA Flags */
     RTC_ClearITPendingBit(RTC_IT_ALRA);
     if(uwRTCAlarmCount != 480)
@@ -266,11 +266,11 @@ void RTC_Alarm_IRQHandler(void)
       LCD_DrawRect(80, 290, 25, 240 );
 
       /* Define the rate of Progress bar */
-      tmp = (uwRTCAlarmCount * 100)/ 480; 
+      tmp = (uwRTCAlarmCount * 100)/ 480;
 
       /* Set the LCD Font */
       LCD_SetFont(&Font16x24);
-    
+
       /* Display Char on the LCD : XXX% */
       LCD_DisplayChar(LINE(2),200, (tmp / 100) +0x30);
       LCD_DisplayChar(LINE(2),180, ((tmp  % 100 ) / 10) +0x30);
@@ -285,7 +285,7 @@ void RTC_Alarm_IRQHandler(void)
   }
   /* Clear the EXTI line 17 */
   EXTI_ClearITPendingBit(EXTI_Line17);
-  
+
 }
 
 /**

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CAN/LoopBack/main.c 
+  * @file    CAN/LoopBack/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup CAN_LoopBack
   * @{
-  */ 
+  */
 
 /* Private define ------------------------------------------------------------*/
 /* Private typedef -----------------------------------------------------------*/
@@ -59,12 +59,12 @@ TestStatus CAN_Interrupt(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
-     */     
+     */
 
 #ifdef USE_CAN1
   /* CANx Periph clock enable */
@@ -76,7 +76,7 @@ int main(void)
 
   /* NVIC Configuration */
   NVIC_Config();
-  
+
   /* Configures LED 1..4 */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
@@ -137,7 +137,7 @@ TestStatus CAN_Polling(void)
 
   /* CAN register init */
   CAN_DeInit(CANx);
-  
+
   /* CAN cell init */
   CAN_InitStructure.CAN_TTCM = DISABLE;
   CAN_InitStructure.CAN_ABOM = DISABLE;
@@ -165,7 +165,7 @@ TestStatus CAN_Polling(void)
   CAN_FilterInitStructure.CAN_FilterIdHigh = 0x0000;
   CAN_FilterInitStructure.CAN_FilterIdLow = 0x0000;
   CAN_FilterInitStructure.CAN_FilterMaskIdHigh = 0x0000;
-  CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x0000;  
+  CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x0000;
   CAN_FilterInitStructure.CAN_FilterFIFOAssignment = 0;
 
   CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
@@ -202,7 +202,7 @@ TestStatus CAN_Polling(void)
 
   if (RxMessage.StdId != 0x11)
   {
-    return FAILED;  
+    return FAILED;
   }
 
   if (RxMessage.IDE != CAN_ID_STD)
@@ -212,14 +212,14 @@ TestStatus CAN_Polling(void)
 
   if (RxMessage.DLC != 2)
   {
-    return FAILED;  
+    return FAILED;
   }
 
   if ((RxMessage.Data[0]<<8|RxMessage.Data[1]) != 0xCAFE)
   {
     return FAILED;
   }
-  
+
   return PASSED; /* Test Passed */
 }
 
@@ -247,7 +247,7 @@ TestStatus CAN_Interrupt(void)
   CAN_InitStructure.CAN_TXFP = DISABLE;
   CAN_InitStructure.CAN_Mode = CAN_Mode_LoopBack;
   CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;
-  
+
   /* Baudrate = 500 Kbps */
   CAN_InitStructure.CAN_BS1 = CAN_BS1_6tq;
   CAN_InitStructure.CAN_BS2 = CAN_BS2_8tq;
@@ -270,7 +270,7 @@ TestStatus CAN_Interrupt(void)
   CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
   CAN_FilterInit(&CAN_FilterInitStructure);
 
-  /* CAN FIFO0 message pending interrupt enable */ 
+  /* CAN FIFO0 message pending interrupt enable */
   CAN_ITConfig(CANx, CAN_IT_FMP0, ENABLE);
 
   /* transmit 1 message */
@@ -285,17 +285,17 @@ TestStatus CAN_Interrupt(void)
 
   /* initialize the value that will be returned */
   ret = 0xFF;
-       
+
   /* receive message with interrupt handling */
   i = 0;
   while((ret ==  0xFF) && (i < 0xFFF))
   {
     i++;
   }
-  
+
   if (i ==  0xFFF)
   {
-    ret = 0;  
+    ret = 0;
   }
 
   /* disable interrupt handling */
@@ -314,7 +314,7 @@ void NVIC_Config(void)
   NVIC_InitTypeDef NVIC_InitStructure;
 
   /* Enable CANx RX0 interrupt IRQ channel */
-#ifdef  USE_CAN1 
+#ifdef  USE_CAN1
   NVIC_InitStructure.NVIC_IRQChannel = CAN1_RX0_IRQn;
 #else  /* USE_CAN2 */
   NVIC_InitStructure.NVIC_IRQChannel = CAN2_RX0_IRQn;
@@ -336,7 +336,7 @@ void NVIC_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -354,6 +354,6 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

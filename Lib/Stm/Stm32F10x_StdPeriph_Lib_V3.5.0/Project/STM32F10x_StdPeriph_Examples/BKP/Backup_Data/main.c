@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BKP/Backup_Data/main.c 
+  * @file    BKP/Backup_Data/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,12 +29,12 @@
 
 /** @addtogroup BKP_Backup_Data
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #if defined USE_STM3210B_EVAL || defined USE_STM32100B_EVAL
-  #define BKP_DR_NUMBER              10   
+  #define BKP_DR_NUMBER              10
 #else
   #define BKP_DR_NUMBER              42
 #endif /* USE_STM3210B_EVAL or USE_STM32100B_EVAL */
@@ -56,7 +56,7 @@ uint16_t BKPDataReg[BKP_DR_NUMBER] =
     BKP_DR25, BKP_DR26, BKP_DR27, BKP_DR28, BKP_DR29, BKP_DR30, BKP_DR31, BKP_DR32,
     BKP_DR33, BKP_DR34, BKP_DR35, BKP_DR36, BKP_DR37, BKP_DR38, BKP_DR39, BKP_DR40,
     BKP_DR41, BKP_DR42
-  };  
+  };
 #endif /* USE_STM3210B_EVAL or USE_STM32100B_EVAL */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -72,19 +72,19 @@ uint8_t CheckBackupReg(uint16_t FirstBackupData);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* Initialize Leds mounted on STM3210X-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
-  
+
   /* Enable PWR and BKP clock */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);
 
@@ -102,7 +102,7 @@ int main(void)
 
     /* Turn on LED3 */
     STM_EVAL_LEDOn(LED3);
-   
+
     /* Check if Backup data registers are programmed */
     if(CheckBackupReg(0x3210) == 0x00)
     { /* Backup data registers values are correct */
@@ -124,9 +124,9 @@ int main(void)
 
   /* Turn on LED4 */
   STM_EVAL_LEDOn(LED4);
-       
+
   while (1)
-  {    
+  {
   }
 }
 
@@ -142,13 +142,13 @@ void WriteToBackupReg(uint16_t FirstBackupData)
   for (index = 0; index < BKP_DR_NUMBER; index++)
   {
     BKP_WriteBackupRegister(BKPDataReg[index], FirstBackupData + (index * 0x5A));
-  }  
+  }
 }
 
 /**
   * @brief  Checks if the Backup DRx registers values are correct or not.
   * @param  FirstBackupData: data to be compared with Backup data registers.
-  * @retval 
+  * @retval
   *          - 0: All Backup DRx registers values are correct
   *          - Value different from 0: Number of the first Backup register
   *            which value is not correct
@@ -178,7 +178,7 @@ uint8_t CheckBackupReg(uint16_t FirstBackupData)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -192,10 +192,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

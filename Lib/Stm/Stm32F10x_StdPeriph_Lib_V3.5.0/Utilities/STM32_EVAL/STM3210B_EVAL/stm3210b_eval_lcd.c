@@ -18,8 +18,8 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
+  ******************************************************************************
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm3210b_eval_lcd.h"
@@ -31,30 +31,30 @@
 
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM3210B_EVAL
   * @{
   */
-    
-/** @defgroup STM3210B_EVAL_LCD 
+
+/** @defgroup STM3210B_EVAL_LCD
   * @briefThis file includes the LCD driver for AM-240320LTNQW00H (LCD_HX8312),
   *          AM-240320L8TNQW00H (LCD_ILI9320), AM-240320LDTNQW00H (LCD_SPFD5408B)
   *          Liquid Crystal Display Module of STM3210B-EVAL board.
   * @{
-  */ 
+  */
 
 /** @defgroup STM3210B_EVAL_LCD_Private_Types
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM3210B_EVAL_LCD_Private_Defines
   * @{
-  */ 
+  */
 #define LCD_ILI9320        0x9320
 #define LCD_HX8312         0x8312
 #define LCD_SPFD5408       0x5408
@@ -68,33 +68,33 @@
 #define POLY_X(Z)          ((int32_t)((Points + Z)->Y))
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM3210B_EVAL_LCD_Private_Macros
   * @{
   */
-#define ABS(X)  ((X) > 0 ? (X) : -(X))   
+#define ABS(X)  ((X) > 0 ? (X) : -(X))
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM3210B_EVAL_LCD_Private_Variables
   * @{
-  */ 
+  */
 static sFONT *LCD_Currentfonts;
 /* Global variables to set the written text color */
 static __IO uint16_t TextColor = 0x0000, BackColor = 0xFFFF;
 static __IO uint32_t LCDType = LCD_ILI9320;
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM3210B_EVAL_LCD_Private_Function_Prototypes
   * @{
-  */ 
+  */
 #ifndef USE_Delay
 static void delay(vu32 nCount);
 #endif /* USE_Delay*/
@@ -105,12 +105,12 @@ static void PutPixel(int16_t x, int16_t y);
 static void LCD_PolyLineRelativeClosed(pPoint Points, uint16_t PointCount, uint16_t Closed);
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM3210B_EVAL_LCD_Private_Functions
   * @{
-  */ 
+  */
 
 /**
   * @brief  DeInitializes the LCD.
@@ -126,32 +126,32 @@ void LCD_DeInit(void)
 
   /*!< LCD_SPI disable */
   SPI_Cmd(LCD_SPI, DISABLE);
-  
+
   /*!< LCD_SPI DeInit */
   SPI_I2S_DeInit(LCD_SPI);
-   
+
   /*!< Disable SPI clock  */
   RCC_APB1PeriphClockCmd(LCD_SPI_CLK, DISABLE);
-    
+
   /* Configure NCS in Output Push-Pull mode */
   GPIO_InitStructure.GPIO_Pin = LCD_NCS_PIN;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   GPIO_Init(LCD_NCS_GPIO_PORT, &GPIO_InitStructure);
-  
+
   /* Configure NWR(RNW), RS in Output Push-Pull mode */
   GPIO_InitStructure.GPIO_Pin = LCD_RS_PIN;
   GPIO_Init(LCD_RS_GPIO_PORT, &GPIO_InitStructure);
 
   GPIO_InitStructure.GPIO_Pin = LCD_NWR_PIN;
   GPIO_Init(LCD_NWR_GPIO_PORT, &GPIO_InitStructure);
-  
+
   /* Configure SPI pins: SCK, MISO and MOSI */
   GPIO_InitStructure.GPIO_Pin = LCD_SPI_SCK_PIN;
   GPIO_Init(LCD_SPI_SCK_GPIO_PORT, &GPIO_InitStructure);
 
   GPIO_InitStructure.GPIO_Pin = LCD_SPI_MISO_PIN;
   GPIO_Init(LCD_SPI_MISO_GPIO_PORT, &GPIO_InitStructure);
-  
+
   GPIO_InitStructure.GPIO_Pin = LCD_SPI_MOSI_PIN;
   GPIO_Init(LCD_SPI_MOSI_GPIO_PORT, &GPIO_InitStructure);
 }
@@ -162,10 +162,10 @@ void LCD_DeInit(void)
   * @retval None
   */
 void LCD_Setup(void)
-{ 
+{
 /* Configure the LCD Control pins --------------------------------------------*/
   LCD_CtrlLinesConfig();
-  
+
 /* Configure the LCD_SPI interface ----------------------------------------------*/
   LCD_SPIConfig();
   if(LCDType == LCD_ILI9320)
@@ -211,7 +211,7 @@ void LCD_Setup(void)
     LCD_WriteReg(LCD_REG_57, 0x0007);
     LCD_WriteReg(LCD_REG_60, 0x0600);
     LCD_WriteReg(LCD_REG_61, 0x020b);
-  
+
     /* Set GRAM area ---------------------------------------------------------*/
     LCD_WriteReg(LCD_REG_80, 0x0000); /* Horizontal GRAM Start Address */
     LCD_WriteReg(LCD_REG_81, 0x00EF); /* Horizontal GRAM End Address */
@@ -241,7 +241,7 @@ void LCD_Setup(void)
     LCD_WriteReg(LCD_REG_7, 0x0173); /* 262K color and display ON */
   }
   else if(LCDType == LCD_SPFD5408)
-  {   
+  {
     /* Start Initial Sequence --------------------------------------------------*/
     LCD_WriteReg(LCD_REG_227, 0x3008); /* Set internal timing */
     LCD_WriteReg(LCD_REG_231, 0x0012); /* Set internal timing */
@@ -261,13 +261,13 @@ void LCD_Setup(void)
     LCD_WriteReg(LCD_REG_17, 0x0000);  /* DC1[2:0], DC0[2:0], VC[2:0] */
     LCD_WriteReg(LCD_REG_18, 0x0000);  /* VREG1OUT voltage */
     LCD_WriteReg(LCD_REG_19, 0x0000);  /* VDV[4:0] for VCOM amplitude */
-    _delay_(20);                /* Dis-charge capacitor power voltage (200ms) */  
+    _delay_(20);                /* Dis-charge capacitor power voltage (200ms) */
     LCD_WriteReg(LCD_REG_17, 0x0007);  /* DC1[2:0], DC0[2:0], VC[2:0] */
     _delay_(5);                 /* Delay 50 ms */
     LCD_WriteReg(LCD_REG_16, 0x12B0);  /* SAP, BT[3:0], AP, DSTB, SLP, STB */
     _delay_(5);                  /* Delay 50 ms */
     LCD_WriteReg(LCD_REG_18, 0x01BD);  /* External reference voltage= Vci */
-    _delay_(5);                 /* Delay 50 ms */ 
+    _delay_(5);                 /* Delay 50 ms */
     LCD_WriteReg(LCD_REG_19, 0x1400);       /* VDV[4:0] for VCOM amplitude */
     LCD_WriteReg(LCD_REG_41, 0x000E);  /* VCM[4:0] for VCOMH */
     _delay_(5);                 /* Delay 50 ms */
@@ -321,12 +321,12 @@ void LCD_Setup(void)
     _delay_(1); /* Delay 10 ms */
     LCD_WriteReg(LCD_REG_3, 0x00);
     LCD_WriteReg(LCD_REG_43, 0x04);
-  
+
     LCD_WriteReg(LCD_REG_40, 0x18);
     LCD_WriteReg(LCD_REG_26, 0x05);
     LCD_WriteReg(LCD_REG_37, 0x05);
     LCD_WriteReg(LCD_REG_25, 0x00);
-    
+
     /* LCD Power On ----------------------------------------------------------*/
     LCD_WriteReg(LCD_REG_28, 0x73);
     LCD_WriteReg(LCD_REG_36, 0x74);
@@ -344,11 +344,11 @@ void LCD_Setup(void)
     LCD_WriteReg(LCD_REG_32, 0x0E);
     LCD_WriteReg(LCD_REG_30, 0x81);
     _delay_(1); /* Delay 10 ms */
-    
+
     /* Chip Set --------------------------------------------------------------*/
     LCD_WriteReg(LCD_REG_157, 0x00);
     LCD_WriteReg(LCD_REG_192, 0x00);
-   
+
     LCD_WriteReg(LCD_REG_14, 0x00);
     LCD_WriteReg(LCD_REG_15, 0x00);
     LCD_WriteReg(LCD_REG_16, 0x00);
@@ -359,7 +359,7 @@ void LCD_Setup(void)
     LCD_WriteReg(LCD_REG_21, 0x00);
     LCD_WriteReg(LCD_REG_22, 0x00);
     LCD_WriteReg(LCD_REG_23, 0x00);
-   
+
     LCD_WriteReg(LCD_REG_52, 0x01);
     LCD_WriteReg(LCD_REG_53, 0x00);
     LCD_WriteReg(LCD_REG_75, 0x00);
@@ -367,7 +367,7 @@ void LCD_Setup(void)
     LCD_WriteReg(LCD_REG_78, 0x00);
     LCD_WriteReg(LCD_REG_79, 0x00);
     LCD_WriteReg(LCD_REG_80, 0x00);
-  
+
     LCD_WriteReg(LCD_REG_60, 0x00);
     LCD_WriteReg(LCD_REG_61, 0x00);
     LCD_WriteReg(LCD_REG_62, 0x01);
@@ -383,20 +383,20 @@ void LCD_Setup(void)
     LCD_WriteReg(LCD_REG_72, 0x00);
     LCD_WriteReg(LCD_REG_73, 0x01);
     LCD_WriteReg(LCD_REG_74, 0x3F);
-  
+
     LCD_WriteReg(LCD_REG_29, 0x08);  /* R29:Gate scan direction setting */
-  
+
     LCD_WriteReg(LCD_REG_134, 0x00);
     LCD_WriteReg(LCD_REG_135, 0x30);
     LCD_WriteReg(LCD_REG_136, 0x02);
     LCD_WriteReg(LCD_REG_137, 0x05);
-  
+
     LCD_WriteReg(LCD_REG_141, 0x01);  /* R141:Register set-up mode for one line clock */
     LCD_WriteReg(LCD_REG_139, 0x20);  /* R139:One line SYSCLK number in one-line */
     LCD_WriteReg(LCD_REG_51, 0x01);  /* R51:N line inversion setting */
     LCD_WriteReg(LCD_REG_55, 0x01);  /* R55:Scanning method setting */
     LCD_WriteReg(LCD_REG_118, 0x00);
-   
+
     /* Gamma Set -------------------------------------------------------------*/
     LCD_WriteReg(LCD_REG_143, 0x10);
     LCD_WriteReg(LCD_REG_144, 0x67);
@@ -410,7 +410,7 @@ void LCD_Setup(void)
     LCD_WriteReg(LCD_REG_152, 0x06);
     LCD_WriteReg(LCD_REG_153, 0x03);
     LCD_WriteReg(LCD_REG_154, 0x00);
-  
+
     /* Display On ------------------------------------------------------------*/
     LCD_WriteReg(LCD_REG_1, 0x50);
     LCD_WriteReg(LCD_REG_5, 0x04);
@@ -418,7 +418,7 @@ void LCD_Setup(void)
     LCD_WriteReg(LCD_REG_59, 0x01);
     _delay_(4);  /* Delay 40 ms */
     LCD_WriteReg(LCD_REG_0, 0x20);
-  }  
+  }
 }
 
 
@@ -460,15 +460,15 @@ void STM3210B_LCD_Init(void)
   */
 void LCD_SetColors(__IO uint16_t _TextColor, __IO uint16_t _BackColor)
 {
-  TextColor = _TextColor; 
+  TextColor = _TextColor;
   BackColor = _BackColor;
 }
 
 /**
   * @brief  Gets the LCD Text and Background colors.
-  * @param  _TextColor: pointer to the variable that will contain the Text 
+  * @param  _TextColor: pointer to the variable that will contain the Text
             Color.
-  * @param  _BackColor: pointer to the variable that will contain the Background 
+  * @param  _BackColor: pointer to the variable that will contain the Background
             Color.
   * @retval None
   */
@@ -547,8 +547,8 @@ void LCD_ClearLine(uint8_t Line)
 void LCD_Clear(uint16_t Color)
 {
   uint32_t index = 0;
-  
-  LCD_SetCursor(0x00, 0x013F); 
+
+  LCD_SetCursor(0x00, 0x013F);
   if((LCDType == LCD_ILI9320) || (LCDType == LCD_SPFD5408))
   {
     LCD_WriteRAM_Prepare(); /* Prepare to write GRAM */
@@ -559,15 +559,15 @@ void LCD_Clear(uint16_t Color)
   }
   if((LCDType == LCD_ILI9320) || (LCDType == LCD_SPFD5408))
   {
-    LCD_CtrlLinesWrite(LCD_NCS_GPIO_PORT, LCD_NCS_PIN, Bit_SET); 
-  }  
+    LCD_CtrlLinesWrite(LCD_NCS_GPIO_PORT, LCD_NCS_PIN, Bit_SET);
+  }
 }
 
 
 /**
   * @brief  Sets the cursor position.
   * @param  Xpos: specifies the X position.
-  * @param  Ypos: specifies the Y position. 
+  * @param  Ypos: specifies the Y position.
   * @retval None
   */
 void LCD_SetCursor(uint8_t Xpos, uint16_t Ypos)
@@ -597,11 +597,11 @@ void LCD_DrawChar(uint8_t Xpos, uint16_t Ypos, const uint16_t *c)
 {
   uint32_t index = 0, i = 0;
   uint8_t Xaddress = 0;
-   
+
   Xaddress = Xpos;
-  
+
   LCD_SetCursor(Xaddress, Ypos);
-  
+
   for(index = 0; index < LCD_Currentfonts->Height; index++)
   {
     if((LCDType == LCD_ILI9320) || (LCDType == LCD_SPFD5408))
@@ -624,7 +624,7 @@ void LCD_DrawChar(uint8_t Xpos, uint16_t Ypos, const uint16_t *c)
     if((LCDType == LCD_ILI9320) || (LCDType == LCD_SPFD5408))
     {
       LCD_CtrlLinesWrite(LCD_NCS_GPIO_PORT, LCD_NCS_PIN, Bit_SET);
-    }  
+    }
     Xaddress++;
     LCD_SetCursor(Xaddress, Ypos);
   }
@@ -699,7 +699,7 @@ void LCD_SetDisplayWindow(uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t 
     if(Ypos >= Width)
     {
       LCD_WriteReg(LCD_REG_82, (Ypos - Width + 1));
-    }  
+    }
     else
     {
       LCD_WriteReg(LCD_REG_82, 0);
@@ -708,13 +708,13 @@ void LCD_SetDisplayWindow(uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t 
     LCD_WriteReg(LCD_REG_83, Ypos);
   }
   else if(LCDType == LCD_HX8312)
-  {  
+  {
     LCD_WriteReg(LCD_REG_1, 0xD0);
     LCD_WriteReg(LCD_REG_5, 0x14);
-  
+
     LCD_WriteReg(LCD_REG_69, (Xpos - Height + 1));
     LCD_WriteReg(LCD_REG_70, Xpos);
- 
+
     LCD_WriteReg(LCD_REG_71, (((Ypos - Width + 1) & 0x100)>> 8));
     LCD_WriteReg(LCD_REG_72, ((Ypos - Width + 1) & 0xFF));
     LCD_WriteReg(LCD_REG_73, ((Ypos & 0x100)>> 8));
@@ -739,9 +739,9 @@ void LCD_WindowModeDisable(void)
   else if(LCDType == LCD_HX8312)
   {
     LCD_WriteReg(LCD_REG_1, 0x50);
-    LCD_WriteReg(LCD_REG_5, 0x04); 
+    LCD_WriteReg(LCD_REG_5, 0x04);
   }
-    
+
 }
 
 
@@ -757,10 +757,10 @@ void LCD_WindowModeDisable(void)
 void LCD_DrawLine(uint8_t Xpos, uint16_t Ypos, uint16_t Length, uint8_t Direction)
 {
   uint32_t i = 0;
-  
+
   LCD_SetCursor(Xpos, Ypos);
   if(Direction == LCD_DIR_HORIZONTAL)
-  { 
+  {
     if((LCDType == LCD_ILI9320) || (LCDType == LCD_SPFD5408))
     {
       LCD_WriteRAM_Prepare(); /* Prepare to write GRAM */
@@ -805,7 +805,7 @@ void LCD_DrawRect(uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width)
 {
   LCD_DrawLine(Xpos, Ypos, Width, LCD_DIR_HORIZONTAL);
   LCD_DrawLine((Xpos + Height), Ypos, Width, LCD_DIR_HORIZONTAL);
-  
+
   LCD_DrawLine(Xpos, Ypos, Height, LCD_DIR_VERTICAL);
   LCD_DrawLine(Xpos, (Ypos - Width + 1), Height, LCD_DIR_VERTICAL);
 }
@@ -820,14 +820,14 @@ void LCD_DrawRect(uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width)
   */
 void LCD_DrawCircle(uint8_t Xpos, uint16_t Ypos, uint16_t Radius)
 {
-  int32_t  D;/* Decision Variable */ 
+  int32_t  D;/* Decision Variable */
   uint32_t  CurX;/* Current X Value */
-  uint32_t  CurY;/* Current Y Value */ 
-  
+  uint32_t  CurY;/* Current Y Value */
+
   D = 3 - (Radius << 1);
   CurX = 0;
   CurY = Radius;
-  
+
   while (CurX <= CurY)
   {
     LCD_SetCursor(Xpos + CurX, Ypos + CurY);
@@ -909,7 +909,7 @@ void LCD_DrawCircle(uint8_t Xpos, uint16_t Ypos, uint16_t Radius)
       LCD_WriteRAM(TextColor);
     }
     if (D < 0)
-    { 
+    {
       D += (CurX << 2) + 6;
     }
     else
@@ -930,7 +930,7 @@ void LCD_DrawCircle(uint8_t Xpos, uint16_t Ypos, uint16_t Radius)
 void LCD_DrawMonoPict(const uint32_t *Pict)
 {
   uint32_t index = 0, i = 0;
-  LCD_SetCursor(0, (LCD_PIXEL_WIDTH - 1)); 
+  LCD_SetCursor(0, (LCD_PIXEL_WIDTH - 1));
 
   if((LCDType == LCD_ILI9320) || (LCDType == LCD_SPFD5408))
   {
@@ -958,7 +958,7 @@ void LCD_DrawMonoPict(const uint32_t *Pict)
   }
 }
 
-#ifdef USE_LCD_DrawBMP 
+#ifdef USE_LCD_DrawBMP
 /**
   * @brief  Displays a bitmap picture loaded in the SPI Flash.
   * @param  BmpAddress: Bmp picture address in the SPI Flash.
@@ -971,7 +971,7 @@ void LCD_DrawBMP(uint32_t BmpAddress)
   sFLASH_ReadBuffer((uint8_t*)&size, BmpAddress + 2, 4);
   /* get bitmap data address offset */
   sFLASH_ReadBuffer((uint8_t*)&i, BmpAddress + 10, 4);
-  
+
   size = (size - i)/2;
   sFLASH_StartReadSequence(BmpAddress + i);
   /* Disable LCD_SPI  */
@@ -980,7 +980,7 @@ void LCD_DrawBMP(uint32_t BmpAddress)
   SPI_DataSizeConfig(LCD_SPI, SPI_DataSize_16b);
   /* Enable LCD_SPI  */
   SPI_Cmd(LCD_SPI, ENABLE);
-  
+
   if((LCDType == LCD_ILI9320) || (LCDType == LCD_SPFD5408))
   {
     /* Set GRAM write direction and BGR = 1 */
@@ -989,7 +989,7 @@ void LCD_DrawBMP(uint32_t BmpAddress)
     LCD_WriteReg(LCD_REG_3, 0x1008);
     LCD_WriteRAM_Prepare(); /* Prepare to write GRAM */
   }
-  
+
   /* Read bitmap data from SPI Flash and send them to LCD */
   for(i = 0; i < size; i++)
   {
@@ -1018,7 +1018,7 @@ void LCD_DrawBMP(uint32_t BmpAddress)
   }
 }
 #endif /* USE_LCD_DrawBMP */
- 
+
 /**
   * @brief  Displays a full rectangle.
   * @param  Xpos: specifies the X position.
@@ -1033,7 +1033,7 @@ void LCD_DrawFullRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Hei
 
   LCD_DrawLine(Xpos, Ypos, Width, LCD_DIR_HORIZONTAL);
   LCD_DrawLine((Xpos + Height), Ypos, Width, LCD_DIR_HORIZONTAL);
-  
+
   LCD_DrawLine(Xpos, Ypos, Height, LCD_DIR_VERTICAL);
   LCD_DrawLine(Xpos, (Ypos - Width + 1), Height, LCD_DIR_VERTICAL);
 
@@ -1045,7 +1045,7 @@ void LCD_DrawFullRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Hei
 
   while(Height--)
   {
-    LCD_DrawLine(++Xpos, Ypos, Width, LCD_DIR_HORIZONTAL);    
+    LCD_DrawLine(++Xpos, Ypos, Width, LCD_DIR_HORIZONTAL);
   }
 
   LCD_SetTextColor(TextColor);
@@ -1060,32 +1060,32 @@ void LCD_DrawFullRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Hei
   */
 void LCD_DrawFullCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
 {
-  int32_t  D;    /* Decision Variable */ 
+  int32_t  D;    /* Decision Variable */
   uint32_t  CurX;/* Current X Value */
-  uint32_t  CurY;/* Current Y Value */ 
-  
+  uint32_t  CurY;/* Current Y Value */
+
   D = 3 - (Radius << 1);
 
   CurX = 0;
   CurY = Radius;
-  
+
   LCD_SetTextColor(BackColor);
 
   while (CurX <= CurY)
   {
-    if(CurY > 0) 
+    if(CurY > 0)
     {
       LCD_DrawLine(Xpos - CurX, Ypos + CurY, 2*CurY, LCD_DIR_HORIZONTAL);
       LCD_DrawLine(Xpos + CurX, Ypos + CurY, 2*CurY, LCD_DIR_HORIZONTAL);
     }
 
-    if(CurX > 0) 
+    if(CurX > 0)
     {
       LCD_DrawLine(Xpos - CurY, Ypos + CurX, 2*CurX, LCD_DIR_HORIZONTAL);
       LCD_DrawLine(Xpos + CurY, Ypos + CurX, 2*CurX, LCD_DIR_HORIZONTAL);
     }
     if (D < 0)
-    { 
+    {
       D += (CurX << 2) + 6;
     }
     else
@@ -1110,15 +1110,15 @@ void LCD_DrawFullCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
   */
 void LCD_DrawUniLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
 {
-  int16_t deltax = 0, deltay = 0, x = 0, y = 0, xinc1 = 0, xinc2 = 0, 
-  yinc1 = 0, yinc2 = 0, den = 0, num = 0, numadd = 0, numpixels = 0, 
+  int16_t deltax = 0, deltay = 0, x = 0, y = 0, xinc1 = 0, xinc2 = 0,
+  yinc1 = 0, yinc2 = 0, den = 0, num = 0, numadd = 0, numpixels = 0,
   curpixel = 0;
-  
+
   deltax = ABS(x2 - x1);        /* The difference between the x's */
   deltay = ABS(y2 - y1);        /* The difference between the y's */
   x = x1;                       /* Start x off at the first pixel */
   y = y1;                       /* Start y off at the first pixel */
-  
+
   if (x2 >= x1)                 /* The x-values are increasing */
   {
     xinc1 = 1;
@@ -1129,7 +1129,7 @@ void LCD_DrawUniLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
     xinc1 = -1;
     xinc2 = -1;
   }
-  
+
   if (y2 >= y1)                 /* The y-values are increasing */
   {
     yinc1 = 1;
@@ -1140,7 +1140,7 @@ void LCD_DrawUniLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
     yinc1 = -1;
     yinc2 = -1;
   }
-  
+
   if (deltax >= deltay)         /* There is at least one x-value for every y-value */
   {
     xinc1 = 0;                  /* Don't change the x when numerator >= denominator */
@@ -1159,7 +1159,7 @@ void LCD_DrawUniLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
     numadd = deltax;
     numpixels = deltay;         /* There are more y-values than x-values */
   }
-  
+
   for (curpixel = 0; curpixel <= numpixels; curpixel++)
   {
     PutPixel(x, y);             /* Draw the current pixel */
@@ -1215,7 +1215,7 @@ static void LCD_PolyLineRelativeClosed(pPoint Points, uint16_t PointCount, uint1
   if(PointCount < 2)
   {
     return;
-  }  
+  }
   X = Points->X;
   Y = Points->Y;
   while(--PointCount)
@@ -1228,7 +1228,7 @@ static void LCD_PolyLineRelativeClosed(pPoint Points, uint16_t PointCount, uint1
   if(Closed)
   {
     LCD_DrawUniLine(First->X, First->Y, X, Y);
-  }  
+  }
 }
 
 /**
@@ -1293,10 +1293,10 @@ void LCD_FillPolyLine(pPoint Points, uint16_t PointCount)
     {
       IMAGE_RIGHT = pixelX;
     }
-    
+
     pixelY = POLY_Y(i);
     if(pixelY < IMAGE_TOP)
-    { 
+    {
       IMAGE_TOP = pixelY;
     }
     if(pixelY > IMAGE_BOTTOM)
@@ -1304,52 +1304,52 @@ void LCD_FillPolyLine(pPoint Points, uint16_t PointCount)
       IMAGE_BOTTOM = pixelY;
     }
   }
-  
-  LCD_SetTextColor(BackColor);  
+
+  LCD_SetTextColor(BackColor);
 
   /*  Loop through the rows of the image. */
-  for (pixelY = IMAGE_TOP; pixelY < IMAGE_BOTTOM; pixelY++) 
-  {  
+  for (pixelY = IMAGE_TOP; pixelY < IMAGE_BOTTOM; pixelY++)
+  {
     /* Build a list of nodes. */
     nodes = 0; j = PointCount-1;
 
-    for (i = 0; i < PointCount; i++) 
+    for (i = 0; i < PointCount; i++)
     {
-      if (POLY_Y(i)<(double) pixelY && POLY_Y(j)>=(double) pixelY || POLY_Y(j)<(double) pixelY && POLY_Y(i)>=(double) pixelY) 
+      if (POLY_Y(i)<(double) pixelY && POLY_Y(j)>=(double) pixelY || POLY_Y(j)<(double) pixelY && POLY_Y(i)>=(double) pixelY)
       {
-        nodeX[nodes++]=(int) (POLY_X(i)+((pixelY-POLY_Y(i))*(POLY_X(j)-POLY_X(i)))/(POLY_Y(j)-POLY_Y(i))); 
+        nodeX[nodes++]=(int) (POLY_X(i)+((pixelY-POLY_Y(i))*(POLY_X(j)-POLY_X(i)))/(POLY_Y(j)-POLY_Y(i)));
       }
-      j = i; 
+      j = i;
     }
-  
+
     /* Sort the nodes, via a simple "Bubble" sort. */
     i = 0;
-    while (i < nodes-1) 
+    while (i < nodes-1)
     {
-      if (nodeX[i]>nodeX[i+1]) 
+      if (nodeX[i]>nodeX[i+1])
       {
-        swap = nodeX[i]; 
-        nodeX[i] = nodeX[i+1]; 
-        nodeX[i+1] = swap; 
+        swap = nodeX[i];
+        nodeX[i] = nodeX[i+1];
+        nodeX[i+1] = swap;
         if(i)
         {
-          i--; 
+          i--;
         }
       }
-      else 
+      else
       {
         i++;
       }
     }
-  
+
     /*  Fill the pixels between node pairs. */
-    for (i = 0; i < nodes; i+=2) 
+    for (i = 0; i < nodes; i+=2)
     {
-      if(nodeX[i] >= IMAGE_RIGHT) 
+      if(nodeX[i] >= IMAGE_RIGHT)
       {
         break;
       }
-      if(nodeX[i+1] > IMAGE_LEFT) 
+      if(nodeX[i+1] > IMAGE_LEFT)
       {
         if (nodeX[i] < IMAGE_LEFT)
         {
@@ -1367,7 +1367,7 @@ void LCD_FillPolyLine(pPoint Points, uint16_t PointCount)
         /* for (j=nodeX[i]; j<nodeX[i+1]; j++) PutPixel(j,pixelY); */
       }
     }
-  } 
+  }
 
   /* draw the edges */
   LCD_SetTextColor(TextColor);
@@ -1457,7 +1457,7 @@ uint16_t LCD_ReadReg(uint8_t LCD_Reg)
 {
   uint16_t tmp = 0;
   uint8_t i = 0;
-  
+
   /* LCD_SPI prescaler: 4 */
   LCD_SPI->CR1 &= 0xFFC7;
   LCD_SPI->CR1 |= 0x0008;
@@ -1466,7 +1466,7 @@ uint16_t LCD_ReadReg(uint8_t LCD_Reg)
   /* Read 16-bit Reg */
   /* Reset LCD control line(/CS) and Send Start-Byte */
   LCD_nCS_StartByte(START_BYTE | LCD_READ_REG);
-  
+
   for(i = 0; i < 5; i++)
   {
     SPI_I2S_SendData(LCD_SPI, 0xFF);
@@ -1475,9 +1475,9 @@ uint16_t LCD_ReadReg(uint8_t LCD_Reg)
     }
     /* One byte of invalid dummy data read after the start byte */
     while(SPI_I2S_GetFlagStatus(LCD_SPI, SPI_I2S_FLAG_RXNE) == RESET)
-    {    
+    {
     }
-    SPI_I2S_ReceiveData(LCD_SPI); 
+    SPI_I2S_ReceiveData(LCD_SPI);
   }
 
   SPI_I2S_SendData(LCD_SPI, 0xFF);
@@ -1492,8 +1492,8 @@ uint16_t LCD_ReadReg(uint8_t LCD_Reg)
   {
   }
   tmp = SPI_I2S_ReceiveData(LCD_SPI);
-  
-  
+
+
   SPI_I2S_SendData(LCD_SPI, 0xFF);
   while(SPI_I2S_GetFlagStatus(LCD_SPI, SPI_I2S_FLAG_BSY) != RESET)
   {
@@ -1553,20 +1553,20 @@ void LCD_WriteRAMWord(uint16_t RGB_Code)
 static void LCD_WriteRegHX8312(uint8_t LCD_Reg, uint8_t LCD_RegValue)
 {
   uint16_t tmp = 0;
-  
+
   LCD_CtrlLinesWrite(LCD_NWR_GPIO_PORT, LCD_NWR_PIN, Bit_RESET);
   LCD_CtrlLinesWrite(LCD_RS_GPIO_PORT, LCD_RS_PIN, Bit_RESET);
   LCD_CtrlLinesWrite(LCD_NCS_GPIO_PORT, LCD_NCS_PIN, Bit_RESET);
-  
+
   tmp = LCD_Reg << 8;
   tmp |= LCD_RegValue;
-   
+
   SPI_I2S_SendData(LCD_SPI, tmp);
 
   while(SPI_I2S_GetFlagStatus(LCD_SPI, SPI_I2S_FLAG_BSY) != RESET)
   {
   }
-  
+
   LCD_CtrlLinesWrite(LCD_NCS_GPIO_PORT, LCD_NCS_PIN, Bit_SET);
 }
 
@@ -1619,7 +1619,7 @@ void LCD_WriteRAM(uint16_t RGB_Code)
     while(SPI_I2S_GetFlagStatus(LCD_SPI, SPI_I2S_FLAG_BSY) != RESET)
     {
     }
-  
+
     LCD_CtrlLinesWrite(LCD_NCS_GPIO_PORT, LCD_NCS_PIN, Bit_SET);
   }
 }
@@ -1651,7 +1651,7 @@ void LCD_PowerOn(void)
     LCD_WriteReg(LCD_REG_7, 0x0173);  /* 262K color and display ON */
   }
   else if(LCDType == LCD_HX8312)
-  {  
+  {
     /* Power On Set */
     LCD_WriteReg(LCD_REG_28, 0x73);
     LCD_WriteReg(LCD_REG_36, 0x74);
@@ -1686,7 +1686,7 @@ void LCD_DisplayOn(void)
     LCD_WriteReg(LCD_REG_7, 0x0173); /* 262K color and display ON */
   }
   else if(LCDType == LCD_HX8312)
-  {  
+  {
     LCD_WriteReg(LCD_REG_1, 0x50);
     LCD_WriteReg(LCD_REG_5, 0x04);
     /* Display On */
@@ -1694,7 +1694,7 @@ void LCD_DisplayOn(void)
     LCD_WriteReg(LCD_REG_59, 0x01);
     _delay_(4); /* Delay 40 ms */
     LCD_WriteReg(LCD_REG_0, 0x20);
-  }  
+  }
 }
 
 
@@ -1711,12 +1711,12 @@ void LCD_DisplayOff(void)
     LCD_WriteReg(LCD_REG_7, 0x0);
   }
   else if(LCDType == LCD_HX8312)
-  { 
+  {
     /* Display Off */
     LCD_WriteReg(LCD_REG_0, 0xA0);
     _delay_(4);  /* Delay 40 ms */
     LCD_WriteReg(LCD_REG_59, 0x00);
-  } 
+  }
 }
 
 
@@ -1737,14 +1737,14 @@ void LCD_CtrlLinesConfig(void)
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_Init(LCD_NCS_GPIO_PORT, &GPIO_InitStructure);
-  
+
   /* Configure NWR(RNW), RS in Output Push-Pull mode */
   GPIO_InitStructure.GPIO_Pin = LCD_RS_PIN;
   GPIO_Init(LCD_RS_GPIO_PORT, &GPIO_InitStructure);
 
   GPIO_InitStructure.GPIO_Pin = LCD_NWR_PIN;
   GPIO_Init(LCD_NWR_GPIO_PORT, &GPIO_InitStructure);
-  
+
   LCD_CtrlLinesWrite(LCD_NWR_GPIO_PORT, LCD_NWR_PIN, Bit_SET);
   LCD_CtrlLinesWrite(LCD_RS_GPIO_PORT, LCD_RS_PIN, Bit_SET);
 }
@@ -1794,12 +1794,12 @@ void LCD_SPIConfig(void)
 
   GPIO_InitStructure.GPIO_Pin = LCD_SPI_MISO_PIN;
   GPIO_Init(LCD_SPI_MISO_GPIO_PORT, &GPIO_InitStructure);
-  
+
   GPIO_InitStructure.GPIO_Pin = LCD_SPI_MOSI_PIN;
   GPIO_Init(LCD_SPI_MOSI_GPIO_PORT, &GPIO_InitStructure);
 
   SPI_I2S_DeInit(LCD_SPI);
-  
+
   /* SPI Config */
   SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
   SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
@@ -1829,14 +1829,14 @@ void LCD_SPIConfig(void)
 /**
   * @brief  Displays a pixel.
   * @param  x: pixel x.
-  * @param  y: pixel y.  
+  * @param  y: pixel y.
   * @retval None
   */
 static void PutPixel(int16_t x, int16_t y)
-{ 
+{
   if(x < 0 || x > 239 || y < 0 || y > 319)
   {
-    return;  
+    return;
   }
   LCD_DrawLine(x, y, 1, LCD_DIR_HORIZONTAL);
 }
@@ -1849,7 +1849,7 @@ static void PutPixel(int16_t x, int16_t y)
   */
 static void delay(vu32 nCount)
 {
-  vu32 index = 0; 
+  vu32 index = 0;
   for(index = (100000 * nCount); index != 0; index--)
   {
   }
@@ -1857,22 +1857,22 @@ static void delay(vu32 nCount)
 #endif /* USE_Delay*/
 /**
   * @}
-  */ 
+  */
 
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-  
 /**
   * @}
   */
-  
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

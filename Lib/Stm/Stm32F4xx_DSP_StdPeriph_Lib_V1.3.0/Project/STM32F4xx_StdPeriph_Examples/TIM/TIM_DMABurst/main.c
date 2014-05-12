@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_DMABurst/main.c 
+  * @file    TIM/TIM_DMABurst/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup TIM_DMABurst
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -61,52 +61,52 @@ static void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
-     */     
+     */
 
   /* TIM1 Configuration */
-  TIM_Config();       
-  
+  TIM_Config();
+
   /* Time base configuration */
   /* -----------------------------------------------------------------------
     TIM1 Configuration: generate 1 PWM signal using the DMA burst mode:
-  
-    TIM1 input clock (TIM1CLK) is set to 2 * APB2 clock (PCLK2), 
-    since APB2 prescaler is different from 1.   
-      TIM1CLK = 2 * PCLK2  
-      PCLK2 = HCLK / 2 
+
+    TIM1 input clock (TIM1CLK) is set to 2 * APB2 clock (PCLK2),
+    since APB2 prescaler is different from 1.
+      TIM1CLK = 2 * PCLK2
+      PCLK2 = HCLK / 2
       => TIM1CLK = 2 * (HCLK / 2) = HCLK = SystemCoreClock
-    
+
     To get TIM1 counter clock at 24 MHz, the prescaler is computed as follows:
       Prescaler = (TIM1CLK / TIM1 counter clock) - 1
       Prescaler = (SystemCoreClock /24 MHz) - 1
-  
+
     The TIM1 period is 5.8 KHz: TIM1 Frequency = TIM1 counter clock/(ARR + 1)
                                                = 24 MHz / 4096 = 5.85 KHz
     TIM1 Channel1 duty cycle = (TIM1_CCR1/ TIM1_ARR)* 100 = 33.33%
-  
-    Note: 
+
+    Note:
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
      Each time the core clock (HCLK) changes, user had to call SystemCoreClockUpdate()
      function to update SystemCoreClock variable value. Otherwise, any configuration
-     based on this variable will be incorrect.  
-  ----------------------------------------------------------------------- */  
-  TIM_TimeBaseStructure.TIM_Period = 0xFFFF;          
-  TIM_TimeBaseStructure.TIM_Prescaler = (uint16_t) (SystemCoreClock / 24000000) - 1;       
-  TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;    
-  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;   
+     based on this variable will be incorrect.
+  ----------------------------------------------------------------------- */
+  TIM_TimeBaseStructure.TIM_Period = 0xFFFF;
+  TIM_TimeBaseStructure.TIM_Prescaler = (uint16_t) (SystemCoreClock / 24000000) - 1;
+  TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;
+  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
   TIM_TimeBaseInit(TIM1, &TIM_TimeBaseStructure);
 
   /* TIM Configuration in PWM Mode */
-  TIM_OCInitStructure.TIM_OCMode =  TIM_OCMode_PWM1;    
-  TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;          
-  TIM_OCInitStructure.TIM_Pulse = 0xFFF;  
-  TIM_OC1Init(TIM1, &TIM_OCInitStructure); 
+  TIM_OCInitStructure.TIM_OCMode =  TIM_OCMode_PWM1;
+  TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
+  TIM_OCInitStructure.TIM_Pulse = 0xFFF;
+  TIM_OC1Init(TIM1, &TIM_OCInitStructure);
 
   /* TIM1 DMAR Base register and DMA Burst Length Config */
   TIM_DMAConfig(TIM1, TIM_DMABase_ARR, TIM_DMABurstLength_3Transfers);
@@ -116,7 +116,7 @@ int main(void)
 
   /* TIM1 enable */
   TIM_Cmd(TIM1, ENABLE);
-  
+
   /* TIM1 PWM Outputs Enable */
   TIM_CtrlPWMOutputs(TIM1, ENABLE);
 
@@ -128,7 +128,7 @@ int main(void)
   {
   }
 
-  /* Infinite loop */ 
+  /* Infinite loop */
   while(1)
   {
   }
@@ -151,7 +151,7 @@ static void TIM_Config(void)
 
   /* DMA2 clock enable */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2, ENABLE);
-  
+
   /* GPIOA Configuration: PA8(TIM1 CH1) as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
@@ -162,14 +162,14 @@ static void TIM_Config(void)
 
   /* Connect TIM pins to AF1 */
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource8, GPIO_AF_TIM1);
-  
+
   /* DeInitialize the DMA2 Stream5 */
   DMA_DeInit(DMA2_Stream5);
 
   DMA_InitStructure.DMA_Channel = DMA_Channel_6;
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)TIM1_DMAR_ADDRESS;
   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)aSRC_Buffer;
-  DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral;  
+  DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral;
   DMA_InitStructure.DMA_BufferSize = 3;
   DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
   DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
@@ -205,10 +205,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

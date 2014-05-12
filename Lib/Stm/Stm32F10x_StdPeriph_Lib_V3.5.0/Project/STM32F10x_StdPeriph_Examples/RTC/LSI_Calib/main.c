@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RTC/LSI_Calib/main.c 
+  * @file    RTC/LSI_Calib/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup RTC_LSI_Calib
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -57,14 +57,14 @@ void NVIC_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
+     */
 
-  /* Initialize LEDs and Key Button mounted on STM3210X-EVAL board */       
+  /* Initialize LEDs and Key Button mounted on STM3210X-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_GPIO);
@@ -224,7 +224,7 @@ void RTC_Configuration(void)
 }
 
 /**
-  * @brief  Increments OperationComplete variable and return its value 
+  * @brief  Increments OperationComplete variable and return its value
   *         before increment operation.
   * @param  None
   * @retval OperationComplete value before increment
@@ -232,7 +232,7 @@ void RTC_Configuration(void)
 uint32_t IncrementVar_OperationComplete(void)
 {
   OperationComplete++;
-  
+
   return (uint32_t)(OperationComplete -1);
 }
 

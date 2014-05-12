@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/USART_TwoBoards/DataExchangeInterrupt/stm32f2xx_it.c 
+  * @file    USART/USART_TwoBoards/DataExchangeInterrupt/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -163,7 +163,7 @@ void SysTick_Handler(void)
   {
     TimeOut--;
   }
-  
+
   if (Counter < 10)
   {
     Counter++;
@@ -221,7 +221,7 @@ void USARTx_IRQHandler(void)
       }
     }
   }
-  
+
   /* USART in mode Receiver --------------------------------------------------*/
   if (USART_GetITStatus(USARTx, USART_IT_RXNE) == SET)
   {
@@ -242,7 +242,7 @@ void USARTx_IRQHandler(void)
         RxBuffer[RxIndex++] = USART_ReceiveData(USARTx);
       }
     }
-  }     
+  }
 }
 
 /******************************************************************************/
@@ -263,10 +263,10 @@ void USARTx_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

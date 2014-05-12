@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2C/I2C_TwoBoards/DataExchangeInterrupt/stm32f2xx_it.c 
+  * @file    I2C/I2C_TwoBoards/DataExchangeInterrupt/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -36,7 +36,7 @@
 /** @addtogroup I2C_DataExchangeInterrupt
   * @{
   */
-  
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -47,7 +47,7 @@ extern __IO uint32_t TimeOut;
 __IO uint32_t Event = 0x00;
 
 uint8_t HEADER_ADDRESS_Write = (((SLAVE_ADDRESS & 0xFF00) >> 7) | 0xF0);
-uint8_t HEADER_ADDRESS_Read = (((SLAVE_ADDRESS & 0xFF00) >> 7) | 0xF1); 
+uint8_t HEADER_ADDRESS_Read = (((SLAVE_ADDRESS & 0xFF00) >> 7) | 0xF1);
 
 extern  __IO uint8_t Tx_Idx;
 extern  __IO uint8_t Rx_Idx;
@@ -56,7 +56,7 @@ extern  uint8_t NumberOfByteToTransmit;
 __IO uint8_t GenerateStartStatus = 0x00;
 extern  uint8_t RxBuffer[];
 
-#ifdef I2C_10BITS_ADDRESS  
+#ifdef I2C_10BITS_ADDRESS
 __IO uint8_t Send_HeaderStatus = 0x00;
 #endif /* I2C_10BITS_ADDRESS */
 
@@ -164,14 +164,14 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-#if defined (I2C_MASTER)  
+#if defined (I2C_MASTER)
   /* Decrement the time out value */
   if (TimeOut != 0x0)
   {
     TimeOut--;
   }
 #endif /* I2C_MASTER*/
-  
+
   if (Counter < 10)
   {
     Counter++;
@@ -197,7 +197,7 @@ void SysTick_Handler(void)
 void I2Cx_ER_IRQHANDLER(void)
 {
 #if defined (I2C_SLAVE)
-  
+
   /* Read SR1 register to get I2C error */
   if ((I2C_ReadRegister(I2Cx, I2C_Register_SR1) & 0xFF00) != 0x00)
   {
@@ -205,15 +205,15 @@ void I2Cx_ER_IRQHANDLER(void)
     I2Cx->SR1 &= 0x00FF;
   }
 #endif /* I2C_SLAVE*/
-  
+
 #if defined (I2C_MASTER)
-  
+
   /* Read SR1 register to get I2C error */
   if ((I2C_ReadRegister(I2Cx, I2C_Register_SR1) & 0xFF00) != 0x00)
   {
     /* Clears error flags */
     I2Cx->SR1 &= 0x00FF;
-    
+
     /* Set LED3 and LED4 */
     STM_EVAL_LEDOn(LED3);
     STM_EVAL_LEDOn(LED4);
@@ -231,10 +231,10 @@ void I2Cx_ER_IRQHANDLER(void)
 void I2Cx_EV_IRQHANDLER(void)
 {
 #if defined (I2C_MASTER)
-  /* Once the Start condition is sent the master can be master receiver 
+  /* Once the Start condition is sent the master can be master receiver
   or master transmitter */
   if (MasterMode == MASTER_MODE_TRANSMITTER)
-  { 
+  {
     /* Get Last I2C Event */
     Event = I2C_GetLastEvent(I2Cx);
     switch (Event)
@@ -242,41 +242,41 @@ void I2Cx_EV_IRQHANDLER(void)
   /* ************************************************************************/
   /*                        Master Transmitter Events                       */
   /*                                                                        */
-  /* ************************************************************************/ 
+  /* ************************************************************************/
 /* Sending the header sequence for Master Transmitter case ----------------*/
-      
+
 #ifdef I2C_10BITS_ADDRESS
       /* Check on EV5 */
     case I2C_EVENT_MASTER_MODE_SELECT :
       /* Send Header to Slave for write */
       I2C_SendData(I2Cx, HEADER_ADDRESS_Write);
       break;
-      
+
       /* Check on EV9 */
     case I2C_EVENT_MASTER_MODE_ADDRESS10:
       /* Send slave Address for write */
       I2C_Send7bitAddress(I2Cx, (uint8_t)SLAVE_ADDRESS, I2C_Direction_Transmitter);
       break;
-      
-      
+
+
 #else  /* I2C_7BITS_ADDRESS */
       /* Check on EV5 */
     case I2C_EVENT_MASTER_MODE_SELECT :
       /* Send slave Address for write */
       I2C_Send7bitAddress(I2Cx, (uint8_t)SLAVE_ADDRESS, I2C_Direction_Transmitter);
       break;
-      
-#endif /* I2C_10BITS_ADDRESS */ 
-      
+
+#endif /* I2C_10BITS_ADDRESS */
+
       /* Check on EV6 */
     case I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED:
       /* Transmit the First Data  */
       I2C_SendData(I2Cx, TxBuffer[Tx_Idx++]);
       break;
-      
+
       /* Check on EV8 */
     case I2C_EVENT_MASTER_BYTE_TRANSMITTING:
-    case I2C_EVENT_MASTER_BYTE_TRANSMITTED:      
+    case I2C_EVENT_MASTER_BYTE_TRANSMITTED:
       if (Tx_Idx == (uint8_t)NumberOfByteToTransmit)
       {
         /* Send STOP condition */
@@ -289,11 +289,11 @@ void I2Cx_EV_IRQHANDLER(void)
         I2C_SendData(I2Cx, TxBuffer[Tx_Idx++]);
       }
       break;
-           
+
     default:
       break;
     }
-    
+
   }
   /*************************************************************************/
   /*                        Master Receiver Events                         */
@@ -301,11 +301,11 @@ void I2Cx_EV_IRQHANDLER(void)
   /*************************************************************************/
   else /* MASTER_MODE_RECEIVER */
   {
-#ifdef I2C_10BITS_ADDRESS  
+#ifdef I2C_10BITS_ADDRESS
     /* Check on SB Flag and clear it */
     if(I2C_GetITStatus(I2Cx, I2C_IT_SB)== SET)
     {
-      if (Send_HeaderStatus == 0x00) 
+      if (Send_HeaderStatus == 0x00)
       {
         /* Send Header to Slave for write */
         I2C_SendData(I2Cx, HEADER_ADDRESS_Write);
@@ -333,11 +333,11 @@ void I2Cx_EV_IRQHANDLER(void)
     else if(I2C_GetITStatus(I2Cx, I2C_IT_ADD10)== SET)
     {
       /* Send slave Address */
-      I2C_Send7bitAddress(I2Cx, (uint8_t)SLAVE_ADDRESS, I2C_Direction_Transmitter);   
-    }   
-    
+      I2C_Send7bitAddress(I2Cx, (uint8_t)SLAVE_ADDRESS, I2C_Direction_Transmitter);
+    }
+
 #else /* I2C_7BITS_ADDRESS */
-    
+
     /* Check on EV5 */
     if(I2C_GetITStatus(I2Cx, I2C_IT_SB)== SET)
     {
@@ -353,9 +353,9 @@ void I2Cx_EV_IRQHANDLER(void)
         /* Enable buffer Interrupts */
         I2C_ITConfig(I2Cx, I2C_IT_BUF , ENABLE);
       }
-    }  
+    }
 #endif /* I2C_10BITS_ADDRESS */
-    
+
     else if(I2C_GetITStatus(I2Cx, I2C_IT_ADDR)== SET)
     {
       if (NumberOfByteToReceive == 1)
@@ -364,14 +364,14 @@ void I2Cx_EV_IRQHANDLER(void)
       }
       /* Clear ADDR Register */
       (void)(I2Cx->SR1);
-      (void)(I2Cx->SR2);  
+      (void)(I2Cx->SR2);
       if (GenerateStartStatus == 0x00)
-      { 
+      {
         if (NumberOfByteToReceive == 1)
         {
-          I2C_GenerateSTOP(I2Cx, ENABLE);  
-        }  
-        
+          I2C_GenerateSTOP(I2Cx, ENABLE);
+        }
+
         if (NumberOfByteToReceive == 2)
         {
           I2C_AcknowledgeConfig(I2Cx, DISABLE);
@@ -380,35 +380,35 @@ void I2Cx_EV_IRQHANDLER(void)
           I2C_ITConfig(I2Cx, I2C_IT_BUF , DISABLE);
         }
       }
-      
-#ifdef I2C_10BITS_ADDRESS   
+
+#ifdef I2C_10BITS_ADDRESS
       if (GenerateStartStatus == 0x01)
       {
         /* Repeated Start */
         I2C_GenerateSTART(I2Cx, ENABLE);
         GenerateStartStatus = 0x00;
       }
-      
+
 #endif /* I2C_10BITS_ADDRESS */
-    } 
+    }
     else if((I2C_GetITStatus(I2Cx, I2C_IT_RXNE)== SET)&&(I2C_GetITStatus(I2Cx, I2C_IT_BTF)== RESET))
     {
       /* Store I2C received data */
       RxBuffer[Rx_Idx++] = I2C_ReceiveData (I2Cx);
       NumberOfByteToReceive--;
-      
+
       if (NumberOfByteToReceive == 0x03)
       {
         /* Disable buffer Interrupts */
         I2C_ITConfig(I2Cx, I2C_IT_BUF , DISABLE);
       }
-      
+
       if (NumberOfByteToReceive == 0x00)
       {
         /* Disable Error and Buffer Interrupts */
-        I2C_ITConfig(I2Cx, (I2C_IT_EVT | I2C_IT_BUF), DISABLE);            
+        I2C_ITConfig(I2Cx, (I2C_IT_EVT | I2C_IT_BUF), DISABLE);
       }
-    }    
+    }
     /* BUSY, MSL and RXNE flags */
     else if(I2C_GetITStatus(I2Cx, I2C_IT_BTF)== SET)
     {
@@ -418,50 +418,50 @@ void I2Cx_EV_IRQHANDLER(void)
         I2C_AcknowledgeConfig(I2Cx, DISABLE);
         /* Store I2C received data */
         RxBuffer[Rx_Idx++] = I2C_ReceiveData (I2Cx);
-        NumberOfByteToReceive--;        
-      } 
+        NumberOfByteToReceive--;
+      }
       else if (NumberOfByteToReceive == 2)
-      {           
-        I2C_GenerateSTOP(I2Cx, ENABLE);    
-        
+      {
+        I2C_GenerateSTOP(I2Cx, ENABLE);
+
         /* Store I2C received data */
         RxBuffer[Rx_Idx++] = I2C_ReceiveData (I2Cx);
         NumberOfByteToReceive--;
         /* Store I2C received data */
         RxBuffer[Rx_Idx++] = I2C_ReceiveData (I2Cx);
-        NumberOfByteToReceive--;        
+        NumberOfByteToReceive--;
         /* Disable Error and Buffer Interrupts */
-        I2C_ITConfig(I2Cx, (I2C_IT_EVT | I2C_IT_BUF), DISABLE);            
+        I2C_ITConfig(I2Cx, (I2C_IT_EVT | I2C_IT_BUF), DISABLE);
       }
-      else 
+      else
       {
         /* Store I2C received data */
         RxBuffer[Rx_Idx++] = I2C_ReceiveData (I2Cx);
         NumberOfByteToReceive--;
       }
-    } 
-  }  
+    }
+  }
 #endif /* I2C_MASTER*/
-  
+
 
 #if defined (I2C_SLAVE)
   /* Get Last I2C Event */
   Event = I2C_GetLastEvent(I2Cx);
   switch (Event)
-  { 
+  {
     /* ****************************************************************************/
     /*                          Slave Transmitter Events                          */
     /*                                                                            */
-    /* ****************************************************************************/  
-    
+    /* ****************************************************************************/
+
     /* Check on EV1 */
-  case I2C_EVENT_SLAVE_TRANSMITTER_ADDRESS_MATCHED:  
+  case I2C_EVENT_SLAVE_TRANSMITTER_ADDRESS_MATCHED:
     I2C_SendData(I2Cx, TxBuffer[Tx_Idx++]);
     I2C_ITConfig(I2Cx, I2C_IT_BUF , ENABLE);
     break;
     /* Check on EV3 */
   case I2C_EVENT_SLAVE_BYTE_TRANSMITTING:
-  case I2C_EVENT_SLAVE_BYTE_TRANSMITTED:    
+  case I2C_EVENT_SLAVE_BYTE_TRANSMITTED:
     if (Tx_Idx < NumberOfByteToTransmit)
     {
       I2C_SendData(I2Cx, TxBuffer[Tx_Idx++]);
@@ -472,33 +472,33 @@ void I2Cx_EV_IRQHANDLER(void)
       I2C_ITConfig(I2Cx, I2C_IT_EVT  | I2C_IT_BUF, DISABLE);
     }
     break;
-    
+
     /* ****************************************************************************/
     /*                              Slave Receiver Events                         */
     /*                                                                            */
-    /* ****************************************************************************/ 
-    
+    /* ****************************************************************************/
+
     /* check on EV1*/
   case I2C_EVENT_SLAVE_RECEIVER_ADDRESS_MATCHED:
     Rx_Idx = 0x00;
     break;
-    
+
     /* Check on EV2*/
-  case I2C_EVENT_SLAVE_BYTE_RECEIVED:  
-  case (I2C_EVENT_SLAVE_BYTE_RECEIVED | I2C_SR1_BTF):  
+  case I2C_EVENT_SLAVE_BYTE_RECEIVED:
+  case (I2C_EVENT_SLAVE_BYTE_RECEIVED | I2C_SR1_BTF):
     RxBuffer[Rx_Idx++] = I2C_ReceiveData(I2Cx);
     break;
- 
+
     /* Check on EV4 */
-  case I2C_EVENT_SLAVE_STOP_DETECTED:             
+  case I2C_EVENT_SLAVE_STOP_DETECTED:
     I2C_GetFlagStatus(I2Cx, I2C_FLAG_STOPF);
     I2C_Cmd(I2Cx, ENABLE);
     break;
-    
+
   default:
     break;
   }
-#endif /* I2C_SLAVE*/  
+#endif /* I2C_SLAVE*/
 }
 /**
   * @brief  This function handles PPP interrupt request.
@@ -511,7 +511,7 @@ void I2Cx_EV_IRQHANDLER(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}

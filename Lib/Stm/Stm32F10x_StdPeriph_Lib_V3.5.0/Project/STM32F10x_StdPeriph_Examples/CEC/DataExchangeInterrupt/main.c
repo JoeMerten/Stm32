@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CEC/DataExchangeInterrupt/main.c 
+  * @file    CEC/DataExchangeInterrupt/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup CEC_DataExchangeInterrupt
   * @{
-  */  
+  */
 
 
 /* Private typedef -----------------------------------------------------------*/
@@ -51,7 +51,7 @@ void RCC_Configuration(void);
 void NVIC_Configuration(void);
 void GPIO_Configuration(void);
 TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
-  
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -61,13 +61,13 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* RCC configuration */
   RCC_Configuration();
 
@@ -82,12 +82,12 @@ int main(void)
   CEC_InitStructure.CEC_BitPeriodMode = CEC_BitPeriodStdMode;
   CEC_Init(&CEC_InitStructure);
 
-  /* Set Prescaler value for APB1 clock PCLK1 = 24MHz */ 
+  /* Set Prescaler value for APB1 clock PCLK1 = 24MHz */
   CEC_SetPrescaler(0x4AF);
 
   /* Set the CEC initiator address */
   CEC_OwnAddressConfig(MY_DEVICE_ADDRESS);
-  
+
   /* Activate CEC interrupts associated to the set of RBTF,RERR, TBTF, TERR flags */
   CEC_ITConfig(ENABLE);
 
@@ -98,22 +98,22 @@ int main(void)
   while(ReceivedFrame == 0)
   {
   }
-  
+
   /* Check the received data with the send ones */
   TransferStatus = Buffercmp(TransmitBuffer, ReceiveBuffer, ByteNumber);
-  /* TransferStatus = PASSED, if the data transmitted from CEC Device1 and  
+  /* TransferStatus = PASSED, if the data transmitted from CEC Device1 and
      received by CEC Device2 are the same */
-  /* TransferStatus = FAILED, if the data transmitted from CEC Device1 and 
+  /* TransferStatus = FAILED, if the data transmitted from CEC Device1 and
      received by CEC Device2 are different */
- 
+
   if (TransferStatus == PASSED)
-  { 
+  {
     /* OK */
     /* Turn on LED1 */
     STM_EVAL_LEDOn(LED1);
   }
   else
-  { 
+  {
     /* KO */
     /* Turn on LED2 */
     STM_EVAL_LEDOn(LED2);
@@ -175,7 +175,7 @@ void GPIO_Configuration(void)
 
   /* Enable GPIOB  clocks */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
- 
+
   /* Configure GPIOB Pin 8 (CEC line) as Output open drain */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -198,12 +198,12 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
     {
       return FAILED;
     }
-    
+
     pBuffer1++;
     pBuffer2++;
   }
 
-  return PASSED;  
+  return PASSED;
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -230,10 +230,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

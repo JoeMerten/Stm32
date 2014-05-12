@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_PWMInput/main.c 
+  * @file    TIM/TIM_PWMInput/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup TIM_PWMInput
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -54,33 +54,33 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
      */
-       
+
   /* TIM Configuration */
   TIM_Config();
 
-  
-  /* --------------------------------------------------------------------------- 
+
+  /* ---------------------------------------------------------------------------
     TIM4 configuration: PWM Input mode
 
-    In this example TIM4 input clock (TIM4CLK) is set to 2 * APB1 clock (PCLK1), 
-    since APB1 prescaler is different from 1.   
-      TIM4CLK = 2 * PCLK1  
-      PCLK1 = HCLK / 4 
+    In this example TIM4 input clock (TIM4CLK) is set to 2 * APB1 clock (PCLK1),
+    since APB1 prescaler is different from 1.
+      TIM4CLK = 2 * PCLK1
+      PCLK1 = HCLK / 4
       => TIM4CLK = HCLK / 2 = SystemCoreClock /2
 
-    External Signal Frequency = TIM4 counter clock / TIM4_CCR2 in Hz. 
+    External Signal Frequency = TIM4 counter clock / TIM4_CCR2 in Hz.
 
     External Signal DutyCycle = (TIM4_CCR1*100)/(TIM4_CCR2) in %.
 
   --------------------------------------------------------------------------- */
-  
+
   TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;
   TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising;
   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
@@ -120,7 +120,7 @@ void TIM_Config(void)
 
   /* GPIOB clock enable */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
-  
+
   /* TIM4 chennel2 configuration : PB.07 */
   GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_7;
   GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF;
@@ -128,7 +128,7 @@ void TIM_Config(void)
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_UP ;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
-  
+
   /* Connect TIM pin to AF2 */
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource7, GPIO_AF_TIM4);
 
@@ -162,10 +162,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

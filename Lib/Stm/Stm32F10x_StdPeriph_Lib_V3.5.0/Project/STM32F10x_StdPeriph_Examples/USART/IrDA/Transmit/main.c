@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/IrDA/Transmit/main.c 
+  * @file    USART/IrDA/Transmit/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup USART_IrDA_Transmit
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -52,13 +52,13 @@ JOYState_TypeDef ReadKey(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -66,7 +66,7 @@ int main(void)
   GPIO_Configuration();
 
 #ifndef USE_STM3210C_EVAL
-  /* Initialize JoyStick Button mounted on STM3210X-EVAL board */       
+  /* Initialize JoyStick Button mounted on STM3210X-EVAL board */
   STM_EVAL_PBInit(BUTTON_UP, BUTTON_MODE_GPIO);
   STM_EVAL_PBInit(BUTTON_DOWN, BUTTON_MODE_GPIO);
   STM_EVAL_PBInit(BUTTON_LEFT, BUTTON_MODE_GPIO);
@@ -80,11 +80,11 @@ int main(void)
     while(1);
   }
 
-#endif  
-     
+#endif
+
 /* USARTy configuration ------------------------------------------------------*/
   /* USARTy configured as follow:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -152,7 +152,7 @@ int main(void)
         USART_SendData(USARTy, JOY_NONE);
         while(USART_GetFlagStatus(USARTy, USART_FLAG_TXE) == RESET)
         {
-        } 
+        }
         break;
       default:
         break;
@@ -166,10 +166,10 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{  
+{
   /* Enable GPIO clock */
   RCC_APB2PeriphClockCmd(USARTy_GPIO_CLK | RCC_APB2Periph_AFIO, ENABLE);
-  
+
   /* Enable USARTy clocks */
   RCC_APB1PeriphClockCmd(USARTy_CLK, ENABLE);
 }
@@ -189,14 +189,14 @@ void GPIO_Configuration(void)
 #else
   /* Enable the USART2 Pins Software Remapping */
   GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
-#endif  
+#endif
 
   /* Configure USARTy Tx as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin = USARTy_TxPin;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(USARTy_GPIO, &GPIO_InitStructure);
-  
+
   /* Configure USARTy Rx as input floating */
   GPIO_InitStructure.GPIO_Pin = USARTy_RxPin;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
@@ -215,40 +215,40 @@ JOYState_TypeDef ReadKey(void)
   if(!STM_EVAL_PBGetState(BUTTON_RIGHT))
   {
     while(STM_EVAL_PBGetState(BUTTON_RIGHT) == Bit_RESET);
-    return JOY_RIGHT; 
+    return JOY_RIGHT;
   }
   /* "left" key is pressed */
   if(!STM_EVAL_PBGetState(BUTTON_LEFT))
   {
     while(STM_EVAL_PBGetState(BUTTON_LEFT) == Bit_RESET);
-    return JOY_LEFT; 
+    return JOY_LEFT;
   }
   /* "up" key is pressed */
   if(!STM_EVAL_PBGetState(BUTTON_UP))
   {
     while(STM_EVAL_PBGetState(BUTTON_UP) == Bit_RESET);
-    return JOY_UP; 
+    return JOY_UP;
   }
   /* "down" key is pressed */
   if(!STM_EVAL_PBGetState(BUTTON_DOWN))
   {
     while(STM_EVAL_PBGetState(BUTTON_DOWN) == Bit_RESET);
-    return JOY_DOWN; 
+    return JOY_DOWN;
   }
   /* "sel" key is pressed */
   if(!STM_EVAL_PBGetState(BUTTON_SEL))
   {
     while(STM_EVAL_PBGetState(BUTTON_SEL) == Bit_RESET);
-    return JOY_SEL; 
+    return JOY_SEL;
   }
   /* No key is pressed */
-  else 
+  else
   {
     return JOY_NONE;
   }
 #else
   return IOE_JoyStickGetState();
-#endif  
+#endif
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -261,7 +261,7 @@ JOYState_TypeDef ReadKey(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -275,10 +275,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

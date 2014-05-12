@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/STOP/main.c 
+  * @file    PWR/STOP/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -35,7 +35,7 @@
 
 /** @addtogroup PWR_STOP
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -63,13 +63,13 @@ void SYSCLKConfig_STOP(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
-     */     
-       
+     */
+
   /* Configure the SysTick to generate an interrupt each 250 ms */
   SysTick_Configuration();
 
@@ -97,11 +97,11 @@ int main(void)
 
     /* Enter Stop Mode */
     PWR_EnterSTOPMode(PWR_Regulator_LowPower, PWR_STOPEntry_WFI);
-    
+
     /* Disable Wakeup Counter */
     RTC_WakeUpCmd(DISABLE);
 
-    /* Configures system clock after wake-up from STOP: enable HSE, PLL and select 
+    /* Configures system clock after wake-up from STOP: enable HSE, PLL and select
        PLL as system clock source (HSE and PLL are disabled in STOP mode) */
     SYSCLKConfig_STOP();
   }
@@ -117,7 +117,7 @@ void RTC_Config(void)
   EXTI_InitTypeDef  EXTI_InitStructure;
   NVIC_InitTypeDef  NVIC_InitStructure;
   __IO uint32_t AsynchPrediv = 0, SynchPrediv = 0;
- 
+
   /* Enable the PWR clock */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
 
@@ -125,18 +125,18 @@ void RTC_Config(void)
   PWR_BackupAccessCmd(ENABLE);
 
 #if defined (RTC_CLOCK_SOURCE_LSI)  /* LSI used as RTC source clock*/
-/* The RTC Clock may varies due to LSI frequency dispersion. */   
-  /* Enable the LSI OSC */ 
+/* The RTC Clock may varies due to LSI frequency dispersion. */
+  /* Enable the LSI OSC */
   RCC_LSICmd(ENABLE);
 
-  /* Wait till LSI is ready */  
+  /* Wait till LSI is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET)
   {
   }
 
   /* Select the RTC Clock Source */
   RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
-  
+
   SynchPrediv = 0xFF;
   AsynchPrediv = 0x7F;
 
@@ -144,21 +144,21 @@ void RTC_Config(void)
   /* Enable the LSE OSC */
   RCC_LSEConfig(RCC_LSE_ON);
 
-  /* Wait till LSE is ready */  
+  /* Wait till LSE is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)
   {
   }
 
   /* Select the RTC Clock Source */
   RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
-  
+
   SynchPrediv = 0xFF;
   AsynchPrediv = 0x7F;
 
 #else
   #error Please select the RTC Clock source inside the main.c file
 #endif /* RTC_CLOCK_SOURCE_LSI */
-  
+
   /* Enable the RTC Clock */
   RCC_RTCCLKCmd(ENABLE);
 
@@ -182,7 +182,7 @@ void RTC_Config(void)
   EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
   EXTI_InitStructure.EXTI_LineCmd = ENABLE;
   EXTI_Init(&EXTI_InitStructure);
-  
+
   /* Enable the RTC Wakeup Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = RTC_WKUP_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
@@ -203,21 +203,21 @@ void SYSCLKConfig_STOP(void)
   /* After wake-up from STOP reconfigure the system clock */
   /* Enable HSE */
   RCC_HSEConfig(RCC_HSE_ON);
-  
+
   /* Wait till HSE is ready */
   while (RCC_GetFlagStatus(RCC_FLAG_HSERDY) == RESET)
   {}
-  
+
   /* Enable PLL */
   RCC_PLLCmd(ENABLE);
-  
+
   /* Wait till PLL is ready */
   while (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)
   {}
-  
+
   /* Select PLL as system clock source */
   RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
-  
+
   /* Wait till PLL is used as system clock source */
   while (RCC_GetSYSCLKSource() != 0x08)
   {}
@@ -232,8 +232,8 @@ void SysTick_Configuration(void)
 {
   /* SysTick interrupt each 250 ms */
   if (SysTick_Config((SystemCoreClock/8) / 4))
-  { 
-    /* Capture error */ 
+  {
+    /* Capture error */
     while (1);
   }
 
@@ -267,7 +267,7 @@ void Delay(__IO uint32_t nTime)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -280,10 +280,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

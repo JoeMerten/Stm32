@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    SPI/Simplex_Interrupt/main.c 
+  * @file    SPI/Simplex_Interrupt/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup SPI_Simplex_Interrupt
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -63,13 +63,13 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System clocks configuration ---------------------------------------------*/
   RCC_Configuration();
 
@@ -129,7 +129,7 @@ int main(void)
 void RCC_Configuration(void)
 {
   /* PCLK2 = HCLK/2 */
-  RCC_PCLK2Config(RCC_HCLK_Div2); 
+  RCC_PCLK2Config(RCC_HCLK_Div2);
 
 /* Enable peripheral clocks --------------------------------------------------*/
 #ifdef USE_STM3210C_EVAL
@@ -138,7 +138,7 @@ void RCC_Configuration(void)
                          RCC_APB2Periph_AFIO, ENABLE);
 
   /* Enable SPI_MASTER Periph clock */
-  RCC_APB1PeriphClockCmd(SPI_MASTER_CLK, ENABLE);                           
+  RCC_APB1PeriphClockCmd(SPI_MASTER_CLK, ENABLE);
 #else
   /* Enable SPI_MASTER clock and GPIO clock for SPI_MASTER and SPI_SLAVE */
   RCC_APB2PeriphClockCmd(SPI_MASTER_GPIO_CLK | SPI_SLAVE_GPIO_CLK |
@@ -168,7 +168,7 @@ void GPIO_Configuration(void)
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(SPI_MASTER_GPIO, &GPIO_InitStructure);
-  
+
   /* Configure SPI_SLAVE pins: SCK and MISO ---------------------------------*/
   /* Configure SCK and MOSI pins as Input Floating */
   GPIO_InitStructure.GPIO_Pin = SPI_SLAVE_PIN_SCK ;
@@ -252,10 +252,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_6Steps/stm32f4xx_it.c 
+  * @file    TIM/TIM_6Steps/stm32f4xx_it.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -36,7 +36,7 @@
 
 /** @addtogroup TIM_6Steps
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -150,7 +150,7 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief  This function handles TIM1 Trigger and commutation and TIM11 
+  * @brief  This function handles TIM1 Trigger and commutation and TIM11
   *         global interrupts requests.
   * @param  None
   * @retval None
@@ -185,7 +185,7 @@ void TIM1_TRG_COM_TIM11_IRQHandler(void)
     TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
     TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
     TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Enable);
-    
+
     /*  Channel3 configuration */
     TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
     TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Enable);
@@ -272,10 +272,10 @@ void TIM1_TRG_COM_TIM11_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

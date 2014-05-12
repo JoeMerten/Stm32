@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DMA/FSMC/main.c 
+  * @file    DMA/FSMC/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #ifdef STM32F10X_HD_VL /* High-density Value line devices */
@@ -32,7 +32,7 @@
 
 /** @addtogroup DMA_FSMC
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -70,13 +70,13 @@ TestStatus Buffercmp(const uint32_t* pBuffer, uint32_t* pBuffer1, uint16_t Buffe
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -87,7 +87,7 @@ int main(void)
   /* DMA2 channel5 configuration */
   DMA_DeInit(DMA2_Channel5);
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)SRC_Const_Buffer;
-  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)Bank1_SRAM3_ADDR;    
+  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)Bank1_SRAM3_ADDR;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
   DMA_InitStructure.DMA_BufferSize = 32;
   DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Enable;
@@ -109,12 +109,12 @@ int main(void)
   DMA_ClearFlag(DMA2_FLAG_TC5);
 
   /* Read from FSMC ----------------------------------------------------------*/
-  /* Destination buffer initialization */ 
+  /* Destination buffer initialization */
   for(Idx=0; Idx<128; Idx++) DST_Buffer[Idx]=0;
 
   /* DMA1 channel3 configuration */
   DMA_DeInit(DMA1_Channel3);
-  DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)Bank1_SRAM3_ADDR;  
+  DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)Bank1_SRAM3_ADDR;
   DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)DST_Buffer;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
   DMA_InitStructure.DMA_BufferSize = 128;
@@ -138,9 +138,9 @@ int main(void)
 
   /* Check if the transmitted and received data are equal */
   TransferStatus = Buffercmp(SRC_Const_Buffer, (uint32_t*)DST_Buffer, BufferSize);
-  /* TransferStatus = PASSED, if the transmitted and received data 
+  /* TransferStatus = PASSED, if the transmitted and received data
      are the same */
-  /* TransferStatus = FAILED, if the transmitted and received data 
+  /* TransferStatus = FAILED, if the transmitted and received data
      are different */
 
   while (1)
@@ -154,7 +154,7 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{   
+{
   /* Enable peripheral clocks ------------------------------------------------*/
   /* DMA1 and DMA2 clock enable */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1 | RCC_AHBPeriph_DMA2, ENABLE);
@@ -177,12 +177,12 @@ TestStatus Buffercmp(const uint32_t* pBuffer, uint32_t* pBuffer1, uint16_t Buffe
     {
       return FAILED;
     }
-    
+
     pBuffer++;
     pBuffer1++;
   }
 
-  return PASSED;  
+  return PASSED;
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -195,7 +195,7 @@ TestStatus Buffercmp(const uint32_t* pBuffer, uint32_t* pBuffer1, uint16_t Buffe
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -209,10 +209,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

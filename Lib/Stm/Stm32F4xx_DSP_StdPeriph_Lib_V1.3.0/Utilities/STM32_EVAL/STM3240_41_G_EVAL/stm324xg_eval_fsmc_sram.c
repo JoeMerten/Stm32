@@ -6,7 +6,7 @@
   * @date    19-September-2013
   * @brief   This file provides a set of functions needed to drive the
   *          IS61WV102416BLL SRAM memory mounted on STM324xG-EVAL evaluation
-  *          board(MB786) RevB.    
+  *          board(MB786) RevB.
   ******************************************************************************
   * @attention
   *
@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -43,7 +43,7 @@
   */
 
 /** @addtogroup STM324xG_EVAL_FSMC_SRAM
-  * @brief     This file provides a set of functions needed to drive the 
+  * @brief     This file provides a set of functions needed to drive the
   *            CY7C1071DV33-12BAXI SRAM memory mounted on STM324xG-EVAL board.
   * @{
   */
@@ -62,7 +62,7 @@
 /**
   * @brief  FSMC Bank 1 NOR/SRAM2
   */
-#define Bank1_SRAM2_ADDR  ((uint32_t)0x64000000)  
+#define Bank1_SRAM2_ADDR  ((uint32_t)0x64000000)
 
 /**
   * @}
@@ -108,15 +108,15 @@ void SRAM_Init(void)
 {
   FSMC_NORSRAMInitTypeDef  FSMC_NORSRAMInitStructure;
   FSMC_NORSRAMTimingInitTypeDef  p;
-  GPIO_InitTypeDef GPIO_InitStructure; 
-  
+  GPIO_InitTypeDef GPIO_InitStructure;
+
   /* Enable GPIOs clock */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD | RCC_AHB1Periph_GPIOE | RCC_AHB1Periph_GPIOF |
                          RCC_AHB1Periph_GPIOG, ENABLE);
 
   /* Enable FSMC clock */
-  RCC_AHB3PeriphClockCmd(RCC_AHB3Periph_FSMC, ENABLE); 
-  
+  RCC_AHB3PeriphClockCmd(RCC_AHB3Periph_FSMC, ENABLE);
+
 /*-- GPIOs Configuration -----------------------------------------------------*/
 /*
  +-------------------+--------------------+------------------+------------------+
@@ -147,13 +147,13 @@ void SRAM_Init(void)
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource8, GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource9, GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource10, GPIO_AF_FSMC);
-  GPIO_PinAFConfig(GPIOD, GPIO_PinSource11, GPIO_AF_FSMC); 
+  GPIO_PinAFConfig(GPIOD, GPIO_PinSource11, GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource12, GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource13, GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource14, GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource15, GPIO_AF_FSMC);
 
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0  | GPIO_Pin_1  | GPIO_Pin_4  | GPIO_Pin_5  | 
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0  | GPIO_Pin_1  | GPIO_Pin_4  | GPIO_Pin_5  |
                                 GPIO_Pin_8  | GPIO_Pin_9  | GPIO_Pin_10 | GPIO_Pin_11 |
                                 GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
@@ -182,7 +182,7 @@ void SRAM_Init(void)
   GPIO_PinAFConfig(GPIOE, GPIO_PinSource14 , GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOE, GPIO_PinSource15 , GPIO_AF_FSMC);
 
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0  | GPIO_Pin_1  | GPIO_Pin_2  | GPIO_Pin_3 |  
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0  | GPIO_Pin_1  | GPIO_Pin_2  | GPIO_Pin_3 |
                                 GPIO_Pin_4  | GPIO_Pin_5  | GPIO_Pin_6  | GPIO_Pin_7 |
                                 GPIO_Pin_8  | GPIO_Pin_9  | GPIO_Pin_10 | GPIO_Pin_11|
                                 GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
@@ -202,9 +202,9 @@ void SRAM_Init(void)
   GPIO_PinAFConfig(GPIOF, GPIO_PinSource14 , GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOF, GPIO_PinSource15 , GPIO_AF_FSMC);
 
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0  | GPIO_Pin_1  | GPIO_Pin_2  | GPIO_Pin_3  | 
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0  | GPIO_Pin_1  | GPIO_Pin_2  | GPIO_Pin_3  |
                                 GPIO_Pin_4  | GPIO_Pin_5  | GPIO_Pin_12 | GPIO_Pin_13 |
-                                GPIO_Pin_14 | GPIO_Pin_15;      
+                                GPIO_Pin_14 | GPIO_Pin_15;
 
   GPIO_Init(GPIOF, &GPIO_InitStructure);
 
@@ -218,8 +218,8 @@ void SRAM_Init(void)
   GPIO_PinAFConfig(GPIOG, GPIO_PinSource5 , GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOG, GPIO_PinSource9 , GPIO_AF_FSMC);
 
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0  | GPIO_Pin_1  | GPIO_Pin_2  | GPIO_Pin_3 | 
-                                GPIO_Pin_4  | GPIO_Pin_5  |GPIO_Pin_9;      
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0  | GPIO_Pin_1  | GPIO_Pin_2  | GPIO_Pin_3 |
+                                GPIO_Pin_4  | GPIO_Pin_5  |GPIO_Pin_9;
 
   GPIO_Init(GPIOG, &GPIO_InitStructure);
 
@@ -237,7 +237,7 @@ void SRAM_Init(void)
   FSMC_NORSRAMInitStructure.FSMC_MemoryType = FSMC_MemoryType_SRAM;
   FSMC_NORSRAMInitStructure.FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_16b;
   FSMC_NORSRAMInitStructure.FSMC_BurstAccessMode = FSMC_BurstAccessMode_Disable;
-  FSMC_NORSRAMInitStructure.FSMC_AsynchronousWait = FSMC_AsynchronousWait_Disable;  
+  FSMC_NORSRAMInitStructure.FSMC_AsynchronousWait = FSMC_AsynchronousWait_Disable;
   FSMC_NORSRAMInitStructure.FSMC_WaitSignalPolarity = FSMC_WaitSignalPolarity_Low;
   FSMC_NORSRAMInitStructure.FSMC_WrapMode = FSMC_WrapMode_Disable;
   FSMC_NORSRAMInitStructure.FSMC_WaitSignalActive = FSMC_WaitSignalActive_BeforeWaitState;
@@ -248,10 +248,10 @@ void SRAM_Init(void)
   FSMC_NORSRAMInitStructure.FSMC_ReadWriteTimingStruct = &p;
   FSMC_NORSRAMInitStructure.FSMC_WriteTimingStruct = &p;
 
-  FSMC_NORSRAMInit(&FSMC_NORSRAMInitStructure); 
+  FSMC_NORSRAMInit(&FSMC_NORSRAMInitStructure);
 
   /*!< Enable FSMC Bank1_SRAM2 Bank */
-  FSMC_NORSRAMCmd(FSMC_Bank1_NORSRAM2, ENABLE); 
+  FSMC_NORSRAMCmd(FSMC_Bank1_NORSRAM2, ENABLE);
 
 }
 

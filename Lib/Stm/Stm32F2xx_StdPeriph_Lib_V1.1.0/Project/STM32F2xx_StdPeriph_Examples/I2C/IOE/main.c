@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2C/IOE/main.c 
+  * @file    I2C/IOE/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -34,7 +34,7 @@
 
 /** @addtogroup I2C_IOE
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -42,7 +42,7 @@
 /* Private variables ---------------------------------------------------------*/
 static __IO uint32_t TimingDelay;
 RCC_ClocksTypeDef RCC_Clocks;
-    
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -52,17 +52,17 @@ RCC_ClocksTypeDef RCC_Clocks;
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
-     */     
+     */
 
   /* SysTick end of count event each 10ms */
   RCC_GetClocksFreq(&RCC_Clocks);
   SysTick_Config(RCC_Clocks.HCLK_Frequency / 100);
-         
+
   /* Initialize LEDs and push-buttons mounted on STM322xG-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
@@ -76,18 +76,18 @@ int main(void)
 
   /* Initialize the LCD */
   STM322xG_LCD_Init();
- 
-  /* Clear the LCD */ 
+
+  /* Clear the LCD */
   LCD_Clear(White);
   /* Set the LCD Back Color */
   LCD_SetBackColor(Blue);
   /* Set the LCD Text Color */
-  LCD_SetTextColor(White);    
- 
+  LCD_SetTextColor(White);
+
   LCD_DisplayStringLine(Line0, (uint8_t *)"   STM322xG-EVAL    ");
   LCD_DisplayStringLine(Line1, (uint8_t *)"  Example on how to ");
   LCD_DisplayStringLine(Line2, (uint8_t *)" use the IO Expander");
-  
+
   /* Configure the IO Expander */
   if (IOE_Config() == IOE_OK)
   {
@@ -114,19 +114,19 @@ int main(void)
 
 #ifdef IOE_INTERRUPT_MODE
   /* Enable the Touch Screen and Joystick interrupts */
-  IOE_ITConfig(IOE_ITSRC_JOYSTICK | IOE_ITSRC_TSC); 
+  IOE_ITConfig(IOE_ITSRC_JOYSTICK | IOE_ITSRC_TSC);
 #endif /* IOE_INTERRUPT_MODE */
-  
-  
+
+
   while(1)
   {
 #ifdef IOE_POLLING_MODE
     static JOY_State_TypeDef JoyState = JOY_NONE;
     static TS_STATE* TS_State;
-    
+
     /* Get the Joystick State */
     JoyState = IOE_JoyStickGetState();
-   
+
     switch (JoyState)
     {
       case JOY_NONE:
@@ -134,27 +134,27 @@ int main(void)
         break;
       case JOY_UP:
         LCD_DisplayStringLine(Line5, (uint8_t *)"JOY:     UP         ");
-        break;     
+        break;
       case JOY_DOWN:
         LCD_DisplayStringLine(Line5, (uint8_t *)"JOY:    DOWN        ");
-        break;          
+        break;
       case JOY_LEFT:
         LCD_DisplayStringLine(Line5, (uint8_t *)"JOY:    LEFT        ");
-        break;         
+        break;
       case JOY_RIGHT:
         LCD_DisplayStringLine(Line5, (uint8_t *)"JOY:    RIGHT        ");
-        break;                 
+        break;
       case JOY_CENTER:
         LCD_DisplayStringLine(Line5, (uint8_t *)"JOY:   CENTER       ");
-        break; 
+        break;
       default:
         LCD_DisplayStringLine(Line5, (uint8_t *)"JOY:   ERROR      ");
-        break;         
+        break;
     }
 
     /* Update the structure with the current position */
-    TS_State = IOE_TS_GetState();  
-    
+    TS_State = IOE_TS_GetState();
+
     if ((TS_State->TouchDetected) && (TS_State->Y < 220) && (TS_State->Y > 180))
     {
       if ((TS_State->X > 10) && (TS_State->X < 70))
@@ -171,7 +171,7 @@ int main(void)
       {
         LCD_DisplayStringLine(Line6, (uint8_t *)"           LD2      ");
         STM_EVAL_LEDOn(LED2);
-      }     
+      }
       else if ((TS_State->X > 250) && (TS_State->X < 310))
       {
         LCD_DisplayStringLine(Line6, (uint8_t *)"                LD1 ");
@@ -185,12 +185,12 @@ int main(void)
       STM_EVAL_LEDOff(LED3);
       STM_EVAL_LEDOff(LED4);
     }
-#endif /* IOE_POLLING_MODE */  
-    
+#endif /* IOE_POLLING_MODE */
+
 #ifdef BUTTON_POLLING_MODE
     /* Insert 10 ms delay */
     Delay(1);
-    
+
     if (STM_EVAL_PBGetState(BUTTON_KEY) == 0)
     {
       /* Toggle LD1 */
@@ -237,7 +237,7 @@ void Delay(uint32_t nTime)
 void TimingDelay_Decrement(void)
 {
   if (TimingDelay != 0x00)
-  { 
+  {
     TimingDelay--;
   }
 }
@@ -252,12 +252,12 @@ void TimingDelay_Decrement(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
   LCD_DisplayStringLine(Line0, "assert_param error!!");
-  
+
   /* Infinite loop */
   while (1)
   {
@@ -267,10 +267,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

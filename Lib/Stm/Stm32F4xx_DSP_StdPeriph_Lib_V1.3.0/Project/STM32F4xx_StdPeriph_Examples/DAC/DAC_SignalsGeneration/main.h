@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DAC/DAC_SignalsGeneration/main.h 
+  * @file    DAC/DAC_SignalsGeneration/main.h
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,15 +16,15 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
   */
-  
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -35,7 +35,7 @@
 #if defined (USE_STM324xG_EVAL)
   #include "stm324xg_eval.h"
 
-#elif defined (USE_STM324x7I_EVAL) 
+#elif defined (USE_STM324x7I_EVAL)
   #include "stm324x7i_eval.h"
 
 #else
@@ -49,7 +49,7 @@
   #define DAC_DHR12R2_ADDRESS    0x40007414
   #define DAC_DHR8R1_ADDRESS     0x40007410
 
-#else /* defined (USE_STM324x7I_EVAL)*/ 
+#else /* defined (USE_STM324x7I_EVAL)*/
   #define DAC_DHR12R2_ADDRESS    0x40007414
   #define DAC_DHR8R1_ADDRESS     0x40007410
 

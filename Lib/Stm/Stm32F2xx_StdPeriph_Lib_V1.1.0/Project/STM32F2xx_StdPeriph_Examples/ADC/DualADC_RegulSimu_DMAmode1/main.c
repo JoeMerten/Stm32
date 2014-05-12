@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    ADC/DualADC_RegulSimu_DMAmode1/main.c 
+  * @file    ADC/DualADC_RegulSimu_DMAmode1/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -34,7 +34,7 @@
 
 /** @addtogroup ADC_DualADC_RegulSimu_DMAmode1
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -73,7 +73,7 @@ int main(void)
 
   /* DMA2 Stream0 channel0 configuration **************************************/
   DMA_Config();
-  
+
   /* ADCs configuration ------------------------------------------------------*/
   /* Configure ADC Channel10, 11, 12 pin as analog input */
   GPIO_Config();
@@ -121,12 +121,12 @@ void ADC1_CH10_CH11_Config(void)
   ADC_InitStructure.ADC_ScanConvMode = ENABLE;
   ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
   ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
-  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC1;  
+  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC1;
   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
   ADC_InitStructure.ADC_NbrOfConversion = 2;
   ADC_Init(ADC1, &ADC_InitStructure);
 
-  /* ADC1 regular channels 10, 11 configuration */ 
+  /* ADC1 regular channels 10, 11 configuration */
   ADC_RegularChannelConfig(ADC1, ADC_Channel_10, 1, ADC_SampleTime_3Cycles);
   ADC_RegularChannelConfig(ADC1, ADC_Channel_11, 2, ADC_SampleTime_3Cycles);
 }
@@ -149,7 +149,7 @@ void ADC2_CH11_CH12_Config(void)
   ADC_InitStructure.ADC_NbrOfConversion = 2;
   ADC_Init(ADC2, &ADC_InitStructure);
 
-  /* ADC2 regular channels 11, 12 configuration */ 
+  /* ADC2 regular channels 11, 12 configuration */
   ADC_RegularChannelConfig(ADC2, ADC_Channel_11, 1, ADC_SampleTime_3Cycles);
   ADC_RegularChannelConfig(ADC2, ADC_Channel_12, 2, ADC_SampleTime_3Cycles);
 }
@@ -163,7 +163,7 @@ void DMA_Config(void)
 {
   DMA_InitTypeDef DMA_InitStructure;
 
-  DMA_InitStructure.DMA_Channel = DMA_Channel_0; 
+  DMA_InitStructure.DMA_Channel = DMA_Channel_0;
   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)&ADCDualConvertedValue;
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)ADC_CCR_ADDRESS;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
@@ -174,7 +174,7 @@ void DMA_Config(void)
   DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
   DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
   DMA_InitStructure.DMA_Priority = DMA_Priority_High;
-  DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Enable;         
+  DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Enable;
   DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull;
   DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
   DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
@@ -212,7 +212,7 @@ void GPIO_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -225,10 +225,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

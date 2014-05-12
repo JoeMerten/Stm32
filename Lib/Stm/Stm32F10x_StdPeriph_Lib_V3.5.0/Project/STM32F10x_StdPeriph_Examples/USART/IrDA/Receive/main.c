@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/IrDA/Receive/main.c 
+  * @file    USART/IrDA/Receive/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup USART_IrDA_Receive
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -51,13 +51,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -69,10 +69,10 @@ int main(void)
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
-  
+
 /* USARTy configuration ------------------------------------------------------*/
   /* USARTy configured as follow:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -85,7 +85,7 @@ int main(void)
   USART_InitStructure.USART_Parity = USART_Parity_No ;
   USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-  
+
   /* Configure the USARTy */
   USART_Init(USARTy, &USART_InitStructure);
   /* Enable the USARTy */
@@ -114,13 +114,13 @@ int main(void)
         STM_EVAL_LEDOn(LED1);
         STM_EVAL_LEDOff(LED2);
         STM_EVAL_LEDOff(LED3);
-        STM_EVAL_LEDOff(LED4);     
+        STM_EVAL_LEDOff(LED4);
         break;
       case JOY_DOWN:
         STM_EVAL_LEDOn(LED2);
         STM_EVAL_LEDOff(LED1);
         STM_EVAL_LEDOff(LED3);
-        STM_EVAL_LEDOff(LED4); 
+        STM_EVAL_LEDOff(LED4);
         break;
       case JOY_LEFT:
         STM_EVAL_LEDOn(LED3);
@@ -132,7 +132,7 @@ int main(void)
         STM_EVAL_LEDOn(LED4);
         STM_EVAL_LEDOff(LED1);
         STM_EVAL_LEDOff(LED2);
-        STM_EVAL_LEDOff(LED3);        
+        STM_EVAL_LEDOff(LED3);
         break;
       case JOY_SEL:
         STM_EVAL_LEDOn(LED1);
@@ -154,10 +154,10 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{   
+{
   /* Enable GPIO clock */
   RCC_APB2PeriphClockCmd(USARTy_GPIO_CLK | RCC_APB2Periph_AFIO, ENABLE);
-  
+
   /* Enable USARTy clocks */
   RCC_APB1PeriphClockCmd(USARTy_CLK, ENABLE);
 }
@@ -177,14 +177,14 @@ void GPIO_Configuration(void)
 #else
   /* Enable the USART2 Pins Software Remapping */
   GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
-#endif  
+#endif
 
   /* Configure USARTy Tx as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin = USARTy_TxPin;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(USARTy_GPIO, &GPIO_InitStructure);
-  
+
   /* Configure USARTy Rx as input floating */
   GPIO_InitStructure.GPIO_Pin = USARTy_RxPin;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
@@ -201,7 +201,7 @@ void GPIO_Configuration(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -215,10 +215,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V4.5.0
   * @date    07-March-2011
-  * @brief   This file contains all the functions prototypes for the 
+  * @brief   This file contains all the functions prototypes for the
   *          stm32100e_eval_fsmc_sram firmware driver.
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
+  ******************************************************************************
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32100E_EVAL_FSMC_SRAM_H
@@ -34,18 +34,18 @@
 /** @addtogroup Utilities
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM32100E_EVAL
   * @{
   */
-  
+
 /** @addtogroup STM32100E_EVAL_FSMC_SRAM
   * @{
-  */  
+  */
 
 /** @defgroup STM32100E_EVAL_FSMC_SRAM_Exported_Types
   * @{
@@ -53,24 +53,24 @@
 /**
   * @}
   */
-  
+
 /** @defgroup STM32100E_EVAL_FSMC_SRAM_Exported_Constants
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
-  
+  */
+
 /** @defgroup STM32100E_EVAL_FSMC_SRAM_Exported_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM32100E_EVAL_FSMC_SRAM_Exported_Functions
   * @{
-  */      
+  */
 
 void SRAM_Init(void);
 void SRAM_WriteBuffer(uint16_t* pBuffer, uint32_t WriteAddr, uint32_t NumHalfwordToWrite);
@@ -95,10 +95,10 @@ void SRAM_ReadBuffer(uint16_t* pBuffer, uint32_t ReadAddr, uint32_t NumHalfwordT
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

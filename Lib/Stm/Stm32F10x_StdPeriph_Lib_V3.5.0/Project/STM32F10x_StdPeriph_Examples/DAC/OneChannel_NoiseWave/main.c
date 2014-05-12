@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DAC/OneChannel_NoiseWave/main.c 
+  * @file    DAC/OneChannel_NoiseWave/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup DAC_OneChannel_NoiseWave
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -51,18 +51,18 @@ void Delay(__IO uint32_t nCount);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
-  /* System Clocks Configuration */
-  RCC_Configuration();   
+     */
 
-  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically 
-     connected to the DAC converter. In order to avoid parasitic consumption, 
+  /* System Clocks Configuration */
+  RCC_Configuration();
+
+  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically
+     connected to the DAC converter. In order to avoid parasitic consumption,
      the GPIO pin should be configured in analog */
   GPIO_Configuration();
 
@@ -73,7 +73,7 @@ int main(void)
   DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Enable;
   DAC_Init(DAC_Channel_1, &DAC_InitStructure);
 
-  /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is 
+  /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is
      automatically connected to the DAC converter. */
   DAC_Cmd(DAC_Channel_1, ENABLE);
 
@@ -93,7 +93,7 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{   
+{
   /* Enable peripheral clocks ------------------------------------------------*/
   /* GPIOA Periph clock enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
@@ -110,8 +110,8 @@ void GPIO_Configuration(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
 
-  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically 
-     connected to the DAC converter. In order to avoid parasitic consumption, 
+  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically
+     connected to the DAC converter. In order to avoid parasitic consumption,
      the GPIO pin should be configured in analog */
   GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_4;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
@@ -138,7 +138,7 @@ void Delay(__IO uint32_t nCount)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -152,10 +152,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

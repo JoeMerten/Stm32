@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    FSMC/NAND/main.c 
+  * @file    FSMC/NAND/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
-  * @brief   Main program body 
+  * @brief   Main program body
   ******************************************************************************
   * @attention
   *
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm3210e_eval_fsmc_nand.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup FSMC_NAND
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -57,21 +57,21 @@ void Fill_Buffer(uint8_t *pBuffer, uint16_t BufferLenght, uint32_t Offset);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
+     */
 
   /* Initialize Leds mounted on STM3210X-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_LEDInit(LED3);
-  
+
   /* Enable the FSMC Clock */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_FSMC, ENABLE);
-  
+
   /* FSMC Initialization */
   NAND_Init();
 
@@ -98,7 +98,7 @@ int main(void)
 
     /* Read back the written data */
     status = NAND_ReadSmallPage (RxBuffer, WriteReadAddr, PageNumber);
-   
+
     /* Verify the written data */
     for(j = 0; j < BUFFER_SIZE; j++)
     {
@@ -109,13 +109,13 @@ int main(void)
     }
 
     if (WriteReadStatus == 0)
-    { 
+    {
       /* OK */
       /* Turn on LED1 */
       STM_EVAL_LEDOn(LED1);
     }
     else
-    { 
+    {
       /* KO */
       /* Turn on LED2 */
       STM_EVAL_LEDOn(LED2);
@@ -159,7 +159,7 @@ void Fill_Buffer(uint8_t *pBuffer, uint16_t BufferLenght, uint32_t Offset)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -172,7 +172,7 @@ void assert_failed(uint8_t* file, uint32_t line)
 #endif
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/OnePulse/main.c 
+  * @file    TIM/OnePulse/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup TIM_OnePulse
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -52,13 +52,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -66,20 +66,20 @@ int main(void)
   GPIO_Configuration();
 
   /* TIM4 configuration: One Pulse mode ------------------------
-     The external signal is connected to TIM4_CH2 pin (PB.07), 
+     The external signal is connected to TIM4_CH2 pin (PB.07),
      The Rising edge is used as active edge,
      The One Pulse signal is output on TIM4_CH1 pin (PB.06)
-     The TIM_Pulse defines the delay value 
+     The TIM_Pulse defines the delay value
      The (TIM_Period -  TIM_Pulse) defines the One Pulse value.
      TIM2CLK = SystemCoreClock, we want to get TIM2 counter clock at 24 MHz:
      - Prescaler = (TIM2CLK / TIM2 counter clock) - 1
-     The Autoreload value is 65535 (TIM4->ARR), so the maximum frequency value 
+     The Autoreload value is 65535 (TIM4->ARR), so the maximum frequency value
      to trigger the TIM4 input is 24000000/65535 = 300 Hz.
 
-     The TIM_Pulse defines the delay value, the delay value is fixed 
+     The TIM_Pulse defines the delay value, the delay value is fixed
      to 682.6 us:
-     delay =  CCR1/TIM4 counter clock = 682.6 us. 
-     The (TIM_Period - TIM_Pulse) defines the One Pulse value, 
+     delay =  CCR1/TIM4 counter clock = 682.6 us.
+     The (TIM_Period - TIM_Pulse) defines the One Pulse value,
      the pulse value is fixed to 2.048 ms:
      One Pulse value = (TIM_Period - TIM_Pulse) / TIM4 counter clock = 2.048 ms.
 
@@ -189,10 +189,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

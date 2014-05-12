@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    TIM/InputCapture/stm32f10x_it.c 
+  * @file    TIM/InputCapture/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -30,7 +30,7 @@
 
 /** @addtogroup TIM_Input_Capture
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -146,8 +146,8 @@ void SysTick_Handler(void)
   * @retval None
   */
 void TIM3_IRQHandler(void)
-{ 
-  if(TIM_GetITStatus(TIM3, TIM_IT_CC2) == SET) 
+{
+  if(TIM_GetITStatus(TIM3, TIM_IT_CC2) == SET)
   {
     /* Clear TIM3 Capture compare interrupt pending bit */
     TIM_ClearITPendingBit(TIM3, TIM_IT_CC2);
@@ -160,18 +160,18 @@ void TIM3_IRQHandler(void)
     else if(CaptureNumber == 1)
     {
       /* Get the Input Capture value */
-      IC3ReadValue2 = TIM_GetCapture2(TIM3); 
-      
+      IC3ReadValue2 = TIM_GetCapture2(TIM3);
+
       /* Capture computation */
       if (IC3ReadValue2 > IC3ReadValue1)
       {
-        Capture = (IC3ReadValue2 - IC3ReadValue1); 
+        Capture = (IC3ReadValue2 - IC3ReadValue1);
       }
       else
       {
-        Capture = ((0xFFFF - IC3ReadValue1) + IC3ReadValue2); 
+        Capture = ((0xFFFF - IC3ReadValue1) + IC3ReadValue2);
       }
-      /* Frequency computation */ 
+      /* Frequency computation */
       TIM3Freq = (uint32_t) SystemCoreClock / Capture;
       CaptureNumber = 0;
     }
@@ -196,10 +196,10 @@ void TIM3_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

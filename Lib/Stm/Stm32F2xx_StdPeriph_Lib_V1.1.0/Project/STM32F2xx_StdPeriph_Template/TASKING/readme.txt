@@ -1,6 +1,6 @@
 /**
   @page tasking TASKING Project Template for STM32F2xx devices
- 
+
   @verbatim
   ******************** (C) COPYRIGHT 2012 STMicroelectronics *******************
   * @file    readme.txt
@@ -18,43 +18,43 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
   @endverbatim
- 
+
  @par Directory contents
- 
+
  - .cproject/.project: A pre-configured project file with the provided library
                        structure that produces an executable image with TASKING.
 
 - TASKING                     : This folder contains
- 
-     - stm32f2xx.lsl          : This file is TASKING linker script that contains the 
-                                STM32F2xx vector table and used to place program code (readonly) 
+
+     - stm32f2xx.lsl          : This file is TASKING linker script that contains the
+                                STM32F2xx vector table and used to place program code (readonly)
                                 in internal FLASH and data (readwrite, Stack and Heap)in
-                                internal SRAM. 
+                                internal SRAM.
                                 You can customize this file to your need.
 
-                           
+
  @par How to use it ?
 
  - Open TASKING toolchain.
- - Click on File->Import, select General->'Existing Projects into Workspace' 
-   and then click "Next". 
- - Browse to  TASKING workspace directory and select the project: 
+ - Click on File->Import, select General->'Existing Projects into Workspace'
+   and then click "Next".
+ - Browse to  TASKING workspace directory and select the project:
    - STM322xG-EVAL: to configure the project for STM32F2xx devices.
- - Rebuild all project files: Select the project in the "Project explorer" 
+ - Rebuild all project files: Select the project in the "Project explorer"
    window then click on Project->build project menu.
- - Run program: Select the project in the "Project explorer" window then click 
+ - Run program: Select the project in the "Project explorer" window then click
    Run->Debug (F11)
 
  @note The needed define symbols for this config are already declared in the
-       preprocessor section: USE_STM322xG_EVAL, STM32F2XX, USE_STDPERIPH_DRIVER 
+       preprocessor section: USE_STM322xG_EVAL, STM32F2XX, USE_STDPERIPH_DRIVER
 
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>

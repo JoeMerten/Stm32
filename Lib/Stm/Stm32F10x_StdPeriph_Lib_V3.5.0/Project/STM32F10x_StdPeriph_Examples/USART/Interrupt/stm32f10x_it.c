@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/Interrupt/stm32f10x_it.c 
+  * @file    USART/Interrupt/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -31,19 +31,19 @@
 
 /** @addtogroup USART_Interrupt
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern uint8_t TxBuffer1[]; 
-extern uint8_t TxBuffer2[]; 
+extern uint8_t TxBuffer1[];
+extern uint8_t TxBuffer2[];
 extern uint8_t RxBuffer1[];
 extern uint8_t RxBuffer2[];
 extern __IO uint8_t TxCounter1;
 extern __IO uint8_t TxCounter2;
-extern __IO uint8_t RxCounter1; 
+extern __IO uint8_t RxCounter1;
 extern __IO uint8_t RxCounter2;
 extern uint8_t NbrOfDataToTransfer1;
 extern uint8_t NbrOfDataToTransfer2;
@@ -176,9 +176,9 @@ void USARTy_IRQHandler(void)
       USART_ITConfig(USARTy, USART_IT_RXNE, DISABLE);
     }
   }
-  
+
   if(USART_GetITStatus(USARTy, USART_IT_TXE) != RESET)
-  {   
+  {
     /* Write one byte to the transmit data register */
     USART_SendData(USARTy, TxBuffer1[TxCounter1++]);
 
@@ -186,7 +186,7 @@ void USARTy_IRQHandler(void)
     {
       /* Disable the USARTy Transmit interrupt */
       USART_ITConfig(USARTy, USART_IT_TXE, DISABLE);
-    }    
+    }
   }
 }
 
@@ -208,9 +208,9 @@ void USARTz_IRQHandler(void)
       USART_ITConfig(USARTz, USART_IT_RXNE, DISABLE);
     }
   }
-  
+
   if(USART_GetITStatus(USARTz, USART_IT_TXE) != RESET)
-  {   
+  {
     /* Write one byte to the transmit data register */
     USART_SendData(USARTz, TxBuffer2[TxCounter2++]);
 
@@ -240,10 +240,10 @@ void USARTz_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    CAN/LoopBack/stm32f10x_it.c 
+  * @file    CAN/LoopBack/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -30,7 +30,7 @@
 
 /** @addtogroup CAN_LoopBack
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -172,11 +172,11 @@ void CAN1_RX0_IRQHandler(void)
   if((RxMessage.ExtId==0x1234) && (RxMessage.IDE==CAN_ID_EXT)
      && (RxMessage.DLC==2) && ((RxMessage.Data[1]|RxMessage.Data[0]<<8)==0xDECA))
   {
-    ret = 1; 
+    ret = 1;
   }
   else
   {
-    ret = 0; 
+    ret = 0;
   }
 }
 
@@ -204,11 +204,11 @@ void CAN2_RX0_IRQHandler(void)
   if((RxMessage.ExtId==0x1234) && (RxMessage.IDE==CAN_ID_EXT)
      && (RxMessage.DLC==2) && ((RxMessage.Data[1]|RxMessage.Data[0]<<8)==0xDECA))
   {
-    ret = 1; 
+    ret = 1;
   }
   else
   {
-    ret = 0; 
+    ret = 0;
   }
 }
 #endif
@@ -230,10 +230,10 @@ void CAN2_RX0_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
-  
+  */
+
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

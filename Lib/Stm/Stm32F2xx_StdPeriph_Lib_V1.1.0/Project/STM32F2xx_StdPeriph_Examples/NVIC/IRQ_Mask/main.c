@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    NVIC/IRQ_Mask/main.c 
+  * @file    NVIC/IRQ_Mask/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -35,7 +35,7 @@
 
 /** @addtogroup IRQ_Mask
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -53,12 +53,12 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
         system_stm32f2xx.c file
-     */     
+     */
 
   /* Initialize Leds mounted on STM322xG-EVAL board */
   STM_EVAL_LEDInit(LED1);
@@ -69,12 +69,12 @@ int main(void)
   /* Initialize the KEY and SEL buttons mounted on STM322xG-EVAL board */
   STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_GPIO);
   STM_EVAL_PBInit(BUTTON_TAMPER, BUTTON_MODE_EXTI);
-    
+
   /* TIM configuration -------------------------------------------------------*/
   TIM_Config();
 
   while (1)
-  { 
+  {
     /* Wait until KEY button is pressed. */
     while(STM_EVAL_PBGetState(BUTTON_KEY) == RESET)
     {
@@ -83,8 +83,8 @@ int main(void)
     {
     }
 
-    /* This instruction raises the execution priority to 0. This prevents all 
-       exceptions with configurable priority from activating, other than through 
+    /* This instruction raises the execution priority to 0. This prevents all
+       exceptions with configurable priority from activating, other than through
        the HardFault fault escalation mechanism. */
     __disable_irq();
 
@@ -99,7 +99,7 @@ int main(void)
     {
     }
 
-    /* This instruction will allow all exceptions with configurable priority to 
+    /* This instruction will allow all exceptions with configurable priority to
        be activated. */
     __enable_irq();
 
@@ -114,7 +114,7 @@ int main(void)
   * @retval None
   */
 void TIM_Config(void)
-{ 
+{
   TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
   TIM_OCInitTypeDef  TIM_OCInitStructure;
   NVIC_InitTypeDef  NVIC_InitStructure;
@@ -124,29 +124,29 @@ void TIM_Config(void)
                          RCC_APB1Periph_TIM4, ENABLE);
 
   /* TIM2 configuration */
-  TIM_TimeBaseStructure.TIM_Period = 0x4AF;          
+  TIM_TimeBaseStructure.TIM_Period = 0x4AF;
   TIM_TimeBaseStructure.TIM_Prescaler = ((SystemCoreClock/1200) - 1);
-  TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;    
-  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  
+  TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;
+  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
   TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
   TIM_OCStructInit(&TIM_OCInitStructure);
-  
+
   /* Output Compare Timing Mode configuration: Channel1 */
   TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Timing;
-  TIM_OCInitStructure.TIM_Pulse = 0x0;  
+  TIM_OCInitStructure.TIM_Pulse = 0x0;
   TIM_OC1Init(TIM2, &TIM_OCInitStructure);
-  
+
   /* TIM3 configuration */
-  TIM_TimeBaseStructure.TIM_Period = 0x95F;    
+  TIM_TimeBaseStructure.TIM_Period = 0x95F;
   TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
-  
+
   /* Output Compare Timing Mode configuration: Channel1 */
   TIM_OC1Init(TIM3, &TIM_OCInitStructure);
-  
+
   /* TIM4 configuration */
-  TIM_TimeBaseStructure.TIM_Period = 0xE0F;  
+  TIM_TimeBaseStructure.TIM_Period = 0xE0F;
   TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
-  
+
   /* Output Compare Timing Mode configuration: Channel1 */
   TIM_OC1Init(TIM4, &TIM_OCInitStructure);
 
@@ -169,7 +169,7 @@ void TIM_Config(void)
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
-  
+
   /* Enable the TIM3 Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
@@ -201,7 +201,7 @@ void TIM_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -214,10 +214,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/ComplementarySignals/main.c 
+  * @file    TIM/ComplementarySignals/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup TIM_ComplementarySignals
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -53,13 +53,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -70,16 +70,16 @@ int main(void)
   TIM1 Configuration to:
 
   1/ Generate 3 complementary PWM signals with 3 different duty cycles:
-    TIM1CLK is fixed to SystemCoreClock, the TIM1 Prescaler is equal to 0 so the 
+    TIM1CLK is fixed to SystemCoreClock, the TIM1 Prescaler is equal to 0 so the
     TIM1 counter clock used is SystemCoreClock.
     * SystemCoreClock is set to 72 MHz for Low-density, Medium-density, High-density
-    and Connectivity line devices. For Low-Density Value line and Medium-Density 
+    and Connectivity line devices. For Low-Density Value line and Medium-Density
     Value line devices, SystemCoreClock is set to 24 MHz.
 
     The objective is to generate PWM signal at 17.57 KHz:
     - TIM1_Period = (SystemCoreClock / 17570) - 1
 
-    The Three Duty cycles are computed as the following description: 
+    The Three Duty cycles are computed as the following description:
 
     The channel 1 duty cycle is set to 50% so channel 1N is set to 50%.
     The channel 2 duty cycle is set to 25% so channel 2N is set to 75%.
@@ -88,9 +88,9 @@ int main(void)
       - ChannelxPulse = DutyCycle * (TIM1_Period - 1) / 100
 
   2/ Insert a dead time equal to 11/SystemCoreClock ns
-  3/ Configure the break feature, active at High level, and using the automatic 
+  3/ Configure the break feature, active at High level, and using the automatic
      output enable feature
-  4/ Use the Locking parameters level1. 
+  4/ Use the Locking parameters level1.
   ----------------------------------------------------------------------- */
 
   /* Compute the value to be set in ARR register to generate signal frequency at 17.57 Khz */
@@ -189,7 +189,7 @@ void GPIO_Configuration(void)
   GPIO_Init(GPIOE, &GPIO_InitStructure);
 
   /* TIM1 Full remapping pins */
-  GPIO_PinRemapConfig(GPIO_FullRemap_TIM1, ENABLE); 
+  GPIO_PinRemapConfig(GPIO_FullRemap_TIM1, ENABLE);
 
 #else
   /* GPIOA Configuration: Channel 1, 2 and 3 as alternate function push-pull */
@@ -205,7 +205,7 @@ void GPIO_Configuration(void)
   /* GPIOB Configuration: BKIN pin */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-  GPIO_Init(GPIOB, &GPIO_InitStructure);  
+  GPIO_Init(GPIOB, &GPIO_InitStructure);
 #endif
 }
 
@@ -231,10 +231,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

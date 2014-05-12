@@ -5,7 +5,7 @@
   * @version V4.5.0
   * @date    07-March-2011
   * @brief   This file contains definitions for STM3210B_EVAL's Leds, push-buttons
-  *          COM ports, SD Card (on SPI), sFLASH (on SPI) and Temperature sensor 
+  *          COM ports, SD Card (on SPI), sFLASH (on SPI) and Temperature sensor
   *          LM75 (on I2C) hardware resources.
   ******************************************************************************
   * @attention
@@ -18,9 +18,9 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
-  
+  ******************************************************************************
+  */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM3210B_EVAL_H
 #define __STM3210B_EVAL_H
@@ -41,15 +41,15 @@
 /** @addtogroup STM32_EVAL
   * @{
   */
-    
+
 /** @addtogroup STM3210B_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM3210B_EVAL_LOW_LEVEL
   * @{
   */
-  
+
 /** @defgroup STM3210B_EVAL_LOW_LEVEL_Exported_Types
   * @{
   */
@@ -60,34 +60,34 @@
 
 /** @defgroup STM3210B_EVAL_LOW_LEVEL_Exported_Constants
   * @{
-  */ 
+  */
 /** @addtogroup STM3210B_EVAL_LOW_LEVEL_LED
   * @{
   */
 #define LEDn                             4
 #define LED1_PIN                         GPIO_Pin_6
 #define LED1_GPIO_PORT                   GPIOC
-#define LED1_GPIO_CLK                    RCC_APB2Periph_GPIOC  
-  
+#define LED1_GPIO_CLK                    RCC_APB2Periph_GPIOC
+
 #define LED2_PIN                         GPIO_Pin_7
 #define LED2_GPIO_PORT                   GPIOC
-#define LED2_GPIO_CLK                    RCC_APB2Periph_GPIOC  
+#define LED2_GPIO_CLK                    RCC_APB2Periph_GPIOC
 
-#define LED3_PIN                         GPIO_Pin_8  
+#define LED3_PIN                         GPIO_Pin_8
 #define LED3_GPIO_PORT                   GPIOC
-#define LED3_GPIO_CLK                    RCC_APB2Periph_GPIOC  
-  
+#define LED3_GPIO_CLK                    RCC_APB2Periph_GPIOC
+
 #define LED4_PIN                         GPIO_Pin_9
 #define LED4_GPIO_PORT                   GPIOC
-#define LED4_GPIO_CLK                    RCC_APB2Periph_GPIOC  
+#define LED4_GPIO_CLK                    RCC_APB2Periph_GPIOC
 
 /**
   * @}
-  */ 
-  
+  */
+
 /** @addtogroup STM3210B_EVAL_LOW_LEVEL_BUTTON
   * @{
-  */  
+  */
 #define BUTTONn                          8
 
 /**
@@ -99,7 +99,7 @@
 #define WAKEUP_BUTTON_EXTI_LINE          EXTI_Line0
 #define WAKEUP_BUTTON_EXTI_PORT_SOURCE   GPIO_PortSourceGPIOA
 #define WAKEUP_BUTTON_EXTI_PIN_SOURCE    GPIO_PinSource0
-#define WAKEUP_BUTTON_EXTI_IRQn          EXTI0_IRQn 
+#define WAKEUP_BUTTON_EXTI_IRQn          EXTI0_IRQn
 /**
  * @brief Tamper push-button
  */
@@ -109,7 +109,7 @@
 #define TAMPER_BUTTON_EXTI_LINE          EXTI_Line13
 #define TAMPER_BUTTON_EXTI_PORT_SOURCE   GPIO_PortSourceGPIOC
 #define TAMPER_BUTTON_EXTI_PIN_SOURCE    GPIO_PinSource13
-#define TAMPER_BUTTON_EXTI_IRQn          EXTI15_10_IRQn 
+#define TAMPER_BUTTON_EXTI_IRQn          EXTI15_10_IRQn
 /**
  * @brief Key push-button
  */
@@ -139,7 +139,7 @@
 #define LEFT_BUTTON_EXTI_LINE            EXTI_Line1
 #define LEFT_BUTTON_EXTI_PORT_SOURCE     GPIO_PortSourceGPIOE
 #define LEFT_BUTTON_EXTI_PIN_SOURCE      GPIO_PinSource1
-#define LEFT_BUTTON_EXTI_IRQn            EXTI1_IRQn  
+#define LEFT_BUTTON_EXTI_IRQn            EXTI1_IRQn
 /**
  * @brief Joystick Up push-button
  */
@@ -149,17 +149,17 @@
 #define UP_BUTTON_EXTI_LINE              EXTI_Line8
 #define UP_BUTTON_EXTI_PORT_SOURCE       GPIO_PortSourceGPIOD
 #define UP_BUTTON_EXTI_PIN_SOURCE        GPIO_PinSource8
-#define UP_BUTTON_EXTI_IRQn              EXTI9_5_IRQn  
+#define UP_BUTTON_EXTI_IRQn              EXTI9_5_IRQn
 /**
  * @brief Joystick Down push-button
- */  
+ */
 #define DOWN_BUTTON_PIN                  GPIO_Pin_14
 #define DOWN_BUTTON_GPIO_PORT            GPIOD
 #define DOWN_BUTTON_GPIO_CLK             RCC_APB2Periph_GPIOD
 #define DOWN_BUTTON_EXTI_LINE            EXTI_Line14
 #define DOWN_BUTTON_EXTI_PORT_SOURCE     GPIO_PortSourceGPIOD
 #define DOWN_BUTTON_EXTI_PIN_SOURCE      GPIO_PinSource14
-#define DOWN_BUTTON_EXTI_IRQn            EXTI15_10_IRQn  
+#define DOWN_BUTTON_EXTI_IRQn            EXTI15_10_IRQn
 /**
  * @brief Joystick Sel push-button
  */
@@ -169,10 +169,10 @@
 #define SEL_BUTTON_EXTI_LINE             EXTI_Line12
 #define SEL_BUTTON_EXTI_PORT_SOURCE      GPIO_PortSourceGPIOD
 #define SEL_BUTTON_EXTI_PIN_SOURCE       GPIO_PinSource12
-#define SEL_BUTTON_EXTI_IRQn             EXTI15_10_IRQn   
+#define SEL_BUTTON_EXTI_IRQn             EXTI15_10_IRQn
 /**
   * @}
-  */ 
+  */
 
 /** @addtogroup STM3210B_EVAL_LOW_LEVEL_COM
   * @{
@@ -181,7 +181,7 @@
 
 /**
  * @brief Definition for COM port1, connected to USART1
- */ 
+ */
 #define EVAL_COM1                        USART1
 #define EVAL_COM1_CLK                    RCC_APB2Periph_USART1
 #define EVAL_COM1_TX_PIN                 GPIO_Pin_9
@@ -194,7 +194,7 @@
 
 /**
  * @brief Definition for COM port2, connected to USART2 (USART2 pins remapped on GPIOD)
- */ 
+ */
 #define EVAL_COM2                        USART2
 #define EVAL_COM2_CLK                    RCC_APB1Periph_USART2
 #define EVAL_COM2_TX_PIN                 GPIO_Pin_5
@@ -207,7 +207,7 @@
 
 /**
   * @}
-  */ 
+  */
 
 /** @addtogroup STM3210B_EVAL_LOW_LEVEL_SD_SPI
   * @{
@@ -242,7 +242,7 @@
   */
 /**
   * @brief  M25P FLASH SPI Interface pins
-  */  
+  */
 #define sFLASH_SPI                       SPI1
 #define sFLASH_SPI_CLK                   RCC_APB2Periph_SPI1
 #define sFLASH_SPI_SCK_PIN               GPIO_Pin_5                  /* PA.05 */
@@ -256,7 +256,7 @@
 #define sFLASH_SPI_MOSI_GPIO_CLK         RCC_APB2Periph_GPIOA
 #define sFLASH_CS_PIN                    GPIO_Pin_4                  /* PA.04 */
 #define sFLASH_CS_GPIO_PORT              GPIOA                       /* GPIOA */
-#define sFLASH_CS_GPIO_CLK               RCC_APB2Periph_GPIOA 
+#define sFLASH_CS_GPIO_CLK               RCC_APB2Periph_GPIOA
 
 /**
   * @}
@@ -267,7 +267,7 @@
   */
 /**
   * @brief  LM75 Temperature Sensor I2C Interface pins
-  */  
+  */
 #define LM75_I2C                         I2C1
 #define LM75_I2C_CLK                     RCC_APB1Periph_I2C1
 #define LM75_I2C_SCL_PIN                 GPIO_Pin_6                  /* PB.06 */
@@ -285,26 +285,26 @@
 #define LM75_DMA_TX_CHANNEL              DMA1_Channel6
 #define LM75_DMA_RX_CHANNEL              DMA1_Channel7
 #define LM75_DMA_TX_TCFLAG               DMA1_FLAG_TC6
-#define LM75_DMA_RX_TCFLAG               DMA1_FLAG_TC7 
+#define LM75_DMA_RX_TCFLAG               DMA1_FLAG_TC7
 
 /**
   * @}
   */
-    
+
 /**
   * @}
-  */ 
-  
+  */
+
 /** @defgroup STM3210B_EVAL_LOW_LEVEL_Exported_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM3210B_EVAL_LOW_LEVEL_Exported_Functions
   * @{
-  */ 
+  */
 void STM_EVAL_LEDInit(Led_TypeDef Led);
 void STM_EVAL_LEDOn(Led_TypeDef Led);
 void STM_EVAL_LEDOff(Led_TypeDef Led);
@@ -313,35 +313,35 @@ void STM_EVAL_PBInit(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode);
 uint32_t STM_EVAL_PBGetState(Button_TypeDef Button);
 void STM_EVAL_COMInit(COM_TypeDef COM, USART_InitTypeDef* USART_InitStruct);
 void SD_LowLevel_DeInit(void);
-void SD_LowLevel_Init(void); 
+void SD_LowLevel_Init(void);
 void sFLASH_LowLevel_DeInit(void);
-void sFLASH_LowLevel_Init(void); 
+void sFLASH_LowLevel_Init(void);
 void LM75_LowLevel_DeInit(void);
-void LM75_LowLevel_Init(void); 
- 
+void LM75_LowLevel_Init(void);
+
 /**
   * @}
-  */ 
-    
+  */
+
 #ifdef __cplusplus
 }
 #endif
-  
+
 #endif /* __STM3210B_EVAL_H */
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */  
+  */
 
 /**
   * @}
-  */    
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

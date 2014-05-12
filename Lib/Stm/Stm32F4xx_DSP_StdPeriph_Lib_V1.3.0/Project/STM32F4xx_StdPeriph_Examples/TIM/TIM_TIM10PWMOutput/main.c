@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_TIM10PWMOutput/main.c 
+  * @file    TIM/TIM_TIM10PWMOutput/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup TIM_TIM10PWMOutput
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -57,42 +57,42 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
      */
 
   /* TIM Configuration */
   TIM_Config();
-  
+
   /* ---------------------------------------------------------------------------
     TIM10 Configuration: generate 1 PWM signal:
-    
-    In this example TIM10 input clock (TIM10CLK) is set to 2 * APB2 clock (PCLK2), 
-    since APB2 prescaler is different from 1.   
-      TIM10CLK = 2 * PCLK2  
-      PCLK2 = HCLK / 2 
+
+    In this example TIM10 input clock (TIM10CLK) is set to 2 * APB2 clock (PCLK2),
+    since APB2 prescaler is different from 1.
+      TIM10CLK = 2 * PCLK2
+      PCLK2 = HCLK / 2
       => TIM10CLK = HCLK = SystemCoreClock
-          
+
     To get TIM10 counter clock at 21 MHz, the prescaler is computed as follows:
        Prescaler = (TIM10CLK / TIM10 counter clock) - 1
        Prescaler = (SystemCoreClock /21 MHz) - 1
-                                              
+
     To get TIM10 output clock at 31.530 KHz, the period (TIM10_ARR) is computed as follows:
        ARR = (TIM10 counter clock / TIM10 output clock) - 1
            = 665
-                  
+
     TIM10 Channel1 duty cycle = (TIM10_CCR1/ TIM10_ARR)* 100 = 50%
 
-    Note: 
+    Note:
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
      Each time the core clock (HCLK) changes, user had to call SystemCoreClockUpdate()
      function to update SystemCoreClock variable value. Otherwise, any configuration
-     based on this variable will be incorrect.    
-  --------------------------------------------------------------------------- */   
+     based on this variable will be incorrect.
+  --------------------------------------------------------------------------- */
 
 
   /* Compute the prescaler value */
@@ -133,20 +133,20 @@ int main(void)
 void TIM_Config(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
-  
+
   /* TIM10 clock enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM10, ENABLE);
 
   /* GPIOF clock enable */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOF, ENABLE);
-  
+
   /* GPIOF Configuration: TIM10 CH1 (PF6) */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 ;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP ;
-  GPIO_Init(GPIOF, &GPIO_InitStructure); 
+  GPIO_Init(GPIOF, &GPIO_InitStructure);
 
   /* Connect TIM pins to AF3 */
   GPIO_PinAFConfig(GPIOF, GPIO_PinSource6, GPIO_AF_TIM10);
@@ -173,10 +173,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

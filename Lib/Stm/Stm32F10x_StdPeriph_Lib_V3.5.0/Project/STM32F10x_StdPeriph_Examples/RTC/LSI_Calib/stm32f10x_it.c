@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RTC/LSI_Calib/stm32f10x_it.c 
+  * @file    RTC/LSI_Calib/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,11 +19,11 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
-#include "main.h" 
+#include "main.h"
 
 /** @addtogroup STM32F10x_StdPeriph_Examples
   * @{
@@ -31,7 +31,7 @@
 
 /** @addtogroup RTC_LSI_Calib
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -167,8 +167,8 @@ void RTC_IRQHandler(void)
   */
 void TIM5_IRQHandler(void)
 {
-  uint32_t tmp = 0; 
-  
+  uint32_t tmp = 0;
+
   if (TIM_GetITStatus(TIM5, TIM_IT_CC4) == SET)
   {
     tmpCC4[IncrementVar_OperationComplete()] = (uint16_t)(TIM5->CCR4);

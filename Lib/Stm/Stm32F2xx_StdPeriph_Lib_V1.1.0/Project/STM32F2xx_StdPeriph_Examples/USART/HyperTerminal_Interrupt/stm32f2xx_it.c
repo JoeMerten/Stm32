@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/HyperTerminal_Interrupt/stm32f2xx_it.c 
+  * @file    USART/HyperTerminal_Interrupt/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -55,8 +55,8 @@ uint8_t TxBuffer[] = "\n\rUSART Hyperterminal Interrupts Example: USART-Hyperter
 uint8_t RxBuffer[RXBUFFERSIZE];
 uint8_t NbrOfDataToTransfer = TXBUFFERSIZE;
 uint8_t NbrOfDataToRead = RXBUFFERSIZE;
-__IO uint8_t TxCounter = 0; 
-__IO uint16_t RxCounter = 0; 
+__IO uint8_t TxCounter = 0;
+__IO uint16_t RxCounter = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -186,7 +186,7 @@ void USARTx_IRQHANDLER(void)
   }
 
   if(USART_GetITStatus(EVAL_COM1, USART_IT_TXE) != RESET)
-  {   
+  {
     /* Write one byte to the transmit data register */
     USART_SendData(EVAL_COM1, TxBuffer[TxCounter++]);
 
@@ -216,10 +216,10 @@ void USARTx_IRQHANDLER(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

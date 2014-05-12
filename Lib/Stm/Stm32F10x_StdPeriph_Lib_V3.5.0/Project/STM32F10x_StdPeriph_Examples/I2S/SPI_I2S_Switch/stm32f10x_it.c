@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2S/SPI_I2S_Switch/stm32f10x_it.c 
+  * @file    I2S/SPI_I2S_Switch/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -30,7 +30,7 @@
 
 /** @addtogroup I2S_SPI_I2S_Switch
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -154,10 +154,10 @@ void SysTick_Handler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

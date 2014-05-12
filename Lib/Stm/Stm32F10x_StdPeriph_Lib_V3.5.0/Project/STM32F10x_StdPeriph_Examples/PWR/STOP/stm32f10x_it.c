@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/STOP/stm32f10x_it.c 
+  * @file    PWR/STOP/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -156,8 +156,8 @@ void SysTick_Handler(void)
 void EXTI9_5_IRQHandler(void)
 {
   if(EXTI_GetITStatus(KEY_BUTTON_EXTI_LINE) != RESET)
-  { 
-    /* Clear the Key Button EXTI line pending bit */  
+  {
+    /* Clear the Key Button EXTI line pending bit */
     EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
 
     /* Toggle LED2 */
@@ -188,7 +188,7 @@ void RTCAlarm_IRQHandler(void)
     }
 
     /* Wait until last write operation on RTC registers has finished */
-    RTC_WaitForLastTask();   
+    RTC_WaitForLastTask();
     /* Clear RTC Alarm interrupt pending bit */
     RTC_ClearITPendingBit(RTC_IT_ALR);
     /* Wait until last write operation on RTC registers has finished */

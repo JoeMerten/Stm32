@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/HyperTerminal_Interrupt/main.c 
+  * @file    USART/HyperTerminal_Interrupt/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup USART_HyperTerminal_Interrupt
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -45,7 +45,7 @@ USART_InitTypeDef USART_InitStructure;
 
 /* Private function prototypes -----------------------------------------------*/
 void NVIC_Configuration(void);
-  
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -55,19 +55,19 @@ void NVIC_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-              
+     */
+
   /* NVIC configuration */
   NVIC_Configuration();
-  
+
 /* USARTx configuration ------------------------------------------------------*/
   /* USARTx configured as follow:
-        - BaudRate = 9600 baud  
+        - BaudRate = 9600 baud
         - Word Length = 8 Bits
         - Two Stop Bit
         - Odd parity
@@ -83,11 +83,11 @@ int main(void)
 
   STM_EVAL_COMInit(COM1, &USART_InitStructure);
 
-  /* Enable the EVAL_COM1 Transmit interrupt: this interrupt is generated when the 
-     EVAL_COM1 transmit data register is empty */  
+  /* Enable the EVAL_COM1 Transmit interrupt: this interrupt is generated when the
+     EVAL_COM1 transmit data register is empty */
   USART_ITConfig(EVAL_COM1, USART_IT_TXE, ENABLE);
 
-  /* Enable the EVAL_COM1 Receive interrupt: this interrupt is generated when the 
+  /* Enable the EVAL_COM1 Receive interrupt: this interrupt is generated when the
      EVAL_COM1 receive data register is not empty */
   USART_ITConfig(EVAL_COM1, USART_IT_RXNE, ENABLE);
 
@@ -123,7 +123,7 @@ void NVIC_Configuration(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -137,10 +137,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

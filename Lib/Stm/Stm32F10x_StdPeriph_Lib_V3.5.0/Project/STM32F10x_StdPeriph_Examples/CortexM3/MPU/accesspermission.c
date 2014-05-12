@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CortexM3/MPU/accesspermission.c 
+  * @file    CortexM3/MPU/accesspermission.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -16,8 +16,8 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
+  ******************************************************************************
+  */
 
 
 /* Includes ------------------------------------------------------------------*/
@@ -30,12 +30,12 @@
 /** @addtogroup CortexM3_MPU
   * @{
   */
-  
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define ARRAY_ADDRESS_START    (0x20002000UL)
 #define ARRAY_SIZE             (0x09UL << 0UL)
-#define ARRAY_REGION_NUMBER    (0x03UL << MPU_RNR_REGION_Pos) 
+#define ARRAY_REGION_NUMBER    (0x03UL << MPU_RNR_REGION_Pos)
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -62,21 +62,21 @@ uint8_t privilegedreadonlyarray[32] __at(0x20002000);
   */
 void accesspermission(void)
 {
- uint8_t a; 
-  
-  /* Configure region for privilegedreadonlyarray as REGION NÝ3, 32byte and R 
+ uint8_t a;
+
+  /* Configure region for privilegedreadonlyarray as REGION NÝ3, 32byte and R
      only in privileged mode */
   MPU->RNR  = ARRAY_REGION_NUMBER;
   MPU->RBAR |= ARRAY_ADDRESS_START;
   MPU->RASR |= ARRAY_SIZE | portMPU_REGION_PRIVILEGED_READ_ONLY;
-  
+
   /* Read from privilegedreadonlyarray. This will not generate error */
   a = privilegedreadonlyarray[0];
-  
+
   /* Uncomment the following line to write to privilegedreadonlyarray. This will
      generate error */
   //privilegedreadonlyarray[0] = 'e';
-  
+
 }
 
 /**

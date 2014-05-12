@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    ADC/3ADCs_DMA/stm32f10x_it.c 
+  * @file    ADC/3ADCs_DMA/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -30,7 +30,7 @@
 
 /** @addtogroup ADC_3ADCs_DMA
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -145,7 +145,7 @@ void SysTick_Handler(void)
 /******************************************************************************/
 /*            STM32F10x Peripherals Interrupt Handlers                        */
 /******************************************************************************/
- 
+
 /**
   * @brief  This function handles ADC1 and ADC2 global interrupts requests.
   * @param  None
@@ -175,10 +175,10 @@ void ADC1_2_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

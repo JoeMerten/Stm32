@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/MultiProcessor/stm32f10x_it.c 
+  * @file    USART/MultiProcessor/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -28,10 +28,10 @@
 /** @addtogroup STM32F10x_StdPeriph_Examples
   * @{
   */
-  
+
 /** @addtogroup USART_MultiProcessor
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -180,7 +180,7 @@ void EXTI9_5_IRQHandler(void)
     USART_ReceiverWakeUpCmd(USARTz, ENABLE);
 
     /* Clear Key Button EXTI Line Pending Bit */
-    EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE); 
+    EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
   }
 }
 
@@ -202,10 +202,10 @@ void EXTI9_5_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

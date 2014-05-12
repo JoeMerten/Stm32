@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.1
   * @date    19-September-2013
-  * @brief   This file contains all the functions prototypes for the 
+  * @brief   This file contains all the functions prototypes for the
   *          STM324x7i_eval_fmc_sram.c driver.
   ******************************************************************************
   * @attention
@@ -17,14 +17,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM324x7I_EVAL_FMC_SRAM_H
@@ -40,18 +40,18 @@
 /** @addtogroup Utilities
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM324x7I_EVAL
   * @{
   */
-  
+
 /** @addtogroup STM324x7I_EVAL_FMC_SRAM
   * @{
-  */  
+  */
 
 /** @defgroup STM324x7I_EVAL_FMC_SRAM_Exported_Types
   * @{
@@ -59,24 +59,24 @@
 /**
   * @}
   */
-  
+
 /** @defgroup STM324x7I_EVAL_FMC_SRAM_Exported_Constants
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
-  
+  */
+
 /** @defgroup STM324x7I_EVAL_FMC_SRAM_Exported_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM324x7I_EVAL_FMC_SRAM_Exported_Functions
   * @{
-  */      
+  */
 
 void SRAM_Init(void);
 void SRAM_WriteBuffer(uint16_t* pBuffer, uint32_t WriteAddr, uint32_t NumHalfwordToWrite);
@@ -101,10 +101,10 @@ void SRAM_ReadBuffer(uint16_t* pBuffer, uint32_t ReadAddr, uint32_t NumHalfwordT
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

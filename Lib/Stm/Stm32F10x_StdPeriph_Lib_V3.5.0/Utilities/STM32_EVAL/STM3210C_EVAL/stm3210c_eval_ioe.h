@@ -17,8 +17,8 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
+  ******************************************************************************
+  */
 
   /* File Info : ---------------------------------------------------------------
     SUPPORTED FEATURES:
@@ -38,8 +38,8 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif   
-   
+#endif
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
 
@@ -49,37 +49,37 @@
 
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM3210C_EVAL
   * @{
   */
-    
-/** @defgroup STM3210C_EVAL_IOE 
+
+/** @defgroup STM3210C_EVAL_IOE
   * @{
-  */ 
+  */
 
 /** @defgroup STM3210C_EVAL_IOE_Exported_Types
   * @{
-  */ 
+  */
 
-/** 
-  * @brief  Touch Screen Information structure  
-  */ 
+/**
+  * @brief  Touch Screen Information structure
+  */
 typedef struct
 {
   uint16_t TouchDetected;
   uint16_t X;
   uint16_t Y;
   uint16_t Z;
-}TS_STATE; 
-  
-/** 
-  * @brief  Joystick State definitions  
-  */ 
+}TS_STATE;
+
+/**
+  * @brief  Joystick State definitions
+  */
 #ifndef __STM32_EVAL_H
-typedef enum 
-{ 
+typedef enum
+{
   JOY_NONE = 0,
   JOY_SEL = 1,
   JOY_DOWN = 2,
@@ -89,32 +89,32 @@ typedef enum
 } JOYState_TypeDef
 ;
 #endif /* __STM32_EVAL_H */
- 
-/** 
-  * @brief  IO_Expander Error codes  
-  */ 
+
+/**
+  * @brief  IO_Expander Error codes
+  */
 typedef enum
 {
   IOE_OK = 0,
-  IOE_FAILURE, 
+  IOE_FAILURE,
   IOE_TIMEOUT,
   PARAM_ERROR,
-  IOE1_NOT_OPERATIONAL, 
+  IOE1_NOT_OPERATIONAL,
   IOE2_NOT_OPERATIONAL
 }IOE_Status_TypDef;
 
-/** 
-  * @brief  IO bit values  
-  */ 
+/**
+  * @brief  IO bit values
+  */
 typedef enum
 {
   BitReset = 0,
   BitSet = 1
 }IOE_BitValue_TypeDef;
 
-/** 
-  * @brief  IOE DMA Direction  
-  */ 
+/**
+  * @brief  IOE DMA Direction
+  */
 typedef enum
 {
   IOE_DMA_TX = 0,
@@ -123,12 +123,12 @@ typedef enum
 
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM3210C_EVAL_IOE_Exported_Constants
   * @{
-  */ 
+  */
 
 /**
  * @brief Uncomment the line below to enable verfying each written byte in write
@@ -140,31 +140,31 @@ typedef enum
 /**
  * @brief Uncomment the line below if you want to use user defined Delay function
  *        (for precise timing), otherwise default _delay_ function defined within
- *         this driver is used (less precise timing).  
+ *         this driver is used (less precise timing).
  */
 /* #define USE_Delay */
 
 /**
  * @brief Uncomment the line below if you want to use user timeout callback.
  *        Function prototypes is declared in this file but function body may be
- *        implemented into user application.  
+ *        implemented into user application.
  */
 /* #define USE_TIMEOUT_USER_CALLBACK */
 
 #ifdef USE_Delay
 #include "main.h"
- 
+
   #define _delay_     Delay  /* !< User can provide more timing precise _delay_ function
                                    (with 10ms time base), using SysTick for example */
 #else
   #define _delay_     delay      /* !< Default _delay_ function with less precise timing */
-#endif    
+#endif
 
 /*------------------------------------------------------------------------------
-    Hardware Configuration 
+    Hardware Configuration
 ------------------------------------------------------------------------------*/
-/** 
-  * @brief  I2C port definitions  
+/**
+  * @brief  I2C port definitions
   */
 #define IOE_I2C                          I2C1
 #define IOE_I2C_CLK                      RCC_APB1Periph_I2C1
@@ -175,10 +175,10 @@ typedef enum
 #define IOE_I2C_SDA_GPIO_PORT            GPIOB
 #define IOE_I2C_SDA_GPIO_CLK             RCC_APB2Periph_GPIOB
 #define IOE_I2C_DR                       ((uint32_t)0x40005410)
-#define IOE_I2C_SPEED                    300000  
+#define IOE_I2C_SPEED                    300000
 
-/** 
-  * @brief  IOE DMA definitions  
+/**
+  * @brief  IOE DMA definitions
   */
 #define IOE_DMA                          DMA1
 #define IOE_DMA_CLK                      RCC_AHBPeriph_DMA1
@@ -188,65 +188,65 @@ typedef enum
 #define IOE_DMA_RX_TCFLAG                DMA1_FLAG_TC7
 
 
-/** 
-  * @brief  IO Expander Interrupt line on EXTI  
-  */ 
+/**
+  * @brief  IO Expander Interrupt line on EXTI
+  */
 #define IOE_IT_PIN                       GPIO_Pin_14
 #define IOE_IT_GPIO_PORT                 GPIOB
 #define IOE_IT_GPIO_CLK                  RCC_APB2Periph_GPIOB
 #define IOE_IT_EXTI_PORT_SOURCE          GPIO_PortSourceGPIOB
 #define IOE_IT_EXTI_PIN_SOURCE           GPIO_PinSource14
 #define IOE_IT_EXTI_LINE                 EXTI_Line14
-#define IOE_IT_EXTI_IRQn                 EXTI15_10_IRQn       
+#define IOE_IT_EXTI_IRQn                 EXTI15_10_IRQn
 
 /**
-  * @brief Eval Board IO Pins definition 
-  */ 
+  * @brief Eval Board IO Pins definition
+  */
 #define AUDIO_RESET_PIN             IO_Pin_2 /* IO_Exapnader_2 */ /* Output */
 #define MII_INT_PIN                 IO_Pin_0 /* IO_Exapnader_2 */ /* Output */
 #define VBAT_DIV_PIN                IO_Pin_0 /* IO_Exapnader_1 */ /* Output */
 #define MEMS_INT1_PIN               IO_Pin_3 /* IO_Exapnader_1 */ /* Input */
 #define MEMS_INT2_PIN               IO_Pin_2 /* IO_Exapnader_1 */ /* Input */
 
- 
+
 /**
-  * @brief Eval Board both IO Exapanders Pins definition 
-  */ 
+  * @brief Eval Board both IO Exapanders Pins definition
+  */
 #define IO1_IN_ALL_PINS          (uint32_t)(MEMS_INT1_PIN | MEMS_INT2_PIN)
 #define IO2_IN_ALL_PINS          (uint32_t)(JOY_IO_PINS)
 #define IO1_OUT_ALL_PINS         (uint32_t)(VBAT_DIV_PIN)
 #define IO2_OUT_ALL_PINS         (uint32_t)(AUDIO_RESET_PIN | MII_INT_PIN)
 
-/** 
-  * @brief  The 7 bits IO Expanders adresses and chip IDs  
-  */ 
-#define IOE_1_ADDR                 0x82    
-#define IOE_2_ADDR                 0x88    
+/**
+  * @brief  The 7 bits IO Expanders adresses and chip IDs
+  */
+#define IOE_1_ADDR                 0x82
+#define IOE_2_ADDR                 0x88
 #define STMPE811_ID                0x0811
 
 
 /*------------------------------------------------------------------------------
     Functional and Interrupt Management
 ------------------------------------------------------------------------------*/
-/** 
-  * @brief  IO Expander Functionalities definitions  
-  */ 
+/**
+  * @brief  IO Expander Functionalities definitions
+  */
 #define IOE_ADC_FCT              0x01
 #define IOE_TS_FCT               0x02
 #define IOE_IO_FCT               0x04
 #define IOE_TEMPSENS_FCT         0x08
 
-/** 
-  * @brief  Interrupt source configuration definitons  
-  */ 
+/**
+  * @brief  Interrupt source configuration definitons
+  */
 #define IOE_ITSRC_TSC           0x01  /* IO_Exapnder 1 */
 #define IOE_ITSRC_INMEMS        0x02  /* IO_Exapnder 1 */
 #define IOE_ITSRC_JOYSTICK      0x04  /* IO_Exapnder 2 */
 #define IOE_ITSRC_TEMPSENS      0x08  /* IO_Exapnder 2 */
 
-/** 
-  * @brief  Glaobal Interrupts definitions  
-  */ 
+/**
+  * @brief  Glaobal Interrupts definitions
+  */
 #define IOE_GIT_GPIO             0x80
 #define IOE_GIT_ADC              0x40
 #define IOE_GIT_TEMP             0x20
@@ -260,31 +260,31 @@ typedef enum
 /*------------------------------------------------------------------------------
     STMPE811 device register definition
 ------------------------------------------------------------------------------*/
-/** 
-  * @brief  Identification registers  
-  */ 
+/**
+  * @brief  Identification registers
+  */
 #define IOE_REG_CHP_ID             0x00
 #define IOE_REG_ID_VER             0x02
 
-/** 
-  * @brief  General Control Registers  
-  */ 
+/**
+  * @brief  General Control Registers
+  */
 #define IOE_REG_SYS_CTRL1          0x03
 #define IOE_REG_SYS_CTRL2          0x04
-#define IOE_REG_SPI_CFG            0x08 
+#define IOE_REG_SPI_CFG            0x08
 
-/** 
-  * @brief  Interrupt Control register  
-  */ 
+/**
+  * @brief  Interrupt Control register
+  */
 #define IOE_REG_INT_CTRL           0x09
 #define IOE_REG_INT_EN             0x0A
 #define IOE_REG_INT_STA            0x0B
 #define IOE_REG_GPIO_INT_EN        0x0C
 #define IOE_REG_GPIO_INT_STA       0x0D
 
-/** 
-  * @brief  GPIO Registers  
-  */ 
+/**
+  * @brief  GPIO Registers
+  */
 #define IOE_REG_GPIO_SET_PIN       0x10
 #define IOE_REG_GPIO_CLR_PIN       0x11
 #define IOE_REG_GPIO_MP_STA        0x12
@@ -294,9 +294,9 @@ typedef enum
 #define IOE_REG_GPIO_FE            0x16
 #define IOE_REG_GPIO_AF            0x17
 
-/** 
-  * @brief  ADC Registers  
-  */ 
+/**
+  * @brief  ADC Registers
+  */
 #define IOE_REG_ADC_INT_EN         0x0E
 #define IOE_REG_ADC_INT_STA        0x0F
 #define IOE_REG_ADC_CTRL1          0x20
@@ -309,32 +309,32 @@ typedef enum
 #define IOE_REG_ADC_DATA_CH4       0x38 /* 16-Bit register */
 #define IOE_REG_ADC_DATA_CH5       0x3A /* 16-Bit register */
 #define IOE_REG_ADC_DATA_CH6       0x3B /* 16-Bit register */
-#define IOE_REG_ADC_DATA_CH7       0x3C /* 16-Bit register */ 
+#define IOE_REG_ADC_DATA_CH7       0x3C /* 16-Bit register */
 
-/** 
-  * @brief  TouchScreen Registers  
-  */ 
+/**
+  * @brief  TouchScreen Registers
+  */
 #define IOE_REG_TSC_CTRL           0x40
 #define IOE_REG_TSC_CFG            0x41
-#define IOE_REG_WDM_TR_X           0x42 
+#define IOE_REG_WDM_TR_X           0x42
 #define IOE_REG_WDM_TR_Y           0x44
 #define IOE_REG_WDM_BL_X           0x46
 #define IOE_REG_WDM_BL_Y           0x48
 #define IOE_REG_FIFO_TH            0x4A
 #define IOE_REG_FIFO_STA           0x4B
 #define IOE_REG_FIFO_SIZE          0x4C
-#define IOE_REG_TSC_DATA_X         0x4D 
+#define IOE_REG_TSC_DATA_X         0x4D
 #define IOE_REG_TSC_DATA_Y         0x4F
 #define IOE_REG_TSC_DATA_Z         0x51
-#define IOE_REG_TSC_DATA_XYZ       0x52 
+#define IOE_REG_TSC_DATA_XYZ       0x52
 #define IOE_REG_TSC_FRACT_XYZ      0x56
 #define IOE_REG_TSC_DATA           0x57
 #define IOE_REG_TSC_I_DRIVE        0x58
 #define IOE_REG_TSC_SHIELD         0x59
 
-/** 
-  * @brief  Temperature Sensor registers  
-  */ 
+/**
+  * @brief  Temperature Sensor registers
+  */
 #define IOE_REG_TEMP_CTRL          0x60
 #define IOE_REG_TEMP_DATA          0x61
 #define IOE_REG_TEMP_TH            0x62
@@ -344,8 +344,8 @@ typedef enum
     Functions parameters defines
 ------------------------------------------------------------------------------*/
 /**
-  * @brief Touch Screen Pins definition 
-  */ 
+  * @brief Touch Screen Pins definition
+  */
 #define TOUCH_YD                    IO_Pin_1 /* IO_Exapnader_1 */ /* Input */
 #define TOUCH_XD                    IO_Pin_2 /* IO_Exapnader_1 */ /* Input */
 #define TOUCH_YU                    IO_Pin_3 /* IO_Exapnader_1 */ /* Input */
@@ -353,8 +353,8 @@ typedef enum
 #define TOUCH_IO_ALL                (uint32_t)(IO_Pin_1 | IO_Pin_2 | IO_Pin_3 | IO_Pin_4)
 
 /**
-  * @brief  JOYSTICK Pins definition 
-  */ 
+  * @brief  JOYSTICK Pins definition
+  */
 #define JOY_IO_SEL                   IO_Pin_7
 #define JOY_IO_DOWN                  IO_Pin_6
 #define JOY_IO_LEFT                  IO_Pin_5
@@ -363,9 +363,9 @@ typedef enum
 #define JOY_IO_NONE                  JOY_IO_PINS
 #define JOY_IO_PINS                  (uint32_t)(IO_Pin_3 | IO_Pin_4 | IO_Pin_5 | IO_Pin_6 | IO_Pin_7)
 
-/** 
-  * @brief  IO Pins  
-  */ 
+/**
+  * @brief  IO Pins
+  */
 #define IO_Pin_0                 0x01
 #define IO_Pin_1                 0x02
 #define IO_Pin_2                 0x04
@@ -376,23 +376,23 @@ typedef enum
 #define IO_Pin_7                 0x80
 #define IO_Pin_ALL               0xFF
 
-/** 
-  * @brief  IO Pin directions  
-  */ 
+/**
+  * @brief  IO Pin directions
+  */
 #define Direction_IN             0x00
 #define Direction_OUT            0x01
 
-/** 
-  * @brief  Interrupt Line output parameters  
-  */ 
+/**
+  * @brief  Interrupt Line output parameters
+  */
 #define Polarity_Low             0x00
 #define Polarity_High            0x04
 #define Type_Level               0x00
 #define Type_Edge                0x02
 
-/** 
-  * @brief IO Interrupts  
-  */ 
+/**
+  * @brief IO Interrupts
+  */
 #define IO_IT_0                  0x01
 #define IO_IT_1                  0x02
 #define IO_IT_2                  0x04
@@ -406,58 +406,58 @@ typedef enum
 #define IOE_TS_IT                (uint8_t)(IO_IT_0 | IO_IT_1 | IO_IT_2)
 #define IOE_INMEMS_IT            (uint8_t)(IO_IT_2 | IO_IT_3)
 
-/** 
-  * @brief  Edge detection value  
-  */ 
+/**
+  * @brief  Edge detection value
+  */
 #define EDGE_FALLING              0x01
 #define EDGE_RISING               0x02
 
-/** 
-  * @brief  Global interrupt Enable bit  
-  */ 
+/**
+  * @brief  Global interrupt Enable bit
+  */
 #define IOE_GIT_EN                0x01
 
 /**
   * @}
-  */ 
+  */
 
 
 
 /** @defgroup STM3210C_EVAL_IOE_Exported_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 
 /** @defgroup STM3210C_EVAL_IOE_Exported_Functions
   * @{
-  */ 
+  */
 
-/** 
-  * @brief  Configuration and initialization functions  
+/**
+  * @brief  Configuration and initialization functions
   */
 uint8_t IOE_Config(void);
 uint8_t IOE_ITConfig(uint32_t IOE_ITSRC_Source);
 
-/** 
+/**
   * @brief  Timeout user callback function. This function is called when a timeout
   *         condition occurs during communication with IO Expander. Only protoype
   *         of this function is decalred in IO Expander driver. Its implementation
   *         may be done into user application. This function may typically stop
   *         current operations and reset the I2C peripheral and IO Expander.
   *         To enable this function use uncomment the define USE_TIMEOUT_USER_CALLBACK
-  *         at the top of this file.          
+  *         at the top of this file.
   */
-#ifdef USE_TIMEOUT_USER_CALLBACK 
+#ifdef USE_TIMEOUT_USER_CALLBACK
  uint8_t IOE_TimeoutUserCallback(void);
 #else
  #define IOE_TimeoutUserCallback()  IOE_TIMEOUT
 #endif /* USE_TIMEOUT_USER_CALLBACK */
 
-/** 
+/**
   * @brief IO pins control functions
   */
 uint8_t IOE_WriteIOPin(uint8_t IO_Pin, IOE_BitValue_TypeDef BitVal);
@@ -465,12 +465,12 @@ uint8_t IOE_ReadIOPin(uint32_t IO_Pin);
 JOYState_TypeDef
  IOE_JoyStickGetState(void);
 
-/** 
+/**
   * @brief Touch Screen controller functions
   */
 TS_STATE* IOE_TS_GetState(void);
 
-/** 
+/**
   * @brief Interrupts Mangement functions
   */
 FlagStatus IOE_GetGITStatus(uint8_t DeviceAddr, uint8_t Global_IT);
@@ -478,12 +478,12 @@ uint8_t IOE_ClearGITPending(uint8_t DeviceAddr, uint8_t IO_IT);
 FlagStatus IOE_GetIOITStatus(uint8_t DeviceAddr, uint8_t IO_IT);
 uint8_t IOE_ClearIOITPending(uint8_t DeviceAddr, uint8_t IO_IT);
 
-/** 
+/**
   * @brief Temperature Sensor functions
   */
 uint32_t IOE_TempSens_GetData(void);
 
-/** 
+/**
   * @brief IO-Expander Control functions
   */
 uint8_t IOE_IsOperational(uint8_t DeviceAddr);
@@ -496,7 +496,7 @@ uint8_t IOE_GITCmd(uint8_t DeviceAddr, FunctionalState NewState);
 uint8_t IOE_GITConfig(uint8_t DeviceAddr, uint8_t Global_IT, FunctionalState NewState);
 uint8_t IOE_IOITConfig(uint8_t DeviceAddr, uint8_t IO_IT, FunctionalState NewState);
 
-/** 
+/**
   * @brief Low Layer functions
   */
 uint8_t IOE_TS_Config(void);
@@ -517,21 +517,21 @@ uint16_t I2C_ReadDataBuffer(uint8_t DeviceAddr, uint32_t RegisterAddr);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */     
+  */
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

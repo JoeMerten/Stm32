@@ -168,7 +168,7 @@ SECTIONS
     libm.a ( * )
     libgcc.a ( * )
   }
-  
+
   .ROarraySection : {*(.ROarraySection)} >MEMORY_ARRAY
-  
+
 }

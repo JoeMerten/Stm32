@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CAN/LoopBack/main.c 
+  * @file    CAN/LoopBack/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,13 +29,13 @@
 
 /** @addtogroup CAN_LoopBack
   * @{
-  */ 
+  */
 
 
 
 /* Private define ------------------------------------------------------------*/
 #define __CAN1_USED__
-/* #define __CAN2_USED__*/   /* Please check that you device is 
+/* #define __CAN2_USED__*/   /* Please check that you device is
                                 Connectivity line when using CAN2 */
 
 #ifdef  __CAN1_USED__
@@ -65,13 +65,13 @@ TestStatus CAN_Interrupt(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
 
 
 #ifdef  __CAN1_USED__
@@ -85,19 +85,19 @@ int main(void)
 
   /* NVIC Configuration */
   NVIC_Configuration();
-  
+
   /* Configures LED 1..4 */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
-  
-  /* Turns selected LED Off */  
+
+  /* Turns selected LED Off */
   STM_EVAL_LEDOff(LED1);
   STM_EVAL_LEDOff(LED2);
   STM_EVAL_LEDOff(LED3);
   STM_EVAL_LEDOff(LED4);
-  
+
   /* CAN transmit at 125Kb/s and receive by polling in loopback mode */
   TestRx = CAN_Polling();
 
@@ -159,7 +159,7 @@ TestStatus CAN_Polling(void)
   CAN_InitStructure.CAN_RFLM=DISABLE;
   CAN_InitStructure.CAN_TXFP=DISABLE;
   CAN_InitStructure.CAN_Mode=CAN_Mode_LoopBack;
-  
+
   /* Baudrate = 125kbps*/
   CAN_InitStructure.CAN_SJW=CAN_SJW_1tq;
   CAN_InitStructure.CAN_BS1=CAN_BS1_2tq;
@@ -178,7 +178,7 @@ TestStatus CAN_Polling(void)
   CAN_FilterInitStructure.CAN_FilterIdHigh=0x0000;
   CAN_FilterInitStructure.CAN_FilterIdLow=0x0000;
   CAN_FilterInitStructure.CAN_FilterMaskIdHigh=0x0000;
-  CAN_FilterInitStructure.CAN_FilterMaskIdLow=0x0000;  
+  CAN_FilterInitStructure.CAN_FilterMaskIdLow=0x0000;
   CAN_FilterInitStructure.CAN_FilterFIFOAssignment=0;
 
 
@@ -216,7 +216,7 @@ TestStatus CAN_Polling(void)
 
   if (RxMessage.StdId!=0x11)
   {
-    return FAILED;  
+    return FAILED;
   }
 
   if (RxMessage.IDE!=CAN_ID_STD)
@@ -226,14 +226,14 @@ TestStatus CAN_Polling(void)
 
   if (RxMessage.DLC!=2)
   {
-    return FAILED;  
+    return FAILED;
   }
 
   if ((RxMessage.Data[0]<<8|RxMessage.Data[1])!=0xCAFE)
   {
     return FAILED;
   }
-  
+
   return PASSED; /* Test Passed */
 }
 
@@ -264,7 +264,7 @@ TestStatus CAN_Interrupt(void)
   CAN_InitStructure.CAN_TXFP=DISABLE;
   CAN_InitStructure.CAN_Mode=CAN_Mode_LoopBack;
   CAN_InitStructure.CAN_SJW=CAN_SJW_1tq;
-  
+
   /* Baudrate = 500 Kbps */
   CAN_InitStructure.CAN_BS1=CAN_BS1_2tq;
   CAN_InitStructure.CAN_BS2=CAN_BS2_3tq;
@@ -287,7 +287,7 @@ TestStatus CAN_Interrupt(void)
   CAN_FilterInitStructure.CAN_FilterActivation=ENABLE;
   CAN_FilterInit(&CAN_FilterInitStructure);
 
-  /* CAN FIFO0 message pending interrupt enable */ 
+  /* CAN FIFO0 message pending interrupt enable */
   CAN_ITConfig(CANx, CAN_IT_FMP0, ENABLE);
 
   /* transmit 1 message */
@@ -302,17 +302,17 @@ TestStatus CAN_Interrupt(void)
 
   /* initialize the value that will be returned */
   ret = 0xFF;
-       
+
   /* receive message with interrupt handling */
   i=0;
   while((ret == 0xFF) && (i < 0xFFF))
   {
     i++;
   }
-  
+
   if (i == 0xFFF)
   {
-    ret=0;  
+    ret=0;
   }
 
   /* disable interrupt handling */
@@ -338,10 +338,10 @@ void NVIC_Configuration(void)
 #else  /*__CAN2_USED__*/
   /* CAN2 is not implemented in the device */
    #error "CAN2 is implemented only in Connectivity line devices"
-  
+
 #endif /*__CAN1_USED__*/
 #else
-#ifdef  __CAN1_USED__ 
+#ifdef  __CAN1_USED__
   NVIC_InitStructure.NVIC_IRQChannel = CAN1_RX0_IRQn;
 #else  /*__CAN2_USED__*/
   NVIC_InitStructure.NVIC_IRQChannel = CAN2_RX0_IRQn;
@@ -365,7 +365,7 @@ void NVIC_Configuration(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -383,6 +383,6 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

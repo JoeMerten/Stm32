@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    ADC/ADC_TripleModeInterleaved/main.c 
+  * @file    ADC/ADC_TripleModeInterleaved/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup ADC_TripleModeInterleaved
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -54,18 +54,18 @@ static void ADC_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
-     */     
+     */
 
   /* ADC configuration */
   ADC_Config();
-   
-  /* Start ADC1 Software Conversion */ 
+
+  /* Start ADC1 Software Conversion */
   ADC_SoftwareStartConv(ADC1);
 
   while (1)
@@ -75,7 +75,7 @@ int main(void)
 
 /**
   * @brief  ADC configuration
-  * @note   This function Configure the ADC peripheral  
+  * @note   This function Configure the ADC peripheral
             1) Enable peripheral clocks
             2) Configure ADC Channel 12 pin as analog input
             3) DMA2_Stream0 channel2 configuration
@@ -90,23 +90,23 @@ static void ADC_Config(void)
   GPIO_InitTypeDef       GPIO_InitStructure;
   DMA_InitTypeDef        DMA_InitStructure;
   ADC_InitTypeDef        ADC_InitStructure;
-  ADC_CommonInitTypeDef  ADC_CommonInitStructure;  
-  
+  ADC_CommonInitTypeDef  ADC_CommonInitStructure;
+
   /* Enable peripheral clocks *************************************************/
   RCC_AHB1PeriphClockCmd( ADC1_2_CHANNEL_GPIO_CLK , ENABLE);
   RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_DMA2 , ENABLE);
   RCC_APB2PeriphClockCmd( RCC_APB2Periph_ADC1 , ENABLE);
   RCC_APB2PeriphClockCmd( RCC_APB2Periph_ADC2 , ENABLE);
-  RCC_APB2PeriphClockCmd( RCC_APB2Periph_ADC3 , ENABLE);  
+  RCC_APB2PeriphClockCmd( RCC_APB2Periph_ADC3 , ENABLE);
 
-  /* Configure ADC Channel 12 pin as analog input *****************************/ 
+  /* Configure ADC Channel 12 pin as analog input *****************************/
   GPIO_InitStructure.GPIO_Pin = GPIO_PIN;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
   GPIO_Init(GPIO_PORT, &GPIO_InitStructure);
 
   /* DMA2 Stream0 channel0 configuration **************************************/
-  DMA_InitStructure.DMA_Channel = DMA_CHANNELx;  
+  DMA_InitStructure.DMA_Channel = DMA_CHANNELx;
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)ADC_CDR_ADDRESS;
   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)&aADCTripleConvertedValue;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
@@ -117,7 +117,7 @@ static void ADC_Config(void)
   DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;
   DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
   DMA_InitStructure.DMA_Priority = DMA_Priority_High;
-  DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;         
+  DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
   DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull;
   DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
   DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
@@ -129,8 +129,8 @@ static void ADC_Config(void)
   /* ADC Common configuration *************************************************/
   ADC_CommonInitStructure.ADC_Mode = ADC_TripleMode_Interl;
   ADC_CommonInitStructure.ADC_TwoSamplingDelay = ADC_TwoSamplingDelay_5Cycles;
-  ADC_CommonInitStructure.ADC_DMAAccessMode = ADC_DMAAccessMode_2;  
-  ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div2; 
+  ADC_CommonInitStructure.ADC_DMAAccessMode = ADC_DMAAccessMode_2;
+  ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div2;
   ADC_CommonInit(&ADC_CommonInitStructure);
 
   /* ADC1 regular channel 12 configuration ************************************/
@@ -149,11 +149,11 @@ static void ADC_Config(void)
 
   /* ADC2 regular channel 12 configuration ************************************/
   ADC_Init(ADC2, &ADC_InitStructure);
-  /* ADC2 regular channel12 configuration */ 
+  /* ADC2 regular channel12 configuration */
   ADC_RegularChannelConfig(ADC2, ADC_CHANNEL, 1, ADC_SampleTime_3Cycles);
 
   /* ADC3 regular channel 12 configuration ************************************/
-  ADC_Init(ADC3, &ADC_InitStructure); 
+  ADC_Init(ADC3, &ADC_InitStructure);
   /* ADC3 regular channel12 configuration */
   ADC_RegularChannelConfig(ADC3, ADC_CHANNEL, 1, ADC_SampleTime_3Cycles);
 
@@ -168,7 +168,7 @@ static void ADC_Config(void)
 
   /* Enable ADC3 **************************************************************/
   ADC_Cmd(ADC3, ENABLE);
-}  
+}
 
 #ifdef  USE_FULL_ASSERT
 
@@ -180,7 +180,7 @@ static void ADC_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -193,10 +193,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

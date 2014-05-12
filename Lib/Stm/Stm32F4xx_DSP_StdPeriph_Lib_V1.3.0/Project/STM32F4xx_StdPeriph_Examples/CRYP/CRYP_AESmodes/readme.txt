@@ -1,13 +1,13 @@
 /**
   @page CRYP_AESmodes  Encrypt and Decrypt data using AES Algo in chaining modes and all key sizes
-  
+
   @verbatim
   ******************** (C) COPYRIGHT 2013 STMicroelectronics *******************
-  * @file    CRYP/CRYP_AESmodes/readme.txt 
+  * @file    CRYP/CRYP_AESmodes/readme.txt
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
-  * @brief   Description of the CRYP AES Algorithm in all modes and all key 
+  * @brief   Description of the CRYP AES Algorithm in all modes and all key
   *          sizes example.
   ******************************************************************************
   *
@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -26,10 +26,10 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Example Description
 
-This example shows how to use the CRYPTO peripheral to encrypt and decrypt data 
-using AES in chaining modes (ECB, CBC, CTR) and all key sizes (128, 192, 256) 
+This example shows how to use the CRYPTO peripheral to encrypt and decrypt data
+using AES in chaining modes (ECB, CBC, CTR) and all key sizes (128, 192, 256)
 Algorithm.
 
 For this example, a firmware is used to interface with the Crypto peripheral
@@ -68,7 +68,7 @@ The Plain data, encrypted data and decrypted data can be displayed on a PC
 HyperTerminal using the USART.
 
 The USARTx is configured as follows:
-    - BaudRate = 115200 baud  
+    - BaudRate = 115200 baud
     - Word Length = 8 Bits
     - One Stop Bit
     - No parity
@@ -76,8 +76,8 @@ The USARTx is configured as follows:
     - Receive and transmit enabled
 
 
-@par Directory contents 
-  
+@par Directory contents
+
   - CRYP/CRYP_AESmodes/system_stm32f4xx.c   STM32F4xx system clock configuration file
   - CRYP/CRYP_AESmodes/stm32f4xx_conf.h     Library Configuration file
   - CRYP/CRYP_AESmodes/stm32f4xx_it.c       Interrupt handlers
@@ -86,25 +86,25 @@ The USARTx is configured as follows:
   - CRYP/CRYP_AESmodes/main.h               Main program header file
 
 
-@par Hardware and Software environment 
+@par Hardware and Software environment
 
   - This example runs on STM32F415xx/417xx, STM32F437xx and STM32F439xx devices.
-    
-  - This example has been tested with STMicroelectronics STM324xG-EVAL (STM32F41xx 
-    Devices), STM32437I-EVAL (STM32F437xx Devices) and STM32439I-EVAL RevB 
-    (STM32F439xx Devices) evaluation boards and can be easily tailored 
+
+  - This example has been tested with STMicroelectronics STM324xG-EVAL (STM32F41xx
+    Devices), STM32437I-EVAL (STM32F437xx Devices) and STM32439I-EVAL RevB
+    (STM32F439xx Devices) evaluation boards and can be easily tailored
     to any other supported device and development board.
 
-  - STM324xG-EVAL and STM32437I-EVAL Set-up 
-    - Connect a null-modem female/female RS232 cable between the DB9 connector 
+  - STM324xG-EVAL and STM32437I-EVAL Set-up
+    - Connect a null-modem female/female RS232 cable between the DB9 connector
       CN16 (USART3) and PC serial port.
       @note Make sure that jumper JP22 is in position 1-2
-      
-  - STM32439I-EVAL RevB Set-up 
-    - Connect a null-modem female/female RS232 cable between the DB9 connector 
+
+  - STM32439I-EVAL RevB Set-up
+    - Connect a null-modem female/female RS232 cable between the DB9 connector
       CN8 (USART1) and PC serial port.
       @note Make sure that jumper JP7 is in position 1-2
- 
+
   - Hyperterminal configuration:
     - Word Length = 8 Bits
     - One Stop Bit
@@ -113,24 +113,24 @@ The USARTx is configured as follows:
     - flow control: None
 
 
-@par How to use it ? 
+@par How to use it ?
 
 In order to make the program work, you must do the following:
  - Copy all source files from this example folder to the template folder under
    Project\STM32F4xx_StdPeriph_Templates
  - Open your preferred toolchain
- - Select the project workspace related to the used device 
+ - Select the project workspace related to the used device
    - If "STM32F40_41xxx" is selected as default project Add the following files in the project source list:
-     - Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval.c 
-      
+     - Utilities\STM32_EVAL\STM3240_41_G_EVAL\stm324xg_eval.c
+
    - If "STM32F427_437xx" is selected as default project Add the following files in the project source list:
      - Utilities\STM32_EVAL\STM324x7I_EVAL\stm324x7i_eval.c
-     
+
    - If "STM32F429_439xx" is selected as default project Add the following files in the project source list:
      - Utilities\STM32_EVAL\STM324x9I_EVAL\stm324x9i_eval.c
-       
+
  - Rebuild all files and load your image into target memory
  - Run the example
-  
+
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/BOR/main.c 
+  * @file    PWR/BOR/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -35,7 +35,7 @@
 
 /** @addtogroup PWR_BOR
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -59,13 +59,13 @@ __IO uint32_t Counter = 0;
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f2xx.c file
-     */     
-       
+     */
+
   /* Initialize LED1 on STM322xG-EVAL board */
   STM_EVAL_LEDInit(LED1);
 
@@ -76,13 +76,13 @@ int main(void)
   if (STM_EVAL_PBGetState(BUTTON_KEY) == 0x00)
   {
     /* Get BOR Option Bytes */
-    if((FLASH_OB_GetBOR() & 0x0C) != BOR_LEVEL) 
+    if((FLASH_OB_GetBOR() & 0x0C) != BOR_LEVEL)
     {
       /* Unlocks the option bytes block access */
       FLASH_OB_Unlock();
 
       /* Select the desired V(BOR) Level -------------------------------------*/
-      FLASH_OB_BORConfig(BOR_LEVEL); 
+      FLASH_OB_BORConfig(BOR_LEVEL);
 
       /* Launch the option byte loading */
       FLASH_OB_Launch();
@@ -90,8 +90,8 @@ int main(void)
       /* Locks the option bytes block access */
       FLASH_OB_Lock();
     }
-  } 
-   
+  }
+
   while (1)
   {
     /* Toggle The LED1 */
@@ -112,7 +112,7 @@ int main(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -125,10 +125,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

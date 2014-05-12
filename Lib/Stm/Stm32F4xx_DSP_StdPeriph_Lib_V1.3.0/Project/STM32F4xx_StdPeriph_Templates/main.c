@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Project/STM32F4xx_StdPeriph_Templates/main.c 
+  * @file    Project/STM32F4xx_StdPeriph_Templates/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -30,7 +30,7 @@
 
 /** @addtogroup Template_Project
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -51,13 +51,13 @@ static void Delay(__IO uint32_t nTime);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/
-       startup_stm32f429_439xx.s/startup_stm32f401xx.s) before to branch to 
-       application main. To reconfigure the default setting of SystemInit() 
+       startup_stm32f429_439xx.s/startup_stm32f401xx.s) before to branch to
+       application main. To reconfigure the default setting of SystemInit()
        function, refer to system_stm32f4xx.c file
-     */  
+     */
 
   /* SysTick end of count event each 10ms */
   RCC_GetClocksFreq(&RCC_Clocks);
@@ -66,7 +66,7 @@ int main(void)
   /* Add your application code here */
   /* Insert 50 ms delay */
   Delay(5);
-      
+
   /* Infinite loop */
   while (1)
   {
@@ -79,7 +79,7 @@ int main(void)
   * @retval None
   */
 void Delay(__IO uint32_t nTime)
-{ 
+{
   uwTimingDelay = nTime;
 
   while(uwTimingDelay != 0);
@@ -93,7 +93,7 @@ void Delay(__IO uint32_t nTime)
 void TimingDelay_Decrement(void)
 {
   if (uwTimingDelay != 0x00)
-  { 
+  {
     uwTimingDelay--;
   }
 }
@@ -108,7 +108,7 @@ void TimingDelay_Decrement(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

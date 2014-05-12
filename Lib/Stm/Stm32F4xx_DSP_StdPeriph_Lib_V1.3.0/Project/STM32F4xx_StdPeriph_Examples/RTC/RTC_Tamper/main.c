@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RTC/RTC_Tamper/main.c 
+  * @file    RTC/RTC_Tamper/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup RTC_Tamper
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -43,13 +43,13 @@
 /* Uncomment the corresponding line to select the RTC Clock source */
 #define RTC_CLOCK_SOURCE_LSE            /* LSE used as RTC source clock */
 /* #define RTC_CLOCK_SOURCE_LSI */      /* LSI used as RTC source clock. The RTC Clock
-                                           may varies due to LSI frequency dispersion. */ 
+                                           may varies due to LSI frequency dispersion. */
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint32_t aRTC_BKP_DR[RTC_BKP_DR_NUMBER] =
   {
-    RTC_BKP_DR0, RTC_BKP_DR1, RTC_BKP_DR2, RTC_BKP_DR3, 
+    RTC_BKP_DR0, RTC_BKP_DR1, RTC_BKP_DR2, RTC_BKP_DR3,
     RTC_BKP_DR4, RTC_BKP_DR5, RTC_BKP_DR6, RTC_BKP_DR7,
     RTC_BKP_DR8, RTC_BKP_DR9, RTC_BKP_DR10, RTC_BKP_DR11,
     RTC_BKP_DR12, RTC_BKP_DR13, RTC_BKP_DR14, RTC_BKP_DR15,
@@ -70,7 +70,7 @@ static uint32_t CheckRTC_BKP_DR(uint32_t FirstRTCBackupData);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s)
        before to branch to application main.
@@ -81,7 +81,7 @@ int main(void)
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
-  
+
   /* RTC configuration */
   RTC_Config();
 
@@ -124,36 +124,36 @@ void RTC_Config(void)
   /* Reset BKP Domain */
   RCC_BackupResetCmd(ENABLE);
   RCC_BackupResetCmd(DISABLE);
-      
+
 #if defined (RTC_CLOCK_SOURCE_LSI)  /* LSI used as RTC source clock*/
 /* The RTC Clock may varies due to LSI frequency dispersion. */
-  /* Enable the LSI OSC */ 
+  /* Enable the LSI OSC */
   RCC_LSICmd(ENABLE);
 
-  /* Wait till LSI is ready */  
+  /* Wait till LSI is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET)
   {
   }
 
   /* Select the RTC Clock Source */
   RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
-  
+
 #elif defined (RTC_CLOCK_SOURCE_LSE) /* LSE used as RTC source clock */
   /* Enable the LSE OSC */
   RCC_LSEConfig(RCC_LSE_ON);
 
-  /* Wait till LSE is ready */  
+  /* Wait till LSE is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)
   {
   }
 
   /* Select the RTC Clock Source */
   RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
-  
+
 #else
   #error Please select the RTC Clock source inside the main.c file
 #endif /* RTC_CLOCK_SOURCE_LSI */
-  
+
   /* Enable The external line21 interrupt */
   EXTI_ClearITPendingBit(EXTI_Line21);
   EXTI_InitStructure.EXTI_Line = EXTI_Line21;
@@ -258,7 +258,7 @@ uint32_t IsBackupRegReset(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -271,10 +271,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

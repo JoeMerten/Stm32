@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V4.5.0
   * @date    07-March-2011
-  * @brief   This file contains all the functions prototypes for the 
+  * @brief   This file contains all the functions prototypes for the
   *          stm32100e_eval_fsmc_onenand firmware driver.
   ******************************************************************************
   * @attention
@@ -17,9 +17,9 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
+  ******************************************************************************
   */
-   
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32100E_EVAL_FSMC_ONENAND_H
 #define __STM32100E_EVAL_FSMC_ONENAND_H
@@ -34,18 +34,18 @@
 /** @addtogroup Utilities
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM32100E_EVAL
   * @{
   */
-  
+
 /** @addtogroup STM32100E_EVAL_FSMC_ONENAND
   * @{
-  */  
+  */
 
 /** @defgroup STM32100E_EVAL_FSMC_ONENAND_Exported_Types
   * @{
@@ -65,21 +65,21 @@ typedef enum
   OneNAND_TIMEOUT
 }OneNAND_Status;
 
-typedef struct 
+typedef struct
 {
   uint16_t Block;
   uint16_t Page;
-} OneNAND_ADDRESS; 
+} OneNAND_ADDRESS;
 /**
   * @}
   */
-  
+
 /** @defgroup STM32100E_EVAL_FSMC_ONENAND_Exported_Constants
   * @{
   */
-/** 
-  * @brief  OneNAND memory command  
-  */  
+/**
+  * @brief  OneNAND memory command
+  */
 #define OneNAND_CMD_ERASE                    ((uint16_t)0x0094)
 #define OneNAND_CMD_PROGRAM                  ((uint16_t)0x0080)
 #define OneNAND_CMD_RESET                    ((uint16_t)0x00F0)
@@ -87,9 +87,9 @@ typedef struct
 #define OneNAND_CMD_UNLOCK                   ((uint16_t)0x0023)
 #define OneNAND_CMD_LOAD                     ((uint16_t)0x0000)
 
-/** 
-  * @brief OneNand Register description  
-  */  
+/**
+  * @brief OneNand Register description
+  */
 #define OneNAND_REG_MANUFACTERID             ((uint32_t)0x1E000) /* Manufacturer identification */
 #define OneNAND_REG_DEVICEID                 ((uint32_t)0x1E002) /* Device identification */
 #define OneNAND_REG_DATABUFFERSIZE           ((uint32_t)0x1E006) /* Data Buffer size */
@@ -109,8 +109,8 @@ typedef struct
 #define OneNAND_REG_STARTBLOCKADDRESS        ((uint32_t)0x1E498) /* Start memory block address in Write Protection mode */
 #define OneNAND_REG_WRITEPROTECTIONSTATUS    ((uint32_t)0x1E49C) /* Current memory Write Protection status */
 
-/** 
-  * @brief OneNand Memory partition description  
+/**
+  * @brief OneNand Memory partition description
   */
 #define OneNAND_DATA_RAM_0_0_ADD            ((uint32_t)0x0400) /* DataRAM Main page0/sector0 */
 #define OneNAND_DATA_RAM_0_0_REG            ((uint32_t)0x0800) /* DataRAM 0_0 is selected with 4 sector */
@@ -138,18 +138,18 @@ typedef struct
 
 /**
   * @}
-  */ 
-  
+  */
+
 /** @defgroup STM32100E_EVAL_FSMC_ONENAND_Exported_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM32100E_EVAL_FSMC_ONENAND_Exported_Functions
   * @{
-  */ 
+  */
 void OneNAND_Init(void);
 void OneNAND_Reset(void);
 void OneNAND_ReadID(OneNAND_IDTypeDef* OneNAND_ID);
@@ -180,10 +180,10 @@ uint16_t OneNAND_ReadControllerStatus(void);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

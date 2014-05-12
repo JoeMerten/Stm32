@@ -1,6 +1,6 @@
 /**
   @page HiTOP5_STM3210E HiTOP Project Template for STM32F10x High-density devices
-  
+
   @verbatim
   ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    readme.txt
@@ -8,7 +8,7 @@
   * @version V3.5.0
   * @date    08-April-2011
   * @brief   This sub directory contains all the user modifiable files needed
-  *          to create a new project linked with the STM32F10x Standard Peripherals 
+  *          to create a new project linked with the STM32F10x Standard Peripherals
   *          Library and working with HiTOP software toolchain (version 5.40 and later).
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -19,63 +19,63 @@
   * INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   ******************************************************************************
   @endverbatim
- 
+
 @par Directory contents
 
- - Project.htp: A pre-configured project file with the provided library 
+ - Project.htp: A pre-configured project file with the provided library
                 structure that produces an executable image with HiTOP
 
  - cstart_thumb2.asm: This file initializes the stack pointer and copy initialized
-                      sections from ROM to RAM.                 
+                      sections from ROM to RAM.
 
  - Objects: This mandatory directory contains the executable images.
 
- - Settings: This directory contains the linker and script files.                  
+ - Settings: This directory contains the linker and script files.
      - arm_arch.lsl: This file is used to place program code (readonly)
                      in internal FLASH and data (readwrite, Stack and Heap)
                      in internal SRAM.
 
      - flash_nor.scr:  This file is a HiTOP script allowing the FSMC configuration.
-                       It should be executed before programming the NOR flash of the 
+                       It should be executed before programming the NOR flash of the
                        STM32 High-density devices.
-                       
+
      - link.lnk: This file is the HiTOP linker it invokes the STM32F10x_hd.lsl.
 
      - linkextsram.lnk: This file is the HiTOP linker it invokes the STM32F10x_extsram.lsl.
-     
-     - linknor.lnk: This file is the HiTOP linker it invokes the STM32F10xnor.lsl.      
-                                   
+
+     - linknor.lnk: This file is the HiTOP linker it invokes the STM32F10xnor.lsl.
+
      - reset_appl.scr: This file is a HiTOP script it performs a target reset.
-     
-     - reset_go_main.scr: This file is a HiTOP script and it sets the Program 
+
+     - reset_go_main.scr: This file is a HiTOP script and it sets the Program
                           Counter at the "main" instruction.
 
-     - StartupScript.scr: This file is a HiTOP script and it performs a target 
+     - StartupScript.scr: This file is a HiTOP script and it performs a target
                           reset before loading The executable image.
 
-     - STM32F10x_extsram.lsl: This file  used to place program code (readonly) in 
+     - STM32F10x_extsram.lsl: This file  used to place program code (readonly) in
                               internal FLASH and data (readwrite, Stack and Heap)
                               in external SRAM.
                               It contains also the vector table of the STM32 high-density
-                              devices. 
-                              You can customize this file to your need. 
+                              devices.
+                              You can customize this file to your need.
                               This file is used only with STM32 High-density devices.
-                                 
+
      - STM32F10x_hd.lsl: This file is used to place program code (readonly)
                          in internal FLASH and data (readwrite, Stack and Heap)
                          in internal SRAM.
-                         It contains also the vector table of the STM32 
+                         It contains also the vector table of the STM32
                          High-Density devices.
-                         You can customize this file to your need. 
+                         You can customize this file to your need.
 
-     - STM32F10xnor.lsl: This file  used to place program code (readonly) in 
+     - STM32F10xnor.lsl: This file  used to place program code (readonly) in
                          external NOR FLASH and data (readwrite, Stack and Heap)
                          in internal SRAM.
                          It contains also the vector table of the STM32 high-density
-                         devices. 
-                         You can customize this file to your need. 
-                         This file is used only with STM32 High-density devices.                                
-                             
+                         devices.
+                         You can customize this file to your need.
+                         This file is used only with STM32 High-density devices.
+
 @par How to use it ?
 
 - Open the HiTOP toolchain.
@@ -86,21 +86,21 @@
 - Run the "RESET_GO_MAIN" script to set the PC at the "main"
 - Run program: Debug->Go(F5).
 
-- When using High-density devices, it is mandatory to reset the target before 
+- When using High-density devices, it is mandatory to reset the target before
   loading the project into  target
 - It is recommended to run the reset script ( click on TR button in the toolbar menu)
-  after loading the project into target. 
+  after loading the project into target.
 
 @note
- - Low-density Value line devices are STM32F100xx microcontrollers where the 
+ - Low-density Value line devices are STM32F100xx microcontrollers where the
    Flash memory density ranges between 16 and 32 Kbytes.
- - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+ - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx
    microcontrollers where the Flash memory density ranges between 16 and 32 Kbytes.
  - Medium-density Value line devices are STM32F100xx microcontrollers where
-   the Flash memory density ranges between 64 and 128 Kbytes.  
- - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   the Flash memory density ranges between 64 and 128 Kbytes.
+ - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
- - High-density Value line devices are STM32F100xx microcontrollers where the 
+ - High-density Value line devices are STM32F100xx microcontrollers where the
    Flash memory density ranges between 256 and 512 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.

@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    CEC/DataExchangeInterrupt/stm32f10x_it.c 
+  * @file    CEC/DataExchangeInterrupt/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -31,7 +31,7 @@
 
 /** @addtogroup CEC_DataExchangeInterrupt
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -40,7 +40,7 @@
 /* Receive buffer */
 uint8_t ReceiveBuffer[10];
 /* Transmit buffer */
-uint8_t TransmitBuffer[10] = {0xDF, 0x12, 0xD3, 0x56, 0x97, 
+uint8_t TransmitBuffer[10] = {0xDF, 0x12, 0xD3, 0x56, 0x97,
                               0xA1, 0xEC, 0x7B, 0x4F, 0x22};
 __IO uint8_t ReceivedFrame = 0;
 uint8_t send_inc = 0, rcv_inc = 0;
@@ -161,7 +161,7 @@ void SysTick_Handler(void)
   */
 void EXTI9_5_IRQHandler(void)
 {
-  /* Generate rising edge on Key button to detect when we push key button to initiate 
+  /* Generate rising edge on Key button to detect when we push key button to initiate
      transmission */
   if(EXTI_GetITStatus(KEY_BUTTON_EXTI_LINE) != RESET)
   {
@@ -211,12 +211,12 @@ void CEC_IRQHandler(void)
     /* Check if the byte received is a Header */
     else if (CEC_GetFlagStatus(CEC_FLAG_RSOM))
     {
- 
+
       InitiatorAddress = ((CEC_ReceiveDataByte() >> 4) & 0x0F);
       rcv_inc = 0;
     }
     /* Receive each byte except header in the reception buffer */
-    else 
+    else
     {
       ReceiveBuffer[rcv_inc] = CEC_ReceiveDataByte();
       rcv_inc++;
@@ -231,7 +231,7 @@ void CEC_IRQHandler(void)
   {
     TransErrorCode = CEC->ESR;
     CEC_ClearFlag(CEC_FLAG_TBTRF | CEC_FLAG_TERR);
-   
+
   }
   /* Check if end of message bit is set in the data to be transmitted */
   else if (CEC_GetFlagStatus(CEC_FLAG_TEOM))
@@ -278,10 +278,10 @@ void CEC_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
-  
+  */
+
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

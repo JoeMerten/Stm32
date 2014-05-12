@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.1
   * @date    19-September-2013
-  * @brief   This file contains all the functions prototypes for the 
+  * @brief   This file contains all the functions prototypes for the
   *          STM324x7i_eval_audio_codec.c driver.
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -32,8 +32,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "STM324x7i_eval.h"
-#include "STM324x7i_eval_ioe.h" /* IOExpander driver is included in order to allow 
-                                   CS43L22 codec reset pin managment on the 
+#include "STM324x7i_eval_ioe.h" /* IOExpander driver is included in order to allow
+                                   CS43L22 codec reset pin managment on the
                                    evaluation board */
 
 /** @addtogroup Utilities
@@ -42,15 +42,15 @@
 
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM324x7I_EVAL
   * @{
   */
-    
-/** @defgroup STM324x7I_EVAL_AUDIO_CODEC 
+
+/** @defgroup STM324x7I_EVAL_AUDIO_CODEC
   * @{
-  */    
+  */
 
 
 /** @defgroup STM324x7I_EVAL_AUDIO_CODEC_Exported_Types
@@ -59,15 +59,15 @@
 
 /** @defgroup STM324x7I_EVAL_AUDIO_CODEC_Exported_Constants
   * @{
-  */ 
+  */
 
 /*------------------------------------
              CONFIGURATION: Audio Codec Driver Configuration parameters
                                       ----------------------------------------*/
 /* Audio Transfer mode (DMA, Interrupt or Polling) */
-#define AUDIO_MAL_MODE_NORMAL         /* Uncomment this line to enable the audio 
+#define AUDIO_MAL_MODE_NORMAL         /* Uncomment this line to enable the audio
                                          Transfer using DMA */
-/* #define AUDIO_MAL_MODE_CIRCULAR */ /* Uncomment this line to enable the audio 
+/* #define AUDIO_MAL_MODE_CIRCULAR */ /* Uncomment this line to enable the audio
                                          Transfer using DMA */
 
 /* For the DMA modes select the interrupt that will be used */
@@ -79,39 +79,39 @@
 #define EVAL_AUDIO_IRQ_PREPRIO           0   /* Select the preemption priority level(0 is the highest) */
 #define EVAL_AUDIO_IRQ_SUBRIO            0   /* Select the sub-priority level (0 is the highest) */
 
-/* Uncomment the following line to use the default Codec_TIMEOUT_UserCallback() 
+/* Uncomment the following line to use the default Codec_TIMEOUT_UserCallback()
    function implemented in STM324x7I_eval_audio_codec.c file.
-   Codec_TIMEOUT_UserCallback() function is called whenever a timeout condition 
-   occurs during communication (waiting on an event that doesn't occur, bus 
-   errors, busy devices ...). */   
+   Codec_TIMEOUT_UserCallback() function is called whenever a timeout condition
+   occurs during communication (waiting on an event that doesn't occur, bus
+   errors, busy devices ...). */
 /* #define USE_DEFAULT_TIMEOUT_CALLBACK */
 /*----------------------------------------------------------------------------*/
 
 /*------------------------------------
                     OPTIONAL Configuration defines parameters
                                       ----------------------------------------*/
-/* I2C clock speed configuration (in Hz) 
-  WARNING: 
-   Make sure that this define is not already declared in other files (ie. 
+/* I2C clock speed configuration (in Hz)
+  WARNING:
+   Make sure that this define is not already declared in other files (ie.
   STM324x7I_eval.h file). It can be used in parallel by other modules. */
 #ifndef I2C_SPEED
  #define I2C_SPEED                        100000
 #endif /* I2C_SPEED */
 
-/* Uncomment defines below to select standard for audio communication between 
+/* Uncomment defines below to select standard for audio communication between
   Codec and I2S peripheral */
 #define I2S_STANDARD_PHILLIPS
 /* #define I2S_STANDARD_MSB */
 /* #define I2S_STANDARD_LSB */
 
-/* Uncomment the defines below to select if the Master clock mode should be 
+/* Uncomment the defines below to select if the Master clock mode should be
   enabled or not */
 #define CODEC_MCLK_ENABLED
 /* #deine CODEC_MCLK_DISABLED */
 
-/* Uncomment this line to enable verifying data sent to codec after each write 
+/* Uncomment this line to enable verifying data sent to codec after each write
   operation */
-#define VERIFY_WRITTENDATA 
+#define VERIFY_WRITTENDATA
 /*----------------------------------------------------------------------------*/
 
 /*-----------------------------------
@@ -164,10 +164,10 @@
 #define CODEC_I2S_SDA_PINSRC           GPIO_PinSource9
 
 /* Maximum Timeout values for flags and events waiting loops. These timeouts are
-   not based on accurate values, they just guarantee that the application will 
+   not based on accurate values, they just guarantee that the application will
    not remain stuck if the I2C communication is corrupted.
    You may modify these timeout values depending on CPU frequency and application
-   conditions (interrupts routines ...). */   
+   conditions (interrupts routines ...). */
 #define CODEC_FLAG_TIMEOUT             ((uint32_t)0x1000)
 #define CODEC_LONG_TIMEOUT             ((uint32_t)(300 * CODEC_FLAG_TIMEOUT))
 /*----------------------------------------------------------------------------*/
@@ -199,21 +199,21 @@
 /*----------------------------------------------------------------------------*/
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM324x7I_EVAL_AUDIO_CODEC_Exported_Macros
   * @{
-  */ 
+  */
 #define VOLUME_CONVERT(x)    ((Volume > 100)? 100:((uint8_t)((Volume * 255) / 100)))
 #define DMA_MAX(x)           (((x) <= DMA_MAX_SZE)? (x):DMA_MAX_SZE)
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM324x7I_EVAL_AUDIO_CODEC_Exported_Functions
   * @{
-  */ 
+  */
 
 uint32_t EVAL_AUDIO_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFreq);
 uint32_t EVAL_AUDIO_DeInit(void);
@@ -231,12 +231,12 @@ uint32_t Codec_SwitchOutput(uint8_t Output);
 /* This function is called when the requested data has been completely transferred.
    In Normal mode (when  the define AUDIO_MAL_MODE_NORMAL is enabled) this function
    is called at the end of the whole audio file.
-   In circular mode (when  the define AUDIO_MAL_MODE_CIRCULAR is enabled) this 
+   In circular mode (when  the define AUDIO_MAL_MODE_CIRCULAR is enabled) this
    function is called at the end of the current buffer transmission. */
 void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size);
 
-/* This function is called when half of the requested buffer has been transferred 
-   This callback is useful in Circular mode only (when AUDIO_MAL_MODE_CIRCULAR 
+/* This function is called when half of the requested buffer has been transferred
+   This callback is useful in Circular mode only (when AUDIO_MAL_MODE_CIRCULAR
    define is enabled)*/
 void EVAL_AUDIO_HalfTransfer_CallBack(uint32_t pBuffer, uint32_t Size);
 
@@ -244,24 +244,16 @@ void EVAL_AUDIO_HalfTransfer_CallBack(uint32_t pBuffer, uint32_t Size);
    error occurs. */
 void EVAL_AUDIO_Error_CallBack(void* pData);
 
-/* Codec_TIMEOUT_UserCallback() function is called whenever a timeout condition 
-   occurs during communication (waiting on an event that doesn't occur, bus 
+/* Codec_TIMEOUT_UserCallback() function is called whenever a timeout condition
+   occurs during communication (waiting on an event that doesn't occur, bus
    errors, busy devices ...) on the Codec control interface (I2C).
-   You can use the default timeout callback implementation by uncommenting the 
+   You can use the default timeout callback implementation by uncommenting the
    define USE_DEFAULT_TIMEOUT_CALLBACK in STM324x7I_eval_audio_codec.h file.
    Typically the user implementation of this callback should reset I2C peripheral
    and re-initialize communication or in worst case reset all the application. */
 uint32_t Codec_TIMEOUT_UserCallback(void);
-void Audio_MAL_IRQHandler(void); 
+void Audio_MAL_IRQHandler(void);
 #endif /* __STM324x7I_EVAL_AUDIOCODEC_H */
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
 
 /**
   * @}
@@ -269,10 +261,18 @@ void Audio_MAL_IRQHandler(void);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */    
+  */
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

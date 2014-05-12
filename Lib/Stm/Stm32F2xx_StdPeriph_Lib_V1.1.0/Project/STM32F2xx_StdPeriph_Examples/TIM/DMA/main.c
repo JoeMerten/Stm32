@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/DMA/main.c 
+  * @file    TIM/DMA/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -34,7 +34,7 @@
 
 /** @addtogroup TIM_DMA
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -59,7 +59,7 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
@@ -70,13 +70,13 @@ int main(void)
   TIM_Config();
 
   /* TIM1 DMA Transfer example -------------------------------------------------
-  
-  TIM1 input clock (TIM1CLK) is set to 2 * APB2 clock (PCLK2), since APB2 
-  prescaler is different from 1.   
-    TIM1CLK = 2 * PCLK2  
-    PCLK2 = HCLK / 2 
+
+  TIM1 input clock (TIM1CLK) is set to 2 * APB2 clock (PCLK2), since APB2
+  prescaler is different from 1.
+    TIM1CLK = 2 * PCLK2
+    PCLK2 = HCLK / 2
     => TIM1CLK = 2 * (HCLK / 2) = HCLK = SystemCoreClock
-  
+
   TIM1CLK = SystemCoreClock, Prescaler = 0, TIM1 counter clock = SystemCoreClock
   SystemCoreClock is set to 120 MHz for STM32F2xx devices.
 
@@ -87,14 +87,14 @@ int main(void)
   Update DMA request.
 
   The number of this repetitive requests is defined by the TIM1 Repetion counter,
-  each 3 Update Requests, the TIM1 Channel 3 Duty Cycle changes to the next new 
-  value defined by the SRC_Buffer . 
-  
-  Note: 
+  each 3 Update Requests, the TIM1 Channel 3 Duty Cycle changes to the next new
+  value defined by the SRC_Buffer .
+
+  Note:
     SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
     Each time the core clock (HCLK) changes, user had to call SystemCoreClockUpdate()
     function to update SystemCoreClock variable value. Otherwise, any configuration
-    based on this variable will be incorrect.  
+    based on this variable will be incorrect.
   -----------------------------------------------------------------------------*/
   /* Compute the value to be set in ARR regiter to generate signal frequency at 17.57 Khz */
   TimerPeriod = (SystemCoreClock / 17570 ) - 1;
@@ -132,10 +132,10 @@ int main(void)
 
   /* TIM1 counter enable */
   TIM_Cmd(TIM1, ENABLE);
-  
+
   /* DMA enable*/
   DMA_Cmd(DMA2_Stream6, ENABLE);
-  
+
   /* TIM1 Update DMA Request enable */
   TIM_DMACmd(TIM1, TIM_DMA_CC3, ENABLE);
 
@@ -155,7 +155,7 @@ void TIM_Config(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
   DMA_InitTypeDef DMA_InitStructure;
-  
+
   /* GPIOA and GPIOB clock enable */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOB, ENABLE);
 
@@ -165,7 +165,7 @@ void TIM_Config(void)
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP ;
-  GPIO_Init(GPIOA, &GPIO_InitStructure); 
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_TIM1);
 
   /* GPIOB Configuration: Channel 3N as alternate function push-pull */
@@ -177,7 +177,7 @@ void TIM_Config(void)
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2 , ENABLE);
 
   DMA_DeInit(DMA2_Stream6);
-  DMA_InitStructure.DMA_Channel = DMA_Channel_6;  
+  DMA_InitStructure.DMA_Channel = DMA_Channel_6;
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)(TIM1_CCR3_ADDRESS) ;
   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)SRC_Buffer;
   DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral;
@@ -217,10 +217,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

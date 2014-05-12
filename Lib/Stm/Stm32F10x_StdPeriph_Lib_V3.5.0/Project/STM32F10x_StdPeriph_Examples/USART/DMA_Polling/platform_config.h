@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/DMA_Polling/platform_config.h 
+  * @file    USART/DMA_Polling/platform_config.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __PLATFORM_CONFIG_H
@@ -34,7 +34,7 @@
  //#define USE_STM3210B_EVAL
  //#define USE_STM3210E_EVAL
  //#define USE_STM32100E_EVAL
- #define USE_STM3210C_EVAL 
+ #define USE_STM3210C_EVAL
 #endif
 
 /* Define the STM32F10x hardware depending on the used evaluation board */
@@ -49,7 +49,7 @@
   #define USARTy_Tx_DMA_Channel    DMA1_Channel4
   #define USARTy_Tx_DMA_FLAG       DMA1_FLAG_TC4
   #define USARTy_Rx_DMA_Channel    DMA1_Channel5
-  #define USARTy_Rx_DMA_FLAG       DMA1_FLAG_TC5  
+  #define USARTy_Rx_DMA_FLAG       DMA1_FLAG_TC5
   #define USARTy_DR_Base           0x40013804
 
   #define USARTz                   USART2
@@ -61,7 +61,7 @@
   #define USARTz_Tx_DMA_Channel    DMA1_Channel7
   #define USARTz_Tx_DMA_FLAG       DMA1_FLAG_TC7
   #define USARTz_Rx_DMA_Channel    DMA1_Channel6
-  #define USARTz_Rx_DMA_FLAG       DMA1_FLAG_TC6 
+  #define USARTz_Rx_DMA_FLAG       DMA1_FLAG_TC6
   #define USARTz_DR_Base           0x40004404
 
 #elif defined USE_STM3210E_EVAL || defined(USE_STM32100E_EVAL)
@@ -75,7 +75,7 @@
   #define USARTy_Tx_DMA_Channel    DMA1_Channel4
   #define USARTy_Tx_DMA_FLAG       DMA1_FLAG_TC4
   #define USARTy_Rx_DMA_Channel    DMA1_Channel5
-  #define USARTy_Rx_DMA_FLAG       DMA1_FLAG_TC5  
+  #define USARTy_Rx_DMA_FLAG       DMA1_FLAG_TC5
   #define USARTy_DR_Base           0x40013804
 
   #define USARTz                   USART2
@@ -87,7 +87,7 @@
   #define USARTz_Tx_DMA_Channel    DMA1_Channel7
   #define USARTz_Tx_DMA_FLAG       DMA1_FLAG_TC7
   #define USARTz_Rx_DMA_Channel    DMA1_Channel6
-  #define USARTz_Rx_DMA_FLAG       DMA1_FLAG_TC6  
+  #define USARTz_Rx_DMA_FLAG       DMA1_FLAG_TC6
   #define USARTz_DR_Base           0x40004404
 
 #elif defined USE_STM3210C_EVAL
@@ -101,7 +101,7 @@
   #define USARTy_Tx_DMA_Channel    DMA1_Channel7
   #define USARTy_Tx_DMA_FLAG       DMA1_FLAG_TC7
   #define USARTy_Rx_DMA_Channel    DMA1_Channel6
-  #define USARTy_Rx_DMA_FLAG       DMA1_FLAG_TC6  
+  #define USARTy_Rx_DMA_FLAG       DMA1_FLAG_TC6
   #define USARTy_DR_Base           0x40004404
 
   #define USARTz                   USART3
@@ -113,9 +113,9 @@
   #define USARTz_Tx_DMA_Channel    DMA1_Channel2
   #define USARTz_Tx_DMA_FLAG       DMA1_FLAG_TC2
   #define USARTz_Rx_DMA_Channel    DMA1_Channel3
-  #define USARTz_Rx_DMA_FLAG       DMA1_FLAG_TC3  
+  #define USARTz_Rx_DMA_FLAG       DMA1_FLAG_TC3
   #define USARTz_DR_Base           0x40004804
-  
+
 #endif /* USE_STM3210B_EVAL */
 
 /* Exported macro ------------------------------------------------------------*/

@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    NVIC/IRQ_Mask/stm32f2xx_it.c 
+  * @file    NVIC/IRQ_Mask/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -37,7 +37,7 @@
 
 /** @addtogroup IRQ_Mask
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -176,16 +176,16 @@ void EXTI15_10_IRQHandler(void)
   {
     if(index == 0)
     {
-      /* Configure the BASEPRI register to 0x40 (Preemption priority = 1). 
-         Only IRQ with higher preemption priority than 1 are permitted. 
+      /* Configure the BASEPRI register to 0x40 (Preemption priority = 1).
+         Only IRQ with higher preemption priority than 1 are permitted.
          This will mask TIM3 and TIM4 IRQ from generation. */
       __set_BASEPRI(0x40);
       index++;
     }
     else
     {
-      /* Configure the BASEPRI register to 0x00 (Preemption priority = 0). 
-         When this BASEPRI register is set to 0, it has no effect on the current 
+      /* Configure the BASEPRI register to 0x00 (Preemption priority = 0).
+         When this BASEPRI register is set to 0, it has no effect on the current
          priority.
          TIM2, TIM3 and TIM4 generation is controlled by NVIC priority registers. */
       __set_BASEPRI(0x00);
@@ -193,9 +193,9 @@ void EXTI15_10_IRQHandler(void)
     }
 
     /* Clears the TAMPER Button EXTI line pending bit */
-    EXTI_ClearITPendingBit(TAMPER_BUTTON_EXTI_LINE);  
+    EXTI_ClearITPendingBit(TAMPER_BUTTON_EXTI_LINE);
   }
-} 
+}
 
 /**
   * @brief  This function handles TIM2 global interrupt request.
@@ -206,7 +206,7 @@ void TIM2_IRQHandler(void)
 {
   /* Clear TIM2 update interrupt */
   TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
-  
+
   /* Toggle LED1 */
   STM_EVAL_LEDToggle(LED1);
 }
@@ -220,7 +220,7 @@ void TIM3_IRQHandler(void)
 {
   /* Clear TIM3 update interrupt */
   TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
-  
+
   /* Toggle LED2 */
   STM_EVAL_LEDToggle(LED2);
 }
@@ -234,17 +234,17 @@ void TIM4_IRQHandler(void)
 {
   /* Clear TIM4 update interrupt */
   TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
-  
+
   /* Toggle LED3 */
   STM_EVAL_LEDToggle(LED3);
 }
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

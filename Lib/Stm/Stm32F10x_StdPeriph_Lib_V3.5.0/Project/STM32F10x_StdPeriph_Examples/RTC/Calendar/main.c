@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RTC/Calendar/main.c 
+  * @file    RTC/Calendar/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -67,18 +67,18 @@ uint8_t USART_Scanf(uint32_t value);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
+     */
 
-  /* Initialize LED1 mounted on STM3210X-EVAL board */       
+  /* Initialize LED1 mounted on STM3210X-EVAL board */
   STM_EVAL_LEDInit(LED1);
 
   /* USARTx configured as follow:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -285,7 +285,7 @@ void Time_Adjust(void)
 void Time_Display(uint32_t TimeVar)
 {
   uint32_t THH = 0, TMM = 0, TSS = 0;
-  
+
   /* Reset RTC Counter when Time is 23:59:59 */
   if (RTC_GetCounter() == 0x0001517F)
   {
@@ -293,7 +293,7 @@ void Time_Display(uint32_t TimeVar)
      /* Wait until last write operation on RTC registers has finished */
      RTC_WaitForLastTask();
   }
-  
+
   /* Compute  hours */
   THH = TimeVar / 3600;
   /* Compute minutes */
@@ -308,7 +308,7 @@ void Time_Display(uint32_t TimeVar)
   * @brief  Shows the current time (HH:MM:SS) on the Hyperterminal.
   * @param  None
   * @retval None
-  */   
+  */
 void Time_Show(void)
 {
   printf("\n\r");

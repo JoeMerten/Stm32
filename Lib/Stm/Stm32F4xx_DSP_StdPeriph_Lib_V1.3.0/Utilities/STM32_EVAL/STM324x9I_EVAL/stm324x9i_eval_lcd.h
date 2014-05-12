@@ -17,14 +17,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */  
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM324x9I_EVAL_LCD_H
@@ -32,60 +32,60 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm324x9i_eval.h"
 #include "stm324x9i_eval_fmc_sdram.h"
 #include "../Common/fonts.h"
-   
+
 /** @addtogroup Utilities
   * @{
   */
 
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM324x9I_EVAL
   * @{
   */
-    
+
 /** @addtogroup STM324x9I_EVAL_LCD
   * @{
-  */ 
+  */
 
 
 /** @defgroup STM324x9I_EVAL_LCD_Exported_Types
   * @{
   */
-typedef struct 
+typedef struct
 {
   int16_t X;
   int16_t Y;
-} Point, * pPoint;   
+} Point, * pPoint;
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM324x9I_EVAL_LCD_Exported_Constants
   * @{
-  */ 
-  
+  */
+
 /**
- * @brief Used LCD  
+ * @brief Used LCD
  */
 
-typedef enum 
+typedef enum
 {
     USE_LCD_AM640480        = 0,      /*!<  LCD Ampire 640x480 */
     USE_LCD_AM480272        = 1,      /*!<  LCD Ampire 480x272 */
 } LCD_Used;
 
 
-/** 
-  * @brief  LCD color  
-  */ 
+/**
+  * @brief  LCD color
+  */
 #define LCD_COLOR_WHITE          0xFFFF
 #define LCD_COLOR_BLACK          0x0000
 #define LCD_COLOR_GREY           0xF7DE
@@ -97,8 +97,8 @@ typedef enum
 #define LCD_COLOR_CYAN           0x7FFF
 #define LCD_COLOR_YELLOW         0xFFE0
 
-/** 
-  * @brief  LCD Lines depending on the chosen fonts.  
+/**
+  * @brief  LCD Lines depending on the chosen fonts.
   */
 #define LCD_LINE_0               LINE(0)
 #define LCD_LINE_1               LINE(1)
@@ -159,29 +159,29 @@ typedef enum
 #define LCD_LINE_56              LINE(56)
 #define LCD_LINE_57              LINE(57)
 #define LCD_LINE_58              LINE(58)
-#define LCD_LINE_59              LINE(59)    
-    
-/** 
-  * @brief LCD default font 
-  */ 
+#define LCD_LINE_59              LINE(59)
+
+/**
+  * @brief LCD default font
+  */
 #define LCD_DEFAULT_FONT         Font16x24
 
-/** 
-  * @brief  LCD Direction  
-  */ 
+/**
+  * @brief  LCD Direction
+  */
 #define LCD_DIR_HORIZONTAL       0x0000
 #define LCD_DIR_VERTICAL         0x0001
 
-/** 
-  * @brief  LCD Layer  
-  */ 
+/**
+  * @brief  LCD Layer
+  */
 #define LCD_BACKGROUND_LAYER     0x0000
 #define LCD_FOREGROUND_LAYER     0x0001
 
 
-/** 
-  * @brief  I2C port definitions  
-  */ 
+/**
+  * @brief  I2C port definitions
+  */
 #define LCD_I2C                          I2C1
 #define LCD_I2C_CLK                      RCC_APB1Periph_I2C1
 #define LCD_I2C_SCL_PIN                  GPIO_Pin_6
@@ -194,34 +194,34 @@ typedef enum
 #define LCD_I2C_SDA_GPIO_CLK             RCC_AHB1Periph_GPIOB
 #define LCD_I2C_SDA_SOURCE               GPIO_PinSource9
 #define LCD_I2C_SDA_AF                   GPIO_AF_I2C1
-#define LCD_I2C_DR                       ((uint32_t)0x40005410)    
+#define LCD_I2C_DR                       ((uint32_t)0x40005410)
 
-/** 
-  * @brief  The Touch panel connector for LCD panel addresses  
-  */ 
-#define LCD_ADDR                   0x80    
+/**
+  * @brief  The Touch panel connector for LCD panel addresses
+  */
+#define LCD_ADDR                   0x80
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM324x9I_EVAL_LCD_Exported_Macros
   * @{
   */
-#define ASSEMBLE_RGB(R ,G, B)    ((((R)& 0xF8) << 8) | (((G) & 0xFC) << 3) | (((B) & 0xF8) >> 3)) 
+#define ASSEMBLE_RGB(R ,G, B)    ((((R)& 0xF8) << 8) | (((G) & 0xFC) << 3) | (((B) & 0xF8) >> 3))
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM324x9I_EVAL_LCD_Exported_Functions
   * @{
   */
 
-void     LCD_DeInit(void);   
+void     LCD_DeInit(void);
 void     LCD_Init(void);
 void     LCD_LayerInit(void);
 void     LCD_SetLayer(uint32_t Layerx);
-void     LCD_SetColors(uint16_t _TextColor, uint16_t _BackColor); 
+void     LCD_SetColors(uint16_t _TextColor, uint16_t _BackColor);
 void     LCD_GetColors(uint16_t *_TextColor, uint16_t *_BackColor);
 void     LCD_SetTextColor(uint16_t Color);
 void     LCD_SetBackColor(uint16_t Color);
@@ -270,7 +270,7 @@ void     LCD_DisplayOff(void);
 
 /**
   * @}
-  */    
+  */
 #ifdef __cplusplus
 }
 #endif
@@ -278,18 +278,18 @@ void     LCD_DisplayOff(void);
 #endif /* __STM324x9I_EVAL_LCD_H */
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /*********************** (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

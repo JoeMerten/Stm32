@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/InputCapture/main.c 
+  * @file    TIM/InputCapture/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup TIM_Input_Capture
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -50,13 +50,13 @@ void NVIC_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -67,9 +67,9 @@ int main(void)
   GPIO_Configuration();
 
   /* TIM3 configuration: Input Capture mode ---------------------
-     The external signal is connected to TIM3 CH2 pin (PA.07)  
+     The external signal is connected to TIM3 CH2 pin (PA.07)
      The Rising edge is used as active edge,
-     The TIM3 CCR2 is used to compute the frequency value 
+     The TIM3 CCR2 is used to compute the frequency value
   ------------------------------------------------------------ */
 
   TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;
@@ -79,7 +79,7 @@ int main(void)
   TIM_ICInitStructure.TIM_ICFilter = 0x0;
 
   TIM_ICInit(TIM3, &TIM_ICInitStructure);
-  
+
   /* TIM enable counter */
   TIM_Cmd(TIM3, ENABLE);
 
@@ -159,10 +159,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

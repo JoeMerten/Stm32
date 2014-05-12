@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,14 +34,14 @@
 
 /** @addtogroup SHA224_SHA256_DMA
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 HASH_MsgDigest MsgDigest;
-static uint8_t MessageToHash[SIZE_MSG_TO_HASH_IN_BYTES]= 
+static uint8_t MessageToHash[SIZE_MSG_TO_HASH_IN_BYTES]=
 "The STM32 F4 series is the result of a perfect symbiosis of the real-time control capabilities of an MCU and the signal processing performance of a DSP, and thus complements the STM32 portfolio with a new class of devices, digital signal controllers (DSC).";
 
 /* Private function prototypes -----------------------------------------------*/
@@ -69,7 +69,7 @@ static void USART_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
        before to branch to application main.
@@ -81,7 +81,7 @@ int main(void)
   /***********************************************************************/
   /* !!!! This example runs only on STM32F437x/STM32F439x Devices !!!    */
   /***********************************************************************/
-  
+
   /* Enable HASH and DMA clocks */
   RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_HASH, ENABLE);
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2, ENABLE);
@@ -111,8 +111,8 @@ int main(void)
 }
 
 /**
-  * @brief  HASH SHA224 Digest computation (using DMA for data transfer) 
-  * @note   DMA2 stream7 channel2 is used to transfer data from memory 
+  * @brief  HASH SHA224 Digest computation (using DMA for data transfer)
+  * @note   DMA2 stream7 channel2 is used to transfer data from memory
   *         (MessageToHash[] array) to HASH Peripheral (the INPUT data register).
   * @param  None
   * @retval None
@@ -156,9 +156,9 @@ static void HASH_SHA224_DMA(void)
   /* Enable DMA2 Transfer */
   DMA_Cmd(DMA2_Stream7, ENABLE);
 
-  /* Note :  When the DMA is enabled, it provides the information to the hash 
-             processor when it is transferring the last data word. Then the 
-             padding and digest computation are performed automatically as if 
+  /* Note :  When the DMA is enabled, it provides the information to the hash
+             processor when it is transferring the last data word. Then the
+             padding and digest computation are performed automatically as if
              DCAL had been written to 1.*/
 
   /* Wait until DMA Transfer completed */
@@ -173,7 +173,7 @@ static void HASH_SHA224_DMA(void)
 
 
 /**
-  * @brief  HASH SHA256 Digest computation (using DMA for data transfer) 
+  * @brief  HASH SHA256 Digest computation (using DMA for data transfer)
   * @note   DMA2 stream7 channel2 is used to transfer data from memory
   *         (MessageToHash[] array) to HASH Peripheral (the INPUT data register).
   * @param  None
@@ -218,9 +218,9 @@ static void HASH_SHA256_DMA(void)
   /* Enable DMA2 Transfer */
   DMA_Cmd(DMA2_Stream7, ENABLE);
 
-  /* Note :  When the DMA is enabled, it provides the information to the hash 
-             processor when it is transferring the last data word. Then the 
-             padding and digest computation are performed automatically as if 
+  /* Note :  When the DMA is enabled, it provides the information to the hash
+             processor when it is transferring the last data word. Then the
+             padding and digest computation are performed automatically as if
              DCAL had been written to 1.*/
 
   /* wait until DMA Transfer completed */
@@ -241,7 +241,7 @@ static void HASH_SHA256_DMA(void)
 static void Display_MainMessage(void)
 {
   uint32_t buffercounter=0;
-  
+
   printf("\n\r ======================================\n\r");
   printf(" ====    HASH Using DMA Example    ====\n\r");
   printf(" ======================================\n\r");
@@ -252,7 +252,7 @@ static void Display_MainMessage(void)
   for(buffercounter = 0; buffercounter <SIZE_MSG_TO_HASH_IN_BYTES; buffercounter++)
   {
     printf("%c", MessageToHash[buffercounter]);
-    
+
     if(((buffercounter%31) == 0) && (buffercounter != 0))
     {
       printf("\n\r");
@@ -300,14 +300,14 @@ static void Display_SHA256Digest(void)
 }
 
 /**
-  * @brief  USART configuration 
+  * @brief  USART configuration
   * @param  None
   * @retval None
   */
 static void USART_Config(void)
 {
   /* USARTx configured as follows:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -355,7 +355,7 @@ PUTCHAR_PROTOTYPE
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -368,10 +368,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

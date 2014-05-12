@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V4.5.0
   * @date    07-March-2011
-  * @brief   This file contains all the functions prototypes for the 
+  * @brief   This file contains all the functions prototypes for the
   *          stm3210e_eval_fsmc_nand firmware driver.
   ******************************************************************************
   * @attention
@@ -17,9 +17,9 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
+  ******************************************************************************
   */
-   
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM3210E_EVAL_FSMC_NAND_H
 #define __STM3210E_EVAL_FSMC_NAND_H
@@ -34,18 +34,18 @@
 /** @addtogroup Utilities
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM3210E_EVAL
   * @{
   */
-  
+
 /** @addtogroup STM3210E_EVAL_FSMC_NAND
   * @{
-  */  
+  */
 
 /** @defgroup STM3210E_EVAL_FSMC_NAND_Exported_Types
   * @{
@@ -58,30 +58,30 @@ typedef struct
   uint8_t Fourth_ID;
 }NAND_IDTypeDef;
 
-typedef struct 
+typedef struct
 {
   uint16_t Zone;
   uint16_t Block;
   uint16_t Page;
-} NAND_ADDRESS;  
+} NAND_ADDRESS;
 /**
   * @}
   */
-  
+
 /** @defgroup STM3210E_EVAL_FSMC_NAND_Exported_Constants
   * @{
   */
-/** 
-  * @brief  NAND Area definition  for STM3210E-EVAL Board RevD  
-  */  
+/**
+  * @brief  NAND Area definition  for STM3210E-EVAL Board RevD
+  */
 #define CMD_AREA                   (uint32_t)(1<<16)  /* A16 = CLE  high */
 #define ADDR_AREA                  (uint32_t)(1<<17)  /* A17 = ALE high */
 
-#define DATA_AREA                  ((uint32_t)0x00000000) 
+#define DATA_AREA                  ((uint32_t)0x00000000)
 
-/** 
-  * @brief  FSMC NAND memory command  
-  */  
+/**
+  * @brief  FSMC NAND memory command
+  */
 #define NAND_CMD_AREA_A            ((uint8_t)0x00)
 #define NAND_CMD_AREA_B            ((uint8_t)0x01)
 #define NAND_CMD_AREA_C            ((uint8_t)0x50)
@@ -97,9 +97,9 @@ typedef struct
 #define NAND_CMD_LOCK_STATUS       ((uint8_t)0x7A)
 #define NAND_CMD_RESET             ((uint8_t)0xFF)
 
-/** 
-  * @brief  NAND memory status  
-  */  
+/**
+  * @brief  NAND memory status
+  */
 #define NAND_VALID_ADDRESS         ((uint32_t)0x00000100)
 #define NAND_INVALID_ADDRESS       ((uint32_t)0x00000200)
 #define NAND_TIMEOUT_ERROR         ((uint32_t)0x00000400)
@@ -107,36 +107,36 @@ typedef struct
 #define NAND_ERROR                 ((uint32_t)0x00000001)
 #define NAND_READY                 ((uint32_t)0x00000040)
 
-/** 
-  * @brief  FSMC NAND memory parameters  
-  */  
+/**
+  * @brief  FSMC NAND memory parameters
+  */
 #define NAND_PAGE_SIZE             ((uint16_t)0x0200) /* 512 bytes per page w/o Spare Area */
 #define NAND_BLOCK_SIZE            ((uint16_t)0x0020) /* 32x512 bytes pages per block */
 #define NAND_ZONE_SIZE             ((uint16_t)0x0400) /* 1024 Block per zone */
 #define NAND_SPARE_AREA_SIZE       ((uint16_t)0x0010) /* last 16 bytes as spare area */
 #define NAND_MAX_ZONE              ((uint16_t)0x0004) /* 4 zones of 1024 block */
 
-/** 
-  * @brief  FSMC NAND memory address computation  
-  */  
+/**
+  * @brief  FSMC NAND memory address computation
+  */
 #define ADDR_1st_CYCLE(ADDR)       (uint8_t)((ADDR)& 0xFF)               /* 1st addressing cycle */
 #define ADDR_2nd_CYCLE(ADDR)       (uint8_t)(((ADDR)& 0xFF00) >> 8)      /* 2nd addressing cycle */
 #define ADDR_3rd_CYCLE(ADDR)       (uint8_t)(((ADDR)& 0xFF0000) >> 16)   /* 3rd addressing cycle */
-#define ADDR_4th_CYCLE(ADDR)       (uint8_t)(((ADDR)& 0xFF000000) >> 24) /* 4th addressing cycle */   
+#define ADDR_4th_CYCLE(ADDR)       (uint8_t)(((ADDR)& 0xFF000000) >> 24) /* 4th addressing cycle */
 /**
   * @}
-  */ 
-  
+  */
+
 /** @defgroup STM3210E_EVAL_FSMC_NAND_Exported_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM3210E_EVAL_FSMC_NAND_Exported_Functions
   * @{
-  */ 
+  */
 void NAND_Init(void);
 void NAND_ReadID(NAND_IDTypeDef* NAND_ID);
 uint32_t NAND_WriteSmallPage(uint8_t *pBuffer, NAND_ADDRESS Address, uint32_t NumPageToWrite);
@@ -168,10 +168,10 @@ uint32_t NAND_AddressIncrement(NAND_ADDRESS* Address);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

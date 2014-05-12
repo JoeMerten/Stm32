@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    ADC/ExtLinesTrigger/stm32f10x_it.c 
+  * @file    ADC/ExtLinesTrigger/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -30,7 +30,7 @@
 
 /** @addtogroup ADC_ExtLinesTrigger
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -160,11 +160,11 @@ void ADC1_2_IRQHandler(void)
 {
   /* Clear ADC1 JEOC pending interrupt bit */
   ADC_ClearITPendingBit(ADC1, ADC_IT_JEOC);
-  
+
   /* Get injected channel11 and channel12 converted value */
   ADC_InjectedConvertedValueTab[Index++] = ADC_GetInjectedConversionValue(ADC1, ADC_InjectedChannel_1);
   ADC_InjectedConvertedValueTab[Index++] = ADC_GetInjectedConversionValue(ADC1, ADC_InjectedChannel_2);
-  
+
   if (Index == 32)
   {
     Index = 0;
@@ -189,10 +189,10 @@ void ADC1_2_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

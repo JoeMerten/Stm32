@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DCMI/DCMI_CameraExample/main.c 
+  * @file    DCMI/DCMI_CameraExample/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -37,7 +37,7 @@
 
 /** @addtogroup DCMI_CameraExample
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -67,7 +67,7 @@ static void ADC_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
        before to branch to application main.
@@ -119,7 +119,7 @@ int main(void)
   {
     LCD_SetTextColor(LCD_COLOR_RED);
     LCD_DisplayStringLine(LINE(4), (uint8_t*)"Check the Camera HW and try again");
-    while(1);  
+    while(1);
   }
 
   LCD_SetTextColor(LCD_COLOR_YELLOW);
@@ -139,13 +139,13 @@ int main(void)
   LCD_DisplayStringLine(LINE(4),(uint8_t*)abuffer);
 
   /* Enable DMA2 stream 1 and DCMI interface then start image capture */
-  DMA_Cmd(DMA2_Stream1, ENABLE); 
-  DCMI_Cmd(ENABLE); 
+  DMA_Cmd(DMA2_Stream1, ENABLE);
+  DCMI_Cmd(ENABLE);
 
   /* Insert 100ms delay: wait 100ms */
-  Delay(200); 
+  Delay(200);
 
-  DCMI_CaptureCmd(ENABLE); 
+  DCMI_CaptureCmd(ENABLE);
 
   LCD_ClearLine(LINE(4));
   Demo_LCD_Clear();
@@ -155,14 +155,14 @@ int main(void)
     /* LCD Display window */
     LCD_SetDisplayWindow(179, 239, 120, 160);
     LCD_WriteReg(LCD_REG_3, 0x1038);
-    LCD_WriteRAM_Prepare(); 
+    LCD_WriteRAM_Prepare();
   }
   else if(ImageFormat == BMP_QVGA)
   {
     /* LCD Display window */
     LCD_SetDisplayWindow(239, 319, 240, 320);
     LCD_WriteReg(LCD_REG_3, 0x1038);
-    LCD_WriteRAM_Prepare(); 
+    LCD_WriteRAM_Prepare();
   }
 
   while(1)
@@ -178,7 +178,7 @@ int main(void)
 
     /* Get the last ADC3 conversion result data */
     uhADCVal = ADC_GetConversionValue(ADC3);
-    
+
     /* Change the Brightness of camera using "Brightness Adjustment" register:
        For OV9655 camera Brightness can be positively (0x01 ~ 0x7F) and negatively (0x80 ~ 0xFF) adjusted
        For OV2640 camera Brightness can be positively (0x20 ~ 0x40) and negatively (0 ~ 0x20) adjusted */
@@ -208,10 +208,10 @@ static void ADC_Config(void)
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC3, ENABLE);
 
   /* GPIOF clock enable */
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOF, ENABLE); 
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOF, ENABLE);
 
   /* Configure ADC Channel7 as analog */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9; 
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
   GPIO_Init(GPIOF, &GPIO_InitStructure);
@@ -220,15 +220,15 @@ static void ADC_Config(void)
   ADC_CommonInitStructure.ADC_Mode = ADC_Mode_Independent;
   ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div6;
   ADC_CommonInitStructure.ADC_DMAAccessMode = ADC_DMAAccessMode_Disabled;
-  ADC_CommonInitStructure.ADC_TwoSamplingDelay = ADC_TwoSamplingDelay_5Cycles; 
-  ADC_CommonInit(&ADC_CommonInitStructure); 
+  ADC_CommonInitStructure.ADC_TwoSamplingDelay = ADC_TwoSamplingDelay_5Cycles;
+  ADC_CommonInit(&ADC_CommonInitStructure);
 
   /* ADC3 Configuration ------------------------------------------------------*/
   ADC_StructInit(&ADC_InitStructure);
   ADC_InitStructure.ADC_Resolution = ADC_Resolution_8b;
   ADC_InitStructure.ADC_ScanConvMode = DISABLE;
   ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
-  ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None; 
+  ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
   ADC_InitStructure.ADC_NbrOfConversion = 1;
   ADC_Init(ADC3, &ADC_InitStructure);
@@ -239,7 +239,7 @@ static void ADC_Config(void)
   /* Enable ADC3 */
   ADC_Cmd(ADC3, ENABLE);
 
-  /* ADC3 regular Software Start Conv */ 
+  /* ADC3 regular Software Start Conv */
   ADC_SoftwareStartConv(ADC3);
 }
 
@@ -252,7 +252,7 @@ static void ADC_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -265,10 +265,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

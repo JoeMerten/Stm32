@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    EXTI/EXTI_Example/main.c 
+  * @file    EXTI/EXTI_Example/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup EXTI_Example
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -53,13 +53,13 @@ static void EXTILine13_15_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
-     */ 
+     */
 
   /* Initialize LEDs mounted on EVAL board */
   STM_EVAL_LEDInit(LED1);
@@ -68,7 +68,7 @@ int main(void)
   /* Configure EXTI Line0 (connected to PA0 pin) in interrupt mode */
   EXTILine0_Config();
 
-  /* Configure EXTI Line13/15 (connected to PG13/15 pin) in interrupt mode 
+  /* Configure EXTI Line13/15 (connected to PG13/15 pin) in interrupt mode
      according to EVAL used */
   EXTILine13_15_Config();
 
@@ -95,7 +95,7 @@ static void EXTILine0_Config(void)
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
   /* Enable SYSCFG clock */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-  
+
   /* Configure PA0 pin as input floating */
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
@@ -108,7 +108,7 @@ static void EXTILine0_Config(void)
   /* Configure EXTI Line0 */
   EXTI_InitStructure.EXTI_Line = EXTI_Line0;
   EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;  
+  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
   EXTI_InitStructure.EXTI_LineCmd = ENABLE;
   EXTI_Init(&EXTI_InitStructure);
 
@@ -134,14 +134,14 @@ static void EXTILine13_15_Config(void)
 #ifdef USE_STM324x9I_EVAL
   /* Enable GPIOC clock */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
-#else  
+#else
   /* Enable GPIOG clock */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOG, ENABLE);
 #endif /* USE_STM324x9I_EVAL */
-  
+
   /* Enable SYSCFG clock */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-  
+
   /* Configure PG15 pin as input floating */
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
@@ -151,21 +151,21 @@ static void EXTILine13_15_Config(void)
 #else
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
   GPIO_Init(GPIOG, &GPIO_InitStructure);
-#endif /* USE_STM324x9I_EVAL */  
+#endif /* USE_STM324x9I_EVAL */
 
   /* Connect EXTI Line15 to PG15 pin */
-#ifdef USE_STM324x9I_EVAL  
+#ifdef USE_STM324x9I_EVAL
   SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOC, EXTI_PinSource13);
-#else  
+#else
   SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOG, EXTI_PinSource15);
-#endif /* USE_STM324x9I_EVAL */  
+#endif /* USE_STM324x9I_EVAL */
 
   /* Configure EXTI Line15 */
-#ifdef USE_STM324x9I_EVAL  
+#ifdef USE_STM324x9I_EVAL
   EXTI_InitStructure.EXTI_Line = EXTI_Line13;
-#else  
+#else
   EXTI_InitStructure.EXTI_Line = EXTI_Line15;
-#endif /* USE_STM324x9I_EVAL */  
+#endif /* USE_STM324x9I_EVAL */
 
   EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
   EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
@@ -191,7 +191,7 @@ static void EXTILine13_15_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -204,10 +204,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DAC/TwoChannels_TriangleWave/main.c 
+  * @file    DAC/TwoChannels_TriangleWave/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup DAC_TwoChannels_TriangleWave
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -52,27 +52,27 @@ void Delay(__IO uint32_t nCount);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
-  /* System Clocks Configuration */
-  RCC_Configuration();   
+     */
 
-  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically 
-     connected to the DAC converter. In order to avoid parasitic consumption, 
+  /* System Clocks Configuration */
+  RCC_Configuration();
+
+  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically
+     connected to the DAC converter. In order to avoid parasitic consumption,
      the GPIO pin should be configured in analog */
   GPIO_Configuration();
 
   /* TIM2 Configuration */
   TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
-  TIM_TimeBaseStructure.TIM_Period = 0xF;          
-  TIM_TimeBaseStructure.TIM_Prescaler = 0xF;       
-  TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;    
-  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  
+  TIM_TimeBaseStructure.TIM_Period = 0xF;
+  TIM_TimeBaseStructure.TIM_Prescaler = 0xF;
+  TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;
+  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
   TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
 
   /* TIM2 TRGO selection */
@@ -89,11 +89,11 @@ int main(void)
   DAC_InitStructure.DAC_LFSRUnmask_TriangleAmplitude = DAC_TriangleAmplitude_1023;
   DAC_Init(DAC_Channel_2, &DAC_InitStructure);
 
-  /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is 
+  /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is
      automatically connected to the DAC converter. */
   DAC_Cmd(DAC_Channel_1, ENABLE);
 
-  /* Enable DAC Channel2: Once the DAC channel2 is enabled, PA.05 is 
+  /* Enable DAC Channel2: Once the DAC channel2 is enabled, PA.05 is
      automatically connected to the DAC converter. */
   DAC_Cmd(DAC_Channel_2, ENABLE);
 
@@ -114,7 +114,7 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{   
+{
   /* Enable peripheral clocks ------------------------------------------------*/
   /* GPIOA Periph clock enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
@@ -133,8 +133,8 @@ void GPIO_Configuration(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
 
-  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically 
-     connected to the DAC converter. In order to avoid parasitic consumption, 
+  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically
+     connected to the DAC converter. In order to avoid parasitic consumption,
      the GPIO pin should be configured in analog */
   GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_4 | GPIO_Pin_5;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
@@ -161,7 +161,7 @@ void Delay(__IO uint32_t nCount)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -175,10 +175,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

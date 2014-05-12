@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/STANDBY/stm32f10x_it.c 
+  * @file    PWR/STANDBY/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -31,7 +31,7 @@
 
 /** @addtogroup PWR_STANDBY
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -155,8 +155,8 @@ void SysTick_Handler(void)
 void EXTI9_5_IRQHandler(void)
 {
   if(EXTI_GetITStatus(KEY_BUTTON_EXTI_LINE) != RESET)
-  { 
-    /* Clear the Key Button EXTI line pending bit */  
+  {
+    /* Clear the Key Button EXTI line pending bit */
     EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
 
     /* Turn on LED1 */

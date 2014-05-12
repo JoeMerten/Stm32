@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    NVIC/DMA_WFIMode/main.c 
+  * @file    NVIC/DMA_WFIMode/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -35,7 +35,7 @@
 
 /** @addtogroup DMA_WFIMode
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -61,25 +61,25 @@ void Delay(__IO uint32_t nCount);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
         system_stm32f2xx.c file
-     */     
+     */
 
-  /* Initialize Leds and Key Button mounted on STM322xG-EVAL board */       
+  /* Initialize Leds and Key Button mounted on STM322xG-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_LEDInit(LED3);
-  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI); 
+  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI);
 
   /* DMA1 Stream1 channel4 (connected to USART3_RX) configuration ------------*/
   DMA_Config();
 
   /* EVAL_COM1 (USART3) configuration ----------------------------------------*/
-  USART_Config();  
-    
+  USART_Config();
+
   while (1)
   {
     if(LowPowerMode == 1)
@@ -107,7 +107,7 @@ void USART_Config(void)
 {
   /* EVAL_COM1 configuration ---------------------------------------------------*/
   /* EVAL_COM1 configured as follow:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -142,7 +142,7 @@ void DMA_Config(void)
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
 
   /* DMA1 Stream1 channel4 configuration **************************************/
-  DMA_InitStructure.DMA_Channel = DMA_Channel_4;  
+  DMA_InitStructure.DMA_Channel = DMA_Channel_4;
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)USART3_DR_ADDRESS;
   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)DstBuffer;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
@@ -153,7 +153,7 @@ void DMA_Config(void)
   DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
   DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
   DMA_InitStructure.DMA_Priority = DMA_Priority_High;
-  DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;         
+  DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
   DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull;
   DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
   DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
@@ -162,10 +162,10 @@ void DMA_Config(void)
 
   /* Enable DMA1_Stream1 Transfer complete interrupt */
   DMA_ITConfig(DMA1_Stream1, DMA_IT_TC, ENABLE);
-  
+
   /* Enable DMA1_Stream1 */
   DMA_Cmd(DMA1_Stream1, ENABLE);
-    
+
   /* Enable DMA1_Stream1 IRQn Interrupt ***************************************/
   NVIC_InitStructure.NVIC_IRQChannel = DMA1_Stream1_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
@@ -216,7 +216,7 @@ void Delay(__IO uint32_t nCount)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -229,10 +229,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

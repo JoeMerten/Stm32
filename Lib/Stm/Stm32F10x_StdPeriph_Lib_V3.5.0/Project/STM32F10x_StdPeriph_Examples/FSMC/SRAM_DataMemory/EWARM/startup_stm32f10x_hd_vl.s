@@ -3,15 +3,15 @@
 ;* Author             : MCD Application Team
 ;* Version            : V3.5.0
 ;* Date               : 08-April-2011
-;* Description        : STM32F10x High Density Value Line Devices vector table 
+;* Description        : STM32F10x High Density Value Line Devices vector table
 ;*                      for EWARM toolchain.
 ;*                      This module performs:
 ;*                      - Set the initial SP
-;*                      - Configure the clock system and the external SRAM 
-;*                        mounted on STM32100E-EVAL board to be used as data 
+;*                      - Configure the clock system and the external SRAM
+;*                        mounted on STM32100E-EVAL board to be used as data
 ;*                        memory (optional, to be enabled by user)
 ;*                      - Set the initial PC == __iar_program_start,
-;*                      - Set the vector table entries with the exceptions ISR 
+;*                      - Set the vector table entries with the exceptions ISR
 ;*                        address.
 ;*                      After Reset the Cortex-M3 processor is in Thread mode,
 ;*                      priority is Privileged, and the Stack is set to Main.
@@ -48,7 +48,7 @@ __initial_spTop EQU    0x20000400                 ; stack used for SystemInit & 
         SECTION .intvec:CODE:NOROOT(2)
 
         EXTERN  __iar_program_start
-        EXTERN  SystemInit        
+        EXTERN  SystemInit
         PUBLIC  __vector_table
 
         DATA
@@ -124,13 +124,13 @@ __vector_table
         DCD     TIM5_IRQHandler               ; TIM5
         DCD     SPI3_IRQHandler               ; SPI3
         DCD     UART4_IRQHandler              ; UART4
-        DCD     UART5_IRQHandler              ; UART5                       
+        DCD     UART5_IRQHandler              ; UART5
         DCD     TIM6_DAC_IRQHandler           ; TIM6 and DAC underrun
-        DCD     TIM7_IRQHandler               ; TIM7     
+        DCD     TIM7_IRQHandler               ; TIM7
         DCD     DMA2_Channel1_IRQHandler      ; DMA2 Channel1
         DCD     DMA2_Channel2_IRQHandler      ; DMA2 Channel2
         DCD     DMA2_Channel3_IRQHandler      ; DMA2 Channel3
-        DCD     DMA2_Channel4_5_IRQHandler    ; DMA2 Channel4 & Channel5                   
+        DCD     DMA2_Channel4_5_IRQHandler    ; DMA2 Channel4 & Channel5
         DCD     DMA2_Channel5_IRQHandler      ; DMA2 Channel5
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -144,11 +144,11 @@ __vector_table
 Reset_Handler
 
         LDR     R0, =SystemInit
-        BLX     R0   
+        BLX     R0
         LDR     R0, =sfe(CSTACK)          ; restore original stack pointer
-        MSR     MSP, R0             
+        MSR     MSP, R0
         LDR     R0, =__iar_program_start
-        BX      R0                 
+        BX      R0
 
         PUBWEAK NMI_Handler
         SECTION .text:CODE:REORDER(1)
@@ -424,7 +424,7 @@ UART4_IRQHandler
         SECTION .text:CODE:REORDER(1)
 UART5_IRQHandler
         B UART5_IRQHandler
-        
+
         PUBWEAK TIM6_DAC_IRQHandler
         SECTION .text:CODE:REORDER(1)
 TIM6_DAC_IRQHandler
@@ -433,7 +433,7 @@ TIM6_DAC_IRQHandler
         PUBWEAK TIM7_IRQHandler
         SECTION .text:CODE:REORDER(1)
 TIM7_IRQHandler
-        B TIM7_IRQHandler                
+        B TIM7_IRQHandler
 
         PUBWEAK DMA2_Channel1_IRQHandler
         SECTION .text:CODE:REORDER(1)
@@ -459,6 +459,6 @@ DMA2_Channel4_5_IRQHandler
         SECTION .text:CODE:REORDER(1)
 DMA2_Channel5_IRQHandler
         B DMA2_Channel5_IRQHandler
-                
+
         END
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

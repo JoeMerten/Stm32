@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2C/I2C_TwoBoards/MasterTransmitterInterrupt/stm32f2xx_it.c 
+  * @file    I2C/I2C_TwoBoards/MasterTransmitterInterrupt/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -36,7 +36,7 @@
 /** @addtogroup MasterTransmitterInterrupt
   * @{
   */
-  
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -162,14 +162,14 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-#if defined (I2C_MASTER)  
+#if defined (I2C_MASTER)
   /* Decrement the time out value */
   if (TimeOut != 0x0)
   {
     TimeOut--;
   }
 #endif /* I2C_MASTER*/
-  
+
   if (Counter < 10)
   {
     Counter++;
@@ -203,15 +203,15 @@ void I2Cx_ER_IRQHandler(void)
     I2Cx->SR1 &= 0x00FF;
   }
 #endif /* I2C_SLAVE*/
-  
+
 #if defined (I2C_MASTER)
-  
+
   /* Read SR1 register to get I2C error */
   if ((I2C_ReadRegister(I2Cx, I2C_Register_SR1) & 0xFF00) != 0x00)
   {
     /* Clears erreur flags */
     I2Cx->SR1 &= 0x00FF;
-    
+
     /* Set LED3 and LED4 */
     STM_EVAL_LEDOn(LED3);
     STM_EVAL_LEDOn(LED4);
@@ -254,7 +254,7 @@ void I2Cx_EV_IRQHandler(void)
 
     /* EV8 */
     case I2C_EVENT_MASTER_BYTE_TRANSMITTING:
-    case I2C_EVENT_MASTER_BYTE_TRANSMITTED:      
+    case I2C_EVENT_MASTER_BYTE_TRANSMITTED:
      if (Tx_Idx == GetVar_NbrOfDataToTransfer())
       {
         /* Send STOP condition */
@@ -264,7 +264,7 @@ void I2Cx_EV_IRQHandler(void)
       else
       {
         /* Transmit Data TxBuffer */
-        I2C_SendData(I2Cx, TxBuffer[Tx_Idx++]); 
+        I2C_SendData(I2Cx, TxBuffer[Tx_Idx++]);
       }
       break;
 
@@ -273,7 +273,7 @@ void I2Cx_EV_IRQHandler(void)
   }
 
 #endif /* I2C_MASTER*/
-  
+
 #if defined (I2C_SLAVE)
 
   /* Get Last I2C Event */
@@ -287,8 +287,8 @@ void I2Cx_EV_IRQHandler(void)
     break;
 
     /* Check on EV2*/
-   case I2C_EVENT_SLAVE_BYTE_RECEIVED:  
-   case (I2C_EVENT_SLAVE_BYTE_RECEIVED | I2C_SR1_BTF):  
+   case I2C_EVENT_SLAVE_BYTE_RECEIVED:
+   case (I2C_EVENT_SLAVE_BYTE_RECEIVED | I2C_SR1_BTF):
    if (CmdReceived == 0x00)
     {
       CmdReceived = I2C_ReceiveData(I2Cx);
@@ -308,7 +308,7 @@ void I2Cx_EV_IRQHandler(void)
     default:
       break;
   }
-#endif /* I2C_SLAVE*/  
+#endif /* I2C_SLAVE*/
 }
 
 /**
@@ -322,7 +322,7 @@ void I2Cx_EV_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}

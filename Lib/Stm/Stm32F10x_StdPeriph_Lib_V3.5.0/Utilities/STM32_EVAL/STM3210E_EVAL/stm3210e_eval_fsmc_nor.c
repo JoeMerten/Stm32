@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V4.5.0
   * @date    07-March-2011
-  * @brief   This file provides a set of functions needed to drive the M29W128FL, 
+  * @brief   This file provides a set of functions needed to drive the M29W128FL,
   *          M29W128GL and S29GL128P NOR memories mounted on STM3210E-EVAL board.
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
+  ******************************************************************************
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm3210e_eval_fsmc_nor.h"
@@ -26,69 +26,69 @@
 /** @addtogroup Utilities
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM3210E_EVAL
   * @{
   */
-  
+
 /** @addtogroup STM3210E_EVAL_FSMC_NOR
-  * @brief      This file provides a set of functions needed to drive the M29W128FL, 
+  * @brief      This file provides a set of functions needed to drive the M29W128FL,
   *             M29W128GL and S29GL128P NOR memories mounted on STM3210E-EVAL board.
   * @{
-  */ 
+  */
 
 /** @defgroup STM3210E_EVAL_FSMC_NOR_Private_Types
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM3210E_EVAL_FSMC_NOR_Private_Defines
   * @{
-  */ 
-/** 
-  * @brief  FSMC Bank 1 NOR/SRAM2  
+  */
+/**
+  * @brief  FSMC Bank 1 NOR/SRAM2
   */
 #define Bank1_NOR2_ADDR       ((uint32_t)0x64000000)
 
-/* Delay definition */   
+/* Delay definition */
 #define BlockErase_Timeout    ((uint32_t)0x00A00000)
-#define ChipErase_Timeout     ((uint32_t)0x30000000) 
-#define Program_Timeout       ((uint32_t)0x00001400)     
+#define ChipErase_Timeout     ((uint32_t)0x30000000)
+#define Program_Timeout       ((uint32_t)0x00001400)
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM3210E_EVAL_FSMC_NOR_Private_Macros
   * @{
   */
 #define ADDR_SHIFT(A) (Bank1_NOR2_ADDR + (2 * (A)))
-#define NOR_WRITE(Address, Data)  (*(__IO uint16_t *)(Address) = (Data))  
+#define NOR_WRITE(Address, Data)  (*(__IO uint16_t *)(Address) = (Data))
 /**
   * @}
-  */ 
-  
+  */
+
 
 /** @defgroup STM3210E_EVAL_FSMC_NOR_Private_Variables
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroupSTM3210E_EVAL_FSMC_NOR_Private_Function_Prototypes
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM3210E_EVAL_FSMC_NOR_Private_Functions
@@ -108,7 +108,7 @@ void NOR_Init(void)
   FSMC_NORSRAMTimingInitTypeDef  p;
   GPIO_InitTypeDef GPIO_InitStructure;
 
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_GPIOE | 
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_GPIOE |
                          RCC_APB2Periph_GPIOF | RCC_APB2Periph_GPIOG, ENABLE);
 
   /*-- GPIO Configuration ------------------------------------------------------*/
@@ -152,7 +152,7 @@ void NOR_Init(void)
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   GPIO_Init(GPIOD, &GPIO_InitStructure);
-  
+
   /*-- FSMC Configuration ----------------------------------------------------*/
   p.FSMC_AddressSetupTime = 0x02;
   p.FSMC_AddressHoldTime = 0x00;
@@ -167,7 +167,7 @@ void NOR_Init(void)
   FSMC_NORSRAMInitStructure.FSMC_MemoryType = FSMC_MemoryType_NOR;
   FSMC_NORSRAMInitStructure.FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_16b;
   FSMC_NORSRAMInitStructure.FSMC_BurstAccessMode = FSMC_BurstAccessMode_Disable;
-  FSMC_NORSRAMInitStructure.FSMC_AsynchronousWait = FSMC_AsynchronousWait_Disable;  
+  FSMC_NORSRAMInitStructure.FSMC_AsynchronousWait = FSMC_AsynchronousWait_Disable;
   FSMC_NORSRAMInitStructure.FSMC_WaitSignalPolarity = FSMC_WaitSignalPolarity_Low;
   FSMC_NORSRAMInitStructure.FSMC_WrapMode = FSMC_WrapMode_Disable;
   FSMC_NORSRAMInitStructure.FSMC_WaitSignalActive = FSMC_WaitSignalActive_BeforeWaitState;
@@ -186,8 +186,8 @@ void NOR_Init(void)
 
 /**
   * @brief  Reads NOR memory's Manufacturer and Device Code.
-  * @param  NOR_ID: pointer to a NOR_IDTypeDef structure which will hold the 
-  *         Manufacturer and Device Code.  
+  * @param  NOR_ID: pointer to a NOR_IDTypeDef structure which will hold the
+  *         Manufacturer and Device Code.
   * @retval None
   */
 void NOR_ReadID(NOR_IDTypeDef* NOR_ID)
@@ -222,7 +222,7 @@ NOR_Status NOR_EraseBlock(uint32_t BlockAddr)
 
 /**
   * @brief  Erases the entire chip.
-  * @param  None                      
+  * @param  None
   * @retval NOR_Status: The returned value can be: NOR_SUCCESS, NOR_ERROR
   *         or NOR_TIMEOUT
   */
@@ -241,7 +241,7 @@ NOR_Status NOR_EraseChip(void)
 /**
   * @brief  Writes a half-word to the NOR memory.
   * @param  WriteAddr: NOR memory internal address to write to.
-  * @param  Data: Data to write. 
+  * @param  Data: Data to write.
   * @retval NOR_Status: The returned value can be: NOR_SUCCESS, NOR_ERROR
   *         or NOR_TIMEOUT
   */
@@ -256,17 +256,17 @@ NOR_Status NOR_WriteHalfWord(uint32_t WriteAddr, uint16_t Data)
 }
 
 /**
-  * @brief  Writes a half-word buffer to the FSMC NOR memory. 
-  * @param  pBuffer: pointer to buffer. 
-  * @param  WriteAddr: NOR memory internal address from which the data will be 
+  * @brief  Writes a half-word buffer to the FSMC NOR memory.
+  * @param  pBuffer: pointer to buffer.
+  * @param  WriteAddr: NOR memory internal address from which the data will be
   *         written.
-  * @param  NumHalfwordToWrite: number of Half words to write. 
+  * @param  NumHalfwordToWrite: number of Half words to write.
   * @retval NOR_Status: The returned value can be: NOR_SUCCESS, NOR_ERROR
   *         or NOR_TIMEOUT
   */
 NOR_Status NOR_WriteBuffer(uint16_t* pBuffer, uint32_t WriteAddr, uint32_t NumHalfwordToWrite)
 {
-  NOR_Status status = NOR_ONGOING; 
+  NOR_Status status = NOR_ONGOING;
 
   do
   {
@@ -276,15 +276,15 @@ NOR_Status NOR_WriteBuffer(uint16_t* pBuffer, uint32_t WriteAddr, uint32_t NumHa
     NumHalfwordToWrite--;
   }
   while((status == NOR_SUCCESS) && (NumHalfwordToWrite != 0));
-  
-  return (status); 
+
+  return (status);
 }
 
 /**
-  * @brief  Writes a half-word buffer to the FSMC NOR memory. This function 
+  * @brief  Writes a half-word buffer to the FSMC NOR memory. This function
   *         must be used only with S29GL128P NOR memory.
-  * @param  pBuffer: pointer to buffer. 
-  * @param  WriteAddr: NOR memory internal address from which the data will be 
+  * @param  pBuffer: pointer to buffer.
+  * @param  WriteAddr: NOR memory internal address from which the data will be
   *         written.
   * @param  NumHalfwordToWrite: number of Half words to write.
   *         The maximum allowed value is 32 Half words (64 bytes).
@@ -305,7 +305,7 @@ NOR_Status NOR_ProgramBuffer(uint16_t* pBuffer, uint32_t WriteAddr, uint32_t Num
   /*!< Issue unlock command sequence */
   NOR_WRITE(ADDR_SHIFT(0x00555), 0x00AA);
 
-  NOR_WRITE(ADDR_SHIFT(0x02AA), 0x0055);  
+  NOR_WRITE(ADDR_SHIFT(0x02AA), 0x0055);
 
   /*!< Write Write Buffer Load Command */
   NOR_WRITE(ADDR_SHIFT(WriteAddr), 0x0025);
@@ -316,25 +316,25 @@ NOR_Status NOR_ProgramBuffer(uint16_t* pBuffer, uint32_t WriteAddr, uint32_t Num
   {
     /*!< Store last loaded address & data value (for polling) */
     lastloadedaddress = currentaddress;
- 
+
     NOR_WRITE(ADDR_SHIFT(currentaddress), *pBuffer++);
-    currentaddress += 1; 
+    currentaddress += 1;
   }
 
   NOR_WRITE(ADDR_SHIFT(lastloadedaddress), 0x29);
-  
+
   return(NOR_GetStatus(Program_Timeout));
 }
 
 /**
-  * @brief  Reads a half-word from the NOR memory. 
+  * @brief  Reads a half-word from the NOR memory.
   * @param  ReadAddr: NOR memory internal address to read from.
   * @retval Half-word read from the NOR memory
   */
 uint16_t NOR_ReadHalfWord(uint32_t ReadAddr)
 {
-  NOR_WRITE(ADDR_SHIFT(0x00555), 0x00AA); 
-  NOR_WRITE(ADDR_SHIFT(0x002AA), 0x0055);  
+  NOR_WRITE(ADDR_SHIFT(0x00555), 0x00AA);
+  NOR_WRITE(ADDR_SHIFT(0x002AA), 0x0055);
   NOR_WRITE((Bank1_NOR2_ADDR + ReadAddr), 0x00F0 );
 
   return (*(__IO uint16_t *)((Bank1_NOR2_ADDR + ReadAddr)));
@@ -342,7 +342,7 @@ uint16_t NOR_ReadHalfWord(uint32_t ReadAddr)
 
 /**
   * @brief  Reads a block of data from the FSMC NOR memory.
-  * @param  pBuffer: pointer to the buffer that receives the data read from the 
+  * @param  pBuffer: pointer to the buffer that receives the data read from the
   *         NOR memory.
   * @param  ReadAddr: NOR memory internal address to read from.
   * @param  NumHalfwordToRead : number of Half word to read.
@@ -358,8 +358,8 @@ void NOR_ReadBuffer(uint16_t* pBuffer, uint32_t ReadAddr, uint32_t NumHalfwordTo
   {
     /*!< Read a Halfword from the NOR */
     *pBuffer++ = *(__IO uint16_t *)((Bank1_NOR2_ADDR + ReadAddr));
-    ReadAddr = ReadAddr + 2; 
-  }  
+    ReadAddr = ReadAddr + 2;
+  }
 }
 
 /**
@@ -375,16 +375,16 @@ NOR_Status NOR_ReturnToReadMode(void)
 }
 
 /**
-  * @brief  Returns the NOR memory to Read mode and resets the errors in the NOR 
-  *         memory Status Register.  
+  * @brief  Returns the NOR memory to Read mode and resets the errors in the NOR
+  *         memory Status Register.
   * @param  None
   * @retval NOR_SUCCESS
   */
 NOR_Status NOR_Reset(void)
 {
-  NOR_WRITE(ADDR_SHIFT(0x00555), 0x00AA); 
-  NOR_WRITE(ADDR_SHIFT(0x002AA), 0x0055); 
-  NOR_WRITE(Bank1_NOR2_ADDR, 0x00F0); 
+  NOR_WRITE(ADDR_SHIFT(0x00555), 0x00AA);
+  NOR_WRITE(ADDR_SHIFT(0x002AA), 0x0055);
+  NOR_WRITE(Bank1_NOR2_ADDR, 0x00F0);
 
   return (NOR_SUCCESS);
 }
@@ -396,24 +396,24 @@ NOR_Status NOR_Reset(void)
   *         or NOR_TIMEOUT
   */
 NOR_Status NOR_GetStatus(uint32_t Timeout)
-{ 
+{
   uint16_t val1 = 0x00, val2 = 0x00;
-  NOR_Status status = NOR_ONGOING; 
+  NOR_Status status = NOR_ONGOING;
   uint32_t timeout = Timeout;
 
   /*!< Poll on NOR memory Ready/Busy signal ----------------------------------*/
-  while((GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_6) != RESET) && (timeout > 0)) 
+  while((GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_6) != RESET) && (timeout > 0))
   {
     timeout--;
   }
 
   timeout = Timeout;
-  
-  while((GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_6) == RESET) && (timeout > 0))   
+
+  while((GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_6) == RESET) && (timeout > 0))
   {
     timeout--;
   }
-  
+
   /*!< Get the NOR memory operation status -----------------------------------*/
   while((Timeout != 0x00) && (status != NOR_SUCCESS))
   {
@@ -424,7 +424,7 @@ NOR_Status NOR_GetStatus(uint32_t Timeout)
     val2 = *(__IO uint16_t *)(Bank1_NOR2_ADDR);
 
     /*!< If DQ6 did not toggle between the two reads then return NOR_Success */
-    if((val1 & 0x0040) == (val2 & 0x0040)) 
+    if((val1 & 0x0040) == (val2 & 0x0040))
     {
       return NOR_SUCCESS;
     }
@@ -436,8 +436,8 @@ NOR_Status NOR_GetStatus(uint32_t Timeout)
 
     val1 = *(__IO uint16_t *)(Bank1_NOR2_ADDR);
     val2 = *(__IO uint16_t *)(Bank1_NOR2_ADDR);
-    
-    if((val1 & 0x0040) == (val2 & 0x0040)) 
+
+    if((val1 & 0x0040) == (val2 & 0x0040))
     {
       return NOR_SUCCESS;
     }
@@ -450,7 +450,7 @@ NOR_Status NOR_GetStatus(uint32_t Timeout)
   if(Timeout == 0x00)
   {
     status = NOR_TIMEOUT;
-  } 
+  }
 
   /*!< Return the operation status */
   return (status);
@@ -474,6 +474,6 @@ NOR_Status NOR_GetStatus(uint32_t Timeout)
 
 /**
   * @}
-  */  
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

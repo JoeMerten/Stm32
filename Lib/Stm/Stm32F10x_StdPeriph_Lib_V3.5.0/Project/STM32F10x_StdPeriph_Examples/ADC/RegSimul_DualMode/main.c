@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    ADC/RegSimul_DualMode/main.c 
+  * @file    ADC/RegSimul_DualMode/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup ADC_RegSimul_DualMode
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -39,11 +39,11 @@
 ADC_InitTypeDef ADC_InitStructure;
 DMA_InitTypeDef DMA_InitStructure;
 __IO uint32_t ADC_DualConvertedValueTab[16];
-    
+
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
 void GPIO_Configuration(void);
-  
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -53,13 +53,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System clocks configuration ---------------------------------------------*/
   RCC_Configuration();
 
@@ -91,8 +91,8 @@ int main(void)
   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
   ADC_InitStructure.ADC_NbrOfChannel = 2;
   ADC_Init(ADC1, &ADC_InitStructure);
-  /* ADC1 regular channels configuration */ 
-  ADC_RegularChannelConfig(ADC1, ADC_Channel_14, 1, ADC_SampleTime_239Cycles5);    
+  /* ADC1 regular channels configuration */
+  ADC_RegularChannelConfig(ADC1, ADC_Channel_14, 1, ADC_SampleTime_239Cycles5);
   ADC_RegularChannelConfig(ADC1, ADC_Channel_17, 2, ADC_SampleTime_239Cycles5);
   /* Enable ADC1 DMA */
   ADC_DMACmd(ADC1, ENABLE);
@@ -105,7 +105,7 @@ int main(void)
   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
   ADC_InitStructure.ADC_NbrOfChannel = 2;
   ADC_Init(ADC2, &ADC_InitStructure);
-  /* ADC2 regular channels configuration */ 
+  /* ADC2 regular channels configuration */
   ADC_RegularChannelConfig(ADC2, ADC_Channel_11, 1, ADC_SampleTime_239Cycles5);
   ADC_RegularChannelConfig(ADC2, ADC_Channel_12, 2, ADC_SampleTime_239Cycles5);
   /* Enable ADC2 external trigger conversion */
@@ -116,7 +116,7 @@ int main(void)
   /* Enable Vrefint channel17 */
   ADC_TempSensorVrefintCmd(ENABLE);
 
-  /* Enable ADC1 reset calibration register */   
+  /* Enable ADC1 reset calibration register */
   ADC_ResetCalibration(ADC1);
   /* Check the end of ADC1 reset calibration register */
   while(ADC_GetResetCalibrationStatus(ADC1));
@@ -129,7 +129,7 @@ int main(void)
   /* Enable ADC2 */
   ADC_Cmd(ADC2, ENABLE);
 
-  /* Enable ADC2 reset calibration register */   
+  /* Enable ADC2 reset calibration register */
   ADC_ResetCalibration(ADC2);
   /* Check the end of ADC2 reset calibration register */
   while(ADC_GetResetCalibrationStatus(ADC2));
@@ -139,7 +139,7 @@ int main(void)
   /* Check the end of ADC2 calibration */
   while(ADC_GetCalibrationStatus(ADC2));
 
-  /* Start ADC1 Software Conversion */ 
+  /* Start ADC1 Software Conversion */
   ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 
   /* Test on DMA1 channel1 transfer complete flag */
@@ -196,7 +196,7 @@ void GPIO_Configuration(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -210,10 +210,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

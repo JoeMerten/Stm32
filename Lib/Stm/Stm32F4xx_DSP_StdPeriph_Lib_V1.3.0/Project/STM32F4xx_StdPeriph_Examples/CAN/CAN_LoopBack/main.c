@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CAN/CAN_LoopBack/main.c 
+  * @file    CAN/CAN_LoopBack/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup CAN_LoopBack
   * @{
-  */ 
+  */
 
 /* Private define ------------------------------------------------------------*/
 /* Private typedef -----------------------------------------------------------*/
@@ -57,17 +57,17 @@ TestStatus CAN_Polling(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
-     */   
+     */
 
   /* CANx Periph clock enable */
   RCC_APB1PeriphClockCmd(CAN_CLK, ENABLE);
-  
+
   /* Initialize LEDs mounted on EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
@@ -110,7 +110,7 @@ TestStatus CAN_Polling(void)
 
   /* CAN register init */
   CAN_DeInit(CANx);
-  
+
   /* CAN cell init */
   CAN_InitStructure.CAN_TTCM = DISABLE;
   CAN_InitStructure.CAN_ABOM = DISABLE;
@@ -138,7 +138,7 @@ TestStatus CAN_Polling(void)
   CAN_FilterInitStructure.CAN_FilterIdHigh = 0x0000;
   CAN_FilterInitStructure.CAN_FilterIdLow = 0x0000;
   CAN_FilterInitStructure.CAN_FilterMaskIdHigh = 0x0000;
-  CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x0000;  
+  CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x0000;
   CAN_FilterInitStructure.CAN_FilterFIFOAssignment = 0;
 
   CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
@@ -175,7 +175,7 @@ TestStatus CAN_Polling(void)
 
   if (RxMessage.StdId != 0x11)
   {
-    return FAILED;  
+    return FAILED;
   }
 
   if (RxMessage.IDE != CAN_ID_STD)
@@ -185,14 +185,14 @@ TestStatus CAN_Polling(void)
 
   if (RxMessage.DLC != 2)
   {
-    return FAILED;  
+    return FAILED;
   }
 
   if ((RxMessage.Data[0]<<8|RxMessage.Data[1]) != 0xCAFE)
   {
     return FAILED;
   }
-  
+
   return PASSED; /* Test Passed */
 }
 
@@ -206,7 +206,7 @@ TestStatus CAN_Polling(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -224,6 +224,6 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

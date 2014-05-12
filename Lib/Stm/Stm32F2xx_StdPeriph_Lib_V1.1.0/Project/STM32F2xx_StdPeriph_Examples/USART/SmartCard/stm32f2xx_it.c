@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/Smartcard/stm32f2xx_it.c 
+  * @file    USART/Smartcard/stm32f2xx_it.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -18,14 +18,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_it.h"
@@ -175,7 +175,7 @@ void SC_USART_IRQHandler(void)
     /* Resend the byte that failed to be received (by the Smartcard) correctly */
     SC_ParityErrorHandler();
   }
-  
+
   /* If the SC_USART detects a parity error */
   if(USART_GetITStatus(SC_USART, USART_IT_PE) != RESET)
   {
@@ -184,14 +184,14 @@ void SC_USART_IRQHandler(void)
     /* Flush the SC_USART DR register */
     USART_ReceiveData(SC_USART);
   }
-  
+
   if(USART_GetITStatus(SC_USART, USART_IT_RXNE) != RESET)
   {
     /* Disable SC_USART RXNE Interrupt */
     USART_ITConfig(SC_USART, USART_IT_RXNE, DISABLE);
     USART_ReceiveData(SC_USART);
   }
-  
+
   /* If a Overrun error is signaled by the card */
   if(USART_GetITStatus(SC_USART, USART_IT_ORE) != RESET)
   {
@@ -221,7 +221,7 @@ void SC_OFF_EXTI_IRQHandler(void)
     STM_EVAL_LEDToggle(LED2);
     STM_EVAL_LEDToggle(LED3);
     STM_EVAL_LEDToggle(LED4);
-    
+
     /* Smartcard detected */
     CardInserted = 1;
 
@@ -251,10 +251,10 @@ void SC_OFF_EXTI_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

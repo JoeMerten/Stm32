@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/OCInactive/main.c 
+  * @file    TIM/OCInactive/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -35,7 +35,7 @@
 
 /** @addtogroup TIM_OCInactive
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -61,7 +61,7 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
@@ -70,31 +70,31 @@ int main(void)
 
   /* TIM Configuration */
   TIM_Config();
-  
+
   /* ---------------------------------------------------------------
     TIM2 Configuration: Output Compare Inactive Mode:
-    In this example TIM2 input clock (TIM2CLK) is set to 2 * APB1 clock (PCLK1), 
-    since APB1 prescaler is different from 1.   
-      TIM2CLK = 2 * PCLK1  
-      PCLK1 = HCLK / 4 
+    In this example TIM2 input clock (TIM2CLK) is set to 2 * APB1 clock (PCLK1),
+    since APB1 prescaler is different from 1.
+      TIM2CLK = 2 * PCLK1
+      PCLK1 = HCLK / 4
       => TIM2CLK = HCLK / 2 = SystemCoreClock /2
-          
+
     To get TIM2 counter clock at 1 KHz, the prescaler is computed as follows:
        Prescaler = (TIM2CLK / TIM2 counter clock) - 1
        Prescaler = ((SystemCoreClock /2) /1 KHz) - 1
-       
+
     Generate 4 signals with 4 different delays:
        TIM2_CH1 delay = CCR1_Val/TIM2 counter clock = 1000 ms
        TIM2_CH2 delay = CCR2_Val/TIM2 counter clock = 500 ms
        TIM2_CH3 delay = CCR3_Val/TIM2 counter clock = 250 ms
        TIM2_CH4 delay = CCR4_Val/TIM2 counter clock = 125 ms
 
-    Note: 
+    Note:
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f2xx.c file.
      Each time the core clock (HCLK) changes, user had to call SystemCoreClockUpdate()
      function to update SystemCoreClock variable value. Otherwise, any configuration
-     based on this variable will be incorrect. 
-     
+     based on this variable will be incorrect.
+
   --------------------------------------------------------------- */
   /* Compute the prescaler value */
   PrescalerValue = (uint16_t) ((SystemCoreClock / 2) / 1000) - 1;
@@ -142,7 +142,7 @@ int main(void)
   TIM_OC4PreloadConfig(TIM2, TIM_OCPreload_Disable);
 
   TIM_ARRPreloadConfig(TIM2, ENABLE);
-  
+
   /* Turn on LED1, LED2, LED3 and LED4 */
   STM_EVAL_LEDOn(LED1);
   STM_EVAL_LEDOn(LED2);
@@ -168,24 +168,24 @@ void TIM_Config(void)
 {
   NVIC_InitTypeDef NVIC_InitStructure;
    GPIO_InitTypeDef GPIO_InitStructure;
-  
+
   /* TIM2 clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
   /* GPIOA clock enable */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
-   
+
   /* GPIOC Configuration: TIM2 CH1 (PA0), TIM2 CH2 (PA1), TIM2 CH2 (PA2) and TIM2 CH4 (PA3) */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
-  GPIO_Init(GPIOA, &GPIO_InitStructure); 
-    
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
+
   /* Connect TIM Channels to AF1 */
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource0, GPIO_AF_TIM2);
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource1, GPIO_AF_TIM2); 
+  GPIO_PinAFConfig(GPIOA, GPIO_PinSource1, GPIO_AF_TIM2);
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_TIM2);
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_TIM2);
 
@@ -200,7 +200,7 @@ void TIM_Config(void)
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);  
+  NVIC_Init(&NVIC_InitStructure);
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -223,10 +223,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 #endif
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

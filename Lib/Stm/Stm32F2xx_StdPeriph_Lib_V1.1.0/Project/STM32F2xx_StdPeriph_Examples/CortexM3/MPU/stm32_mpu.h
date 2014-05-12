@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CortexM3/MPU/stm32_mpu.h 
+  * @file    CortexM3/MPU/stm32_mpu.h
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32_MPU_H
@@ -34,10 +34,10 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-#define MPU_RASR_XN_Pos                          28  
-#define MPU_RASR_XN_Msk                          (1UL << MPU_RASR_XN_Pos)                       
-#define MPU_RASR_AP_Pos                          24  
-#define MPU_RASR_AP_Msk                          (7UL << MPU_RASR_AP_Pos)                      
+#define MPU_RASR_XN_Pos                          28
+#define MPU_RASR_XN_Msk                          (1UL << MPU_RASR_XN_Pos)
+#define MPU_RASR_AP_Pos                          24
+#define MPU_RASR_AP_Msk                          (7UL << MPU_RASR_AP_Pos)
 #define RAM_ADDRESS_START                        (0x20000000UL)
 #define RAM_SIZE                                 (0x19UL << 0UL)
 #define PERIPH_ADDRESS_START                     (0x40000000)

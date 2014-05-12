@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/Interrupt/platform_config.h 
+  * @file    USART/Interrupt/platform_config.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __PLATFORM_CONFIG_H
@@ -30,11 +30,11 @@
 /* Uncomment the line corresponding to the STMicroelectronics evaluation board
    used to run the example */
 #if !defined (USE_STM3210B_EVAL) &&  !defined (USE_STM3210E_EVAL) &&  !defined (USE_STM3210C_EVAL) &&  !defined (USE_STM32100B_EVAL) &&  !defined (USE_STM32100E_EVAL)
- //#define USE_STM32100B_EVAL  
+ //#define USE_STM32100B_EVAL
  //#define USE_STM3210B_EVAL
  //#define USE_STM3210E_EVAL
  //#define USE_STM3210C_EVAL
- #define USE_STM32100E_EVAL 
+ #define USE_STM32100E_EVAL
 #endif
 
 /* Define the STM32F10x hardware depending on the used evaluation board */
@@ -48,7 +48,7 @@
   #define USARTy_TxPin             GPIO_Pin_9
   #define USARTy_IRQn              USART1_IRQn
   #define USARTy_IRQHandler        USART1_IRQHandler
-    
+
   #define USARTz                   USART2
   #define USARTz_GPIO              GPIOD
   #define USARTz_CLK               RCC_APB1Periph_USART2
@@ -57,7 +57,7 @@
   #define USARTz_TxPin             GPIO_Pin_5
   #define USARTz_IRQn              USART2_IRQn
   #define USARTz_IRQHandler        USART2_IRQHandler
-    
+
 #elif defined (USE_STM3210E_EVAL) || defined (USE_STM32100E_EVAL)
 
   #define USARTy                   USART1
@@ -68,7 +68,7 @@
   #define USARTy_TxPin             GPIO_Pin_9
   #define USARTy_IRQn              USART1_IRQn
   #define USARTy_IRQHandler        USART1_IRQHandler
-  
+
   #define USARTz                   USART2
   #define USARTz_GPIO              GPIOA
   #define USARTz_CLK               RCC_APB1Periph_USART2
@@ -77,7 +77,7 @@
   #define USARTz_TxPin             GPIO_Pin_2
   #define USARTz_IRQn              USART2_IRQn
   #define USARTz_IRQHandler        USART2_IRQHandler
-  
+
 #elif defined USE_STM3210C_EVAL
 
   #define USARTy                   USART2
@@ -88,7 +88,7 @@
   #define USARTy_TxPin             GPIO_Pin_5
   #define USARTy_IRQn              USART2_IRQn
   #define USARTy_IRQHandler        USART2_IRQHandler
-  
+
   #define USARTz                   USART3
   #define USARTz_GPIO              GPIOC
   #define USARTz_CLK               RCC_APB1Periph_USART3
@@ -97,7 +97,7 @@
   #define USARTz_TxPin             GPIO_Pin_10
   #define USARTz_IRQn              USART3_IRQn
   #define USARTz_IRQHandler        USART3_IRQHandler
-  
+
 #elif defined USE_STM32100B_EVAL
 
   #define USARTy                   USART1
@@ -108,7 +108,7 @@
   #define USARTy_TxPin             GPIO_Pin_9
   #define USARTy_IRQn              USART1_IRQn
   #define USARTy_IRQHandler        USART1_IRQHandler
-    
+
   #define USARTz                   USART2
   #define USARTz_GPIO              GPIOD
   #define USARTz_CLK               RCC_APB1Periph_USART2
@@ -117,7 +117,7 @@
   #define USARTz_TxPin             GPIO_Pin_5
   #define USARTz_IRQn              USART2_IRQn
   #define USARTz_IRQHandler        USART2_IRQHandler
-   
+
 #endif /* USE_STM3210B_EVAL */
 
 /* Exported macro ------------------------------------------------------------*/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    SysTick/SysTick_Example/main.c 
+  * @file    SysTick/SysTick_Example/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup SysTick_Example
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -44,7 +44,7 @@ GPIO_InitTypeDef GPIO_InitStructure;
 static __IO uint32_t TimingDelay;
 
 /* Private function prototypes -----------------------------------------------*/
-static void Delay(__IO uint32_t nTime);   
+static void Delay(__IO uint32_t nTime);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -55,14 +55,14 @@ static void Delay(__IO uint32_t nTime);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
-     */       
-       
+     */
+
   /* Initialize LEDs available on EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
@@ -82,26 +82,26 @@ int main(void)
        - Configure the SysTick Counter clock source to be Core Clock Source (HCLK).
        - Enable the SysTick Interrupt.
        - Start the SysTick Counter.
-    
+
     2. You can change the SysTick Clock source to be HCLK_Div8 by calling the
        SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8) just after the
        SysTick_Config() function call. The SysTick_CLKSourceConfig() is defined
        inside the misc.c file.
 
     3. You can change the SysTick IRQ priority by calling the
-       NVIC_SetPriority(SysTick_IRQn,...) just after the SysTick_Config() function 
+       NVIC_SetPriority(SysTick_IRQn,...) just after the SysTick_Config() function
        call. The NVIC_SetPriority() is defined inside the core_cm3.h file.
 
     4. To adjust the SysTick time base, use the following formula:
-                            
+
          Reload Value = SysTick Counter Clock (Hz) x  Desired Time base (s)
-    
+
        - Reload Value is the parameter to be passed for SysTick_Config() function
        - Reload Value should not exceed 0xFFFFFF
    */
   if (SysTick_Config(SystemCoreClock / 1000))
-  { 
-    /* Capture error */ 
+  {
+    /* Capture error */
     while (1);
   }
 
@@ -129,7 +129,7 @@ int main(void)
   * @retval None
   */
 void Delay(__IO uint32_t nTime)
-{ 
+{
   TimingDelay = nTime;
 
   while(TimingDelay != 0);
@@ -143,7 +143,7 @@ void Delay(__IO uint32_t nTime)
 void TimingDelay_Decrement(void)
 {
   if (TimingDelay != 0)
-  { 
+  {
     TimingDelay--;
   }
 }
@@ -158,7 +158,7 @@ void TimingDelay_Decrement(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -171,10 +171,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

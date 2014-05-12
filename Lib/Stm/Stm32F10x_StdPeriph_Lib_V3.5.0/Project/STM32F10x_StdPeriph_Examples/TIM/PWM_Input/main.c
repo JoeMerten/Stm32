@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/PWM_Input/main.c 
+  * @file    TIM/PWM_Input/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup TIM_PWM_Input
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -50,13 +50,13 @@ void NVIC_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -67,9 +67,9 @@ int main(void)
   GPIO_Configuration();
 
   /* TIM3 configuration: PWM Input mode ------------------------
-     The external signal is connected to TIM3 CH2 pin (PA.01), 
+     The external signal is connected to TIM3 CH2 pin (PA.01),
      The Rising edge is used as active edge,
-     The TIM3 CCR2 is used to compute the frequency value 
+     The TIM3 CCR2 is used to compute the frequency value
      The TIM3 CCR1 is used to compute the duty cycle value
   ------------------------------------------------------------ */
 
@@ -169,10 +169,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

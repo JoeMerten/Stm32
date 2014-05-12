@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.3
   * @date    13-November-2013
-  * @brief   This file contains all the functions prototypes for the 
+  * @brief   This file contains all the functions prototypes for the
   *          stm324x9i_eval_fmc_nor.c driver.
   ******************************************************************************
   * @attention
@@ -17,15 +17,15 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
-  
+  */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM324X9I_EVAL_FMC_NOR_H
 #define __STM324X9I_EVAL_FMC_NOR_H
@@ -38,7 +38,7 @@
   */
 /**
   * @brief  FMC NOR ID typedef
-  */  
+  */
 typedef struct
 {
   uint16_t Manufacturer_Code;
@@ -56,7 +56,7 @@ typedef enum
   NOR_ONGOING,
   NOR_ERROR,
   NOR_TIMEOUT
-}NOR_Status;  
+}NOR_Status;
 
 /**
   * @}
@@ -67,18 +67,18 @@ typedef enum
   */
 /**
   * @brief  FMC NOR Bank Address
-  */  
+  */
 #define NOR_BANK_ADDR        ((uint32_t)0x60000000)
- 
+
 /**
   * @brief  FMC NOR block erase timeout
-  */ 
+  */
 #define BLOCKERASE_TIMEOUT   ((uint32_t)0x00A00000)
 
 /**
   * @brief  FMC NOR chip erase timeout
   */
-#define CHIPERASE_TIMEOUT    ((uint32_t)0x30000000) 
+#define CHIPERASE_TIMEOUT    ((uint32_t)0x30000000)
 
 /**
   * @brief  FMC NOR program timeout
@@ -87,28 +87,28 @@ typedef enum
 
 /**
   * @brief  FMC NOR Burst Access mode
-  */  
-#define NOR_BURSTACCESS     FMC_BurstAccessMode_Disable  
+  */
+#define NOR_BURSTACCESS     FMC_BurstAccessMode_Disable
 /* #define NOR_BURSTACCESS      FMC_BurstAccessMode_Enable */
 
 /**
   * @brief  FMC NOR Write Burst feature
-  */  
-#define NOR_WRITEBURST      FMC_WriteBurst_Disable 
+  */
+#define NOR_WRITEBURST      FMC_WriteBurst_Disable
 /* #define NOR_WRITEBURST       FMC_WriteBurst_Enable */
 
 /**
   * @brief  FMC NOR Continuous Clock feature
-  */  
+  */
 #define CONTINUOUSCLOCK_FEATURE     FMC_CClock_SyncOnly
 /* #define CONTINUOUSCLOCK_FEATURE      FMC_CClock_SyncAsync */
 
 
 /* NOR Ready/Busy signal GPIO definitions */
-#define NOR_READY_BUSY_PIN    GPIO_Pin_6 
+#define NOR_READY_BUSY_PIN    GPIO_Pin_6
 #define NOR_READY_BUSY_GPIO   GPIOD
-#define NOR_READY_STATE       SET 
-#define NOR_BUSY_STATE        RESET 
+#define NOR_READY_STATE       SET
+#define NOR_BUSY_STATE        RESET
 
 /**
   * @}
@@ -120,12 +120,12 @@ typedef enum
 
 /**
   * @}
-  */  
-  
+  */
+
 /** @defgroup STM324x9I_EVAL_FMC_NOR_Exported_Functions
   * @{
   */
-void        NOR_Init(void);  
+void        NOR_Init(void);
 void        NOR_GPIOConfig(void);
 void        NOR_ReadID(NOR_IDTypeDef* pNOR_ID);
 NOR_Status  NOR_EraseBlock(uint32_t uwBlockAddress);
@@ -146,7 +146,7 @@ NOR_Status  NOR_GetStatus(uint32_t Timeout);
   */
 /**
   * @}
-  */ 
+  */
 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

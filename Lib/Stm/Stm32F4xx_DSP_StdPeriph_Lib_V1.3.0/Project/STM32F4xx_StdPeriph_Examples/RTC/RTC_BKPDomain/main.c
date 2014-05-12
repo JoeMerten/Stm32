@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RTC/RTC_BKPDomain/main.c 
+  * @file    RTC/RTC_BKPDomain/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup RTC_BKPDomain
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -60,12 +60,12 @@ uint32_t uwIndex = 0;
 
 uint32_t aBKPDataReg[RTC_BKP_DR_NUMBER] =
   {
-    RTC_BKP_DR0, RTC_BKP_DR1, RTC_BKP_DR2, 
+    RTC_BKP_DR0, RTC_BKP_DR1, RTC_BKP_DR2,
     RTC_BKP_DR3, RTC_BKP_DR4, RTC_BKP_DR5,
-    RTC_BKP_DR6, RTC_BKP_DR7, RTC_BKP_DR8, 
-    RTC_BKP_DR9, RTC_BKP_DR10, RTC_BKP_DR11, 
-    RTC_BKP_DR12, RTC_BKP_DR13, RTC_BKP_DR14, 
-    RTC_BKP_DR15, RTC_BKP_DR16, RTC_BKP_DR17, 
+    RTC_BKP_DR6, RTC_BKP_DR7, RTC_BKP_DR8,
+    RTC_BKP_DR9, RTC_BKP_DR10, RTC_BKP_DR11,
+    RTC_BKP_DR12, RTC_BKP_DR13, RTC_BKP_DR14,
+    RTC_BKP_DR15, RTC_BKP_DR16, RTC_BKP_DR17,
     RTC_BKP_DR18,  RTC_BKP_DR19
   };
 
@@ -91,16 +91,16 @@ static Button_TypeDef ReadKey(void);
   * @retval None
   */
 int main(void)
-{     
+{
   NVIC_InitTypeDef NVIC_InitStructure;
   EXTI_InitTypeDef  EXTI_InitStructure;
 
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s)
        before to branch to application main.
-     */ 
-     
+     */
+
   /* Configure the external interrupt "WAKEUP" and "TAMPER" buttons */
   STM_EVAL_PBInit(BUTTON_TAMPER , BUTTON_MODE_GPIO);
   STM_EVAL_PBInit(BUTTON_WAKEUP , BUTTON_MODE_GPIO);
@@ -185,12 +185,12 @@ int main(void)
 /* RTC Backup Data Registers **************************************************/
     /* Check if RTC Backup DRx registers data are correct */
     if (CheckBackupReg(FIRST_DATA) == 0x00)
-    { 
+    {
       /* OK, RTC Backup DRx registers data are correct */
       LCD_UsrLog ("OK, RTC Backup DRx registers data are correct. \n");
     }
     else
-    { 
+    {
       /* Error, RTC Backup DRx registers data are not correct */
       LCD_ErrLog ("RTC Backup DRx registers data are not correct\n");
     }
@@ -215,13 +215,13 @@ static void RTC_Config(void)
 
   /* Allow access to RTC */
   PWR_BackupAccessCmd(ENABLE);
-    
+
 #if defined (RTC_CLOCK_SOURCE_LSI)  /* LSI used as RTC source clock*/
 /* The RTC Clock may varies due to LSI frequency dispersion. */
-  /* Enable the LSI OSC */ 
+  /* Enable the LSI OSC */
   RCC_LSICmd(ENABLE);
 
-  /* Wait till LSI is ready */  
+  /* Wait till LSI is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET)
   {
   }
@@ -236,7 +236,7 @@ static void RTC_Config(void)
   /* Enable the LSE OSC */
   RCC_LSEConfig(RCC_LSE_ON);
 
-  /* Wait till LSE is ready */  
+  /* Wait till LSE is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)
   {
   }
@@ -250,7 +250,7 @@ static void RTC_Config(void)
 #else
   #error Please select the RTC Clock source inside the main.c file
 #endif /* RTC_CLOCK_SOURCE_LSI */
-  
+
   /* Enable the RTC Clock */
   RCC_RTCCLKCmd(ENABLE);
 
@@ -263,7 +263,7 @@ static void RTC_Config(void)
   /* Display the new RCC BDCR and RTC TAFCR Registers */
   LCD_UsrLog ("RTC Reconfig \n");
   LCD_UsrLog ("RCC BDCR = 0x%x\n", RCC->BDCR);
-  LCD_UsrLog ("RTC TAFCR = 0x%x\n", RTC->TAFCR); 
+  LCD_UsrLog ("RTC TAFCR = 0x%x\n", RTC->TAFCR);
 
   /* Set the Time */
   RTC_TimeStructure.RTC_Hours   = 0x08;
@@ -272,29 +272,29 @@ static void RTC_Config(void)
 
   /* Set the Date */
   RTC_DateStructure.RTC_Month = RTC_Month_January;
-  RTC_DateStructure.RTC_Date = 0x11;  
-  RTC_DateStructure.RTC_Year = 0x13; 
-  RTC_DateStructure.RTC_WeekDay = RTC_Weekday_Friday; 
+  RTC_DateStructure.RTC_Date = 0x11;
+  RTC_DateStructure.RTC_Year = 0x13;
+  RTC_DateStructure.RTC_WeekDay = RTC_Weekday_Friday;
 
   /* Calendar Configuration */
   RTC_InitStructure.RTC_AsynchPrediv = uwAsynchPrediv;
   RTC_InitStructure.RTC_SynchPrediv =  uwSynchPrediv;
   RTC_InitStructure.RTC_HourFormat = RTC_HourFormat_24;
   RTC_Init(&RTC_InitStructure);
-  
+
   /* Set Current Time and Date */
-  RTC_SetTime(RTC_Format_BCD, &RTC_TimeStructure);  
-  RTC_SetDate(RTC_Format_BCD, &RTC_DateStructure); 
+  RTC_SetTime(RTC_Format_BCD, &RTC_TimeStructure);
+  RTC_SetDate(RTC_Format_BCD, &RTC_DateStructure);
 
   /* Configure the RTC Wakeup Clock source and Counter (Wakeup event each 1 second) */
   RTC_WakeUpClockConfig(RTC_WakeUpClock_RTCCLK_Div16);
   RTC_SetWakeUpCounter(0x7FF);
-  
+
   /* Enable the Wakeup Interrupt */
   RTC_ITConfig(RTC_IT_WUT, ENABLE);
 
   /* Enable Wakeup Counter */
-  RTC_WakeUpCmd(ENABLE); 
+  RTC_WakeUpCmd(ENABLE);
 
 /*  Backup SRAM ***************************************************************/
   /* Enable BKPRAM Clock */
@@ -341,15 +341,15 @@ static void RTC_Config(void)
   * @param  LineBegin : line from which the digit is displayed
   * @param  ColBegin : Column from which the digit is displayed
   * @param  CountBegin : Initial value for the digit
-  * @param  ValueMax : Maximum Value for the digit 
-  * @param  ValueMin : Minimum value for the digit                                                                      
+  * @param  ValueMax : Maximum Value for the digit
+  * @param  ValueMin : Minimum value for the digit
   * @retval Digit value
   */
 static uint8_t ReadDigit(uint16_t LineBegin, uint16_t ColBegin, uint8_t CountBegin, uint8_t ValueMax, uint8_t ValueMin)
 {
   uint8_t tmpValue = 0;
   Button_TypeDef keystate = (Button_TypeDef)10;
-  
+
   /* Set the Back Color */
   LCD_SetBackColor(LCD_COLOR_RED);
 
@@ -379,7 +379,7 @@ static uint8_t ReadDigit(uint16_t LineBegin, uint16_t ColBegin, uint8_t CountBeg
       /* Display new value */
       LCD_DisplayChar(LineBegin, ColBegin,((++tmpValue) + 0x30));
     }
-    
+
     /* If "BUTTON_WAKEUP" push button is pressed */
     if(keystate == BUTTON_WAKEUP)
     {
@@ -392,7 +392,7 @@ static uint8_t ReadDigit(uint16_t LineBegin, uint16_t ColBegin, uint8_t CountBeg
       /* Return the digit value and exit */
       return tmpValue;
     }
-  } 
+  }
 }
 
 /**
@@ -404,7 +404,7 @@ static void Time_Regulate(void)
 {
   uint8_t Tmp_HH = 0, Tmp_MM = 0, Tmp_SS = 0;
 
-  LCD_DisplayStringLine(LCD_LINE_12, (uint8_t*)"Set time: hh:mm:ss");  
+  LCD_DisplayStringLine(LCD_LINE_12, (uint8_t*)"Set time: hh:mm:ss");
 
   /* Read time hours */
   Tmp_HH = ReadDigit(LCD_LINE_13, 244, (RTC_TimeStructure.RTC_Hours / 10), 0x2, 0x0);
@@ -474,7 +474,7 @@ static void Time_Display(void)
 
   /* Get the current Time */
   RTC_GetTime(RTC_Format_BIN, &RTC_TimeStructure);
-  
+
   /* Display time hours */
   LCD_DisplayChar(LCD_LINE_13, 244,((RTC_TimeStructure.RTC_Hours / 10) + 0x30));
   LCD_DisplayChar(LCD_LINE_13, 228,((RTC_TimeStructure.RTC_Hours % 10) + 0x30));
@@ -497,14 +497,14 @@ static void Date_Regulate(void)
 {
   uint8_t weekday = 0, date = 0, month = 0, year = 0;
 
-  LCD_DisplayStringLine(LCD_LINE_15, (uint8_t*)"Set date: Weekday / Date / Month / Year");  
-  
+  LCD_DisplayStringLine(LCD_LINE_15, (uint8_t*)"Set date: Weekday / Date / Month / Year");
+
   /* Read Date Weekday */
   weekday = ReadDigit(LCD_LINE_16, 276, (RTC_DateStructure.RTC_WeekDay / 10), 0x7, 0x1);
 
   /* Read Date Day */
   date = ReadDigit(LCD_LINE_16, 244, (RTC_DateStructure.RTC_Date / 10), 3, 0x0);
-  
+
   if(date == 3)
   {
     if((RTC_DateStructure.RTC_Date % 10) > 1)
@@ -520,7 +520,7 @@ static void Date_Regulate(void)
 
   /* Read Date Month */
   month = ReadDigit(LCD_LINE_16, 196, (RTC_DateStructure.RTC_Month / 10), 1, 0x0);
-  
+
   if(month == 1)
   {
     if((RTC_DateStructure.RTC_Month % 10) > 2)
@@ -598,7 +598,7 @@ static void Date_Display(void)
   /* Display Date Month */
   LCD_DisplayChar(LCD_LINE_16, 196,((RTC_DateStructure.RTC_Month / 10) + 0x30));
   LCD_DisplayChar(LCD_LINE_16, 182,((RTC_DateStructure.RTC_Month % 10) + 0x30));
-  
+
   /* Display Date Year */
   LCD_DisplayChar(LCD_LINE_16, 150, '2');
   LCD_DisplayChar(LCD_LINE_16, 134, '0');
@@ -618,10 +618,10 @@ static void Calendar_Show(void)
   {
     /* Display current time */
     Time_Display();
-    
+
     /* Display current date */
     Date_Display();
-    
+
     uwTimeDisplay = 0;
   }
 }
@@ -646,7 +646,7 @@ static void WriteToBackupReg(uint16_t FirstBackupData)
   * @brief  Checks if the Backup data registers values are correct or not.
   * @param  FirstBackupData: data to read from first backup data register
   * @retval - 0: All Backup DRx registers data are correct
-  *         - Value different from 0: Number of the first Backup register which 
+  *         - Value different from 0: Number of the first Backup register which
   *           value is not correct
   */
 static uint32_t CheckBackupReg(uint16_t FirstBackupData)
@@ -701,7 +701,7 @@ static Button_TypeDef ReadKey(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -714,10 +714,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

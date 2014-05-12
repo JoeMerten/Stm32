@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/HalfDuplex/platform_config.h 
+  * @file    USART/HalfDuplex/platform_config.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __PLATFORM_CONFIG_H
@@ -34,7 +34,7 @@
  //#define USE_STM3210B_EVAL
  //#define USE_STM3210E_EVAL
  //#define USE_STM32100E_EVAL
- #define USE_STM3210C_EVAL 
+ #define USE_STM3210C_EVAL
 #endif
 
 /* Define the STM32F10x hardware depending on the used evaluation board */

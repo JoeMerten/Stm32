@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    ADC/VBAT_Measurement/main.c 
+  * @file    ADC/VBAT_Measurement/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -38,7 +38,7 @@
 
 /** @addtogroup ADC_VBAT_Measurement
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -85,8 +85,8 @@ int main(void)
 
   /* ADC1 Channel Vbat configuration */
   ADC1_ChVbat_DMA_Config();
- 
-  /* Start ADC1 Software Conversion */ 
+
+  /* Start ADC1 Software Conversion */
   ADC_SoftwareStartConv(ADC1);
 
   while (1)
@@ -108,14 +108,14 @@ void ADC1_ChVbat_DMA_Config(void)
   ADC_InitTypeDef       ADC_InitStructure;
   ADC_CommonInitTypeDef ADC_CommonInitStructure;
   DMA_InitTypeDef       DMA_InitStructure;
-    
+
   /* Enable peripheral clocks *************************************************/
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2, ENABLE);
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 
   /* DMA2_Stream0 channel0 configuration **************************************/
   DMA_DeInit(DMA2_Stream0);
-  DMA_InitStructure.DMA_Channel = DMA_Channel_0;  
+  DMA_InitStructure.DMA_Channel = DMA_Channel_0;
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)ADC1_DR_ADDRESS;
   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)&ADCConvertedValue;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
@@ -126,14 +126,14 @@ void ADC1_ChVbat_DMA_Config(void)
   DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
   DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
   DMA_InitStructure.DMA_Priority = DMA_Priority_High;
-  DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;         
+  DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
   DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull;
   DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
   DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
   DMA_Init(DMA2_Stream0, &DMA_InitStructure);
   /* DMA2_Stream0 enable */
   DMA_Cmd(DMA2_Stream0, ENABLE);
-    
+
   /* ADC Common Init **********************************************************/
   ADC_CommonInitStructure.ADC_Mode = ADC_Mode_Independent;
   ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div2;
@@ -146,19 +146,19 @@ void ADC1_ChVbat_DMA_Config(void)
   ADC_InitStructure.ADC_ScanConvMode = DISABLE;
   ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
   ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
-  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC1;  
+  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC1;
   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
   ADC_InitStructure.ADC_NbrOfConversion = 1;
   ADC_Init(ADC1, &ADC_InitStructure);
 
   /* Enable ADC1 DMA */
   ADC_DMACmd(ADC1, ENABLE);
-  
+
   /* ADC1 regular channel18 (VBAT) configuration ******************************/
   ADC_RegularChannelConfig(ADC1, ADC_Channel_Vbat, 1, ADC_SampleTime_15Cycles);
 
   /* Enable VBAT channel */
-  ADC_VBATCmd(ENABLE); 
+  ADC_VBATCmd(ENABLE);
 
   /* Enable DMA request after last transfer (Single-ADC mode) */
   ADC_DMARequestAfterLastTransferCmd(ADC1, ENABLE);
@@ -231,7 +231,7 @@ void Display_Init(void)
   */
 static void delay(__IO uint32_t nCount)
 {
-  __IO uint32_t index = 0; 
+  __IO uint32_t index = 0;
   for(index = (100000 * nCount); index != 0; index--)
   {
   }
@@ -261,10 +261,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

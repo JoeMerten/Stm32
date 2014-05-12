@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    WWDG/WWDG_Example/main.c 
+  * @file    WWDG/WWDG_Example/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup WWDG_Example
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -54,22 +54,22 @@ static void Delay(__IO uint32_t nTime);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
-     */     
-       
-  /* Initialize LEDs and Key/Tamper Button mounted on EVAL board */       
+     */
+
+  /* Initialize LEDs and Key/Tamper Button mounted on EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_PBInit(BUTTON, BUTTON_MODE_EXTI);
 
   /* Check if the system has resumed from WWDG reset */
   if (RCC_GetFlagStatus(RCC_FLAG_WWDGRST) != RESET)
-  { 
+  {
     /* WWDGRST flag set */
     /* Turn on LED1 */
     STM_EVAL_LEDOn(LED1);
@@ -86,8 +86,8 @@ int main(void)
 
   /* Setup SysTick Timer for 1 msec interrupts  */
   if (SysTick_Config(SystemCoreClock / 1000))
-  { 
-    /* Capture error */ 
+  {
+    /* Capture error */
     while (1);
   }
 
@@ -102,12 +102,12 @@ int main(void)
     is below 80 (and greater than 64) otherwise a reset will be generated */
   WWDG_SetWindowValue(80);
 
-  /* Enable WWDG and set counter value to 127, WWDG timeout = ~780 us * 64 = 49.92 ms 
-     In this case the refresh window is: 
+  /* Enable WWDG and set counter value to 127, WWDG timeout = ~780 us * 64 = 49.92 ms
+     In this case the refresh window is:
            ~780 * (127-80) = 36.6ms < refresh window < ~780 * 64 = 49.9ms
   */
   WWDG_Enable(127);
-   
+
   while (1)
   {
     /* Toggle LED2 */
@@ -127,7 +127,7 @@ int main(void)
   * @retval None
   */
 static void Delay(__IO uint32_t nTime)
-{ 
+{
   uwTimingDelay = nTime;
 
   while(uwTimingDelay != 0);
@@ -143,7 +143,7 @@ static void Delay(__IO uint32_t nTime)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -156,10 +156,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

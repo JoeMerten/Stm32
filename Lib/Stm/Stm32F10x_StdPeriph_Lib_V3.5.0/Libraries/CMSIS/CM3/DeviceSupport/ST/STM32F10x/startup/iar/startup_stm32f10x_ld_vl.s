@@ -3,13 +3,13 @@
 ;* Author             : MCD Application Team
 ;* Version            : V3.5.0
 ;* Date               : 11-March-2011
-;* Description        : STM32F10x Low Density Value Line Devices vector table 
+;* Description        : STM32F10x Low Density Value Line Devices vector table
 ;*                      for EWARM toolchain.
 ;*                      This module performs:
 ;*                      - Set the initial SP
 ;*                      - Configure the clock system
 ;*                      - Set the initial PC == __iar_program_start,
-;*                      - Set the vector table entries with the exceptions ISR 
+;*                      - Set the vector table entries with the exceptions ISR
 ;*                        address.
 ;*                      After Reset the Cortex-M3 processor is in Thread mode,
 ;*                      priority is Privileged, and the Stack is set to Main.
@@ -46,7 +46,7 @@
         SECTION .intvec:CODE:NOROOT(2)
 
         EXTERN  __iar_program_start
-        EXTERN  SystemInit        
+        EXTERN  SystemInit
         PUBLIC  __vector_table
 
         DATA
@@ -139,7 +139,7 @@ Reset_Handler
         BLX     R0
         LDR     R0, =__iar_program_start
         BX      R0
-        
+
         PUBWEAK NMI_Handler
         SECTION .text:CODE:REORDER(1)
 NMI_Handler
@@ -363,7 +363,7 @@ TIM6_DAC_IRQHandler
         PUBWEAK TIM7_IRQHandler
         SECTION .text:CODE:REORDER(1)
 TIM7_IRQHandler
-        B TIM7_IRQHandler                
+        B TIM7_IRQHandler
 
         END
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

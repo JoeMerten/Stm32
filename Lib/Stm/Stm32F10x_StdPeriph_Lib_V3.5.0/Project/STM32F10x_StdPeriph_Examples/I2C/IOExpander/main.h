@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2C/IOExpander/main.h 
+  * @file    I2C/IOExpander/main.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
@@ -32,11 +32,11 @@
 #include "stm32f10x.h"
 #include "stm32_eval.h"
 #include <stdio.h>
- 
+
 #ifdef USE_STM3210C_EVAL
  #include "stm3210c_eval_lcd.h"
  #include "stm3210c_eval_ioe.h"
- 
+
 #elif defined USE_STM32100E_EVAL
  #include "stm32100e_eval_lcd.h"
  #include "stm32100e_eval_ioe.h"

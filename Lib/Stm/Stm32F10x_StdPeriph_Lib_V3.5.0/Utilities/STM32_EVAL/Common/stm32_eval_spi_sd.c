@@ -4,18 +4,18 @@
   * @author  MCD Application Team
   * @version V4.5.0
   * @date    07-March-2011
-  * @brief   This file provides a set of functions needed to manage the SPI SD 
+  * @brief   This file provides a set of functions needed to manage the SPI SD
   *          Card memory mounted on STM32xx-EVAL board (refer to stm32_eval.h
-  *          to know about the boards supporting this memory). 
-  *          It implements a high level communication layer for read and write 
-  *          from/to this memory. The needed STM32 hardware resources (SPI and 
-  *          GPIO) are defined in stm32xx_eval.h file, and the initialization is 
-  *          performed in SD_LowLevel_Init() function declared in stm32xx_eval.c 
+  *          to know about the boards supporting this memory).
+  *          It implements a high level communication layer for read and write
+  *          from/to this memory. The needed STM32 hardware resources (SPI and
+  *          GPIO) are defined in stm32xx_eval.h file, and the initialization is
+  *          performed in SD_LowLevel_Init() function declared in stm32xx_eval.c
   *          file.
-  *          You can easily tailor this driver to any other development board, 
-  *          by just adapting the defines for hardware resources and 
+  *          You can easily tailor this driver to any other development board,
+  *          by just adapting the defines for hardware resources and
   *          SD_LowLevel_Init() function.
-  *            
+  *
   *          +-------------------------------------------------------+
   *          |                     Pin assignment                    |
   *          +-------------------------+---------------+-------------+
@@ -40,7 +40,7 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
+  ******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -49,49 +49,49 @@
 /** @addtogroup Utilities
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup Common
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL_SPI_SD
   * @brief      This file includes the SD card driver of STM32-EVAL boards.
   * @{
-  */ 
+  */
 
 /** @defgroup STM32_EVAL_SPI_SD_Private_Types
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32_EVAL_SPI_SD_Private_Defines
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM32_EVAL_SPI_SD_Private_Macros
   * @{
   */
 /**
   * @}
-  */ 
-  
+  */
+
 
 /** @defgroup STM32_EVAL_SPI_SD_Private_Variables
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32_EVAL_SPI_SD_Private_Function_Prototypes
@@ -99,12 +99,12 @@
   */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32_EVAL_SPI_SD_Private_Functions
   * @{
-  */ 
+  */
 
 /**
   * @brief  DeInitializes the SD/SD communication.
@@ -119,7 +119,7 @@ void SD_DeInit(void)
 /**
   * @brief  Initializes the SD/SD communication.
   * @param  None
-  * @retval The SD Response: 
+  * @retval The SD Response:
   *         - SD_RESPONSE_FAILURE: Sequence failed
   *         - SD_RESPONSE_NO_ERROR: Sequence succeed
   */
@@ -128,7 +128,7 @@ SD_Error SD_Init(void)
   uint32_t i = 0;
 
   /*!< Initialize SD_SPI */
-  SD_LowLevel_Init(); 
+  SD_LowLevel_Init();
 
   /*!< SD chip select high */
   SD_CS_HIGH();
@@ -164,7 +164,7 @@ uint8_t SD_Detect(void)
 
 /**
   * @brief  Returns information about specific card.
-  * @param  cardinfo: pointer to a SD_CardInfo structure that contains all SD 
+  * @param  cardinfo: pointer to a SD_CardInfo structure that contains all SD
   *         card information.
   * @retval The SD Response:
   *         - SD_RESPONSE_FAILURE: Sequence failed
@@ -187,7 +187,7 @@ SD_Error SD_GetCardInfo(SD_CardInfo *cardinfo)
 
 /**
   * @brief  Reads a block of data from the SD.
-  * @param  pBuffer: pointer to the buffer that receives the data read from the 
+  * @param  pBuffer: pointer to the buffer that receives the data read from the
   *                  SD.
   * @param  ReadAddr: SD's internal address to read from.
   * @param  BlockSize: the SD card Data block size.
@@ -202,10 +202,10 @@ SD_Error SD_ReadBlock(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t BlockSize)
 
   /*!< SD chip select low */
   SD_CS_LOW();
-  
+
   /*!< Send CMD17 (SD_CMD_READ_SINGLE_BLOCK) to read one block */
   SD_SendCmd(SD_CMD_READ_SINGLE_BLOCK, ReadAddr, 0xFF);
-  
+
   /*!< Check if the SD acknowledged the read block command: R1 response (0x00: no errors) */
   if (!SD_GetResponse(SD_RESPONSE_NO_ERROR))
   {
@@ -217,7 +217,7 @@ SD_Error SD_ReadBlock(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t BlockSize)
       {
         /*!< Save the received data */
         *pBuffer = SD_ReadByte();
-       
+
         /*!< Point to the next location where the byte read will be saved */
         pBuffer++;
       }
@@ -230,17 +230,17 @@ SD_Error SD_ReadBlock(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t BlockSize)
   }
   /*!< SD chip select high */
   SD_CS_HIGH();
-  
+
   /*!< Send dummy byte: 8 Clock pulses of delay */
   SD_WriteByte(SD_DUMMY_BYTE);
-  
+
   /*!< Returns the reponse */
   return rvalue;
 }
 
 /**
   * @brief  Reads multiple block of data from the SD.
-  * @param  pBuffer: pointer to the buffer that receives the data read from the 
+  * @param  pBuffer: pointer to the buffer that receives the data read from the
   *                  SD.
   * @param  ReadAddr: SD's internal address to read from.
   * @param  BlockSize: the SD card Data block size.
@@ -253,7 +253,7 @@ SD_Error SD_ReadMultiBlocks(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t BlockS
 {
   uint32_t i = 0, Offset = 0;
   SD_Error rvalue = SD_RESPONSE_FAILURE;
-  
+
   /*!< SD chip select low */
   SD_CS_LOW();
   /*!< Data transfer */
@@ -301,11 +301,11 @@ SD_Error SD_ReadMultiBlocks(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t BlockS
 
 /**
   * @brief  Writes a block on the SD
-  * @param  pBuffer: pointer to the buffer containing the data to be written on 
+  * @param  pBuffer: pointer to the buffer containing the data to be written on
   *                  the SD.
   * @param  WriteAddr: address to write on.
   * @param  BlockSize: the SD card Data block size.
-  * @retval The SD Response: 
+  * @retval The SD Response:
   *         - SD_RESPONSE_FAILURE: Sequence failed
   *         - SD_RESPONSE_NO_ERROR: Sequence succeed
   */
@@ -319,7 +319,7 @@ SD_Error SD_WriteBlock(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t BlockSize)
 
   /*!< Send CMD24 (SD_CMD_WRITE_SINGLE_BLOCK) to write multiple block */
   SD_SendCmd(SD_CMD_WRITE_SINGLE_BLOCK, WriteAddr, 0xFF);
-  
+
   /*!< Check if the SD acknowledged the write block command: R1 response (0x00: no errors) */
   if (!SD_GetResponse(SD_RESPONSE_NO_ERROR))
   {
@@ -358,12 +358,12 @@ SD_Error SD_WriteBlock(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t BlockSize)
 
 /**
   * @brief  Writes many blocks on the SD
-  * @param  pBuffer: pointer to the buffer containing the data to be written on 
+  * @param  pBuffer: pointer to the buffer containing the data to be written on
   *                  the SD.
   * @param  WriteAddr: address to write on.
   * @param  BlockSize: the SD card Data block size.
   * @param  NumberOfBlocks: number of blocks to be written.
-  * @retval The SD Response: 
+  * @retval The SD Response:
   *         - SD_RESPONSE_FAILURE: Sequence failed
   *         - SD_RESPONSE_NO_ERROR: Sequence succeed
   */
@@ -423,10 +423,10 @@ SD_Error SD_WriteMultiBlocks(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t Bloc
 
 /**
   * @brief  Read the CSD card register.
-  *         Reading the contents of the CSD register in SPI mode is a simple 
+  *         Reading the contents of the CSD register in SPI mode is a simple
   *         read-block transaction.
   * @param  SD_csd: pointer on an SCD register structure
-  * @retval The SD Response: 
+  * @retval The SD Response:
   *         - SD_RESPONSE_FAILURE: Sequence failed
   *         - SD_RESPONSE_NO_ERROR: Sequence succeed
   */
@@ -507,7 +507,7 @@ SD_Error SD_GetCSDRegister(SD_CSD* SD_csd)
   SD_csd->DeviceSizeMul = (CSD_Tab[9] & 0x03) << 1;
   /*!< Byte 10 */
   SD_csd->DeviceSizeMul |= (CSD_Tab[10] & 0x80) >> 7;
-    
+
   SD_csd->EraseGrSize = (CSD_Tab[10] & 0x40) >> 6;
   SD_csd->EraseGrMul = (CSD_Tab[10] & 0x3F) << 1;
 
@@ -545,10 +545,10 @@ SD_Error SD_GetCSDRegister(SD_CSD* SD_csd)
 
 /**
   * @brief  Read the CID card register.
-  *         Reading the contents of the CID register in SPI mode is a simple 
+  *         Reading the contents of the CID register in SPI mode is a simple
   *         read-block transaction.
   * @param  SD_cid: pointer on an CID register structure
-  * @retval The SD Response: 
+  * @retval The SD Response:
   *         - SD_RESPONSE_FAILURE: Sequence failed
   *         - SD_RESPONSE_NO_ERROR: Sequence succeed
   */
@@ -557,13 +557,13 @@ SD_Error SD_GetCIDRegister(SD_CID* SD_cid)
   uint32_t i = 0;
   SD_Error rvalue = SD_RESPONSE_FAILURE;
   uint8_t CID_Tab[16];
-  
+
   /*!< SD chip select low */
   SD_CS_LOW();
-  
+
   /*!< Send CMD10 (CID register) */
   SD_SendCmd(SD_CMD_SEND_CID, 0, 0xFF);
-  
+
   /*!< Wait for response in the R1 format (0x00 is no errors) */
   if (!SD_GetResponse(SD_RESPONSE_NO_ERROR))
   {
@@ -650,21 +650,21 @@ SD_Error SD_GetCIDRegister(SD_CID* SD_cid)
 void SD_SendCmd(uint8_t Cmd, uint32_t Arg, uint8_t Crc)
 {
   uint32_t i = 0x00;
-  
+
   uint8_t Frame[6];
-  
+
   Frame[0] = (Cmd | 0x40); /*!< Construct byte 1 */
-  
+
   Frame[1] = (uint8_t)(Arg >> 24); /*!< Construct byte 2 */
-  
+
   Frame[2] = (uint8_t)(Arg >> 16); /*!< Construct byte 3 */
-  
+
   Frame[3] = (uint8_t)(Arg >> 8); /*!< Construct byte 4 */
-  
+
   Frame[4] = (uint8_t)(Arg); /*!< Construct byte 5 */
-  
+
   Frame[5] = (Crc); /*!< Construct CRC: byte 6 */
-  
+
   for (i = 0; i < 6; i++)
   {
     SD_WriteByte(Frame[i]); /*!< Send the Cmd bytes */
@@ -725,7 +725,7 @@ uint8_t SD_GetDataResponse(void)
 /**
   * @brief  Returns the SD response.
   * @param  None
-  * @retval The SD Response: 
+  * @retval The SD Response:
   *         - SD_RESPONSE_FAILURE: Sequence failed
   *         - SD_RESPONSE_NO_ERROR: Sequence succeed
   */
@@ -780,7 +780,7 @@ uint16_t SD_GetStatus(void)
 /**
   * @brief  Put SD in Idle state.
   * @param  None
-  * @retval The SD Response: 
+  * @retval The SD Response:
   *         - SD_RESPONSE_FAILURE: Sequence failed
   *         - SD_RESPONSE_NO_ERROR: Sequence succeed
   */
@@ -788,10 +788,10 @@ SD_Error SD_GoIdleState(void)
 {
   /*!< SD chip select low */
   SD_CS_LOW();
-  
+
   /*!< Send CMD0 (SD_CMD_GO_IDLE_STATE) to put SD in SPI mode */
   SD_SendCmd(SD_CMD_GO_IDLE_STATE, 0, 0x95);
-  
+
   /*!< Wait for In Idle State Response (R1 Format) equal to 0x01 */
   if (SD_GetResponse(SD_IN_IDLE_STATE))
   {
@@ -803,25 +803,25 @@ SD_Error SD_GoIdleState(void)
   {
     /*!< SD chip select high */
     SD_CS_HIGH();
-    
+
     /*!< Send Dummy byte 0xFF */
     SD_WriteByte(SD_DUMMY_BYTE);
-    
+
     /*!< SD chip select low */
     SD_CS_LOW();
-    
+
     /*!< Send CMD1 (Activates the card process) until response equal to 0x0 */
     SD_SendCmd(SD_CMD_SEND_OP_COND, 0, 0xFF);
     /*!< Wait for no error Response (R1 Format) equal to 0x00 */
   }
   while (SD_GetResponse(SD_RESPONSE_NO_ERROR));
-  
+
   /*!< SD chip select high */
   SD_CS_HIGH();
-  
+
   /*!< Send dummy byte 0xFF */
   SD_WriteByte(SD_DUMMY_BYTE);
-  
+
   return SD_RESPONSE_NO_ERROR;
 }
 
@@ -836,16 +836,16 @@ uint8_t SD_WriteByte(uint8_t Data)
   while(SPI_I2S_GetFlagStatus(SD_SPI, SPI_I2S_FLAG_TXE) == RESET)
   {
   }
-  
+
   /*!< Send the byte */
   SPI_I2S_SendData(SD_SPI, Data);
-  
+
   /*!< Wait to receive a byte*/
   while(SPI_I2S_GetFlagStatus(SD_SPI, SPI_I2S_FLAG_RXNE) == RESET)
   {
   }
-  
-  /*!< Return the byte read from the SPI bus */ 
+
+  /*!< Return the byte read from the SPI bus */
   return SPI_I2S_ReceiveData(SD_SPI);
 }
 
@@ -857,7 +857,7 @@ uint8_t SD_WriteByte(uint8_t Data)
 uint8_t SD_ReadByte(void)
 {
   uint8_t Data = 0;
-  
+
   /*!< Wait until the transmit buffer is empty */
   while (SPI_I2S_GetFlagStatus(SD_SPI, SPI_I2S_FLAG_TXE) == RESET)
   {
@@ -896,6 +896,6 @@ uint8_t SD_ReadByte(void)
 
 /**
   * @}
-  */  
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

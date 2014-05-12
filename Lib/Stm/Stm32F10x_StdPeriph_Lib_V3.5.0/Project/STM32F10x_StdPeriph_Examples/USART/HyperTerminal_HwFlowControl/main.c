@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/HyperTerminal_HwFlowControl/main.c 
+  * @file    USART/HyperTerminal_HwFlowControl/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup USART_HyperTerminal_HwFlowControl
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -51,7 +51,7 @@ uint8_t RxCounter = 0;
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
 void GPIO_Configuration(void);
-  
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -61,22 +61,22 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System Clocks Configuration */
   RCC_Configuration();
 
   /* Configure the GPIO ports */
   GPIO_Configuration();
-  
+
 /* USART2 configuration ------------------------------------------------------*/
   /* USART2 configured as follow:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -95,22 +95,22 @@ int main(void)
   USART_Cmd(USART2, ENABLE);
 
 /* Communication hyperterminal-USART2 using hardware flow control -------------*/
-  /* Send a buffer from USART to hyperterminal */  
+  /* Send a buffer from USART to hyperterminal */
   while(NbrOfDataToTransfer--)
   {
     USART_SendData(USART2, TxBuffer[TxCounter++]);
-    while(USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET);          
+    while(USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET);
   }
-  
+
   /* Receive a string (Max RxBufferSize bytes) from the Hyperterminal ended by '\r' (Enter key) */
   do
-  { 
+  {
     if((USART_GetFlagStatus(USART2, USART_FLAG_RXNE) != RESET)&&(RxCounter < RxBufferSize))
     {
        RxBuffer[RxCounter] = USART_ReceiveData(USART2);
        USART_SendData(USART2, RxBuffer[RxCounter++]);
-    }   
- 
+    }
+
   }while((RxBuffer[RxCounter - 1] != '\r')&&(RxCounter != RxBufferSize));
 
   while (1)
@@ -124,7 +124,7 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{    
+{
   /* Enable GPIOx and AFIO clocks */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOx | RCC_APB2Periph_AFIO, ENABLE);
 
@@ -168,7 +168,7 @@ void GPIO_Configuration(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -182,10 +182,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

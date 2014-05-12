@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    DCMI/Camera/camera_api.c 
+  * @file    DCMI/Camera/camera_api.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
-  * @brief   This file contains the routinue needed to configure OV9655/OV2640 
+  * @brief   This file contains the routinue needed to configure OV9655/OV2640
   *          Camera modules.
   ******************************************************************************
   * @attention
@@ -17,14 +17,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "camera_api.h"
@@ -37,7 +37,7 @@
 
 /** @addtogroup DCMI_Camera
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -59,7 +59,7 @@ ImageFormat_TypeDef ImageFormat;
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Initialize resources used for this demo. 
+  * @brief  Initialize resources used for this demo.
   * @param  None
   * @retval Digit value
   */
@@ -67,16 +67,16 @@ uint8_t Demo_Init(void)
 {
   __IO uint32_t tmpValue = 0;
   PressedKey = NOKEY;
-  
+
  /* Configure the IO Expander */
   if(IOE_Config() == IOE_OK)
-  { 
+  {
     LCD_DisplayStringLine(LINE(6), (uint8_t*)"IO Expander OK          ");
     Delay(0xFF);
   }
   else
   {
-    LCD_SetTextColor(LCD_COLOR_RED);  
+    LCD_SetTextColor(LCD_COLOR_RED);
     LCD_DisplayStringLine(LINE(6), (uint8_t*)"IO Expander FAILED Please Reset the board");
     while (1);
   }
@@ -99,7 +99,7 @@ uint8_t Demo_Init(void)
     if (PressedKey == UP)
     {
       PressedKey = NOKEY;
-      
+
       /* Increase the value of the digit */
       if (tmpValue == ValueMin)
       {
@@ -116,7 +116,7 @@ uint8_t Demo_Init(void)
     if (PressedKey == DOWN)
     {
       PressedKey = NOKEY;
-      
+
       /* Decrease the value of the digit */
       if (tmpValue == (ValueMax - 1))
       {
@@ -198,7 +198,7 @@ void Camera_Config(void)
         OV9655_Init(BMP_QQVGA);
         OV9655_QQVGAConfig();
         break;
-      } 
+      }
     }
   }
   else if(Camera == OV2640_CAMERA)
@@ -227,7 +227,7 @@ void Camera_Config(void)
         OV2640_HW_Init();
         OV2640_Init(BMP_QQVGA);
         OV2640_QQVGAConfig();
-        break; 
+        break;
       }
     }
   }
@@ -235,7 +235,7 @@ void Camera_Config(void)
 
 /**
   * @brief  OV2640 camera special effects.
-* @param  index: 
+* @param  index:
   * @retval None
   */
 void OV2640_SpecialEffects(uint8_t index)
@@ -245,7 +245,7 @@ void OV2640_SpecialEffects(uint8_t index)
     case 1:
     {
       LCD_DisplayStringLine(LINE(16), (uint8_t*)" Antique               ");
-      OV2640_ColorEffectsConfig(0x40, 0xa6);/* Antique */ 
+      OV2640_ColorEffectsConfig(0x40, 0xa6);/* Antique */
       break;
     }
     case 2:
@@ -303,7 +303,7 @@ void OV2640_SpecialEffects(uint8_t index)
 void Demo_LCD_Clear(void)
 {
   uint32_t j;
-  for( j= 5; j < 19; j++ ) 
+  for( j= 5; j < 19; j++ )
   {
     LCD_ClearLine(LINE(j));
   }
@@ -330,7 +330,7 @@ void Delay(uint32_t nTime)
 void TimingDelay_Decrement(void)
 {
   if (TimingDelay != 0x00)
-  { 
+  {
     TimingDelay--;
   }
 }
@@ -346,10 +346,10 @@ void NullFunc(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
-  
+  */
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

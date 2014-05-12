@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    SDIO/uSDCard/main.c 
+  * @file    SDIO/uSDCard/main.c
   * @author  MCD Application Team
   * @version V1.1.0
   * @date    13-April-2012
@@ -16,14 +16,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx.h"
@@ -48,7 +48,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 
 #define SD_OPERATION_ERASE          0
 #define SD_OPERATION_BLOCK          1
-#define SD_OPERATION_MULTI_BLOCK    2 
+#define SD_OPERATION_MULTI_BLOCK    2
 #define SD_OPERATION_END            3
 
 /* Private macro -------------------------------------------------------------*/
@@ -77,7 +77,7 @@ TestStatus eBuffercmp(uint8_t* pBuffer, uint32_t BufferLength);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f2xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
@@ -88,7 +88,7 @@ int main(void)
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_LEDInit(LED3);
-  STM_EVAL_LEDInit(LED4);  
+  STM_EVAL_LEDInit(LED4);
 
   /* Interrupt Config */
   NVIC_Configuration();
@@ -96,9 +96,9 @@ int main(void)
   /*------------------------------ SD Init ---------------------------------- */
   if((Status = SD_Init()) != SD_OK)
   {
-    STM_EVAL_LEDOn(LED4); 
+    STM_EVAL_LEDOn(LED4);
   }
-        
+
   while((Status == SD_OK) && (SDCardOperation != SD_OPERATION_END) && (SD_Detect()== SD_PRESENT))
   {
     switch(SDCardOperation)
@@ -116,17 +116,17 @@ int main(void)
         SD_SingleBlockTest();
         SDCardOperation = SD_OPERATION_MULTI_BLOCK;
         break;
-      }       
+      }
       /*-------------------------- SD Multi Blocks Test --------------------- */
       case (SD_OPERATION_MULTI_BLOCK):
       {
         SD_MultiBlockTest();
         SDCardOperation = SD_OPERATION_END;
         break;
-      }              
+      }
     }
   }
-  
+
   /* Infinite loop */
   while (1)
   {}
@@ -151,7 +151,7 @@ void NVIC_Configuration(void)
   NVIC_Init(&NVIC_InitStructure);
   NVIC_InitStructure.NVIC_IRQChannel = SD_SDIO_DMA_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-  NVIC_Init(&NVIC_InitStructure);  
+  NVIC_Init(&NVIC_InitStructure);
 }
 
 /**
@@ -184,7 +184,7 @@ void SD_EraseTest(void)
   {
     EraseStatus = eBuffercmp(Buffer_MultiBlock_Rx, MULTI_BUFFER_SIZE);
   }
-  
+
   if(EraseStatus == PASSED)
   {
     STM_EVAL_LEDOn(LED1);
@@ -192,7 +192,7 @@ void SD_EraseTest(void)
   else
   {
     STM_EVAL_LEDOff(LED1);
-    STM_EVAL_LEDOn(LED4);    
+    STM_EVAL_LEDOn(LED4);
   }
 }
 
@@ -230,7 +230,7 @@ void SD_SingleBlockTest(void)
   {
     TransferStatus1 = Buffercmp(Buffer_Block_Tx, Buffer_Block_Rx, BLOCK_SIZE);
   }
-  
+
   if(TransferStatus1 == PASSED)
   {
     STM_EVAL_LEDOn(LED2);
@@ -238,7 +238,7 @@ void SD_SingleBlockTest(void)
   else
   {
     STM_EVAL_LEDOff(LED2);
-    STM_EVAL_LEDOn(LED4);    
+    STM_EVAL_LEDOn(LED4);
   }
 }
 
@@ -276,7 +276,7 @@ void SD_MultiBlockTest(void)
   {
     TransferStatus2 = Buffercmp(Buffer_MultiBlock_Tx, Buffer_MultiBlock_Rx, MULTI_BUFFER_SIZE);
   }
-  
+
   if(TransferStatus2 == PASSED)
   {
     STM_EVAL_LEDOn(LED3);
@@ -284,7 +284,7 @@ void SD_MultiBlockTest(void)
   else
   {
     STM_EVAL_LEDOff(LED3);
-    STM_EVAL_LEDOn(LED4);    
+    STM_EVAL_LEDOn(LED4);
   }
 }
 

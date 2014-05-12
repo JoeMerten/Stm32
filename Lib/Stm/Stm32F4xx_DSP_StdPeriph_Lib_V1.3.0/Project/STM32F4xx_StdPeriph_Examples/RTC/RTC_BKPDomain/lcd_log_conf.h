@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -38,7 +38,7 @@
   #include "stm324xg_eval.h"
   #include "stm324xg_eval_lcd.h"
 
-#elif defined (USE_STM324x7I_EVAL) 
+#elif defined (USE_STM324x7I_EVAL)
   #include "stm324x7i_eval.h"
   #include "stm324x7i_eval_lcd.h"
 
@@ -49,16 +49,16 @@
 /** @addtogroup LCD_LOG
   * @{
   */
-  
+
 /** @defgroup LCD_LOG
-  * @brief This file is the 
+  * @brief This file is the
   * @{
-  */ 
+  */
 
 
 /** @defgroup LCD_LOG_CONF_Exported_Defines
   * @{
-  */ 
+  */
 
 /* Define the LCD default text color */
 #define     LCD_LOG_DEFAULT_COLOR    White
@@ -76,47 +76,47 @@
 
 /** @defgroup LCD_LOG_CONF_Exported_TypesDefinitions
   * @{
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup LCD_LOG_Exported_Macros
   * @{
-  */ 
+  */
 
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup LCD_LOG_CONF_Exported_Variables
   * @{
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup LCD_LOG_CONF_Exported_FunctionsPrototype
   * @{
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 
 #endif /* __LCD_LOG_H__ */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

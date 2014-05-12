@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CRYP/CRYP_AESECBmode/main.c 
+  * @file    CRYP/CRYP_AESECBmode/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup CRYP_AESECBmode
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -72,29 +72,29 @@ static void USART_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
        before to branch to application main.
      */
-          
-  /* USART Configuration */     
+
+  /* USART Configuration */
   USART_Config();
 
   /* Display Plain Data */
   Display_PlainData();
 
 /*=====================================================
-    Encryption                                          
+    Encryption
 ======================================================*/
   /* Encryption */
   AES128_Encrypt_DMA();
-  
+
   /* Display encrypted Data */
   Display_EncryptedData();
 
 /*=====================================================
-    Decryption                                          
+    Decryption
 ======================================================*/
   /* Decryption */
   AES128_Decrypt_DMA();
@@ -102,16 +102,16 @@ int main(void)
   /* Display decrypted data */
   Display_DecryptedData();
 
-  while(1);  
+  while(1);
 }
 
 /**
-  * @brief  Encrypts Data using AES 
+  * @brief  Encrypts Data using AES
   * @note   DATA transfer is done by the DMA
-  * @note   DMA2 stream6 channel2 is used to transfer data from memory (the 
-  *         PlainData Table) to CRYP Peripheral (the INPUT data register). 
+  * @note   DMA2 stream6 channel2 is used to transfer data from memory (the
+  *         PlainData Table) to CRYP Peripheral (the INPUT data register).
   * @note   DMA2 stream5 channel2 is used to transfer data from CRYP Peripheral
-  *        (the OUTPUT data register to memory (the EncryptedData Table). 
+  *        (the OUTPUT data register to memory (the EncryptedData Table).
   * @param  None
   * @retval None
   */
@@ -120,18 +120,18 @@ static void AES128_Encrypt_DMA(void)
   CRYP_InitTypeDef CRYP_InitStructure;
   CRYP_KeyInitTypeDef CRYP_KeyInitStructure;
   DMA_InitTypeDef DMA_InitStructure;
- 
+
   /* Enable CRYP clock */
   RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_CRYP, ENABLE);
 
   /* Enable DMA2 clock */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2, ENABLE);
- 
+
   /* CRYP configuration********************************************************/
-  /* Crypto key structure initialisation */ 
+  /* Crypto key structure initialisation */
   CRYP_KeyStructInit(&CRYP_KeyInitStructure);
-  
-  /* Crypto Init for Encryption process */      
+
+  /* Crypto Init for Encryption process */
   CRYP_InitStructure.CRYP_AlgoDir  = CRYP_AlgoDir_Encrypt;
   CRYP_InitStructure.CRYP_AlgoMode = CRYP_AlgoMode_AES_ECB;
   CRYP_InitStructure.CRYP_DataType = CRYP_DataType_32b;
@@ -150,11 +150,11 @@ static void AES128_Encrypt_DMA(void)
 
   CRYP_DMACmd(CRYP_DMAReq_DataIN, ENABLE);
   CRYP_DMACmd(CRYP_DMAReq_DataOUT, ENABLE);
-  
+
   /* DMA Configuration ********************************************************/
   DMA_DeInit(DMA2_Stream5);
   DMA_DeInit(DMA2_Stream6);
-  /* set common DMA parameters for Stream 5 and 6*/  
+  /* set common DMA parameters for Stream 5 and 6*/
   DMA_InitStructure.DMA_Channel = DMA_Channel_2;
   DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
   DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;
@@ -163,13 +163,13 @@ static void AES128_Encrypt_DMA(void)
   DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
   DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_Full;
   DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
-  DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;  
+  DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
   DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
   DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
   DMA_InitStructure.DMA_BufferSize = DATA_SIZE;
 
   /* Set the parameters to be configured for stream 6 */
-  DMA_InitStructure.DMA_PeripheralBaseAddr = CRYP_DIN_REG_ADDR; 
+  DMA_InitStructure.DMA_PeripheralBaseAddr = CRYP_DIN_REG_ADDR;
   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)PlainData;
   DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral;
 
@@ -187,7 +187,7 @@ static void AES128_Encrypt_DMA(void)
   /* Enable DMA streams *******************************************************/
   DMA_Cmd(DMA2_Stream6, ENABLE);
   DMA_Cmd(DMA2_Stream5, ENABLE);
-  
+
   /* Wait until the last transfer from OUT FIFO :
      all encrypted Data are transferred from crypt processor */
   while (DMA_GetFlagStatus(DMA2_Stream6, DMA_FLAG_TCIF5) == RESET);
@@ -197,16 +197,16 @@ static void AES128_Encrypt_DMA(void)
   CRYP_DMACmd(CRYP_DMAReq_DataIN, DISABLE);
   CRYP_DMACmd(CRYP_DMAReq_DataOUT, DISABLE);
   DMA_Cmd(DMA2_Stream5, DISABLE);
-  DMA_Cmd(DMA2_Stream6, DISABLE); 
+  DMA_Cmd(DMA2_Stream6, DISABLE);
 }
 
 /**
-  * @brief  Decrypts Data using AES 
-  * @note   DATA transfer is done by DMA  
-  * @note   DMA2 stream6 channel2 is used to transfer data from memory (the 
-  *         EncryptedData Table) to CRYP Peripheral (the INPUT data register). 
+  * @brief  Decrypts Data using AES
+  * @note   DATA transfer is done by DMA
+  * @note   DMA2 stream6 channel2 is used to transfer data from memory (the
+  *         EncryptedData Table) to CRYP Peripheral (the INPUT data register).
   * @note   DMA2 stream5 channel2 is used to transfer data from CRYP Peripheral
-  *        (the OUTPUT data register to memory (the DecryptedData Table). 
+  *        (the OUTPUT data register to memory (the DecryptedData Table).
   * @param  None
   * @retval None
   */
@@ -223,7 +223,7 @@ static void AES128_Decrypt_DMA(void)
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2, ENABLE);
 
   /* CRYP configuration********************************************************/
-  /* Crypto Init for Key preparation for Decryption process */ 
+  /* Crypto Init for Key preparation for Decryption process */
   CRYP_InitStructure.CRYP_AlgoDir = CRYP_AlgoDir_Decrypt;
   CRYP_InitStructure.CRYP_AlgoMode = CRYP_AlgoMode_AES_Key;
   CRYP_InitStructure.CRYP_DataType = CRYP_DataType_32b;
@@ -243,7 +243,7 @@ static void AES128_Decrypt_DMA(void)
   /* wait until the Busy flag is reset */
    while (CRYP_GetFlagStatus(CRYP_FLAG_BUSY) != RESET);
 
-  /* Crypto Init for Decryption process */ 
+  /* Crypto Init for Decryption process */
   CRYP_InitStructure.CRYP_AlgoDir = CRYP_AlgoDir_Decrypt;
   CRYP_InitStructure.CRYP_AlgoMode = CRYP_AlgoMode_AES_ECB;
   CRYP_InitStructure.CRYP_DataType = CRYP_DataType_32b;
@@ -253,13 +253,13 @@ static void AES128_Decrypt_DMA(void)
   CRYP_Cmd(ENABLE);
 
   CRYP_DMACmd(CRYP_DMAReq_DataIN, ENABLE);
-  CRYP_DMACmd(CRYP_DMAReq_DataOUT, ENABLE);  
-  
+  CRYP_DMACmd(CRYP_DMAReq_DataOUT, ENABLE);
+
   /* DMA Configuration*********************************************************/
   DMA_DeInit(DMA2_Stream5);
   DMA_DeInit(DMA2_Stream6);
-  
-  /* Set common DMA parameters for Stream 5 and 6 */  
+
+  /* Set common DMA parameters for Stream 5 and 6 */
   DMA_InitStructure.DMA_Channel = DMA_Channel_2;
   DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
   DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;
@@ -268,13 +268,13 @@ static void AES128_Decrypt_DMA(void)
   DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
   DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_Full;
   DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_INC4;
-  DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_INC4;  
+  DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_INC4;
   DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
   DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
   DMA_InitStructure.DMA_BufferSize = DATA_SIZE;
 
   /* Set the parameters to be configured for stream 6 */
-  DMA_InitStructure.DMA_PeripheralBaseAddr = CRYP_DIN_REG_ADDR; 
+  DMA_InitStructure.DMA_PeripheralBaseAddr = CRYP_DIN_REG_ADDR;
   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)EncryptedData;
   DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral;
 
@@ -305,11 +305,11 @@ static void AES128_Decrypt_DMA(void)
   DMA_Cmd(DMA2_Stream5, DISABLE);
   DMA_Cmd(DMA2_Stream6, DISABLE);
 
-  DMA_ClearFlag(DMA2_Stream6, DMA_FLAG_TCIF5);  
+  DMA_ClearFlag(DMA2_Stream6, DMA_FLAG_TCIF5);
 }
 
 /**
-  * @brief  Displays Plain Data 
+  * @brief  Displays Plain Data
   * @param  None
   * @retval None
   */
@@ -317,21 +317,21 @@ static void Display_PlainData(void)
 {
   uint32_t i=0;
   uint8_t count=0;
-  
+
   printf(" \n\r======================================\n\r");
   printf(" === CRYP AES-128 Using DMA Example ===\n\r");
   printf(" ======================================\n\r");
   printf(" ---------------------------------------\n\r");
   printf(" Plain Data :\n\r");
   printf(" ---------------------------------------\n\r");
-  
+
   for(i = 0; i < DATA_SIZE; i++)
   {
     printf("[0x%8X]", PlainData[i]);
     count++;
 
     if(count == 4)
-    { 
+    {
       count = 0;
       printf("  Block %d \n\r", (i/4) + 1);
     }
@@ -340,7 +340,7 @@ static void Display_PlainData(void)
   printf(" ---------------------------------------\n\r");
   printf(" Key :\n\r");
   printf(" ---------------------------------------\n\r");
-  
+
   for(i = 0; i < 4; i++)
   {
     printf("[0x%8X]", AES128key[i]);
@@ -349,7 +349,7 @@ static void Display_PlainData(void)
 }
 
 /**
-  * @brief  Displays Encrypted Data 
+  * @brief  Displays Encrypted Data
   * @param  None
   * @retval None
   */
@@ -357,18 +357,18 @@ static void Display_EncryptedData(void)
 {
   uint32_t i=0;
   uint8_t count=0;
-  
+
   printf("\n\r ---------------------------------------\n\r");
   printf(" AES-128 Encrypted Data:\n\r");
   printf(" ---------------------------------------\n\r");
-  
+
   for(i = 0; i < DATA_SIZE; i++)
   {
     printf("[0x%8X]", EncryptedData[i]);
     count++;
-    
+
     if(count == 4)
-    { 
+    {
       count = 0;
       printf("  Block %d \n\r", (i/4) + 1);
     }
@@ -376,7 +376,7 @@ static void Display_EncryptedData(void)
 }
 
 /**
-  * @brief  Displays Decrypted Data 
+  * @brief  Displays Decrypted Data
   * @param  None
   * @retval None
   */
@@ -384,18 +384,18 @@ static void Display_DecryptedData(void)
 {
   uint32_t i=0;
   uint8_t count=0;
-  
+
   printf("\n\r ---------------------------------------\n\r");
   printf(" AES-128 Decrypted Data:\n\r");
   printf(" ---------------------------------------\n\r");
-  
+
   for(i = 0; i < DATA_SIZE; i++)
   {
     printf("[0x%8X]", DecryptedData[i]);
     count++;
-    
+
     if(count == 4)
-    { 
+    {
       count = 0;
       printf("  Block %d \n\r", (i/4) + 1);
     }
@@ -403,14 +403,14 @@ static void Display_DecryptedData(void)
 }
 
 /**
-  * @brief  USART configuration 
+  * @brief  USART configuration
   * @param  None
   * @retval None
   */
 static void USART_Config(void)
 {
   /* USARTx configured as follows:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -457,7 +457,7 @@ PUTCHAR_PROTOTYPE
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -470,10 +470,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

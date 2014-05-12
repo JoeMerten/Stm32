@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_OnePulse/main.c 
+  * @file    TIM/TIM_OnePulse/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup TIM_OnePulse
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -58,58 +58,58 @@ static void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
-     */     
-       
+     */
+
   /* TIM Configuration */
   TIM_Config();
 
   /* --------------------------------------------------------------------------
     TIM4 configuration: One Pulse mode
-    The external signal is connected to TIM4_CH2 pin (PB.07), 
+    The external signal is connected to TIM4_CH2 pin (PB.07),
     The Rising edge is used as active edge,
     The One Pulse signal is output on TIM4_CH1 pin (PB.06)
-    The TIM_Pulse defines the delay value 
+    The TIM_Pulse defines the delay value
     The (TIM_Period -  TIM_Pulse) defines the One Pulse value.
-     
-    TIM4 input clock (TIM4CLK) is set to 2 * APB1 clock (PCLK1), 
-    since APB1 prescaler is different from 1.   
-      TIM4CLK = 2 * PCLK1  
-      PCLK1 = HCLK / 4 
+
+    TIM4 input clock (TIM4CLK) is set to 2 * APB1 clock (PCLK1),
+    since APB1 prescaler is different from 1.
+      TIM4CLK = 2 * PCLK1
+      PCLK1 = HCLK / 4
       => TIM4CLK = HCLK / 2 = SystemCoreClock /2
 
     TIM2CLK = SystemCoreClock/2, we want to get TIM2 counter clock at 42 MHz:
      Prescaler = (TIM2CLK / TIM2 counter clock) - 1
      Prescaler = ((SystemCoreClock /2) /42 MHz) - 1
-     
-    The Autoreload value is 65535 (TIM4->ARR), so the maximum frequency value 
+
+    The Autoreload value is 65535 (TIM4->ARR), so the maximum frequency value
     to trigger the TIM4 input is 42000000/65535 = 641 Hz.
 
-    The TIM_Pulse defines the delay value, the delay value is fixed 
+    The TIM_Pulse defines the delay value, the delay value is fixed
     to 390 us:
-    delay =  CCR1/TIM4 counter clock 
-          = 16383 / 42000000 = 390 us. 
-    The (TIM_Period - TIM_Pulse) defines the One Pulse value, 
+    delay =  CCR1/TIM4 counter clock
+          = 16383 / 42000000 = 390 us.
+    The (TIM_Period - TIM_Pulse) defines the One Pulse value,
     the pulse value is fixed to 1.170 ms:
-    One Pulse value = (TIM_Period - TIM_Pulse) / TIM4 counter clock 
+    One Pulse value = (TIM_Period - TIM_Pulse) / TIM4 counter clock
                     = (65535 - 16383) / 42000000 = 1.170 ms.
 
-    Note: 
+    Note:
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
      Each time the core clock (HCLK) changes, user had to call SystemCoreClockUpdate()
      function to update SystemCoreClock variable value. Otherwise, any configuration
-     based on this variable will be incorrect.    
+     based on this variable will be incorrect.
 
   --------------------------------------------------------------------------- */
 
   /* Compute the prescaler value */
   uhPrescalerValue = (uint16_t) ((SystemCoreClock / 2) / 42000000) - 1;
-  
+
   /* Time base configuration */
   TIM_TimeBaseStructure.TIM_Period = 65535;
   TIM_TimeBaseStructure.TIM_Prescaler = uhPrescalerValue;
@@ -166,7 +166,7 @@ static void TIM_Config(void)
 
   /* GPIOB clock enable */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
-  
+
   /* TIM4_CH1 pin (PB.06) configuration */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
@@ -181,8 +181,8 @@ static void TIM_Config(void)
 
   /* Connect TIM pins to AF2 */
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_TIM4);
-  GPIO_PinAFConfig(GPIOB, GPIO_PinSource7, GPIO_AF_TIM4); 
-    
+  GPIO_PinAFConfig(GPIOB, GPIO_PinSource7, GPIO_AF_TIM4);
+
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -207,10 +207,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

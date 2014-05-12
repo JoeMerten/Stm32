@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_CascadeSynchro/main.c 
+  * @file    TIM/TIM_CascadeSynchro/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup TIM_CascadeSynchro
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -55,28 +55,28 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
-       before to branch to application main. 
+       before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f4xx.c file
-     */     
-       
+     */
+
   /* TIM2/3/4 Configuration */
   TIM_Config();
 
   /* Timers synchronisation in cascade mode ------------------------------------
      1/TIM2 is configured as Master Timer:
          - PWM Mode is used
-         - The TIM2 Update event is used as Trigger Output  
+         - The TIM2 Update event is used as Trigger Output
 
      2/TIM3 is slave for TIM2 and Master for TIM4,
          - PWM Mode is used
-         - The ITR1(TIM2) is used as input trigger 
+         - The ITR1(TIM2) is used as input trigger
          - Gated mode is used, so start and stop of slave counter
            are controlled by the Master trigger output signal(TIM2 update event).
-         - The TIM3 Update event is used as Trigger Output. 
+         - The TIM3 Update event is used as Trigger Output.
 
      3/TIM4 is slave for TIM3,
          - PWM Mode is used
@@ -84,14 +84,14 @@ int main(void)
          - Gated mode is used, so start and stop of slave counter
            are controlled by the Master trigger output signal(TIM3 update event).
 
-     In this example TIM2 input clock (TIM2CLK) is set to 2 * APB1 clock (PCLK1), 
-     since APB1 prescaler is different from 1.   
-     TIM2CLK = 2 * PCLK1  
-     PCLK1 = HCLK / 4 
+     In this example TIM2 input clock (TIM2CLK) is set to 2 * APB1 clock (PCLK1),
+     since APB1 prescaler is different from 1.
+     TIM2CLK = 2 * PCLK1
+     PCLK1 = HCLK / 4
      => TIM2CLK = HCLK / 2 = SystemCoreClock /2
 
      The Master Timer TIM2 is running at TIM2 counter clock:
-     TIM2 frequency = (TIM2 counter clock)/ (TIM2 period + 1) = 328.125 KHz 
+     TIM2 frequency = (TIM2 counter clock)/ (TIM2 period + 1) = 328.125 KHz
      and the duty cycle = TIM2_CCR1/(TIM2_ARR + 1) = 25%.
 
      The TIM3 is running:
@@ -101,12 +101,12 @@ int main(void)
      The TIM4 is running:
      - At (TIM3 frequency)/ (TIM4 period + 1) = 20.5 KHz and a duty cycle
        equal to TIM4_CCR1/(TIM4_ARR + 1) = 25%
-  
-     Note: 
+
+     Note:
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
      Each time the core clock (HCLK) changes, user had to call SystemCoreClockUpdate()
      function to update SystemCoreClock variable value. Otherwise, any configuration
-     based on this variable will be incorrect. 
+     based on this variable will be incorrect.
   --------------------------------------------------------------------------- */
 
   /* Time base configuration */
@@ -158,7 +158,7 @@ int main(void)
   /* Slave Mode selection: TIM4 */
   TIM_SelectSlaveMode(TIM4, TIM_SlaveMode_Gated);
   TIM_SelectInputTrigger(TIM4, TIM_TS_ITR2);
-  
+
   /* TIM enable counter */
   TIM_Cmd(TIM3, ENABLE);
   TIM_Cmd(TIM2, ENABLE);
@@ -199,9 +199,9 @@ void TIM_Config(void)
   /* GPIOB Configuration: PB6(TIM4 CH1) as alternate function push-pull ------*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
-  
+
   /* Connect TIM pins to AF2 */
-  GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_TIM4);  
+  GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_TIM4);
 
   /* GPIOA Configuration: PA0(TIM2 CH1) as alternate function push-pull ------*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
@@ -234,10 +234,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    ADC/ADC1_DMA/main.c 
+  * @file    ADC/ADC1_DMA/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup ADC_ADC1_DMA
   * @{
-  */ 
+  */
 
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,13 +54,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f10x_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
-     */     
-       
+     */
+
   /* System clocks configuration ---------------------------------------------*/
   RCC_Configuration();
 
@@ -81,10 +81,10 @@ int main(void)
   DMA_InitStructure.DMA_Priority = DMA_Priority_High;
   DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
   DMA_Init(DMA1_Channel1, &DMA_InitStructure);
-  
+
   /* Enable DMA1 channel1 */
   DMA_Cmd(DMA1_Channel1, ENABLE);
-  
+
   /* ADC1 configuration ------------------------------------------------------*/
   ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
   ADC_InitStructure.ADC_ScanConvMode = ENABLE;
@@ -94,16 +94,16 @@ int main(void)
   ADC_InitStructure.ADC_NbrOfChannel = 1;
   ADC_Init(ADC1, &ADC_InitStructure);
 
-  /* ADC1 regular channel14 configuration */ 
+  /* ADC1 regular channel14 configuration */
   ADC_RegularChannelConfig(ADC1, ADC_Channel_14, 1, ADC_SampleTime_55Cycles5);
 
   /* Enable ADC1 DMA */
   ADC_DMACmd(ADC1, ENABLE);
-  
+
   /* Enable ADC1 */
   ADC_Cmd(ADC1, ENABLE);
 
-  /* Enable ADC1 reset calibration register */   
+  /* Enable ADC1 reset calibration register */
   ADC_ResetCalibration(ADC1);
   /* Check the end of ADC1 reset calibration register */
   while(ADC_GetResetCalibrationStatus(ADC1));
@@ -112,8 +112,8 @@ int main(void)
   ADC_StartCalibration(ADC1);
   /* Check the end of ADC1 calibration */
   while(ADC_GetCalibrationStatus(ADC1));
-     
-  /* Start ADC1 Software Conversion */ 
+
+  /* Start ADC1 Software Conversion */
   ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 
   while (1)
@@ -130,10 +130,10 @@ void RCC_Configuration(void)
 {
 #if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || defined (STM32F10X_HD_VL)
   /* ADCCLK = PCLK2/2 */
-  RCC_ADCCLKConfig(RCC_PCLK2_Div2); 
+  RCC_ADCCLKConfig(RCC_PCLK2_Div2);
 #else
   /* ADCCLK = PCLK2/4 */
-  RCC_ADCCLKConfig(RCC_PCLK2_Div4); 
+  RCC_ADCCLKConfig(RCC_PCLK2_Div4);
 #endif
   /* Enable peripheral clocks ------------------------------------------------*/
   /* Enable DMA1 clock */
@@ -168,7 +168,7 @@ void GPIO_Configuration(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -182,10 +182,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

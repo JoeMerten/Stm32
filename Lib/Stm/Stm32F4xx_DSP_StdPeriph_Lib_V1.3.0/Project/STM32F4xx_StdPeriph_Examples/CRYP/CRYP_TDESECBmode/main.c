@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup CRYP_TDESECBmode
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -80,14 +80,14 @@ static void USART_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
        before to branch to application main.
-     */     
-       
+     */
+
   /* USARTx configured as follows:
-        - BaudRate = 115200 baud  
+        - BaudRate = 115200 baud
         - Word Length = 8 Bits
         - One Stop Bit
         - No parity
@@ -124,17 +124,17 @@ int main(void)
 }
 
 /**
-  * @brief  Encrypts Data using TDES 
+  * @brief  Encrypts Data using TDES
   * @note   DATA transfer is done by DMA
-  * @note   DMA2 stream6 channel2 is used to transfer data from memory (the 
-  *         PlainData Tab) to CRYP Peripheral (the INPUT data register). 
+  * @note   DMA2 stream6 channel2 is used to transfer data from memory (the
+  *         PlainData Tab) to CRYP Peripheral (the INPUT data register).
   * @note   DMA2 stream5 channel2 is used to transfer data from CRYP Peripheral
-  *        (the OUTPUT data register to memory (the EncryptedData Tab). 
+  *        (the OUTPUT data register to memory (the EncryptedData Tab).
   * @param  None
   * @retval None
   */
 static void TDES_Encrypt_DMA(void)
-{ 
+{
   CRYP_InitTypeDef CRYP_InitStructure;
   CRYP_KeyInitTypeDef CRYP_KeyInitStructure;
   DMA_InitTypeDef DMA_InitStructure;
@@ -144,7 +144,7 @@ static void TDES_Encrypt_DMA(void)
 
   /* Enable DMA2 clock */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2, ENABLE);
-  
+
   /* Configure crypto as encoder TDES *****************************************/
   /* Crypto Init for Encryption process */
   CRYP_InitStructure.CRYP_AlgoDir  = CRYP_AlgoDir_Encrypt;
@@ -219,12 +219,12 @@ static void TDES_Encrypt_DMA(void)
 }
 
 /**
-  * @brief  Decrypts Data using TDES 
+  * @brief  Decrypts Data using TDES
   * @note   DATA transfer is done by DMA
-  * @note   DMA2 stream6 channel2 is used to transfer data from memory (the 
-  *         EncryptedData Tab) to CRYP Peripheral (the INPUT data register). 
+  * @note   DMA2 stream6 channel2 is used to transfer data from memory (the
+  *         EncryptedData Tab) to CRYP Peripheral (the INPUT data register).
   * @note   DMA2 stream5 channel2 is used to transfer data from CRYP Peripheral
-  *         (the OUTPUT data register to memory (the DecryptedData Tab). 
+  *         (the OUTPUT data register to memory (the DecryptedData Tab).
   * @param  None
   * @retval None
   */
@@ -239,10 +239,10 @@ static void TDES_Decrypt_DMA(void)
 
   /* Enable DMA2 clock */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2, ENABLE);
-  
+
   /* configure crypto as Decoder TDES *****************************************/
   CRYP_FIFOFlush();
-  /* Crypto Init for Decryption process */ 
+  /* Crypto Init for Decryption process */
   CRYP_InitStructure.CRYP_AlgoDir = CRYP_AlgoDir_Decrypt;
   CRYP_InitStructure.CRYP_AlgoMode = CRYP_AlgoMode_TDES_ECB;
   CRYP_InitStructure.CRYP_DataType = CRYP_DataType_32b;
@@ -280,7 +280,7 @@ static void TDES_Decrypt_DMA(void)
   DMA_InitStructure.DMA_BufferSize = DATA_SIZE;
 
   /* Set the parameters to be configured specific to stream 6 */
-  DMA_InitStructure.DMA_PeripheralBaseAddr = CRYP_DIN_REG_ADDR; 
+  DMA_InitStructure.DMA_PeripheralBaseAddr = CRYP_DIN_REG_ADDR;
   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)EncryptedData;
   DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral;
 
@@ -308,11 +308,11 @@ static void TDES_Decrypt_DMA(void)
   CRYP_DMACmd(CRYP_DMAReq_DataOUT, DISABLE);
   CRYP_DMACmd(CRYP_DMAReq_DataIN, DISABLE);
   DMA_Cmd(DMA2_Stream5, DISABLE);
-  DMA_Cmd(DMA2_Stream6, DISABLE); 
+  DMA_Cmd(DMA2_Stream6, DISABLE);
 }
 
 /**
-  * @brief  Displays Plain Data 
+  * @brief  Displays Plain Data
   * @param  None
   * @retval None
   */
@@ -334,15 +334,15 @@ static void Display_PlainData(void)
     count++;
 
     if(count == 2)
-    { 
+    {
       count = 0;
       printf("  Block %d\n\r", BufferCounter/2);
     }
-  }     
+  }
 }
 
 /**
-  * @brief  Displays Encrypted Data 
+  * @brief  Displays Encrypted Data
   * @param  None
   * @retval None
   */
@@ -361,7 +361,7 @@ static void Display_EncryptedData(void)
     count++;
 
     if(count == 2)
-    { 
+    {
       count = 0;
       printf("  Block %d\n\r", BufferCounter/2);
     }
@@ -369,7 +369,7 @@ static void Display_EncryptedData(void)
 }
 
 /**
-  * @brief  Displays Decrypted Data 
+  * @brief  Displays Decrypted Data
   * @param  None
   * @retval None
   */
@@ -388,7 +388,7 @@ static void Display_DecryptedData(void)
     count++;
 
     if(count == 2)
-    { 
+    {
       count = 0;
       printf("  Block %d\n\r", BufferCounter/2);
     }
@@ -396,7 +396,7 @@ static void Display_DecryptedData(void)
 }
 
 /**
-  * @brief  USART configuration 
+  * @brief  USART configuration
   * @param  None
   * @retval None
   */
@@ -442,7 +442,7 @@ PUTCHAR_PROTOTYPE
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -455,10 +455,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

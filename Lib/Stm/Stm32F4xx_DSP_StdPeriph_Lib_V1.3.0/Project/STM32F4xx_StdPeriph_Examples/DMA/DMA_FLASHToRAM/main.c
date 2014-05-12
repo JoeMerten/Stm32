@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DMA/DMA_FLASHToRAM/main.c 
+  * @file    DMA/DMA_FLASHToRAM/main.c
   * @author  MCD Application Team
   * @version V1.3.0
   * @date    13-November-2013
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -34,7 +34,7 @@
 
 /** @addtogroup DMA_FLASHToRAM
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -58,7 +58,7 @@ uint32_t aDST_Buffer[BUFFER_SIZE];
 /* Private function prototypes -----------------------------------------------*/
 static void DMA_Config(void);
 TestStatus Buffercmp(const uint32_t* pBuffer, uint32_t* pBuffer1, uint16_t BufferLength);
-    
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -68,28 +68,28 @@ TestStatus Buffercmp(const uint32_t* pBuffer, uint32_t* pBuffer1, uint16_t Buffe
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        files (startup_stm32f40_41xxx.s/startup_stm32f427_437xx.s/startup_stm32f429_439xx.s)
        before to branch to application main.
-     */     
+     */
 
   /* Configure LEDs to monitor program status */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
-  
+
   STM_EVAL_LEDOn(LED1); /* Turn LED1 on: start of configuration */
-  
+
   /* Configure and enable the DMA Stream for Memory to Memory transfer */
   DMA_Config();
 
   STM_EVAL_LEDOn(LED2); /* Turn LED2 on: start of Transfer */
-  
-  /* Wait the end of transmission (the DMA Stream is disabled by Hardware at the 
+
+  /* Wait the end of transmission (the DMA Stream is disabled by Hardware at the
      end of the transfer) .
-     There is also another way to check on end of transfer by monitoring the 
+     There is also another way to check on end of transfer by monitoring the
      number of remaining data to be transferred. */
   /* while (DMA_GetCurrentMemoryTarget(DMA_STREAM) != 0) */  /* First method */
   while (DMA_GetCmdStatus(DMA_STREAM) != DISABLE)            /* Second method */
@@ -97,16 +97,16 @@ int main(void)
     /*
        Since this code present a simple example of how to use DMA, it is just
        waiting on the end of transfer.
-       But, while DMA Stream is transferring data, the CPU is free to perform 
+       But, while DMA Stream is transferring data, the CPU is free to perform
        other tasks in parallel to the DMA transfer.
     */
   }
-   
+
   /* Check if the transmitted and received data are equal */
   TransferStatus = Buffercmp(aSRC_Const_Buffer, aDST_Buffer, BUFFER_SIZE);
-  /* TransferStatus = PASSED, if the transmitted and received data 
+  /* TransferStatus = PASSED, if the transmitted and received data
      are the same */
-  /* TransferStatus = FAILED, if the transmitted and received data 
+  /* TransferStatus = FAILED, if the transmitted and received data
      are different */
 
   if (TransferStatus != FAILED)
@@ -114,7 +114,7 @@ int main(void)
     /* Turn LED4 on: Transfer correct */
     STM_EVAL_LEDOn(LED4);
   }
-  
+
   while (1)
   {
   }
@@ -122,7 +122,7 @@ int main(void)
 
 /**
   * @brief  Configure the DMA controller according to the Stream parameters
-  *         defined in main.h file 
+  *         defined in main.h file
   * @param  None
   * @retval None
   */
@@ -131,26 +131,26 @@ static void DMA_Config(void)
   NVIC_InitTypeDef NVIC_InitStructure;
   DMA_InitTypeDef  DMA_InitStructure;
   __IO uint32_t    Timeout = TIMEOUT_MAX;
-    
+
   /* Enable DMA clock */
   RCC_AHB1PeriphClockCmd(DMA_STREAM_CLOCK, ENABLE);
-  
+
   /* Reset DMA Stream registers (for debug purpose) */
   DMA_DeInit(DMA_STREAM);
 
   /* Check if the DMA Stream is disabled before enabling it.
      Note that this step is useful when the same Stream is used multiple times:
      enabled, then disabled then re-enabled... In this case, the DMA Stream disable
-     will be effective only at the end of the ongoing data transfer and it will 
-     not be possible to re-configure it before making sure that the Enable bit 
-     has been cleared by hardware. If the Stream is used only once, this step might 
+     will be effective only at the end of the ongoing data transfer and it will
+     not be possible to re-configure it before making sure that the Enable bit
+     has been cleared by hardware. If the Stream is used only once, this step might
      be bypassed. */
   while (DMA_GetCmdStatus(DMA_STREAM) != DISABLE)
   {
   }
-  
+
   /* Configure DMA Stream */
-  DMA_InitStructure.DMA_Channel = DMA_CHANNEL;  
+  DMA_InitStructure.DMA_Channel = DMA_CHANNEL;
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)aSRC_Const_Buffer;
   DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)aDST_Buffer;
   DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToMemory;
@@ -161,12 +161,12 @@ static void DMA_Config(void)
   DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;
   DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
   DMA_InitStructure.DMA_Priority = DMA_Priority_High;
-  DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;         
+  DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
   DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_Full;
   DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
   DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
   DMA_Init(DMA_STREAM, &DMA_InitStructure);
-    
+
   /* Enable DMA Stream Transfer Complete interrupt */
   DMA_ITConfig(DMA_STREAM, DMA_IT_TC, ENABLE);
 
@@ -174,14 +174,14 @@ static void DMA_Config(void)
   DMA_Cmd(DMA_STREAM, ENABLE);
 
   /* Check if the DMA Stream has been effectively enabled.
-     The DMA Stream Enable bit is cleared immediately by hardware if there is an 
+     The DMA Stream Enable bit is cleared immediately by hardware if there is an
      error in the configuration parameters and the transfer is no started (ie. when
      wrong FIFO threshold is configured ...) */
   Timeout = TIMEOUT_MAX;
   while ((DMA_GetCmdStatus(DMA_STREAM) != ENABLE) && (Timeout-- > 0))
   {
   }
-   
+
   /* Check if a timeout condition occurred */
   if (Timeout == 0)
   {
@@ -196,7 +196,7 @@ static void DMA_Config(void)
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);     
+  NVIC_Init(&NVIC_InitStructure);
 }
 
 /**
@@ -214,12 +214,12 @@ TestStatus Buffercmp(const uint32_t* pBuffer, uint32_t* pBuffer1, uint16_t Buffe
     {
       return FAILED;
     }
-    
+
     pBuffer++;
     pBuffer1++;
   }
 
-  return PASSED;  
+  return PASSED;
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -231,7 +231,7 @@ TestStatus Buffercmp(const uint32_t* pBuffer, uint32_t* pBuffer1, uint16_t Buffe
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -243,10 +243,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 #endif
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

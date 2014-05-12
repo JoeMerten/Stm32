@@ -17,14 +17,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -33,8 +33,8 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif   
-   
+#endif
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm324x9i_eval.h"
 
@@ -44,28 +44,28 @@
 
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM324x9I_EVAL
   * @{
   */
-    
-/** @defgroup STM324x9I_EVAL_IOE16 
+
+/** @defgroup STM324x9I_EVAL_IOE16
   * @{
-  */    
+  */
 
 
 /** @defgroup STM324x9I_EVAL_IOE16_Exported_Types
   * @{
-  */ 
-  
-/** 
-  * @brief  Joystick State definitions  
-  */ 
+  */
+
+/**
+  * @brief  Joystick State definitions
+  */
 #ifndef __STM324X9I_EVAL_H
 
-typedef enum 
-{ 
+typedef enum
+{
   JOY_NONE = 0,
   JOY_SEL = 1,
   JOY_DOWN = 2,
@@ -74,22 +74,22 @@ typedef enum
   JOY_UP = 5
 } JOYState_TypeDef;
 #endif /* __STM324X9I_EVAL_H */
- 
-/** 
-  * @brief  IO_Expander Error codes  
-  */ 
+
+/**
+  * @brief  IO_Expander Error codes
+  */
 typedef enum
 {
   IOE16_OK = 0,
-  IOE16_FAILURE, 
+  IOE16_FAILURE,
   IOE16_TIMEOUT,
   IOE16_PARAM_ERROR,
   IOE16_NOT_OPERATIONAL
 }IOE16_Status_TypDef;
 
-/** 
-  * @brief  IO bit values  
-  */ 
+/**
+  * @brief  IO bit values
+  */
 typedef enum
 {
   IOE16_BitReset = 0,
@@ -99,42 +99,42 @@ typedef enum
 
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM324x9I_EVAL_IOE16_Exported_Constants
   * @{
-  */ 
+  */
 
 /**
  * @brief Uncomment the line below if you want to use user timeout callback.
  *        Function prototypes is declared in this file but function body may be
- *        implemented into user application.  
+ *        implemented into user application.
  */
 /* #define USE_TIMEOUT_USER_CALLBACK */
 
 /**
  * @brief Uncomment the line below if you want to use user defined Delay function
  *        (for precise timing), otherwise default _delay_ function defined within
- *         this driver is used (less precise timing).  
+ *         this driver is used (less precise timing).
  */
 /* #define USE_Delay */
 
 #ifdef USE_Delay
 #include "main.h"
- 
+
   #define _delay_     Delay   /* !< User can provide more timing precise _delay_ function
                                    (with 10ms time base), using SysTick for example */
 #else
   #define _delay_     delay   /* !< Default _delay_ function with less precise timing */
-#endif    
+#endif
 
 /*------------------------------------------------------------------------------
-    Hardware Configuration 
+    Hardware Configuration
 ------------------------------------------------------------------------------*/
-/** 
-  * @brief  I2C port definitions  
-  */ 
+/**
+  * @brief  I2C port definitions
+  */
 #define IOE16_I2C                  I2C1
 #define IOE16_I2C_CLK              RCC_APB1Periph_I2C1
 #define IOE16_I2C_SCL_PIN          GPIO_Pin_6
@@ -149,22 +149,22 @@ typedef enum
 #define IOE16_I2C_SDA_AF           GPIO_AF_I2C1
 #define IOE16_I2C_DR               ((uint32_t)0x40005410)
 
-/** 
-  * @brief  IO Expander Interrupt line on EXTI  
-  */ 
+/**
+  * @brief  IO Expander Interrupt line on EXTI
+  */
 #define IOE16_IT_PIN               GPIO_Pin_8
 #define IOE16_IT_GPIO_PORT         GPIOI
 #define IOE16_IT_GPIO_CLK          RCC_AHB1Periph_GPIOI
 #define IOE16_IT_EXTI_PORT_SOURCE  EXTI_PortSourceGPIOI
 #define IOE16_IT_EXTI_PIN_SOURCE   EXTI_PinSource8
 #define IOE16_IT_EXTI_LINE         EXTI_Line8
-#define IOE16_IT_EXTI_IRQn         EXTI9_5_IRQn   
+#define IOE16_IT_EXTI_IRQn         EXTI9_5_IRQn
 
-/** 
-  * @brief IO Expanders adresse and chip IDs  
-  */ 
-  
-#define IOE16_ADDR                 0x84 
+/**
+  * @brief IO Expanders adresse and chip IDs
+  */
+
+#define IOE16_ADDR                 0x84
 #define STMPE1600_ID               0x1600
 
 
@@ -172,9 +172,9 @@ typedef enum
     Functional and Interrupt Management
 ------------------------------------------------------------------------------*/
 
-/** 
-  * @brief  Interrupt enable  
-  */ 
+/**
+  * @brief  Interrupt enable
+  */
 #define IOE16_IT_EN                0x04
 
 
@@ -182,30 +182,30 @@ typedef enum
 /*------------------------------------------------------------------------------
     STMPE1600 device register definition
 ------------------------------------------------------------------------------*/
-/** 
-  * @brief  Identification registers  
-  */ 
+/**
+  * @brief  Identification registers
+  */
 #define IOE16_REG_CHP_ID_LSB       0x00
 #define IOE16_REG_CHP_ID_MSB       0x01
 #define IOE16_REG_ID_VER           0x02
 
-/** 
-  * @brief  System Control Register  
-  */ 
+/**
+  * @brief  System Control Register
+  */
 #define IOE16_REG_SYS_CTRL         0x03
 
-/** 
-  * @brief  Interrupt Control register  
-  */ 
+/**
+  * @brief  Interrupt Control register
+  */
 #define IOE16_REG_IEGPIOR_LSB      0x08
 #define IOE16_REG_IEGPIOR_MSB      0x09
 #define IOE16_REG_ISGPIOR_LSB      0x0A
 #define IOE16_REG_ISGPIOR_MSB      0x0B
 
 
-/** 
-  * @brief  GPIO Registers  
-  */ 
+/**
+  * @brief  GPIO Registers
+  */
 
 #define IOE16_REG_GPMR_LSB         0x10
 #define IOE16_REG_GPMR_MSB         0x11
@@ -223,8 +223,8 @@ typedef enum
 
 
 /**
-  * @brief JOYSTICK Pins definition 
-  */ 
+  * @brief JOYSTICK Pins definition
+  */
 #define JOY_IO16_SEL               IO16_Pin_14
 #define JOY_IO16_DOWN              IO16_Pin_13
 #define JOY_IO16_LEFT              IO16_Pin_12
@@ -233,9 +233,9 @@ typedef enum
 #define JOY_IO16_NONE              JOY_IO16_PINS
 #define JOY_IO16_PINS              (IO16_Pin_10 | IO16_Pin_11 | IO16_Pin_12 | IO16_Pin_13 | IO16_Pin_14)
 
-/** 
-  * @brief  IO Pins  
-  */ 
+/**
+  * @brief  IO Pins
+  */
 #define IO16_Pin_0                 0x0001
 #define IO16_Pin_1                 0x0002
 #define IO16_Pin_2                 0x0004
@@ -257,22 +257,22 @@ typedef enum
 #define IO16_Pin_ALL_LSB           0x00FF
 #define IO16_Pin_ALL_MSB           0xFF00
 
-/** 
-  * @brief  IO Pin directions  
-  */ 
+/**
+  * @brief  IO Pin directions
+  */
 #define Direction_IN               0x00
 #define Direction_OUT              0x01
 
-/** 
-  * @brief  Interrupt Line output parameters  
-  */ 
+/**
+  * @brief  Interrupt Line output parameters
+  */
 #define IOE16_Polarity_Low         0x00
 #define IOE16_Polarity_High        0x01
 
 
-/** 
-  * @brief IO Interrupts  
-  */ 
+/**
+  * @brief IO Interrupts
+  */
 #define IO16_IT_0                  0x0001
 #define IO16_IT_1                  0x0002
 #define IO16_IT_2                  0x0004
@@ -296,33 +296,33 @@ typedef enum
 #define IOE16_JOY_IT               (IO16_IT_10 | IO16_IT_11 | IO16_IT_12 | IO16_IT_13 | IO16_IT_14)
 #define IOE16_TS_IT                IO16_IT_4
 
-/** 
-  * @brief  Edge detection value  
-  */ 
+/**
+  * @brief  Edge detection value
+  */
 #define EDGE_FALLING               0x01
 #define EDGE_RISING                0x02
 
 /**
   * @}
-  */ 
+  */
 
 
 
 /** @defgroup STM324x9I_EVAL_IOE16_Exported_Macros
   * @{
-  */ 
+  */
 
 /** @defgroup STM324x9I_EVAL_IOE16_Exported_Functions
   * @{
-  */ 
-  
-/** 
-  * @brief  Configuration and initialization functions  
+  */
+
+/**
+  * @brief  Configuration and initialization functions
   */
 uint8_t IOE16_Config(void);
 uint8_t IOE16_ITConfig(uint32_t IOE16_ITSRC_Source);
 
-/** 
+/**
   * @brief IO pins control functions
   */
 uint8_t          IOE16_SetIOPin(uint16_t IO_Pin, IOE16_BitValue_TypeDef BitVal);
@@ -330,12 +330,12 @@ uint8_t          IOE16_MonitorIOPin(uint16_t IO_Pin);
 uint8_t          IOE16_Polarity_Inversion(uint16_t IO_Pin, IOE16_BitValue_TypeDef BitVal);
 JOYState_TypeDef IOE16_JoyStickGetState(void);
 
-/** 
+/**
   * @brief Interrupts Management functions
   */
 uint16_t IOE16_GetITStatus(void);
 
-/** 
+/**
   * @brief IO Expander Control functions
   */
 uint8_t  IOE16_IsOperational(void);
@@ -346,21 +346,21 @@ uint8_t  IOE16_IOPinConfig(uint16_t IO_Pin, uint8_t Direction);
 uint8_t  IOE16_GITCmd(FunctionalState NewState);
 uint8_t  IOE16_IOITConfig(uint16_t IO_IT, FunctionalState NewState);
 
-/** 
+/**
   * @brief Low Layer functions
   */
 uint8_t  IOE16_I2C_WriteDeviceRegister(uint8_t RegisterAddr, uint8_t RegisterValue);
 uint8_t  IOE16_I2C_ReadDeviceRegister(uint8_t RegisterAddr);
 uint16_t IOE16_I2C_ReadDataBuffer(uint32_t RegisterAddr);
 
-/** 
+/**
   * @brief  Timeout user callback function. This function is called when a timeout
   *         condition occurs during communication with IO Expander. Only prototype
   *         of this function is declared in IO Expander driver. Its implementation
   *         may be done into user application. This function may typically stop
   *         current operations and reset the I2C peripheral and IO Expander.
   *         To enable this function use uncomment the define USE_TIMEOUT_USER_CALLBACK
-  *         at the top of this file.          
+  *         at the top of this file.
   */
 uint8_t IOE16_TimeoutUserCallback(void);
 
@@ -371,7 +371,7 @@ uint8_t IOE16_TimeoutUserCallback(void);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
@@ -379,9 +379,9 @@ uint8_t IOE16_TimeoutUserCallback(void);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */       
+  */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

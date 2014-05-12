@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CortexM3/MPU/main.h 
+  * @file    CortexM3/MPU/main.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -16,8 +16,8 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
+  ******************************************************************************
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H

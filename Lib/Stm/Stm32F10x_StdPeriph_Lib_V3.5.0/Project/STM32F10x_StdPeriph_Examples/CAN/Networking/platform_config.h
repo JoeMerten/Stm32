@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CAN/Networking/platform_config.h 
+  * @file    CAN/Networking/platform_config.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __PLATFORM_CONFIG_H
@@ -40,7 +40,7 @@
 #ifdef USE_STM3210B_EVAL
   #define RCC_APB2Periph_GPIO_CAN1    RCC_APB2Periph_GPIOD
   #define GPIO_Remapping_CAN1         GPIO_Remap2_CAN1
-  #define GPIO_CAN1                   GPIOD  
+  #define GPIO_CAN1                   GPIOD
   #define GPIO_Pin_CAN1_RX            GPIO_Pin_0
   #define GPIO_Pin_CAN1_TX            GPIO_Pin_1
 
@@ -54,13 +54,13 @@
 #elif defined USE_STM3210C_EVAL
   #define RCC_APB2Periph_GPIO_CAN1    RCC_APB2Periph_GPIOD
   #define GPIO_Remapping_CAN1         GPIO_Remap2_CAN1
-  #define GPIO_CAN1                   GPIOD  
+  #define GPIO_CAN1                   GPIOD
   #define GPIO_Pin_CAN1_RX            GPIO_Pin_0
   #define GPIO_Pin_CAN1_TX            GPIO_Pin_1
-  
+
   #define RCC_APB2Periph_GPIO_CAN2    RCC_APB2Periph_GPIOB
   #define GPIO_Remapping_CAN2         GPIO_Remap_CAN2
-  #define GPIO_CAN2                   GPIOB  
+  #define GPIO_CAN2                   GPIOB
   #define GPIO_Pin_CAN2_RX            GPIO_Pin_5
   #define GPIO_Pin_CAN2_TX            GPIO_Pin_6
 #endif /* USE_STM3210B_EVAL */
