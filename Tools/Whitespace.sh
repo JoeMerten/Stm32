@@ -5,6 +5,10 @@
 # \project    Multithreaded C++ Framework
 # \file       Whitespace.sh
 # \creation   2014-05-10, Joe Merten
+#-----------------------------------------------------------------------------------------------------------------------
+# Achtung: Wegen bash -e sollte in diesem Skript weder "let" noch "expr" verwendet serden.
+# Statt dessen besser $((...)) verwenden.
+# Siehe auch: http://unix.stackexchange.com/questions/63166/bash-e-exits-when-let-or-expr-evaluates-to-0
 ########################################################################################################################
 
 
@@ -59,6 +63,11 @@ declare   LIGHT="${ESC}[1m"
 
 ########################################################################################################################
 # Falls keine Ansi VT100 Farben gewünscht sind
+#-----------------------------------------------------------------------------------------------------------------------
+# Todo: Folgendes mal genauer angucken: http://stackoverflow.com/questions/64786/error-handling-in-bash
+#     Color the output if it's an interactive terminal
+#    test -t 1 && tput bold; tput setf 4                                 ## red bold
+#    echo -e "\n(!) EXIT HANDLER:\n"
 ########################################################################################################################
 function NoColor {
     BLACK=""; MAROON=""; GREEN=""; OLIVE=""; NAVY=""; PURPLE="" TEAL="" SILVER=""; GRAY=""
@@ -70,35 +79,101 @@ function NoColor {
 
 
 ########################################################################################################################
+#   _____                    _   _
+#  | ____|_  _____ ___ _ __ | |_(_) ___  _ __  ___
+#  |  _| \ \/ / __/ _ \ '_ \| __| |/ _ \| '_ \/ __|
+#  | |___ >  < (_|  __/ |_) | |_| | (_) | | | \__ \
+#  |_____/_/\_\___\___| .__/ \__|_|\___/|_| |_|___/
+#                     |_|
+########################################################################################################################
+
+# siehe auch http://stackoverflow.com/questions/64786/error-handling-in-bash
+# Ohne "errtrace" wird mein OnError() nicht immer gerufen...
+set -o pipefail  # trace ERR through pipes
+set -o errtrace  # trace ERR through 'time command' and other functions
+set -o nounset   ## set -u : exit the script if you try to use an uninitialised variable
+set -o errexit   ## set -e : exit the script if any statement returns a non-true return value
+
+########################################################################################################################
 # Terminalfarben restaurieren, wenn Abbruch via Ctrl+C
 ########################################################################################################################
 function OnCtrlC {
     echo "${RED}[*** interrupted ***]${NORMAL}"
-    # damit bei Ctrl+C auch alle Childprozesse beendet werden
-    kill -INT 0
-    #exit 1
+#    # damit bei Ctrl+C auch alle Childprozesse beendet werden
+#    trap SIGINT
+#    kill -INT 0
+#    #exit 1
 }
 trap OnCtrlC SIGINT
 
-########################################################################################################################
-#   _   _ _ _  __
-#  | | | (_) |/ _| ___
-#  | |_| | | | |_ / _ \
-#  |  _  | | |  _|  __/
-#  |_| |_|_|_|_|  \___|
-########################################################################################################################
 
 ########################################################################################################################
-# Hilfe
+# Fehlerbehandlung Hook
+#-----------------------------------------------------------------------------------------------------------------------
+# Da wir das Skript mit "bash -e" ausführen, führt jeder Befehls- oder Funktionsaufruf, der mit !=0 returniert zu einem
+# Skriptabbruch, sofern der entsprechende Exitcode nicht Skriptseitig ausgewertet wird.
+# Siehe auch http://wiki.bash-hackers.org/commands/builtin/set -e
+# Mit dem OnError() stellen wir hier noch mal einen Fuss in die Tür um genau diesen Umstand (unerwartete Skriptbeendigung)
+# sichtbar zu machen.
 ########################################################################################################################
-function ShowHelp {
-    echo "${AQUA}Shellskript Template${TEAL}, Joe Merten 2014"
-    echo "usage: $0 [options] ..."
-    echo "Available options:"
-    echo "  nocolor       - Dont use Ansi VT100 colors"
-    echo "  -m            - Modify files"
-    echo -n ${NORMAL}
+function OnError() {
+    echo "${RED}Script error exception in line $1, exit code $2${NORMAL}" >&2
+
+    # Stacktrace Versuch
+    # http://wiki.bash-hackers.org/commands/builtin/caller
+    # http://stackoverflow.com/questions/685435/bash-stacktrace
+    local i=0;
+    echo -n "${MAROON}" >&2
+    while caller $i >&2; do
+         ((i++))
+    done
+    echo "==="
+    backtrace
+    echo "==="
+    echo -n "${NORMAL}" >&2
+
+    # Kill, um ggf. gestartete Background Childprozesse auch zu beenden
+    trap SIGINT
+    kill -INT 0
+    exit 2
 }
+trap 'OnError $LINENO $?' ERR
+
+
+########################################################################################################################
+# Exit-Hook
+#-----------------------------------------------------------------------------------------------------------------------
+# OnExit() wird bei jeder Art der Skriptbeendigung aufgerufen, ggf. nach OnError()
+# Siehe auch http://wiki.bash-hackers.org/commands/builtin/trap
+#
+# TODO: Näher untersuchen und für mich anpassen
+#   tempfiles=( )
+#   cleanup() {
+#       rm -f "${tempfiles[@]}"
+#   }
+#   trap cleanup EXIT
+########################################################################################################################
+function OnExit() {
+    if [ "$2" != "0" ]; then
+        echo "${RED}Script exitcode=$2${NORMAL}" >&2
+    else
+        : # echo "${TEAL}Script exitcode=$2${NORMAL}" >&2
+    fi
+
+    # Ggf. Childprozesse beenden
+    #trap SIGINT
+    #kill -INT 0
+
+    # Ggf. Terminalfarben restaurieren
+    echo -n "${NORMAL}"
+}
+trap 'OnExit $LINENO $?' EXIT
+
+
+# Zum Einbinden des Codes aus http://stackoverflow.com/questions/64786/error-handling-in-bash
+# Weil der hat einen besseren Stacktrace.
+# Allerding hebelt der meine eigenen obigen Hooks aus.
+#[ -f /usr/local/bin/lib.trap.sh ] && set +o nounset && source /usr/local/bin/lib.trap.sh
 
 
 ########################################################################################################################
@@ -123,6 +198,7 @@ declare LOG_COLOR_TRACE="${BLUE}"
 
 function Fatal {
     echo "${LOG_COLOR_FATAL}*** Fatal: $*${NORMAL}" >&2
+    trap SIGINT
     kill -INT 0
     echo "+++++++++++++++++++++++++++++++"
 }
@@ -147,46 +223,6 @@ function Debug {
 function Trace {
     echo "${LOG_COLOR_TRACE}Trace: $*${NORMAL}" >&2
 }
-
-
-# TODO: Näher untersuchen und für mich anpassen
-#tempfiles=( )
-#cleanup() {
-    #rm -f "${tempfiles[@]}"
-#}
-#trap cleanup EXIT
-#trap "echo "${RED}**EXIT**${NORMAL}"; kill 0" EXIT
-
-
-# TODO: Näher untersuchen und für mich anpassen
-function OnError() {
-  local parent_lineno="$1"
-  local message="$2"
-  local code="${3:-1}"
-  if [[ -n "$message" ]] ; then
-    echo "Error on or near line ${parent_lineno}: ${message}; exiting with status ${code}"
-  else
-    echo "Error on or near line ${parent_lineno}; exiting with status ${code}"
-  fi
-  exit "${code}"
-}
-trap 'OnError ${LINENO}' ERR
-
-function my_trap_handler() {
-        MYSELF="$0"               # equals to my script name
-        LASTLINE="$1"            # argument 1: last line of error occurence
-        LASTERR="$2"             # argument 2: error code of last command
-        echo "script error encountered at `date` in ${MYSELF}: line ${LASTLINE}: exit status of last command: ${LASTERR}" >&2
-
-        # do additional processing: send email or SNMP trap, write result to database, etc.
-    #
-    # let's assume we send an email message with
-    # subject: "script error encountered at `date` in ${MYSELF}: line ${LASTLINE}: exit status of last command: ${LASTERR}"
-    # with additional contents of ${my_log_file} as email body
-}
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
-trap 'my_trap_handler ${LINENO} $?' ERR
-
 
 
 ########################################################################################################################
@@ -262,6 +298,7 @@ function WithDots {
     echo "$RET"
 }
 
+
 ########################################################################################################################
 # Fileext ermitteln
 ########################################################################################################################
@@ -319,18 +356,45 @@ function Test_GetFileExt {
 #           |___/
 ########################################################################################################################
 
+declare TAB=$'\t'
+declare CR=$'\t'
+
+function CheckLineend {
+    local filename="$1"
+
+    if ! egrep -q "$CR" "$filename"; then
+        return
+    fi
+    if [ "$MODIFY" == "" ]; then
+        Warning "$filename contains cr"
+        return
+    fi
+
+    Info "Remove CR from $filename"
+    TMPFILE=foo42
+
+    if [ -f "$TMPFILE" ]; then
+        Fatal "Weird...the temp file $TMPFILE already exists.  Get rid of it."
+    fi
+
+    if tr -d '\015'  < "$filename" > "$TMPFILE"; then
+        # TODO: Was ist mit den Permissions?
+        mv "$TMPFILE" "$filename"
+    else
+        Fatal "Error $? while removing CR from $filename"
+    fi
+}
 
 function CheckTabs {
     local filename="$1"
     local base="$(basename "$filename")"
     local ext="$(GetFileExt "$filename")"
 
-    # Todo: Auch Makefiele.posix etc abfangen
     if [ "$base" == "Makefile" ] || [ "$ext" == "mk" ] || [ "$ext" == "mak" ]; then
         return
     fi
 
-    if ! egrep -q $'\t' "$filename"; then
+    if ! egrep -q "$TAB" "$filename"; then
         return
     fi
     if [ "$MODIFY" == "" ]; then
@@ -353,6 +417,50 @@ function CheckTabs {
     fi
 }
 
+
+function CheckTrailingWhitespace {
+    local filename="$1"
+    # "\r?" ist hier im Pattern enthalten, damit ich die auch finde, wenn noch <CR> enthalten sind
+    if ! egrep -q "[$TAB ]+$CR?$" "$filename"; then
+        return
+    fi
+    if [ "$MODIFY" == "" ]; then
+        Warning "$filename has trailing whitespace"
+        return
+    fi
+
+    Info "Remove trailing whitespace from $filename"
+    # Quelle: http://stackoverflow.com/questions/9264893/how-to-removing-trailing-whitespace-of-all-files-of-selective-file-types-in-a-di
+    # -i = Modify inplace
+    # -p = eine art While-Schleife? (http://stackoverflow.com/questions/2476919/what-does-perls-p-command-line-switch-do)
+    perl -p -i -e "s/[ \t]*$//g" ${filename}
+}
+
+function CheckAnsiCodes {
+    local filename="$1"
+    local apo=$'\x92'
+    local gans1=$'\x93'
+    local gans2=$'\x94'
+    if [ "$MODIFY" == "" ]; then
+        Warning "$filename has ansi codes"
+        return
+    fi
+
+    Info "Substituting some ansi codes from $filename"
+    TMPFILE=foo42
+
+    if [ -f "$TMPFILE" ]; then
+        Fatal "Weird...the temp file $TMPFILE already exists.  Get rid of it."
+    fi
+
+    if iconv -f "windows-1252" -t "UTF-8" "$filename" -o "$TMPFILE"; then
+        # TODO: Was ist mit den Permissions?
+        mv "$TMPFILE" "$filename"
+    else
+        Fatal "Error $? while converting ansi codes from $filename"
+    fi
+}
+
 ########################################################################################################################
 # Behandlung von genau einer Datei
 ########################################################################################################################
@@ -367,7 +475,47 @@ function DoFile {
     #    Trace "Base = $base"
     #fi
 
+    # Hier etwas Sicherheitsprüfung, damit ich nicht mal versehentlich eine Binärdatei erwische
+    local type="$(file --brief "$filename")"
+    #Trace "$filename: $type"
+    case "$type" in
+        "ASCII English text");;
+        "ASCII text, with CRLF line terminators");;
+        "ASCII English text, with CRLF line terminators");;
+        "UTF-8 Unicode text");;
+        "UTF-8 Unicode text, with CRLF line terminators");;
+        "UTF-8 Unicode English text, with CRLF line terminators");;
+        "UTF-8 Unicode C program text, with CRLF line terminators");;
+
+        "ASCII C program text, with CRLF line terminators");;
+        "ASCII C++ program text, with CRLF line terminators");;
+        "HTML document, ASCII text, with CRLF line terminators");;
+
+        "ASCII English text, with CRLF, LF line terminators");&
+        "ASCII English text, with very long lines, with CRLF line terminators");&
+        "ASCII C program text, with very long lines, with CRLF line terminators");&
+        "HTML document, Non-ISO extended-ASCII text, with CRLF line terminators");&
+        "HIER NUR EIN DUMMY 1")
+            Warning "$filename has type \"$type\"";
+            return 0;;
+
+        "ISO-8859 English text, with CRLF line terminators");&
+        "ISO-8859 C program text, with CRLF line terminators");&
+        "Non-ISO extended-ASCII text, with CRLF line terminators");&
+        "Non-ISO extended-ASCII C program text, with CRLF line terminators");&
+        "Non-ISO extended-ASCII English text, with CRLF line terminators");&
+        "HIER NUR EIN DUMMY 2")
+            Warning "$filename has type \"$type\"";
+            CheckAnsiCodes "$filename"
+            return 0;;
+
+         *) Error "$filename has type \"$type\""
+         return 1
+    esac
+
+    CheckLineend "$filename"
     CheckTabs "$filename"
+    CheckTrailingWhitespace "$filename"
 }
 
 ########################################################################################################################
@@ -389,6 +537,27 @@ function DoAllFiles {
     for file in "${files[@]}"; do
         DoFile "$file"
     done
+}
+
+
+########################################################################################################################
+#   _   _ _ _  __
+#  | | | (_) |/ _| ___
+#  | |_| | | | |_ / _ \
+#  |  _  | | |  _|  __/
+#  |_| |_|_|_|_|  \___|
+########################################################################################################################
+
+########################################################################################################################
+# Hilfe
+########################################################################################################################
+function ShowHelp {
+    echo "${AQUA}Shellskript Template${TEAL}, Joe Merten 2014"
+    echo "usage: $0 [options] ..."
+    echo "Available options:"
+    echo "  nocolor       - Dont use Ansi VT100 colors"
+    echo "  -m            - Modify files"
+    echo -n ${NORMAL}
 }
 
 
@@ -431,63 +600,33 @@ done
 # Main...
 ########################################################################################################################
 
+# Beispieldaten
+# - Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/startup/gcc_ride7/startup_stm32f10x_ld.s
+#   -> hat Tabs, CR und Trailing WS
+# - Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/stm32f10x.h
+#   -> Enthält Ansi-kodierte Apostrophe (92h)
+#      Sobald man das File mit Eclipse als Utf-8 öffnet und dann speichert, werden die in � ersetzt (EF BF BD)
+# - Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Project/STM32F10x_StdPeriph_Template/TrueSTUDIO/STM32100E-EVAL/stm32_flash.ld
+#   -> Enthält Ansi-kodierte Anführungszeichen (93h und 94h)
+#      -> The file is distributed "as is," ...
+
+
 DIRS="Lib"
 FILE_PATTERNS="("
-#FILE_PATTERNS="${FILE_PATTERNS}.*\.h|"
-#FILE_PATTERNS="${FILE_PATTERNS}.*\.c|"
-#FILE_PATTERNS="${FILE_PATTERNS}.*\.hxx|"
-#FILE_PATTERNS="${FILE_PATTERNS}.*\.cxx|"
-#FILE_PATTERNS="${FILE_PATTERNS}.*\.s|"
-#FILE_PATTERNS="${FILE_PATTERNS}.*\.S|"
-#FILE_PATTERNS="${FILE_PATTERNS}.*\.ld|"
-#FILE_PATTERNS="${FILE_PATTERNS}.*\.lds|"
-#FILE_PATTERNS="${FILE_PATTERNS}.*\.txt|"
-FILE_PATTERNS="${FILE_PATTERNS}.*\.md"
-FILE_PATTERNS="${FILE_PATTERNS})"
+FILE_PATTERNS="${FILE_PATTERNS}.*\.h|"
+FILE_PATTERNS="${FILE_PATTERNS}.*\.c|"
+FILE_PATTERNS="${FILE_PATTERNS}.*\.hxx|"
+FILE_PATTERNS="${FILE_PATTERNS}.*\.cxx|"
+FILE_PATTERNS="${FILE_PATTERNS}.*\.s|"
+FILE_PATTERNS="${FILE_PATTERNS}.*\.S|"
+FILE_PATTERNS="${FILE_PATTERNS}.*\.ld|"
+FILE_PATTERNS="${FILE_PATTERNS}.*\.lds|"
+FILE_PATTERNS="${FILE_PATTERNS}.*\.txt|"
+FILE_PATTERNS="${FILE_PATTERNS}.*\.md|"
+FILE_PATTERNS="${FILE_PATTERNS}DUMMY_EINTRAG)"
 #FILE_PATTERNS=".*"
 
 #FILE_PATTERNS="(Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/startup/gcc_ride7/startup_stm32f10x_ld.s|.*\.md)"
-FILE_PATTERNS="(.*/startup_stm32f10x_ld.s|.*\.md)"
+#FILE_PATTERNS="(.*/startup_stm32f10x_ld.s|.*\.md)"
+
 DoAllFiles
-
-exit 2
-
-
-echo "do something"
-Trace   "Traceausgabe"
-Debug   "Debugausgabe"
-Info    "Infoausgabe"
-Warning "Warnmeldung"
-Error   "Fehlermeldung"
-Fatal   "Fatal Fehler"
-
-
-
-
-
-
-
-##
-##  <CR>
-##  #!/bin/sh
-##
-##  TMPFILE=foo42
-##
-##  if [ -f $TMPFILE ] ; then
-##      echo Weird...the temp file $TMPFILE already exists.  Get rid of it.
-##      exit 0
-##  fi
-##
-##  while [ $# -ne 0 ] ; do
-##      tr -d '\015' < $1 > $TMPFILE
-##      if [ $? -eq 0 ] ; then
-##          mv $TMPFILE $1
-##          echo Successfully translated $1 from a DOS text file.
-##      fi
-##      shift
-##  done
-##
-##  rm -f $TMPFILE
-##
-##
-
