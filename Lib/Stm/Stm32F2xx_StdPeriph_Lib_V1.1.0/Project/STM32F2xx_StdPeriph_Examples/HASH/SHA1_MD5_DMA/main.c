@@ -52,7 +52,7 @@ HASH_MsgDigest MsgDigest;
 
 uint8_t MessageToHash[SIZE_MSG_TO_HASH_IN_BYTES]= 
 "Hash processor (HASH) computes a message digest (128bit for MD5 and 160bit for \
-SHA-1) for messages of up to (2exp64 – 1) bits.";
+SHA-1) for messages of up to (2exp64 â€“ 1) bits.";
 
 /* Private function prototypes -----------------------------------------------*/
 void HASH_SHA1_DMA(void);

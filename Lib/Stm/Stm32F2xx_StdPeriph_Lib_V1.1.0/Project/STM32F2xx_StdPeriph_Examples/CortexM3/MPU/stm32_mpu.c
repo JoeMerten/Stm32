@@ -71,17 +71,17 @@ void MPU_Config(void)
   /* Disable MPU */
   MPU->CTRL &= ~MPU_CTRL_ENABLE_Msk;
   
-  /* Configure RAM region as Region N°0, 8kB of size and R/W region */
+  /* Configure RAM region as Region NÂ°0, 8kB of size and R/W region */
   MPU->RNR  = RAM_REGION_NUMBER;
   MPU->RBAR = RAM_ADDRESS_START;
   MPU->RASR = RAM_SIZE | portMPU_REGION_READ_WRITE;
   
-  /* Configure FLASH region as REGION N°1, 1MB of size and R/W region */
+  /* Configure FLASH region as REGION NÂ°1, 1MB of size and R/W region */
   MPU->RNR  = FLASH_REGION_NUMBER;
   MPU->RBAR = FLASH_ADDRESS_START;
   MPU->RASR = FLASH_SIZE | portMPU_REGION_READ_WRITE;
   
-  /* Configure Peripheral region as REGION N°2, 0.5GB of size, R/W and Execute
+  /* Configure Peripheral region as REGION NÂ°2, 0.5GB of size, R/W and Execute
   Never region */
   MPU->RNR  = PERIPH_REGION_NUMBER;  
   MPU->RBAR = PERIPH_ADDRESS_START;
@@ -101,7 +101,7 @@ void MPU_Config(void)
   */
 void MPU_AccessPermConfig(void)
 { 
-  /* Configure region for PrivilegedReadOnlyArray as REGION N°3, 32byte and R 
+  /* Configure region for PrivilegedReadOnlyArray as REGION NÂ°3, 32byte and R 
      only in privileged mode */
   MPU->RNR  = ARRAY_REGION_NUMBER;
   MPU->RBAR |= ARRAY_ADDRESS_START;

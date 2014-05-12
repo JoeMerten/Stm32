@@ -24,7 +24,7 @@
 This example provides a description of how to use the I2C to communicate with 
 an STLM75 (or a compatible device) I2C temperature sensor is mounted on the 
 evaluation board and used to get instantaneous external temperature
-(-55›C to +125›C).
+(-55√ùC to +125√ùC).
 Thanks to STM32 I2C SMBus feature, we can easily monitor the temperature 
 variations. This is managed by the SMBus Alert which is generating a dedicated 
 interrupt informing the system that the temperature is out of the selected 

@@ -32,7 +32,7 @@ feature to simulate a timer with refresh time equal to 250 ms  (1 second/ 8) * 2
 The RTC is configured to generate sub seconds interrupt each 125ms (will have
 8 interrupt per 1 second).
   
-For this example an interactive human interface is developed using STM324xx EVAL’s
+For this example an interactive human interface is developed using STM324xx EVALâ€™s
 LCD and Push Buttons to allow user to use Timer with a real progress bar display.
 
 After startup, the timer is equal to 1 Minute (60 Seconds) and by pressing on

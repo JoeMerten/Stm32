@@ -15,7 +15,7 @@ St Lib inkl. Cmsis
     - Tabs entfernt
       - einige Sourcen sind offenbar mit Tabwidth=8 (F4xx arm_fft_bin_data.c)
         Ich habe dies nicht berücksichtigt und mein Detabbing erst mal komplett mit Tabwidth=8 gemacht
-  - Ansi/Utf-8: � ausgetauscht
+  - Ansi/Utf-8: Komische Apostrophe und Anführungszeichen (�) ausgetauscht
   - Schreibschutz von den Dateien entfernt
     - Check : find . -print0 | xargs -0 ls -lda
     - Change: chmod -R +w .

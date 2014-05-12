@@ -7,7 +7,7 @@
 Hash processor (HASH) computes a
  message digest (128bit for MD5
  and 160bit for SHA-1) for mess
-ages of up to (2exp64 – 1) bits
+ages of up to (2exp64 â€“ 1) bits
 .
 
  ---------------------------------------

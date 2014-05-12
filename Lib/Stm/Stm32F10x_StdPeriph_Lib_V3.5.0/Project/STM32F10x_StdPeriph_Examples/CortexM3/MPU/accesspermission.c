@@ -64,7 +64,7 @@ void accesspermission(void)
 {
  uint8_t a; 
   
-  /* Configure region for privilegedreadonlyarray as REGION NÝ3, 32byte and R 
+  /* Configure region for privilegedreadonlyarray as REGION NÃ3, 32byte and R 
      only in privileged mode */
   MPU->RNR  = ARRAY_REGION_NUMBER;
   MPU->RBAR |= ARRAY_ADDRESS_START;

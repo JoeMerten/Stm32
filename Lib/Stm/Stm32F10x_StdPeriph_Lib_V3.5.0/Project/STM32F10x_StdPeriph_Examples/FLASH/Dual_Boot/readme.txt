@@ -62,7 +62,7 @@ the instructions provided on the LCD:
 =================
 When BFB2 bit is cleared and Bank2 or/and Bank1 contain valid user application code,
 the Bootloader will always jump to this code and never continue normal code execution 
-(i.e. it’s no more possible to use the Bootloader for code upgrade and option bytes
+(i.e. itâ€™s no more possible to use the Bootloader for code upgrade and option bytes
 programming). As consequence, if the user has cleared BFB2 bit (to boot from Bank2),
 in order to be able to execute the embedded Bootloader code he has to: 
    - either, set BFB2 bit to 1

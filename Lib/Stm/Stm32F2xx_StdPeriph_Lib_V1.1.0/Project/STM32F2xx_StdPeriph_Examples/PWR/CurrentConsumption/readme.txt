@@ -49,7 +49,7 @@ To run this example, user has to follow the following steps:
  2. Use an external amperemeter to measure the IDD current. 
 
  3. This example can not be used in DEBUG mode,this is due to the fact that the 
-    Cortex™-M3 core is no longer clocked during low power mode so debugging 
+    Cortexâ„¢-M3 core is no longer clocked during low power mode so debugging 
     features are disbaled
 
 Here below a detailed description of the example code:

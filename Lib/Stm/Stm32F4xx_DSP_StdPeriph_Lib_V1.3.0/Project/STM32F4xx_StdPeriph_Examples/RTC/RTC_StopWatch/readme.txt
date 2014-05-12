@@ -33,7 +33,7 @@ record times possibilities stored in the Backup registers:
  - 10 registers for time (second, minutes and hours)
  - 10 registers for subsecond
   
-For this example an interactive human interface is developed using STM324xx EVAL’s 
+For this example an interactive human interface is developed using STM324xx EVALâ€™s 
 LCD and Push Buttons to allow user to use StopWatch with real time display.
 
 After startup, a default chronometer counter format "00:00:00:000" is displayed 

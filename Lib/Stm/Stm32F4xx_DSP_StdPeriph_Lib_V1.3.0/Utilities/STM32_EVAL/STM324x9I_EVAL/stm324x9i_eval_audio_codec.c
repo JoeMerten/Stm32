@@ -1415,7 +1415,7 @@ static void Delay( __IO uint32_t nCount)
 uint32_t Codec_TIMEOUT_UserCallback(void)
 {
   /* The following code allows I2C error recovery and return to normal communication
-     if the error source doesn’t still exist (ie. hardware issue..) */
+     if the error source doesnâ€™t still exist (ie. hardware issue..) */
   I2C_InitTypeDef I2C_InitStructure;
   
   /* LCD_ErrLog("> I2C Timeout error occurred\n"); */

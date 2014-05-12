@@ -1904,7 +1904,7 @@ uint8_t LCD_TimeOutUserCallback(void)
 /**
   * @brief  LCD_CheckDevice
   * @note   The AMPIRE 480x272 and 480x640 LCDs provided within STM324x9I_EVAL board 
-  *         doesn’t have an internal ID register, however for AMPIRE 480x272 LCD we 
+  *         doesnâ€™t have an internal ID register, however for AMPIRE 480x272 LCD we 
   *         can workaround this limitation by detecting the ID of the IO expander 
   *         (STMPE811) mounted on MB1046 daughter board
   * @param  None.

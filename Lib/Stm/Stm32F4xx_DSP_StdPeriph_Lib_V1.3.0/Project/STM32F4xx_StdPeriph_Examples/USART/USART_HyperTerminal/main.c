@@ -81,7 +81,7 @@ int main(void)
   {}
   
   /* The software must wait until TC=1. The TC flag remains cleared during all data
-     transfers and it is set by hardware at the last frame’s end of transmission*/
+     transfers and it is set by hardware at the last frameâ€™s end of transmission*/
   while (USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TC) == RESET)
   {}
  

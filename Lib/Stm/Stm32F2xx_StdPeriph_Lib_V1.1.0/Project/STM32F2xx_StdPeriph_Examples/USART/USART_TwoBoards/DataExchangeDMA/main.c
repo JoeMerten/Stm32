@@ -198,7 +198,7 @@ int main(void)
       } 
       
       /* The software must wait until TC=1. The TC flag remains cleared during all data
-         transfers and it is set by hardware at the last frame’s end of transmission*/
+         transfers and it is set by hardware at the last frameâ€™s end of transmission*/
       TimeOut = USER_TIMEOUT;
       while ((USART_GetFlagStatus(USARTx, USART_FLAG_TC) == RESET)&&(TimeOut != 0))
       {
@@ -244,7 +244,7 @@ int main(void)
       }
       
       /* The software must wait until TC=1, The TC flag remains cleared during all data
-         transfers and it is set by hardware at the last frame’s end of transmission */
+         transfers and it is set by hardware at the last frameâ€™s end of transmission */
       TimeOut = USER_TIMEOUT;
       while ((USART_GetFlagStatus(USARTx, USART_FLAG_TC) == RESET)&&(TimeOut != 0))
       {

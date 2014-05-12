@@ -86,17 +86,17 @@ void MPU_SETUP(void)
   /* Disable MPU */
   MPU->CTRL &= ~MPU_CTRL_ENABLE_Msk;
   
-  /* Configure RAM region as Region NÝ0, 8kB of size and R/W region */
+  /* Configure RAM region as Region NÃ0, 8kB of size and R/W region */
   MPU->RNR  = RAM_REGION_NUMBER;
   MPU->RBAR = RAM_ADDRESS_START;
   MPU->RASR = RAM_SIZE | portMPU_REGION_READ_WRITE;
   
-  /* Configure FLASH region as REGION NÝ1, 1MB of size and R/W region */
+  /* Configure FLASH region as REGION NÃ1, 1MB of size and R/W region */
   MPU->RNR  = FLASH_REGION_NUMBER;
   MPU->RBAR = FLASH_ADDRESS_START;
   MPU->RASR = FLASH_SIZE | portMPU_REGION_READ_WRITE;
   
-  /* Configure Peripheral region as REGION NÝ2, 0.5GB of size, R/W and Execute
+  /* Configure Peripheral region as REGION NÃ2, 0.5GB of size, R/W and Execute
   Never region */
   MPU->RNR  = PERIPH_REGION_NUMBER;  
   MPU->RBAR = PERIPH_ADDRESS_START;

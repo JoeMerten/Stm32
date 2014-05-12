@@ -33,7 +33,7 @@
  - Project.uvproj/.uvopt: A pre-configured project file with the provided library 
                           structure that produces an executable image with MDK-ARM.
 
-@note Enabling "Options for Target — Output – Browser Information" is useful for
+@note Enabling "Options for Target â€” Output â€“ Browser Information" is useful for
       quick source files navigation but may slow the compilation time.                 
  
  
