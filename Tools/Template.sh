@@ -6,8 +6,9 @@
 # \file       Template.sh
 # \creation   2014-05-10, Joe Merten
 #-----------------------------------------------------------------------------------------------------------------------
-# Achtung: Wegen bash -e sollte in diesem Skript weder "let" noch "expr" verwendet serden.
-# Statt dessen besser $((...)) verwenden.
+# Achtung: Wegen bash -e sollte in diesem Skript weder "let" noch "expr" verwendet serden. ((i++)) ist ebenfalls problematisch.
+# Workaround: "||:" dahinter schreiben, also z.B.:
+#   let 'i++' ||:
 # Siehe auch: http://unix.stackexchange.com/questions/63166/bash-e-exits-when-let-or-expr-evaluates-to-0
 ########################################################################################################################
 
@@ -94,14 +95,30 @@ set -o nounset   ## set -u : exit the script if you try to use an uninitialised 
 set -o errexit   ## set -e : exit the script if any statement returns a non-true return value
 
 ########################################################################################################################
+# Terminalfarben restaurieren, ggf. Childprozesse beenden et cetera
+########################################################################################################################
+declare SHUTTING_DOWN=
+function StopScript {
+    SHUTTING_DOWN="true"
+    local exitcode="$1"
+
+    echo -n "${NORMAL}"
+    echo -n "${NORMAL}" >&2
+
+    # Kill, um ggf. gestartete Background Childprozesse auch zu beenden
+    trap SIGINT
+    kill -INT 0
+    exit $exitcode
+}
+
+########################################################################################################################
 # Terminalfarben restaurieren, wenn Abbruch via Ctrl+C
 ########################################################################################################################
 function OnCtrlC {
-    echo "${RED}[*** interrupted ***]${NORMAL}"
-#    # damit bei Ctrl+C auch alle Childprozesse beendet werden
-#    trap SIGINT
-#    kill -INT 0
-#    #exit 1
+    [ "$SHUTTING_DOWN" != "" ] && return 0
+    echo "${RED}[*** interrupted ***]${NORMAL}" >&2
+    # damit bei Ctrl+C auch alle Childprozesse beendet werden etc.
+    StopScript 2
 }
 trap OnCtrlC SIGINT
 
@@ -118,23 +135,17 @@ trap OnCtrlC SIGINT
 function OnError() {
     echo "${RED}Script error exception in line $1, exit code $2${NORMAL}" >&2
 
-    # Stacktrace Versuch
+    # Stacktrace ausgeben
     # http://wiki.bash-hackers.org/commands/builtin/caller
     # http://stackoverflow.com/questions/685435/bash-stacktrace
     local i=0;
+    local s=""
     echo -n "${MAROON}" >&2
-    while caller $i >&2; do
-         ((i++))
+    while s="$(caller $i)"; do
+        echo "  ${MAROON}$s${NORMAL}" >&2
+        ((i++)) ||:
     done
-    echo "==="
-    backtrace
-    echo "==="
-    echo -n "${NORMAL}" >&2
-
-    # Kill, um ggf. gestartete Background Childprozesse auch zu beenden
-    trap SIGINT
-    kill -INT 0
-    exit 2
+    StopScript 2
 }
 trap 'OnError $LINENO $?' ERR
 
@@ -153,26 +164,16 @@ trap 'OnError $LINENO $?' ERR
 #   trap cleanup EXIT
 ########################################################################################################################
 function OnExit() {
-    if [ "$2" != "0" ]; then
-        echo "${RED}Script exitcode=$2${NORMAL}" >&2
+    local exitcode="$1"
+        if [ "$2" != "0" ]; then
+        echo "${RED}Script exitcode=$exitcode${NORMAL}" >&2
     else
-        : # echo "${TEAL}Script exitcode=$2${NORMAL}" >&2
+        : # echo "${TEAL}Script exitcode=$exitcode${NORMAL}" >&2
     fi
-
-    # Ggf. Childprozesse beenden
-    #trap SIGINT
-    #kill -INT 0
-
-    # Ggf. Terminalfarben restaurieren
-    echo -n "${NORMAL}"
+    # TODO: Hier wirklich noch mal exit aufrufen?
+    StopScript $exitcode
 }
 trap 'OnExit $LINENO $?' EXIT
-
-
-# Zum Einbinden des Codes aus http://stackoverflow.com/questions/64786/error-handling-in-bash
-# Weil der hat einen besseren Stacktrace.
-# Allerding hebelt der meine eigenen obigen Hooks aus.
-#[ -f /usr/local/bin/lib.trap.sh ] && set +o nounset && source /usr/local/bin/lib.trap.sh
 
 
 ########################################################################################################################
@@ -197,8 +198,7 @@ declare LOG_COLOR_TRACE="${BLUE}"
 
 function Fatal {
     echo "${LOG_COLOR_FATAL}*** Fatal: $*${NORMAL}" >&2
-    trap SIGINT
-    kill -INT 0
+    StopScript 2
     echo "+++++++++++++++++++++++++++++++"
 }
 
@@ -279,7 +279,7 @@ function WithDots {
 
     # Dots einfügen
     while [ "$IDX" -gt "3" ]; do
-        let "IDX -= 3"
+        let "IDX -= 3" ||:
         L=${RET:0:$IDX}
         R=${RET:$IDX}
         RET="$L.$R"
@@ -299,32 +299,49 @@ function WithDots {
 
 
 ########################################################################################################################
-# Fileext ermitteln
+# Ermittlung von File Base oder Ext
+#-----------------------------------------------------------------------------------------------------------------------
+# \in  filename  Kompletter Dateiname, optional mit Verzeichnis
+# \in  mode      - "base" = File Base wird ermittelt
+#                - "ext"  = File Ext wird ermittelt
+#-----------------------------------------------------------------------------------------------------------------------
+
 ########################################################################################################################
-function GetFileExt {
+function GetFileBaseExt {
     local filename="$1"
-    local base="$(basename "$filename")"
+    local mode="$2"
+    local name="$(basename "$filename")"
 
     # Vorabprüfung: Eine Fileext ist nur enthalten, wenn der String einen Punkt enthält, vor diesem aber eine "nicht-Punkt" ist
-    if ! [[ "$base" =~ [^.]\. ]]; then
-        echo ""
-        return
+    if ! [[ "$name" =~ [^.]\. ]]; then
+        [ "$mode" == "base" ] && echo "$name"
+        [ "$mode" == "ext" ] && echo ""
+        return 0
     fi
 
     # Prüfung, ob überhaupt ein Punkt enthalten ist
-    #if [ "${base%.*}" == "$base" ]; then
+    #if [ "${name%.*}" == "$name" ]; then
     #    # Kein . enthalten → also auch keine Fileext
     #    echo ""
     #    return
     #fi
 
-    #echo "${base%%.*}"  #  example.a.b.c.d  →  example
-    #echo "${base%.*}"   #  example.a.b.c.d  →  example.a.b.c
-    #echo "${base#*.}"   #  example.a.b.c.d  →  a.b.c.d
-    echo "${base##*.}"  #  example.a.b.c.d  →  d
+                            #echo "${name%%.*}"  #  example.a.b.c.d  →  example
+    [ "$mode" == "base" ] && echo "${name%.*}"   #  example.a.b.c.d  →  example.a.b.c
+                            #echo "${name#*.}"   #  example.a.b.c.d  →  a.b.c.d
+    [ "$mode" == "ext" ]  && echo "${name##*.}"  #  example.a.b.c.d  →  d
+    return 0
 }
 
-function Test_GetFileExt {
+function GetFileBase {
+    GetFileBaseExt "$1" base
+}
+
+function GetFileExt {
+    GetFileBaseExt "$1" ext
+}
+
+function Test_GetFileBaseExt {
     Test_Check "$(GetFileExt "verzeichnis  /example.a")"       "a"
     Test_Check "$(GetFileExt "verzeichnis  /example.a.b.c.d")" "d"
     Test_Check "$(GetFileExt "verzeichnis  /example.")"        ""
@@ -342,8 +359,27 @@ function Test_GetFileExt {
     Test_Check "$(GetFileExt ".project.bla")"  "bla"
     Test_Check "$(GetFileExt ".project")"      ""
     Test_Check "$(GetFileExt " .project")"     "project"
+
+
+    Test_Check "$(GetFileBase "verzeichnis  /example.a")"       "example"
+    Test_Check "$(GetFileBase "verzeichnis  /example.a.b.c.d")" "example.a.b.c"
+    Test_Check "$(GetFileBase "verzeichnis  /example.")"        "example"
+    Test_Check "$(GetFileBase "verzeichnis  /example")"         "example"
+
+    Test_Check "$(GetFileBase "")"              ""
+    Test_Check "$(GetFileBase ".")"             "."
+    Test_Check "$(GetFileBase "..")"            ".."
+    Test_Check "$(GetFileBase "...")"           "..."
+    Test_Check "$(GetFileBase "/x.y.z./...")"   "..."
+    Test_Check "$(GetFileBase "/x.y.z./...a")"  "...a"
+
+    Test_Check "$(GetFileBase "Basename.ext with space")"  "Basename"
+
+    Test_Check "$(GetFileBase ".project.bla")"  ".project"
+    Test_Check "$(GetFileBase ".project")"      ".project"
+    Test_Check "$(GetFileBase " .project")"     " "
 }
-#Test_GetFileExt
+#Test_GetFileBaseExt
 
 
 ########################################################################################################################
