@@ -28,6 +28,7 @@
 declare DIRS=()
 declare FILE_PATTERNS=()
 declare MODIFY=""
+declare LIST_EXTENTIONS=""
 
 ########################################################################################################################
 #    ____      _
@@ -428,10 +429,16 @@ function CheckTabs {
     local ext="$(GetFileExt "$filename")"
 
     if [ "$base" == "Makefile" ] || [ "$ext" == "mk" ] || [ "$ext" == "mak" ]; then
+        # Bei Makefiles haben Tabs syntaktische Bedeutung
         return
     fi
 
-    if ! egrep -q "$TAB" "$filename"; then
+    if [ "$base" == ".project" ] || [ "$base" == ".cproject" ] || [ "$base" == ".classpath" ]; then
+        # Bei Eclipse Projectfiles und Java Classpath behalte ich die Tabs bei, da es sich im Regelfall um generierte Dateien handelt
+        return
+    fi
+
+        if ! egrep -q "$TAB" "$filename"; then
         return
     fi
     if [ "$MODIFY" == "" ]; then
@@ -548,6 +555,8 @@ function DoFile {
 
         "C program text (from flex), ");; # Thrift/thrift-0.9.1/compiler/cpp/thriftl.cc
 
+        "XML document text");;
+
         "HTML document");;
         "HTML document, ASCII text");;
         "HTML document, ASCII text, with CRLF line terminators");;
@@ -650,6 +659,7 @@ function ShowHelp {
     echo "Available options:"
     echo "  nocolor       - Dont use Ansi VT100 colors"
     echo "  -m            - Modify files"
+    echo "  -e            - List file extentions"
     echo -n ${NORMAL}
 }
 
@@ -671,9 +681,11 @@ while (("$#")); do
     exit 0
   elif [ "$1" == "nocolor" ]; then
     NoColor
-  elif [ "$1" == "-m" ]; then
+  elif [ "$1" == "-e" ] || [ "$1" == "--listext" ]; then
+    LIST_EXTENTIONS="true"
+  elif [ "$1" == "-m" ] || [ "$1" == "--modify" ]; then
     MODIFY="true"
-  else
+    else
     DIRS+=("$1")
     #echo "Unexpected parameter \"$1\"" >&2
     #ShowHelp
@@ -711,7 +723,10 @@ done
 # Wenn kein Verzeichnis angegeben, dann defaulten wir auf "."
 [ "${#DIRS[@]}" == "0" ] && DIRS+=('.')
 
-#DoListFileTypes
+if [ "$LIST_EXTENTIONS" == "true" ]; then
+    DoListFileTypes
+    exit
+fi
 
 # Meine FilePatterns sind Regular Expressions (wg. find)
 FILE_PATTERNS+=('.*\.h')
@@ -732,6 +747,15 @@ FILE_PATTERNS+=('.*Makefile\..*') # z.B. für "Makefile.posix"
 FILE_PATTERNS+=('.*\.mk')
 FILE_PATTERNS+=('.*\.sh')
 FILE_PATTERNS+=('.*\.bsh')
+
+# zus. für Android / Java
+FILE_PATTERNS+=('.*\.java')
+FILE_PATTERNS+=('.*\.prefs')
+FILE_PATTERNS+=('.*\.properties')
+FILE_PATTERNS+=('.*\.xml')
+FILE_PATTERNS+=('.*\.classpath')
+FILE_PATTERNS+=('.*\.project')
+
 
 #DIRS=("Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Libraries")
 #FILE_PATTERNS=(".*")
