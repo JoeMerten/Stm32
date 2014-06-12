@@ -433,7 +433,9 @@ function CheckTabs {
         return
     fi
 
-    if [ "$base" == ".project" ] || [ "$base" == ".cproject" ] || [ "$base" == ".classpath" ]; then
+    if [ "$base" == ".project" ] || [ "$base" == ".cproject" ] ||
+       [ "$base.$ext" == "language.settings.xml" ] ||
+       [ "$base" == ".classpath" ]; then
         # Bei Eclipse Projectfiles und Java Classpath behalte ich die Tabs bei, da es sich im Regelfall um generierte Dateien handelt
         return
     fi
@@ -551,13 +553,18 @@ function DoFile {
         "ASCII C program text, with CRLF line terminators");;
         "ASCII C++ program text");;
         "ASCII C++ program text, with CRLF line terminators");;
+        "ASCII assembler program text");;
         "ASCII make commands text");; # Makefile
+        "UTF-8 Unicode make commands text");;
         "ASCII Java program text");;
         "UTF-8 Unicode Java program text");;
 
         "C program text (from flex), ");; # Thrift/thrift-0.9.1/compiler/cpp/thriftl.cc
 
         "XML document text");;
+        "TeX document, ASCII text");;    # Komischerweise wird ein Makefile aus dem Nordic Sdk 5.2.0 als solches erkannt...
+        "LaTeX document, ASCII text");;  #   "  und hier console.h ?!
+        "Blink archive data");;          #   "  Examples/NordicSdk/Blinky/README.md ?!?
 
         "HTML document");;
         "HTML document, ASCII text");;
@@ -565,12 +572,15 @@ function DoFile {
         "HTML document, UTF-8 Unicode text");;
         "HTML document, UTF-8 Unicode text, with CRLF line terminators");;
 
+        "ASCII text, with very long lines");&
         "ASCII English text, with very long lines");&
         "ASCII English text, with very long lines, with CRLF line terminators");&
+        "UTF-8 Unicode English text, with very long lines");&
         "ASCII C program text, with very long lines");&
         "ASCII C program text, with very long lines, with CRLF line terminators");&
+        "UTF-8 Unicode C program text, with very long lines");&
         "HIER NUR EIN DUMMY 1")
-            Warning "$filename has type \"$type\""
+            #Warning "$filename has type \"$type\""
             #return 0
             ;;
 
