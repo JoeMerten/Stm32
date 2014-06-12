@@ -552,6 +552,8 @@ function DoFile {
         "ASCII C++ program text");;
         "ASCII C++ program text, with CRLF line terminators");;
         "ASCII make commands text");; # Makefile
+        "ASCII Java program text");;
+        "UTF-8 Unicode Java program text");;
 
         "C program text (from flex), ");; # Thrift/thrift-0.9.1/compiler/cpp/thriftl.cc
 
