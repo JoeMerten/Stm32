@@ -589,6 +589,13 @@ function DoFile {
             [ "$name" == "readme.txt" ] && CheckAnsiCodes "$filename" # Komischerweise werden einige readme.txt als html eingestuft, wohl wegen der enthaltenen "<a href=...>"
             return 0;;
 
+        "data")
+            # u8g_font_data.c
+            Warning "$filename has type \"$type\""
+            #return 0;;
+            ;;
+
+        "ISO-8859 English text");&
         "ISO-8859 English text, with CRLF line terminators");&
         "ISO-8859 C program text, with CRLF line terminators");&
         "Non-ISO extended-ASCII text, with CRLF line terminators");&
