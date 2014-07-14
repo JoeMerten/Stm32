@@ -263,6 +263,9 @@ function Test_Check {
 
 ########################################################################################################################
 # Hilfsfunktion: Numerischen Wert mit Tausenderpunkten ausgeben
+#-----------------------------------------------------------------------------------------------------------------------
+# \in  valueString  String, in dem die Tausenderseparatoren eingefügt werden sollen
+# \in  minLength    Mindestlänge, Rückgabestring wird ggf. rechtsbündig formatiert
 ########################################################################################################################
 function WithDots {
     local RET="$1"
@@ -287,7 +290,7 @@ function WithDots {
 
     RET="$VORZ$RET"
 
-    if [ "$2" != "" ]; then
+    if [ "$#" == "2" ]; then
         # String auf Mindestlänge formatieren
         while [ "${#RET}" -lt "$2" ]; do
             RET=" $RET"
@@ -297,6 +300,93 @@ function WithDots {
     echo "$RET"
 }
 
+function Test_WithDots {
+    Test_Check "$(WithDots           "")"              ""
+    Test_Check "$(WithDots          "0")"             "0"
+
+    Test_Check "$(WithDots          "1")"             "1"
+    Test_Check "$(WithDots         "12")"            "12"
+    Test_Check "$(WithDots        "133")"           "133"
+    Test_Check "$(WithDots       "1234")"         "1.234"
+    Test_Check "$(WithDots      "12345")"        "12.345"
+    Test_Check "$(WithDots     "123456")"       "123.456"
+    Test_Check "$(WithDots    "1234567")"     "1.234.567"
+    Test_Check "$(WithDots   "12345678")"    "12.345.678"
+    Test_Check "$(WithDots  "123456789")"   "123.456.789"
+
+    Test_Check "$(WithDots         "-1")"            "-1"
+    Test_Check "$(WithDots        "-12")"           "-12"
+    Test_Check "$(WithDots       "-133")"          "-133"
+    Test_Check "$(WithDots      "-1234")"        "-1.234"
+    Test_Check "$(WithDots     "-12345")"       "-12.345"
+    Test_Check "$(WithDots    "-123456")"      "-123.456"
+    Test_Check "$(WithDots   "-1234567")"    "-1.234.567"
+    Test_Check "$(WithDots  "-12345678")"   "-12.345.678"
+    Test_Check "$(WithDots "-123456789")"  "-123.456.789"
+
+    Test_Check "$(WithDots         "+1")"            "+1"
+    Test_Check "$(WithDots        "+12")"           "+12"
+    Test_Check "$(WithDots       "+133")"          "+133"
+    Test_Check "$(WithDots      "+1234")"        "+1.234"
+    Test_Check "$(WithDots     "+12345")"       "+12.345"
+    Test_Check "$(WithDots    "+123456")"      "+123.456"
+    Test_Check "$(WithDots   "+1234567")"    "+1.234.567"
+    Test_Check "$(WithDots  "+12345678")"   "+12.345.678"
+    Test_Check "$(WithDots "+123456789")"  "+123.456.789"
+
+    Test_Check "$(WithDots      "12345" 9)"   "   12.345"
+    Test_Check "$(WithDots     "-12345" 9)"   "  -12.345"
+    Test_Check "$(WithDots     "+12345" 9)"   "  +12.345"
+}
+#Test_WithDots
+
+
+########################################################################################################################
+# Hilfsfunktion: Trim Strings
+#-----------------------------------------------------------------------------------------------------------------------
+# siehe auch: http://stackoverflow.com/questions/369758/how-to-trim-whitespace-from-bash-variable
+########################################################################################################################
+function Trim {
+    local var="$1"
+    var="${var#"${var%%[![:space:]]*}"}"   # remove leading whitespace characters
+    var="${var%"${var##*[![:space:]]}"}"   # remove trailing whitespace characters
+    echo "$var"
+}
+
+function TrimLeft {
+    local var="$1"
+    var="${var#"${var%%[![:space:]]*}"}"   # remove leading whitespace characters
+    echo "$var"
+}
+
+function TrimRight {
+    local var="$1"
+    var="${var%"${var##*[![:space:]]}"}"   # remove trailing whitespace characters
+    echo "$var"
+}
+
+function Test_Trim {
+    Test_Check "$(Trim        "")"              ""
+    Test_Check "$(TrimLeft    "")"              ""
+    Test_Check "$(TrimRight   "")"              ""
+
+    Test_Check "$(Trim           "a b c")"                 "a b c"
+    Test_Check "$(TrimLeft       "a b c")"                 "a b c"
+    Test_Check "$(TrimRight      "a b c")"                 "a b c"
+
+    Test_Check "$(Trim        "   d e f")"                 "d e f"
+    Test_Check "$(TrimLeft    "   d e f")"                 "d e f"
+    Test_Check "$(TrimRight   "   d e f")"              "   d e f"
+
+    Test_Check "$(Trim           "g h i   ")"              "g h i"
+    Test_Check "$(TrimLeft       "g h i   ")"              "g h i   "
+    Test_Check "$(TrimRight      "g h i   ")"              "g h i"
+
+    Test_Check "$(Trim        "   j k l   ")"              "j k l"
+    Test_Check "$(TrimLeft    "   j k l   ")"              "j k l   "
+    Test_Check "$(TrimRight   "   j k l   ")"           "   j k l"
+}
+#Test_Trim
 
 ########################################################################################################################
 # Ermittlung von File Base oder Ext
@@ -304,8 +394,6 @@ function WithDots {
 # \in  filename  Kompletter Dateiname, optional mit Verzeichnis
 # \in  mode      - "base" = File Base wird ermittelt
 #                - "ext"  = File Ext wird ermittelt
-#-----------------------------------------------------------------------------------------------------------------------
-
 ########################################################################################################################
 function GetFileBaseExt {
     local filename="$1"
