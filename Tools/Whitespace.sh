@@ -797,6 +797,7 @@ function DoFile {
 
         "C program text (from flex),");;   # Thrift/thrift-0.9.1/compiler/cpp/thriftl.cc
         "(with BOM) text");;               # Thrift/thrift-0.9.1/sonar-project.properties "UTF-8 Unicode (with BOM) text"
+        "BOA archive data");;              # Stm32/Lib/Stm/Stm32F4xx_DSP_StdPeriph_Lib_V1.3.0/Project/STM32F4xx_StdPeriph_Templates/TrueSTUDIO/STM32F401xx/.settings/com.atollic.truestudio.debug.hardware_device.prefs
 
         "XML document text");;
         "TeX document, text");;            # Komischerweise wird ein Makefile aus dem Nordic Sdk 5.2.0 als solches erkannt...
