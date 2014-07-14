@@ -265,6 +265,9 @@ function Test_Check {
 
 ########################################################################################################################
 # Hilfsfunktion: Numerischen Wert mit Tausenderpunkten ausgeben
+#-----------------------------------------------------------------------------------------------------------------------
+# \in  valueString  String, in dem die Tausenderseparatoren eingefügt werden sollen
+# \in  minLength    Mindestlänge, Rückgabestring wird ggf. rechtsbündig formatiert
 ########################################################################################################################
 function WithDots {
     local RET="$1"
@@ -289,7 +292,7 @@ function WithDots {
 
     RET="$VORZ$RET"
 
-    if [ "$2" != "" ]; then
+    if [ "$#" == "2" ]; then
         # String auf Mindestlänge formatieren
         while [ "${#RET}" -lt "$2" ]; do
             RET=" $RET"
@@ -299,6 +302,93 @@ function WithDots {
     echo "$RET"
 }
 
+function Test_WithDots {
+    Test_Check "$(WithDots           "")"              ""
+    Test_Check "$(WithDots          "0")"             "0"
+
+    Test_Check "$(WithDots          "1")"             "1"
+    Test_Check "$(WithDots         "12")"            "12"
+    Test_Check "$(WithDots        "133")"           "133"
+    Test_Check "$(WithDots       "1234")"         "1.234"
+    Test_Check "$(WithDots      "12345")"        "12.345"
+    Test_Check "$(WithDots     "123456")"       "123.456"
+    Test_Check "$(WithDots    "1234567")"     "1.234.567"
+    Test_Check "$(WithDots   "12345678")"    "12.345.678"
+    Test_Check "$(WithDots  "123456789")"   "123.456.789"
+
+    Test_Check "$(WithDots         "-1")"            "-1"
+    Test_Check "$(WithDots        "-12")"           "-12"
+    Test_Check "$(WithDots       "-133")"          "-133"
+    Test_Check "$(WithDots      "-1234")"        "-1.234"
+    Test_Check "$(WithDots     "-12345")"       "-12.345"
+    Test_Check "$(WithDots    "-123456")"      "-123.456"
+    Test_Check "$(WithDots   "-1234567")"    "-1.234.567"
+    Test_Check "$(WithDots  "-12345678")"   "-12.345.678"
+    Test_Check "$(WithDots "-123456789")"  "-123.456.789"
+
+    Test_Check "$(WithDots         "+1")"            "+1"
+    Test_Check "$(WithDots        "+12")"           "+12"
+    Test_Check "$(WithDots       "+133")"          "+133"
+    Test_Check "$(WithDots      "+1234")"        "+1.234"
+    Test_Check "$(WithDots     "+12345")"       "+12.345"
+    Test_Check "$(WithDots    "+123456")"      "+123.456"
+    Test_Check "$(WithDots   "+1234567")"    "+1.234.567"
+    Test_Check "$(WithDots  "+12345678")"   "+12.345.678"
+    Test_Check "$(WithDots "+123456789")"  "+123.456.789"
+
+    Test_Check "$(WithDots      "12345" 9)"   "   12.345"
+    Test_Check "$(WithDots     "-12345" 9)"   "  -12.345"
+    Test_Check "$(WithDots     "+12345" 9)"   "  +12.345"
+}
+#Test_WithDots
+
+
+########################################################################################################################
+# Hilfsfunktion: Trim Strings
+#-----------------------------------------------------------------------------------------------------------------------
+# siehe auch: http://stackoverflow.com/questions/369758/how-to-trim-whitespace-from-bash-variable
+########################################################################################################################
+function Trim {
+    local var="$1"
+    var="${var#"${var%%[![:space:]]*}"}"   # remove leading whitespace characters
+    var="${var%"${var##*[![:space:]]}"}"   # remove trailing whitespace characters
+    echo "$var"
+}
+
+function TrimLeft {
+    local var="$1"
+    var="${var#"${var%%[![:space:]]*}"}"   # remove leading whitespace characters
+    echo "$var"
+}
+
+function TrimRight {
+    local var="$1"
+    var="${var%"${var##*[![:space:]]}"}"   # remove trailing whitespace characters
+    echo "$var"
+}
+
+function Test_Trim {
+    Test_Check "$(Trim        "")"              ""
+    Test_Check "$(TrimLeft    "")"              ""
+    Test_Check "$(TrimRight   "")"              ""
+
+    Test_Check "$(Trim           "a b c")"                 "a b c"
+    Test_Check "$(TrimLeft       "a b c")"                 "a b c"
+    Test_Check "$(TrimRight      "a b c")"                 "a b c"
+
+    Test_Check "$(Trim        "   d e f")"                 "d e f"
+    Test_Check "$(TrimLeft    "   d e f")"                 "d e f"
+    Test_Check "$(TrimRight   "   d e f")"              "   d e f"
+
+    Test_Check "$(Trim           "g h i   ")"              "g h i"
+    Test_Check "$(TrimLeft       "g h i   ")"              "g h i   "
+    Test_Check "$(TrimRight      "g h i   ")"              "g h i"
+
+    Test_Check "$(Trim        "   j k l   ")"              "j k l"
+    Test_Check "$(TrimLeft    "   j k l   ")"              "j k l   "
+    Test_Check "$(TrimRight   "   j k l   ")"           "   j k l"
+}
+#Test_Trim
 
 ########################################################################################################################
 # Ermittlung von File Base oder Ext
@@ -306,8 +396,6 @@ function WithDots {
 # \in  filename  Kompletter Dateiname, optional mit Verzeichnis
 # \in  mode      - "base" = File Base wird ermittelt
 #                - "ext"  = File Ext wird ermittelt
-#-----------------------------------------------------------------------------------------------------------------------
-
 ########################################################################################################################
 function GetFileBaseExt {
     local filename="$1"
@@ -508,6 +596,122 @@ function CheckAnsiCodes {
     fi
 }
 
+
+########################################################################################################################
+# Ergebnis von "file" zerlegen
+#-----------------------------------------------------------------------------------------------------------------------
+# \in  String     Zu untersuchender String (Ergebnis von "file")
+# \in  Substring  Zu suchender Substring
+# \ret            String, ggf. mit entferntem Substring
+# \ret            0 = Falls Substring gefunden (und entfernt) werden konnte
+# \ret            1 = Falls Substring nicht gefunden wurde
+#-----------------------------------------------------------------------------------------------------------------------
+# ACHTUNG: String und Substring dürfen folgende Zeichen nicht beinhalten: {}/ ... weitere?
+# Diese Funktion soll helfen, die Rückgabe von "file" etwas strukturiert zu untersuchen.
+# Siehe auch http://www.thegeekstuff.com/2010/07/bash-string-manipulation/
+# file liefert Dinge wie z.B.:
+#        "ASCII text"
+#        "ASCII text, with CRLF line terminators"
+#        "ASCII English text"
+#        "ASCII English text, with CRLF line terminators"
+#        "UTF-8 Unicode text"
+#        "UTF-8 Unicode text, with CRLF line terminators"
+#        "UTF-8 Unicode English text"
+#        "UTF-8 Unicode English text, with CRLF line terminators"
+#        "ASCII English text, with CRLF, LF line terminators"
+#        "ASCII C++ program text, with CRLF, LF line terminators"
+#        "Python script, ASCII text executable"   # Hmm, komischerweise wird "Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Utilities/STM32_EVAL/Common/fonts.c" als solchiges erkannt
+#        "Bourne-Again shell script, UTF-8 Unicode text executable"
+#        "UTF-8 Unicode C program text"
+#        "UTF-8 Unicode C program text, with CRLF line terminators"
+#        "UTF-8 Unicode C++ program text"
+#        "ASCII C program text"
+#        "ASCII C program text, with CRLF line terminators"
+#        "ASCII C++ program text"
+#        "ASCII C++ program text, with CRLF line terminators"
+#        "C source, ASCII text"   # Offenbar seit Kubuntu 14.04, vorher "ASCII C program text"
+#        "C++ source, ASCII text"
+#        "ASCII assembler program text"
+#        "ASCII make commands text"  # Makefile
+#        "UTF-8 Unicode make commands text"
+#        "ASCII Java program text"
+#        "UTF-8 Unicode Java program text"
+#        "C program text (from flex), "  # Thrift/thrift-0.9.1/compiler/cpp/thriftl.cc
+#        "XML document text"
+#        "TeX document, ASCII text"     # Komischerweise wird ein Makefile aus dem Nordic Sdk 5.2.0 als solches erkannt...
+#        "LaTeX document, ASCII text"   #   "  und hier console.h ?!
+#        "Blink archive data"           #   "  Examples/NordicSdk/Blinky/README.md ?!?
+#        "HTML document"
+#        "HTML document, ASCII text"
+#        "HTML document, ASCII text, with CRLF line terminators"
+#        "HTML document, UTF-8 Unicode text"
+#        "HTML document, UTF-8 Unicode text, with CRLF line terminators"
+#        "ASCII text, with very long lines"
+#        "ASCII English text, with very long lines"
+#        "ASCII English text, with very long lines, with CRLF line terminators"
+#        "UTF-8 Unicode English text, with very long lines"
+#        "ASCII C program text, with very long lines"
+#        "ASCII C program text, with very long lines, with CRLF line terminators"
+#        "UTF-8 Unicode C program text, with very long lines"
+#        "HTML document, Non-ISO extended-ASCII text, with CRLF line terminators")
+#        "data"
+#        "ISO-8859 English text"
+#        "ISO-8859 English text, with CRLF line terminators"
+#        "ISO-8859 C program text, with CRLF line terminators"
+#        "Non-ISO extended-ASCII text, with CRLF line terminators"
+#        "Non-ISO extended-ASCII C program text, with CRLF line terminators"
+#        "Non-ISO extended-ASCII English text, with CRLF line terminators"
+########################################################################################################################
+declare Test_CheckAndRemoveFileTypePart_ReturnAlways_0="false"
+function CheckAndRemoveFileTypePart {
+    local a
+    a="${1/$2}"
+    if [ "$a" == "$1" ]; then
+        # nix gefunden
+        echo "$a"
+        [ "$Test_CheckAndRemoveFileTypePart_ReturnAlways_0" == "true" ] && return 0 # Hack für die Tests
+        return 1
+    fi
+
+    # Treffer!
+    # Jetzt noch ggf. entfernen:
+    # - Doppelte Komma "C program text, , with CRLF line terminators"
+    # - Komma am Anfang und Ende "C program text, "
+    a="${a//  / }"    # Doppelte Spaces entfernen
+    a="${a//, , /, }" # Doppelte Kommata entfernen
+    a="$(Trim "$a")"
+    a="${a#"${a%%[!,]*}"}"   # remove leading comma
+    a="${a%"${a##*[!,]}"}"   # remove trailing comma
+    a="$(Trim "$a")"
+
+    echo "$a"
+    return 0
+}
+
+function Test_CheckAndRemoveFileTypePart {
+    Test_CheckAndRemoveFileTypePart_ReturnAlways_0="true"
+    Test_Check "$(CheckAndRemoveFileTypePart  "ASCII text"                                                              "with CRLF line terminators"     )"   "ASCII text"
+    Test_Check "$(CheckAndRemoveFileTypePart  "ASCII text, with CRLF line terminators"                                  "with CRLF line terminators"     )"   "ASCII text"
+    Test_Check "$(CheckAndRemoveFileTypePart  "ASCII C++ program text, with CRLF, LF line terminators"                  "with CRLF, LF line terminators" )"   "ASCII C++ program text"
+    Test_Check "$(CheckAndRemoveFileTypePart  "ASCII text, with very long lines"                                        "with very long lines"           )"   "ASCII text"
+    Test_Check "$(CheckAndRemoveFileTypePart  "ASCII English text, with very long lines"                                "with very long lines"           )"   "ASCII English text"
+    Test_Check "$(CheckAndRemoveFileTypePart  "ASCII English text, with very long lines, with CRLF line terminators"    "with very long lines"           )"   "ASCII English text, with CRLF line terminators"
+    Test_Check "$(CheckAndRemoveFileTypePart  "UTF-8 Unicode English text, with very long lines"                        "UTF-8 Unicode"                  )"   "English text, with very long lines"
+    Test_Check "$(CheckAndRemoveFileTypePart  "ASCII C program text, with very long lines"                              "ASCII"                          )"   "C program text, with very long lines"
+    Test_Check "$(CheckAndRemoveFileTypePart  "ASCII C program text, with very long lines, with CRLF line terminators"  "ASCII"                          )"   "C program text, with very long lines, with CRLF line terminators"
+    Test_Check "$(CheckAndRemoveFileTypePart  "UTF-8 Unicode C program text, with very long lines"                      "with very long lines"           )"   "UTF-8 Unicode C program text"
+    Test_Check "$(CheckAndRemoveFileTypePart  "HTML document, Non-ISO extended-ASCII text, with CRLF line terminators"  "HTML document"                  )"   "Non-ISO extended-ASCII text, with CRLF line terminators"
+    #Test_Check "$(CheckAndRemoveFileTypePart  "HTML document, Non-ISO extended-ASCII text, with CRLF line terminators"  "Non-ISO extended-ASCII"         )"   "HTML document, with CRLF line terminators"
+    Test_Check "$(CheckAndRemoveFileTypePart  "data"                                                                    "irgendwas"                      )"   "data"
+    Test_Check "$(CheckAndRemoveFileTypePart  "ISO-8859 English text"                                                   "ISO-8859"                       )"   "English text"
+    Test_Check "$(CheckAndRemoveFileTypePart  "ISO-8859 English text, with CRLF line terminators"                       "ISO-8859"                       )"   "English text, with CRLF line terminators"
+    Test_Check "$(CheckAndRemoveFileTypePart  "ISO-8859 C program text, with CRLF line terminators"                     "ISO-8859"                       )"   "C program text, with CRLF line terminators"
+    Test_Check "$(CheckAndRemoveFileTypePart  "Non-ISO extended-ASCII text, with CRLF line terminators"                 "Non-ISO extended-ASCII"         )"   "text, with CRLF line terminators"
+    Test_Check "$(CheckAndRemoveFileTypePart  "Non-ISO extended-ASCII C program text, with CRLF line terminators"        "with CRLF line terminators"    )"   "Non-ISO extended-ASCII C program text"
+    Test_CheckAndRemoveFileTypePart_ReturnAlways_0="false"
+}
+Test_CheckAndRemoveFileTypePart
+
 ########################################################################################################################
 # Behandlung von genau einer Datei
 ########################################################################################################################
@@ -524,90 +728,94 @@ function DoFile {
 
     # Hier etwas Sicherheitsprüfung, damit ich nicht mal versehentlich eine Binärdatei erwische
     local type="$(file --brief "$filename")"
-    #Trace "$filename: $type"
-    case "$type" in
-        "empty")
+    # Trim, weil z.B. Kubuntu 12.04 "empty" aber Kubuntu 14.04: "empty "
+    local strippedType="$(Trim "$type")"
+    local htmlDoc="false"
+    local crlfAndlf="false"
+    local crlfAndcr="false"
+    local crlf="false"
+    local longLines="false"
+    local nonIso="false"
+    local iso8859="false"
+    local ascii="false"
+    local utf8="false"
+
+    #strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "HTML document"                  )"  && htmlDoc="true"    # sollte als erstes bleiben, siehe obige Tests
+    strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "with CRLF, LF line terminators" )"  && crlfAndlf="true"
+    strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "with CRLF, CR line terminators" )"  && crlfAndcr="true"
+    strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "with CRLF line terminators"     )"  && crlf="true"
+    strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "with very long lines"           )"  && longLines="true"
+
+    strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "Non-ISO extended-ASCII"         )"  && nonIso="true"
+    strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "ISO-8859"                       )"  && iso8859="true"
+    strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "ASCII"                          )"  && ascii="true"
+    strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "UTF-8 Unicode"                  )"  && utf8="true"
+
+    #Trace "$filename: $type / $strippedType"
+
+    if [ "$nonIso" == "true" ] || [ "$iso8859" == "true" ]; then
+        # Bei diesen hier immer warnen, auch wenn konvertiert wird. Z.B.:
+        #     "ISO-8859 English text"
+        #     "ISO-8859 English text, with CRLF line terminators"
+        #     "ISO-8859 C program text, with CRLF line terminators"
+        #     "Non-ISO extended-ASCII text, with CRLF line terminators"
+        #     "Non-ISO extended-ASCII C program text, with CRLF line terminators"
+        #     "Non-ISO extended-ASCII English text, with CRLF line terminators"
+        Warning "$filename has type \"$type\" /  \"$strippedType\""
+        CheckAnsiCodes "$filename"
+        # Mit denen jetzt erst mal nichts weiter tun. Tabs etc. erst im nächsten Durchlauf.
+        return 0
+    fi
+
+    case "$strippedType" in
+        "empty");&
+        "HIER NUR EIN DUMMY 1")
             # Leere Dateien ignorieren wir hier
             # gefunden in /D/git/N4/Embedded/Thrift/thrift-0.9.1/lib/rb/ext/protocol.h
-            return 0;;
+            Warning "$filename has type \"$type\" /  \"$strippedType\""
+            return 0
+            ;;
 
-        "ASCII text");;
-        "ASCII text, with CRLF line terminators");;
-        "ASCII English text");;
-        "ASCII English text, with CRLF line terminators");;
-        "UTF-8 Unicode text");;
-        "UTF-8 Unicode text, with CRLF line terminators");;
-        "UTF-8 Unicode English text");;
-        "UTF-8 Unicode English text, with CRLF line terminators");;
+        "text");;
+        "English text");;
 
-        "ASCII English text, with CRLF, LF line terminators");;
-        "ASCII C++ program text, with CRLF, LF line terminators");;
+        "Python script, text executable");;  # Hmm, komischerweise wird "Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Utilities/STM32_EVAL/Common/fonts.c" als solchiges erkannt
+        "Bourne-Again shell script, text executable");;
+        "POSIX shell script, text executable");;
 
-        "Python script, ASCII text executable");;  # Hmm, komischerweise wird "Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Utilities/STM32_EVAL/Common/fonts.c" als solchiges erkannt
-        "Bourne-Again shell script, UTF-8 Unicode text executable");;
+        "C program text");;
+        "C++ program text");;
+        "C source, text");;                # Offenbar seit Kubuntu 14.04, vorher "ASCII C program text"
+        "C++ source, text");;
+        "assembler program text");;
+        "assembler source text");;         # Seit Kubuntu 14.04
+        "make commands text");;            # Makefile
+        "makefile script, text");;
+        "automake makefile script, text");; # Z.B. bei Thrift
+        "Java program text");;
+        "Pascal source, text");;
 
-        "UTF-8 Unicode C program text");;
-        "UTF-8 Unicode C program text, with CRLF line terminators");;
-        "UTF-8 Unicode C++ program text");;
-        "ASCII C program text");;
-        "ASCII C program text, with CRLF line terminators");;
-        "ASCII C++ program text");;
-        "ASCII C++ program text, with CRLF line terminators");;
-        "ASCII assembler program text");;
-        "ASCII make commands text");; # Makefile
-        "UTF-8 Unicode make commands text");;
-        "ASCII Java program text");;
-        "UTF-8 Unicode Java program text");;
-
-        "C program text (from flex), ");; # Thrift/thrift-0.9.1/compiler/cpp/thriftl.cc
+        "C program text (from flex),");;   # Thrift/thrift-0.9.1/compiler/cpp/thriftl.cc
+        "(with BOM) text");;               # Thrift/thrift-0.9.1/sonar-project.properties "UTF-8 Unicode (with BOM) text"
 
         "XML document text");;
-        "TeX document, ASCII text");;    # Komischerweise wird ein Makefile aus dem Nordic Sdk 5.2.0 als solches erkannt...
-        "LaTeX document, ASCII text");;  #   "  und hier console.h ?!
-        "Blink archive data");;          #   "  Examples/NordicSdk/Blinky/README.md ?!?
+        "TeX document, text");;            # Komischerweise wird ein Makefile aus dem Nordic Sdk 5.2.0 als solches erkannt...
+        "LaTeX document, text");;          #   "  und hier console.h ?!
+        "Blink archive data");;            #   "  Examples/NordicSdk/Blinky/README.md ?!?
 
         "HTML document");;
-        "HTML document, ASCII text");;
-        "HTML document, ASCII text, with CRLF line terminators");;
-        "HTML document, UTF-8 Unicode text");;
-        "HTML document, UTF-8 Unicode text, with CRLF line terminators");;
+        "HTML document, text");;           # Komischerweise werden einige readme.txt als html eingestuft, wohl wegen der enthaltenen "<a href=...>"
+        "exported SGML document, text");;  # nRF51/Android/nRF-Toolbox/res/values-sw600dp/dimens.xml
 
-        "ASCII text, with very long lines");&
-        "ASCII English text, with very long lines");&
-        "ASCII English text, with very long lines, with CRLF line terminators");&
-        "UTF-8 Unicode English text, with very long lines");&
-        "ASCII C program text, with very long lines");&
-        "ASCII C program text, with very long lines, with CRLF line terminators");&
-        "UTF-8 Unicode C program text, with very long lines");&
-        "HIER NUR EIN DUMMY 1")
-            #Warning "$filename has type \"$type\""
+        "data");&
+        "HIER NUR EIN DUMMY 2")
+            # u8g_font_data.c
+            Warning "$filename has type \"$type\" /  \"$strippedType\""
             #return 0
             ;;
 
-        "HTML document, Non-ISO extended-ASCII text, with CRLF line terminators")
-            Warning "$filename has type \"$type\""
-            [ "$name" == "readme.txt" ] && CheckAnsiCodes "$filename" # Komischerweise werden einige readme.txt als html eingestuft, wohl wegen der enthaltenen "<a href=...>"
-            return 0;;
-
-        "data")
-            # u8g_font_data.c
-            Warning "$filename has type \"$type\""
-            #return 0;;
-            ;;
-
-        "ISO-8859 English text");&
-        "ISO-8859 English text, with CRLF line terminators");&
-        "ISO-8859 C program text, with CRLF line terminators");&
-        "Non-ISO extended-ASCII text, with CRLF line terminators");&
-        "Non-ISO extended-ASCII C program text, with CRLF line terminators");&
-        "Non-ISO extended-ASCII English text, with CRLF line terminators");&
-        "HIER NUR EIN DUMMY 2")
-            Warning "$filename has type \"$type\""
-            CheckAnsiCodes "$filename"
-            return 0;;
-
-         *) Error "$filename has unhandled type \"$type\""
-         return 1
+         *) Error "$filename has unhandled type \"$type\" /  \"$strippedType\""
+            return 1
     esac
 
     CheckLineend "$filename"
