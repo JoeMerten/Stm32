@@ -614,6 +614,7 @@ function CheckAnsiCodes {
 #        "ASCII text, with CRLF line terminators"
 #        "ASCII English text"
 #        "ASCII English text, with CRLF line terminators"
+#        "ASCII text, with no line terminators"
 #        "UTF-8 Unicode text"
 #        "UTF-8 Unicode text, with CRLF line terminators"
 #        "UTF-8 Unicode English text"
@@ -734,6 +735,7 @@ function DoFile {
     local crlfAndlf="false"
     local crlfAndcr="false"
     local crlf="false"
+    local nolf="false"
     local longLines="false"
     local nonIso="false"
     local iso8859="false"
@@ -744,6 +746,7 @@ function DoFile {
     strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "with CRLF, LF line terminators" )"  && crlfAndlf="true"
     strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "with CRLF, CR line terminators" )"  && crlfAndcr="true"
     strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "with CRLF line terminators"     )"  && crlf="true"
+    strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "with no line terminators"       )"  && nolf="true"
     strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "with very long lines"           )"  && longLines="true"
 
     strippedType="$(CheckAndRemoveFileTypePart "$strippedType" "Non-ISO extended-ASCII"         )"  && nonIso="true"
