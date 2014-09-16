@@ -1,6 +1,11 @@
 St Lib inkl. Cmsis
 ==================
 
+Stlib Download:
+- http://www.st.com/web/en/search/partNumberKeyword
+- dann als Suchbetriff eingeben: "Stm32 Standard Peripheral Library"
+- nun die lange Liste durchblättern nach der gesuchten Lib
+
 * in ihrer jeweiligen aktuellen Version
   - F10x: V3.5.0 (stsw-stm32054.zip)
   - F2xx: V1.1.0 (stsw-stm32062.zip)
@@ -20,7 +25,7 @@ St Lib inkl. Cmsis
     - Check : find . -print0 | xargs -0 ls -lda
     - Change: chmod -R +w .
 
-Gefundene Dateitypen:
+Gefundene Dateitypen (nur F10x, F2xx, F4xx untersucht, also exklusive F3xx):
 - *.h, *.c, *.s, *.S, *.ld → Sourcen (C, Asm, Linkerskript)
 - *.txt → Ascii Textfiles
 - *.a → GCC Library
@@ -44,3 +49,12 @@ Gefundene Dateitypen:
   - *.svd
   - *.xls
   - *.xsd
+
+Bzgl. F3xx:
+  - kurz betrachtet am 19.9.2014
+  -> http://www.st.com/web/en/catalog/mmc/FM141/SC1169/SS1576?sc=stm32f3
+  - F30x: V1.1.0 (stm32f30x_dsp_stdperiph_lib.zip) STSW-STM32108   -> STM32F30x/31x DSP and standard peripherals library, including 81 examples for 25 different peripherals and template project for 5 different IDEs (UM1581)
+  - http://www.st.com/st-web-ui/static/active/en/st_prod_software_internet/resource/technical/software/firmware/stm32f30x_dsp_stdperiph_lib.zip
+  - F37x: V1.0.0 (stm32f37x_dsp_stdperiph_lib.zip) STSW-STM32115   -> STM32F37x/38x DSP and standard peripherals library, including 73 examples for 26 different peripherals and template project for 5 different IDEs (UM1565)
+  - http://www.st.com/st-web-ui/static/active/en/st_prod_software_internet/resource/technical/software/firmware/stm32f37x_dsp_stdperiph_lib.zip
+  - in Sume ca. 266 MiB, 4.300 Files
