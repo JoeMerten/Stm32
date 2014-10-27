@@ -266,6 +266,9 @@ function Test_Check {
 #-----------------------------------------------------------------------------------------------------------------------
 # \in  valueString  String, in dem die Tausenderseparatoren eingefügt werden sollen
 # \in  minLength    Mindestlänge, Rückgabestring wird ggf. rechtsbündig formatiert
+#-----------------------------------------------------------------------------------------------------------------------
+# TODO: Eigentlich nicht mehr erforderlich, da die Bash das selbst kann, z.B.:
+#    printf "%'d" -123456789
 ########################################################################################################################
 function WithDots {
     local RET="$1"
