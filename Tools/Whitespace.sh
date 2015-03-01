@@ -456,7 +456,7 @@ function ShowHelp {
     echo "  nocolor       - Dont use Ansi VT100 colors"
     echo "  -m            - Modify files"
     echo "  -e            - List file extentions"
-    echo -n ${NORMAL}
+    echo -n "${NORMAL}"
 }
 
 

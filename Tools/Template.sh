@@ -51,7 +51,7 @@ function ShowHelp {
     echo "Available options:"
     echo "  nocolor       - Dont use Ansi VT100 colors"
     echo "  -r            - Act on subdirectories"
-    echo -n ${NORMAL}
+    echo -n "${NORMAL}"
 }
 
 
