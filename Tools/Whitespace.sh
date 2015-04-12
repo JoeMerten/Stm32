@@ -286,6 +286,7 @@ function DoFile {
     local name="$(basename "$filename")"
     local ext="$(GetFileExt "$filename")"
     #Trace "Preparing ${filename}"
+    #return 0
     #if [ "$ext" != "" ]; then
     #    Trace "Fileext = $ext"
     #else
@@ -407,13 +408,23 @@ function DoAllFiles {
     re="($re)"
     #Trace "Find RE = \"$re\""
 
+    # Regular Expression um diverse Verzeichnisse komplett auszuschliessen
+    # Debug & Release sind von Eclipse Managed Make
+    # Out ist häuffig von mir
+    # build ist wohl Standard bei N4
+    local excludeDirsRe="/(Debug|Release|Out|build)/"
+
     # Etwas Aufwand um auch mit Leerzeichen in Dateinamen umgehen zu können
     local files=()
     local i="0"
+    local findopts=""
+    #findopts+=" -L"; # follow Symlinks
     # Erst mal alle Files einsammeln
     while IFS= read -r -d $'\0' file; do
-        files[i++]="$file"
-    done < <(find "${DIRS[@]}" -type f -regextype posix-egrep -regex "${re}" -print0)
+        if ! [[ "$file" =~ $excludeDirsRe ]]; then
+            files[i++]="$file"
+        fi
+    done < <(find ${findopts} "${DIRS[@]}" -type f -regextype posix-egrep -regex "${re}" -print0)
 
     Trace "Found ${#files[@]} Files"
 
