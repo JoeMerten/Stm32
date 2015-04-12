@@ -377,6 +377,8 @@ function DoFile {
         "HTML document, text");;           # Komischerweise werden einige readme.txt als html eingestuft, wohl wegen der enthaltenen "<a href=...>"
         "exported SGML document, text");;  # nRF51/Android/nRF-Toolbox/res/values-sw600dp/dimens.xml
 
+        "Embedded OpenType (EOT)");;       # Kurioses bei: /D/git/N4/Embedded/Lpc43/Common/Lib/Lpcopen/lpcopen_2_12_lpcxpresso_ngx_xplorer_4330/lpc_chip_43xx_m0/inc/lpc_types.h
+
         "data");&
         "HIER NUR EIN DUMMY 2")
             # u8g_font_data.c
