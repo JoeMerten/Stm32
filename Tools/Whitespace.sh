@@ -35,6 +35,7 @@ declare DIRS=()
 declare FILE_PATTERNS=()
 declare MODIFY=""
 declare LIST_EXTENTIONS=""
+declare FOLLOW_SYMLINKS=""
 
 
 ########################################################################################################################
@@ -294,7 +295,7 @@ function DoFile {
     #fi
 
     # Hier etwas Sicherheitsprüfung, damit ich nicht mal versehentlich eine Binärdatei erwische
-    local type="$(file --brief "$filename")"
+    local type="$(file --brief -L "$filename")"
     # Trim, weil z.B. Kubuntu 12.04 "empty" aber Kubuntu 14.04: "empty "
     local strippedType="$(Trim "$type")"
     local htmlDoc="false"
@@ -420,7 +421,7 @@ function DoAllFiles {
     local files=()
     local i="0"
     local findopts=""
-    #findopts+=" -L"; # follow Symlinks
+    [ "$FOLLOW_SYMLINKS" != "" ] && findopts+=" -L"; # follow Symlinks
     # Erst mal alle Files einsammeln
     while IFS= read -r -d $'\0' file; do
         if ! [[ "$file" =~ $excludeDirsRe ]]; then
@@ -469,6 +470,7 @@ function ShowHelp {
     echo "  nocolor       - Dont use Ansi VT100 colors"
     echo "  -m            - Modify files"
     echo "  -e            - List file extentions"
+    echo "  -L            - Follow Symlinks (like find do)"
     echo -n "${NORMAL}"
 }
 
@@ -494,7 +496,9 @@ while (("$#")); do
     LIST_EXTENTIONS="true"
   elif [ "$1" == "-m" ] || [ "$1" == "--modify" ]; then
     MODIFY="true"
-    else
+  elif [ "$1" == "-L" ]; then
+    FOLLOW_SYMLINKS="true"
+  else
     DIRS+=("$1")
     #echo "Unexpected parameter \"$1\"" >&2
     #ShowHelp
