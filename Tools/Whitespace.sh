@@ -379,6 +379,7 @@ function DoFile {
         "exported SGML document, text");;  # nRF51/Android/nRF-Toolbox/res/values-sw600dp/dimens.xml
 
         "Embedded OpenType (EOT)");;       # Kurioses bei: /D/git/N4/Embedded/Lpc43/Common/Lib/Lpcopen/lpcopen_2_12_lpcxpresso_ngx_xplorer_4330/lpc_chip_43xx_m0/inc/lpc_types.h
+        "FORTRAN program,");;              # Kurioses bei: "/D/git/N4/Embedded/Lpc43/Common/Dok/Lpc Setup Notes.txt"
 
         "data");&
         "HIER NUR EIN DUMMY 2")
