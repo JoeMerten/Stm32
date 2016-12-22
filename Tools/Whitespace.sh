@@ -36,6 +36,7 @@ declare FILE_PATTERNS=()
 declare MODIFY=""
 declare LIST_EXTENTIONS=""
 declare FOLLOW_SYMLINKS=""
+declare ALLOW_TABS_CONSEQUENT=""
 
 
 ########################################################################################################################
@@ -94,11 +95,29 @@ function CheckTabs {
         return
     fi
 
-        if ! egrep -q "$TAB" "$filename"; then
-        return
-    fi
+    ! egrep -q "$TAB" "$filename" && return
+    # Tabs detected ...
+
+    local pureTabs="true"
+    # Check if also has space indentation
+    egrep -q "^(    )+[^ ]" "$filename" && pureTabs="false"
+    # Check if also has mixed space / tab indentation like this:
+    #   "→   ☐☐☐☐Abc..."
+    #   "☐☐☐☐→   Abc..."
+    # etc, but allow:
+    #   "→   /* Abc..."
+    #   "→   ☐☐☐dev..."
+    egrep -q "$TAB(    )+[^ ]" "$filename" && pureTabs="false"
+    egrep -q "    $TAB" "$filename" && pureTabs="false"
+
+    [ "$ALLOW_TABS_CONSEQUENT" == "true" ] && [ "$pureTabs" == "true" ] && return
+
     if [ "$MODIFY" == "" ]; then
-        Warning "$filename contains tabs"
+        if [ "$pureTabs" == "true" ]; then
+            Warning "$filename contains tabs"
+        else
+            Warning "$filename contains tabs and also uses space and / or mixed indentation"
+        fi
         #Trace "Base=\"$base\" Ext=\"$ext\""
         return
     fi
@@ -350,6 +369,7 @@ function DoFile {
         "English text");;
 
         "Python script, text executable");;  # Hmm, komischerweise wird "Lib/Stm/Stm32F10x_StdPeriph_Lib_V3.5.0/Utilities/STM32_EVAL/Common/fonts.c" als solchiges erkannt
+        "script text executable for python, text");;
         "Bourne-Again shell script, text executable");;
         "POSIX shell script, text executable");;
 
@@ -370,6 +390,7 @@ function DoFile {
         "BOA archive data");;              # Stm32/Lib/Stm/Stm32F4xx_DSP_StdPeriph_Lib_V1.3.0/Project/STM32F4xx_StdPeriph_Templates/TrueSTUDIO/STM32F401xx/.settings/com.atollic.truestudio.debug.hardware_device.prefs
 
         "XML document text");;
+        "XML 1.0 document, text");;        # Zuweilen bei Eclipse .project?!
         "TeX document, text");;            # Komischerweise wird ein Makefile aus dem Nordic Sdk 5.2.0 als solches erkannt...
         "LaTeX document, text");;          #   "  und hier console.h ?!
         "Blink archive data");;            #   "  Examples/NordicSdk/Blinky/README.md ?!?
@@ -468,10 +489,11 @@ function ShowHelp {
     echo "${AQUA}Whitespace checker${TEAL}, Joe Merten 2014"
     echo "usage: $0 [options] ..."
     echo "Available options:"
-    echo "  nocolor       - Dont use Ansi VT100 colors"
+    echo "  --nocolor     - Dont use Ansi VT100 colors"
     echo "  -m            - Modify files"
     echo "  -e            - List file extentions"
     echo "  -L            - Follow Symlinks (like find do)"
+    echo "  -t            - Don't denounce tabs if they are not mixed up with space indentation"
     echo -n "${NORMAL}"
 }
 
@@ -499,6 +521,8 @@ while (("$#")); do
     MODIFY="true"
   elif [ "$1" == "-L" ]; then
     FOLLOW_SYMLINKS="true"
+  elif [ "$1" == "-t" ]; then
+    ALLOW_TABS_CONSEQUENT="true"
   else
     DIRS+=("$1")
     #echo "Unexpected parameter \"$1\"" >&2
@@ -561,6 +585,7 @@ FILE_PATTERNS+=('.*Makefile\..*') # z.B. für "Makefile.posix"
 FILE_PATTERNS+=('.*\.mk')
 FILE_PATTERNS+=('.*\.sh')
 FILE_PATTERNS+=('.*\.bsh')
+FILE_PATTERNS+=('.*\.py')
 
 # zus. für Android / Java
 FILE_PATTERNS+=('.*\.java')
