@@ -377,10 +377,14 @@ function DoFile {
         "C++ program text");;
         "C source, text");;                # Offenbar seit Kubuntu 14.04, vorher "ASCII C program text"
         "C++ source, text");;
+        "C source, text, with escape sequences");; # detected in Segger/SysView_2.36a/src/SEGGER_RTT.h
+
         "assembler program text");;
         "assembler source text");;         # Seit Kubuntu 14.04
+        "assembler source, text");;        # Seit Kubuntu 16.04?
         "make commands text");;            # Makefile
         "makefile script, text");;
+        "BSD makefile script, text");;
         "automake makefile script, text");; # Z.B. bei Thrift
         "Java program text");;
         "Pascal source, text");;
@@ -401,6 +405,7 @@ function DoFile {
 
         "Embedded OpenType (EOT)");;       # Kurioses bei: /D/git/N4/Embedded/Lpc43/Common/Lib/Lpcopen/lpcopen_2_12_lpcxpresso_ngx_xplorer_4330/lpc_chip_43xx_m0/inc/lpc_types.h
         "FORTRAN program,");;              # Kurioses bei: "/D/git/N4/Embedded/Lpc43/Common/Dok/Lpc Setup Notes.txt"
+        ", init=0x454c, stat=0x0d44, dev=0x200a, bas=0x6923");; # Kurioses bei "UnittestStm/Cubemx/Unittest-Stm/Inc/stm32f4xx_hal_conf.h" unter Kubuntu 16.04
 
         "data");&
         "HIER NUR EIN DUMMY 2")
