@@ -378,6 +378,7 @@ function DoFile {
         "C source, text");;                # Offenbar seit Kubuntu 14.04, vorher "ASCII C program text"
         "C++ source, text");;
         "C source, text, with escape sequences");; # detected in Segger/SysView_2.36a/src/SEGGER_RTT.h
+        "C++ source, text, with escape sequences");;
 
         "assembler program text");;
         "assembler source text");;         # Seit Kubuntu 14.04
@@ -591,6 +592,7 @@ FILE_PATTERNS+=('.*\.mk')
 FILE_PATTERNS+=('.*\.sh')
 FILE_PATTERNS+=('.*\.bsh')
 FILE_PATTERNS+=('.*\.py')
+FILE_PATTERNS+=('.*\.yaml')
 
 # zus. für Android / Java
 FILE_PATTERNS+=('.*\.java')
