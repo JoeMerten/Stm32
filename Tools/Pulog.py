@@ -94,18 +94,14 @@ def main():
 
             # Check for termination conditions
             if args.quitpattern is not None and not quitpatternFound:
-                try:
-                    lineString = str(currentLine, "utf-8")
-                    if re.search(args.quitpattern, lineString):
-                        if args.quitpattime is not None:
-                            quitpatternFound = True
-                            quitpatternTime = time.perf_counter()
-                        else:
-                            quitReason = "pattern \"{}\" found".format(args.quitpattern)
-                            break;
-                except UnicodeDecodeError:
-                    # Nothing to do
-                    pass
+                lineString = str(currentLine, "utf-8", errors='replace') # replace Utf-8 encoding errors with U+FFFD = '�'
+                if re.search(args.quitpattern, lineString):
+                    if args.quitpattime is not None:
+                        quitpatternFound = True
+                        quitpatternTime = time.perf_counter()
+                    else:
+                        quitReason = "pattern \"{}\" found".format(args.quitpattern)
+                        break;
 
         if args.quittime is not None:
             elapsed = time.perf_counter() - startTimeMonotonic
