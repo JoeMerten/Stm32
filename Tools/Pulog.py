@@ -30,15 +30,16 @@ class SignalCatcher:
 
 def main():
     argsParser = argparse.ArgumentParser()
-    argsParser.add_argument("port",                                                  help="Serial port device name")
-    argsParser.add_argument("baudrate",      type = int,                             help="Serial port baudrate")
-    argsParser.add_argument("--rtscts",      action="store_true",                    help="Use rts/cts hardware handshake")
-    argsParser.add_argument("--xonxoff",     action="store_true",                    help="Use xon/xoff software handshake")
-    argsParser.add_argument("--logfile",                                             help="Logfile (serial rx data will be appended)")
-    argsParser.add_argument("--lower-rts",   action="store_true", dest = "lowerRts", help="Lower rts handshake line after open port")
-    argsParser.add_argument("--quittime",    type = int,                             help="Specify time in seconds for automatic termination (over all timeout).")
-    argsParser.add_argument("--quitpattern",                                         help="Specify a regular expression pattern to terminate the program. Works mid-line.")
-    argsParser.add_argument("--quitpattime", type = int,                             help="Specify time in seconds for delayed termination after pattern match.")
+    argsParser.add_argument("port",                                                                              help="Serial port device name")
+    argsParser.add_argument("baudrate",            type = int,                                                   help="Serial port baudrate")
+    argsParser.add_argument("--rtscts",            action="store_true",                                          help="Use rts/cts hardware handshake")
+    argsParser.add_argument("--xonxoff",           action="store_true",                                          help="Use xon/xoff software handshake")
+    argsParser.add_argument("--logfile",                                                   metavar="<filename>", help="Logfile (serial rx data will be appended)")
+    argsParser.add_argument("--lower-rts",         action="store_true", dest = "lowerRts",                       help="Lower rts handshake line after open port")
+    argsParser.add_argument("--lower-rts-delayed", type = float, dest = "lowerRtsDelayed", metavar="<seconds>",  help="Specify delay time for lowering rts handshake line after open port")
+    argsParser.add_argument("--quittime",          type = int,                             metavar="<seconds>",  help="Specify time in seconds for automatic termination (over all timeout)")
+    argsParser.add_argument("--quitpattern",                                               metavar="<regex>",    help="Specify a regular expression pattern to terminate the program, works mid-line")
+    argsParser.add_argument("--quitpattime",       type = int,                             metavar="<seconds>",  help="Specify time in seconds for delayed termination after pattern match")
     args = argsParser.parse_args()
     #print("port={} baudrate={} logfile={} lowerRts={}".format(args.port, args.baudrate, args.logfile, args.lowerRts))
 
@@ -50,6 +51,7 @@ def main():
     startTimeMonotonic = time.perf_counter()
     quitpatternFound = False
     quitpatternTime = 0
+    lowerRtsDelayedDone = False
 
     timestamp = "Started logging at " + datetime.datetime.now().isoformat(" ")
     console = open("/dev/stdout", "wb")
@@ -103,6 +105,13 @@ def main():
                         quitReason = "pattern \"{}\" found".format(args.quitpattern)
                         break;
 
+        if args.lowerRtsDelayed is not None and not lowerRtsDelayedDone:
+            elapsed = time.perf_counter() - startTimeMonotonic
+            if elapsed > args.lowerRtsDelayed:
+                ser.setRTS(False)
+                lowerRtsDelayedDone = True
+
+        # Check for termination conditions
         if args.quittime is not None:
             elapsed = time.perf_counter() - startTimeMonotonic
             if elapsed > args.quittime:
