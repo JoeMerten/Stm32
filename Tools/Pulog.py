@@ -17,6 +17,7 @@ import signal
 import sys
 import re
 
+
 class SignalCatcher:
     terminateRequested = False
     signum = 0
@@ -28,10 +29,41 @@ class SignalCatcher:
         self.terminateRequested = True
         self.signum = signum
 
+
+def baudrateArg(arg):
+    baud = arg.strip()
+    if not baud: raise argparse.ArgumentTypeError("invalid baudrate")
+    try:
+        if 'k' in baud.lower():
+            baud = baud.lower()
+            if   baud ==   "9k" or baud ==   "9k6": baud =   9600
+            elif baud ==  "14k" or baud ==  "14k4": baud =  14400
+            elif baud ==  "19k" or baud ==  "19k2": baud =  19200
+            elif baud ==  "38k" or baud ==  "38k4": baud =  38400
+            elif baud ==  "57k" or baud ==  "57k6": baud =  57600
+            elif baud == "115k" or baud == "115k2": baud = 115200
+            elif baud == "230k" or baud == "230k4": baud = 230400
+            elif baud == "460k" or baud == "460k8": baud = 460800
+            elif baud == "921k" or baud == "921k6": baud = 921600
+            else: baud = int(baud[:-1]) * 1000
+        elif 'M' in baud.upper():
+            baud = baud.upper()
+            if   baud == "1M5": baud = 1500000
+            elif baud == "2M5": baud = 2500000
+            else: baud = int(baud[:-1]) * 1000000
+        else:
+            baud = int(baud)
+    except:
+        raise argparse.ArgumentTypeError("invalid baudrate '" + arg + "'")
+    if baud <= 0:
+        raise argparse.ArgumentTypeError("invalid baudrate '" + arg + "'")
+    return baud
+
+
 def main():
     argsParser = argparse.ArgumentParser()
     argsParser.add_argument("port",                                                                              help="Serial port device name")
-    argsParser.add_argument("baudrate",            type = int,                                                   help="Serial port baudrate")
+    argsParser.add_argument("baudrate",            type = baudrateArg,                                           help="Serial port baudrate, even e.g. 230k or 1M …")
     argsParser.add_argument("--rtscts",            action="store_true",                                          help="Use rts/cts hardware handshake")
     argsParser.add_argument("--xonxoff",           action="store_true",                                          help="Use xon/xoff software handshake")
     argsParser.add_argument("--logfile",                                                   metavar="<filename>", help="Logfile (serial rx data will be appended)")
@@ -53,7 +85,7 @@ def main():
     quitpatternTime = 0
     lowerRtsDelayedDone = False
 
-    timestamp = "Started logging at " + datetime.datetime.now().isoformat(" ")
+    timestamp = "Started logging at " + datetime.datetime.now().replace(microsecond=0).isoformat(" ")
     console = open("/dev/stdout", "wb")
     console.write(bytes(timestamp + "\n", "utf-8"))
     console.flush()
@@ -125,7 +157,7 @@ def main():
                 break;
 
     ser.close()
-    timestamp = "Finished logging at " + datetime.datetime.now().isoformat(" ") + ", " + quitReason
+    timestamp = "Finished logging at " + datetime.datetime.now().replace(microsecond=0).isoformat(" ") + ", " + quitReason
     if len(currentLine) != 0: console.write(b"\n")
     console.write(bytes(timestamp + "\n", "utf-8"))
     console.close()
