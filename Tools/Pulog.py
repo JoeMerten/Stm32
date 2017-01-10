@@ -30,6 +30,28 @@ class SignalCatcher:
         self.signum = signum
 
 
+def timeArg(arg):
+    time = arg.strip()
+    if not time: raise argparse.ArgumentTypeError("invalid duration")
+    time = time.replace(',', '.') # allowing both , and . for decimal separator
+    try:
+        if time.endswith("ms"):
+            time = float(time[:-2]) / 1000
+        elif time.endswith("s"):
+            time = float(time[:-1])
+        elif time.endswith("min"):
+            time = float(time[:-3]) * 60
+        elif time.endswith("h"):
+            time = float(time[:-1]) * 3600
+        else:
+            time = float(time)
+    except:
+        raise argparse.ArgumentTypeError("invalid duration '" + arg + "'")
+    if time <= 0:
+        raise argparse.ArgumentTypeError("invalid duration '" + arg + "'")
+    return time
+
+
 def baudrateArg(arg):
     baud = arg.strip()
     if not baud: raise argparse.ArgumentTypeError("invalid baudrate")
@@ -61,17 +83,17 @@ def baudrateArg(arg):
 
 
 def main():
-    argsParser = argparse.ArgumentParser()
-    argsParser.add_argument("port",                                                                              help="Serial port device name")
-    argsParser.add_argument("baudrate",            type = baudrateArg,                                           help="Serial port baudrate, even e.g. 230k or 1M …")
-    argsParser.add_argument("--rtscts",            action="store_true",                                          help="Use rts/cts hardware handshake")
-    argsParser.add_argument("--xonxoff",           action="store_true",                                          help="Use xon/xoff software handshake")
-    argsParser.add_argument("--logfile",                                                   metavar="<filename>", help="Logfile (serial rx data will be appended)")
-    argsParser.add_argument("--lower-rts",         action="store_true", dest = "lowerRts",                       help="Lower rts handshake line after open port")
-    argsParser.add_argument("--lower-rts-delayed", type = float, dest = "lowerRtsDelayed", metavar="<seconds>",  help="Specify delay time for lowering rts handshake line after open port")
-    argsParser.add_argument("--quittime",          type = int,                             metavar="<seconds>",  help="Specify time in seconds for automatic termination (over all timeout)")
-    argsParser.add_argument("--quitpattern",                                               metavar="<regex>",    help="Specify a regular expression pattern to terminate the program, works mid-line")
-    argsParser.add_argument("--quitpattime",       type = int,                             metavar="<seconds>",  help="Specify time in seconds for delayed termination after pattern match")
+    argsParser = argparse.ArgumentParser(epilog = "All time durations can also be specified with a unit, e.g. \"600ms\" or \"5min\"")
+    argsParser.add_argument("port",                                                                                     help="Serial port device name")
+    argsParser.add_argument("baudrate",            type = baudrateArg,                                                  help="Serial port baudrate, even e.g. 230k or 1M …")
+    argsParser.add_argument("--rtscts",            action="store_true",                                                 help="Use rts/cts hardware handshake")
+    argsParser.add_argument("--xonxoff",           action="store_true",                                                 help="Use xon/xoff software handshake")
+    argsParser.add_argument("--logfile",                                metavar="<filename>",                           help="Logfile (serial rx data will be appended)")
+    argsParser.add_argument("--lower-rts",         action="store_true",                       dest = "lowerRts",        help="Lower rts handshake line after open port")
+    argsParser.add_argument("--lower-rts-delayed", type = timeArg,      metavar="<seconds>",  dest = "lowerRtsDelayed", help="Specify delay time for lowering rts handshake line after open port")
+    argsParser.add_argument("--quittime",          type = timeArg,      metavar="<seconds>",                            help="Specify time in seconds for automatic termination (over all timeout)")
+    argsParser.add_argument("--quitpattern",                            metavar="<regex>",                              help="Specify a regular expression pattern to terminate the program, works mid-line")
+    argsParser.add_argument("--quitpattime",       type = timeArg,      metavar="<seconds>",                            help="Specify time in seconds for delayed termination after pattern match")
     args = argsParser.parse_args()
     #print("port={} baudrate={} logfile={} lowerRts={}".format(args.port, args.baudrate, args.logfile, args.lowerRts))
 
@@ -147,7 +169,7 @@ def main():
         if args.quittime is not None:
             elapsed = time.perf_counter() - startTimeMonotonic
             if elapsed > args.quittime:
-                quitPattern = "{:.2f}s".format(elapsed)
+                quitReason = "{:.2f}s after session started".format(elapsed)
                 break;
 
         if args.quitpattern is not None and quitpatternFound:
