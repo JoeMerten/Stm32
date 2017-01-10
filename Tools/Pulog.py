@@ -91,9 +91,10 @@ def main():
     argsParser.add_argument("--logfile",                                metavar="<filename>",                           help="Logfile (serial rx data will be appended)")
     argsParser.add_argument("--lower-rts",         action="store_true",                       dest = "lowerRts",        help="Lower rts handshake line after open port")
     argsParser.add_argument("--lower-rts-delayed", type = timeArg,      metavar="<seconds>",  dest = "lowerRtsDelayed", help="Specify delay time for lowering rts handshake line after open port")
-    argsParser.add_argument("--quittime",          type = timeArg,      metavar="<seconds>",                            help="Specify time in seconds for automatic termination (over all timeout)")
+    argsParser.add_argument("--quittime",          type = timeArg,      metavar="<seconds>",                            help="Specify time for automatic termination (over all timeout)")
+    argsParser.add_argument("--quitnorxtime",      type = timeArg,      metavar="<seconds>",                            help="Specify time for termination in case of no rx data (rx timeout)")
     argsParser.add_argument("--quitpattern",                            metavar="<regex>",                              help="Specify a regular expression pattern to terminate the program, works mid-line")
-    argsParser.add_argument("--quitpattime",       type = timeArg,      metavar="<seconds>",                            help="Specify time in seconds for delayed termination after pattern match")
+    argsParser.add_argument("--quitpattime",       type = timeArg,      metavar="<seconds>",                            help="Specify time for delayed termination after pattern match")
     args = argsParser.parse_args()
     #print("port={} baudrate={} logfile={} lowerRts={}".format(args.port, args.baudrate, args.logfile, args.lowerRts))
 
@@ -103,6 +104,7 @@ def main():
     if args.lowerRts: ser.setRTS(False)
 
     startTimeMonotonic = time.perf_counter()
+    norxTime = None
     quitpatternFound = False
     quitpatternTime = 0
     lowerRtsDelayedDone = False
@@ -132,6 +134,7 @@ def main():
             break
 
         if data != b'':
+            norxTime = time.perf_counter()
             console.write(data)
             console.flush()
             if args.logfile is not None:
@@ -171,6 +174,18 @@ def main():
             if elapsed > args.quittime:
                 quitReason = "{:.2f}s after session started".format(elapsed)
                 break;
+
+        if args.quitnorxtime is not None:
+            if norxTime is None:
+                elapsed = time.perf_counter() - startTimeMonotonic
+                if elapsed > args.quitnorxtime:
+                    quitReason = "{:.2f}s still no rx data".format(elapsed)
+                    break;
+            else:
+                elapsed = time.perf_counter() - norxTime
+                if elapsed > args.quitnorxtime:
+                    quitReason = "{:.2f}s without rx data".format(elapsed)
+                    break;
 
         if args.quitpattern is not None and quitpatternFound:
             elapsed = time.perf_counter() - quitpatternTime
