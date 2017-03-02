@@ -11,28 +11,34 @@
 
 
 ########################################################################################################################
-# Test results, capabilities of tested terminals
+# Test results, capabilities of tested terminals / parsers
 #-----------------------------------------------------------------------------------------------------------------------
-#                   ╭──────┬───────┬────────┬────────┬───────┬─────────┬─────────┬────────┬─────────┬─────────┬─────┬──────┬───────╮
-#                   │ bold │ faint │ italic │ underl │ blink │ inverse │ conceal │ strike │ color90 │ palette │ rgb │ font │ reset │
-# ╭─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
-# │ Kubuntu konsole │bright│   -   │   ok   │   ok   │ slow  │   ok    │    -    │   -    │   ok    │   ok    │ ok  │  -   │  ok   │
-# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
-# │ macOS console   │      │       │        │        │       │         │         │        │         │         │     │      │       │
-# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
-# │ Eclipse         │  ok  │       │   ok   │   ok   │   -   │   ok    │   ok    │   ok   │   ok    │   ok    │  -  │  -   │       │
-# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
-# │ Jenkins         │      │       │        │        │       │         │         │        │         │         │     │      │       │
-# ╰─────────────────┴──────┴───────┴────────┴────────┴───────┴─────────┴─────────┴────────┴─────────┴─────────┴─────┴──────┴───────╯
-# Notes:
+#                   ╭──────┬───────┬────────┬────────┬───────┬─────────┬─────────┬────────┬────────┬─────────┬─────────┬─────┬──────┬───────╮
+#                   │ bold │ faint │ italic │ underl │ blink │ inverse │ conceal │ dbundl │ strike │ color90 │ palette │ rgb │ font │ reset │
+# ╭─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
+# │ Kubuntu konsole │bright│   -   │   ok   │   ok   │ slow  │   ok    │    -    │   -    │   -    │   ok    │   ok    │ ok  │  -   │  ok   │
+# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
+# │ macOS console   │  ok  │  ok   │   -    │   -    │ slow  │   ok    │   ok    │   -    │   -    │   ok    │   ok    │  -  │  -   │partial│
+# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
+# │ Eclipse         │  ok  │   -   │   ok   │   ok   │   -   │   ok    │   ok    │   ok   │   ok   │   ok    │   ok    │  -  │  -   │partial│
+# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
+# │ Jenkins         │  ok  │   -   │   -    │   ok   │   -   │    -    │   ok    │   ok   │   -    │    -    │    -    │  -  │  -   │partial│
+# ╰─────────────────┴──────┴───────┴────────┴────────┴───────┴─────────┴─────────┴────────┴────────┴─────────┴─────────┴─────┴──────┴───────╯
+# Notes / Issues:
 # ⚫ Kubuntu 16.04 konsole
 #   • applies bright colors for [1m instead of bold
 #   • needs [22m to return to low brightness, [21m won't to this
 #   • blink slow [5m works, but blink fast [6m not
+# ⚫ macOS console
+#   • reset single attributes don't works with foreground [39m and background color [49m
 # ⚫ Eclipse Neon, Ansi Console
 #   • Mihai Nita, net.mihai-nita.ansicon.feature.group, version 1.3.3.201605090119
 #   • reset single attributes don't works with foreground [39m and background color [49m
-#   • [22m switches on double underline
+# ⚫ Jenkins AnsiColor
+#   • reset single attributes don't works with foreground [39m and background color [49m
+#   • reset single attributes don't works with conceal
+# ⚫ Mac XcodeColors
+#   • Still no Ansi support, see https://github.com/robbiehanson/XcodeColors/issues/66
 ########################################################################################################################
 
 
@@ -50,7 +56,7 @@ styles = [
     { "name": "inverse"  , "on": 7, "off": 27 },
     { "name": "conceal"  , "on": 8, "off": 28 },
     { "name": "strikeout", "on": 9, "off": 29 },
-    { "name": "doubleund", "on": 21, "off": 24 }, # 21 = double underline in Eclipse Ansi Console
+    { "name": "dblunderl", "on":21, "off": 24 },  # 21 = double underline in Eclipse Ansi Console and on Jenkins
 ]
 
 ########################################################################################################################
@@ -84,7 +90,7 @@ def paletteColors():
         for j in range(16, 232, 36):
             for i in range(j, j+36): print("\x1B[{};5;{}m {:3d}\x1B[m".format(fgbg, i, i), end='')
             print("")
-        # 24 shades of gray
+        # 24 shades of gray (note, that 232 is not black and 255 seems not to be white)
         for i in range(232, 256): print("\x1B[{};5;{}m  {:3d} \x1B[m".format(fgbg, i, i), end='')
         print("")
 
