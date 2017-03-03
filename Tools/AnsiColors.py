@@ -22,7 +22,7 @@
 # ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
 # │ macOS console   │  ok  │  ok   │   -    │   -    │ slow  │   ok    │   ok    │   -    │   -    │   ok    │   ok    │  -  │  -   │   -   │   -    │   -    │  ok   │
 # ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
-# │ Win Teraterm    │  ok  │   -   │   -    │   ok   │   -   │   ok    │    -    │   -    │   -    │   ok    │   ok    │ ok  │  -   │   -   │   -    │   -    │       │
+# │ Win Teraterm    │  ok  │   -   │   -    │   ok   │   -   │   ok    │    -    │   -    │   -    │   ok    │   ok    │ ok  │  -   │   -   │   -    │   -    │  ok   │
 # ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
 # │ Eclipse         │  ok  │   -   │   ok   │   ok   │   -   │   ok    │   ok    │   ok   │   ok   │   ok    │   ok    │ ok  │  -   │  ok   │   -    │   -    │  ok   │
 # ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
@@ -35,6 +35,9 @@
 #   • blink slow [5m works, but blink fast [6m not
 # ⚫ macOS console
 #   • reset single attributes don't works with foreground [39m and background color [49m
+# ⚫ Win Teraterm 4.9
+#   • [1m changes foreground color to yellow (if default color)
+#   • [5m changes foreground color to red (if default color) and also brighten background color (if not default background color)
 # ⚫ Eclipse Neon, Ansi Console
 #   • Mihai Nita, net.mihai-nita.ansicon.feature.group, version 1.3.5.201612301822
 #   • homepage: https://mihai-nita.net/java/ or https://mihai-nita.net/2013/06/03/eclipse-plugin-ansi-in-console/
