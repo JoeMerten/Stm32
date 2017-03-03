@@ -18,9 +18,9 @@
 # ╭─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
 # │ Kubuntu konsole │bright│   -   │   ok   │   ok   │ slow  │   ok    │    -    │   -    │   -    │   ok    │   ok    │ ok  │  -   │   -   │   -    │   -    │  ok   │
 # ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
-# │ Gnome termonal  │      │       │        │        │       │         │         │        │        │         │         │     │  -   │   -   │   -    │   -    │       │
+# │ Gnome terminal  │      │       │        │        │       │         │         │        │        │         │         │     │  -   │   -   │   -    │   -    │       │
 # ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
-# │ macOS console   │  ok  │  ok   │   -    │   -    │ slow  │   ok    │   ok    │   -    │   -    │   ok    │   ok    │  -  │  -   │   -   │   -    │   -    │  ok   │
+# │ macOS console   │  ok  │  ok   │   -    │   ok   │ slow  │   ok    │   ok    │   -    │   -    │   ok    │   ok    │  -  │  -   │   -   │   -    │   -    │  ok   │
 # ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
 # │ Win Teraterm    │  ok  │   -   │   -    │   ok   │   -   │   ok    │    -    │   -    │   -    │   ok    │   ok    │ ok  │  -   │   -   │   -    │   -    │  ok   │
 # ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
@@ -53,10 +53,7 @@
 # ⚫ My mission
 #   • Jenkins AnsiColor: add italic, inverse, strike, color90, palette, rgb - and maybe fix conceal issues
 #     - homepage: https://wiki.jenkins-ci.org/display/JENKINS/AnsiColor+Plugin
-#     - inverse: https://github.com/dblock/jenkins-ansicolor-plugin/issues/64
-#     - color90: https://github.com/dblock/jenkins-ansicolor-plugin/issues/16
-#     - palette and rgb are addressed here: https://issues.jenkins-ci.org/browse/JENKINS-24378
-#     - palette: https://github.com/dblock/jenkins-ansicolor-plugin/issues/44
+#     - My issue report: https://github.com/dblock/jenkins-ansicolor-plugin/issues/89
 ########################################################################################################################
 
 
