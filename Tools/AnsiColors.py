@@ -13,17 +13,21 @@
 ########################################################################################################################
 # Test results, capabilities of tested terminals / parsers
 #-----------------------------------------------------------------------------------------------------------------------
-#                   ╭──────┬───────┬────────┬────────┬───────┬─────────┬─────────┬────────┬────────┬─────────┬─────────┬─────┬──────┬───────╮
-#                   │ bold │ faint │ italic │ underl │ blink │ inverse │ conceal │ dbundl │ strike │ color90 │ palette │ rgb │ font │ reset │
-# ╭─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
-# │ Kubuntu konsole │bright│   -   │   ok   │   ok   │ slow  │   ok    │    -    │   -    │   -    │   ok    │   ok    │ ok  │  -   │  ok   │
-# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
-# │ macOS console   │  ok  │  ok   │   -    │   -    │ slow  │   ok    │   ok    │   -    │   -    │   ok    │   ok    │  -  │  -   │partial│
-# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
-# │ Eclipse         │  ok  │   -   │   ok   │   ok   │   -   │   ok    │   ok    │   ok   │   ok   │   ok    │   ok    │  -  │  -   │  ok   │
-# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
-# │ Jenkins         │  ok  │   -   │   -    │   ok   │   -   │    -    │   ok*   │   ok   │   -    │    -    │    -    │  -  │  -   │partial│
-# ╰─────────────────┴──────┴───────┴────────┴────────┴───────┴─────────┴─────────┴────────┴────────┴─────────┴─────────┴─────┴──────┴───────╯
+#                   ╭──────┬───────┬────────┬────────┬───────┬─────────┬─────────┬────────┬────────┬─────────┬─────────┬─────┬──────┬───────┬────────┬────────┬───────╮
+#                   │ bold │ faint │ italic │ underl │ blink │ inverse │ conceal │ dbundl │ strike │ color90 │ palette │ rgb │ font │ frame │ encirc │ overln │ reset │
+# ╭─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
+# │ Kubuntu konsole │bright│   -   │   ok   │   ok   │ slow  │   ok    │    -    │   -    │   -    │   ok    │   ok    │ ok  │  -   │   -   │   -    │   -    │  ok   │
+# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
+# │ Gnome termonal  │      │       │        │        │       │         │         │        │        │         │         │     │  -   │   -   │   -    │   -    │       │
+# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
+# │ macOS console   │  ok  │  ok   │   -    │   -    │ slow  │   ok    │   ok    │   -    │   -    │   ok    │   ok    │  -  │  -   │   -   │   -    │   -    │  ok   │
+# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
+# │ Win Teraterm    │      │       │        │        │       │         │         │        │        │         │         │     │  -   │   -   │   -    │   -    │       │
+# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
+# │ Eclipse         │  ok  │   -   │   ok   │   ok   │   -   │   ok    │   ok    │   ok   │   ok   │   ok    │   ok    │ ok  │  -   │  ok   │   -    │   -    │  ok   │
+# ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┼────────┼────────┼───────┤
+# │ Jenkins         │  ok  │   -   │   -    │   ok   │   -   │    -    │   ok*   │   ok   │   -    │    -    │    -    │  -  │  -   │   -   │   -    │   -    │partial│
+# ╰─────────────────┴──────┴───────┴────────┴────────┴───────┴─────────┴─────────┴────────┴────────┴─────────┴─────────┴─────┴──────┴───────┴────────┴────────┴───────╯
 # Notes / Issues:
 # ⚫ Kubuntu 16.04 konsole
 #   • applies bright colors for [1m instead of bold
@@ -32,12 +36,24 @@
 # ⚫ macOS console
 #   • reset single attributes don't works with foreground [39m and background color [49m
 # ⚫ Eclipse Neon, Ansi Console
-#   • Mihai Nita, net.mihai-nita.ansicon.feature.group, version 1.3.3.201605090119
+#   • Mihai Nita, net.mihai-nita.ansicon.feature.group, version 1.3.5.201612301822
+#   • homepage: https://mihai-nita.net/java/ or https://mihai-nita.net/2013/06/03/eclipse-plugin-ansi-in-console/
+#   • behaviour of [1m is customizable (bold versus bright colors)
+#   • conceal text became visible when selected
+#   • for rgb colors, need at least version 1.3.5
 # ⚫ Jenkins AnsiColor
+#   • version 0.4.3
 #   • conceal suppresses output completely, there is no placeholder (e.g. whitespace) output
 #   • reset single attributes don't works with conceal
 # ⚫ Mac XcodeColors
 #   • Still no Ansi support, see https://github.com/robbiehanson/XcodeColors/issues/66
+# ⚫ My mission
+#   • Jenkins AnsiColor: add italic, inverse, strike, color90, palette, rgb - and maybe fix conceal issues
+#     - homepage: https://wiki.jenkins-ci.org/display/JENKINS/AnsiColor+Plugin
+#     - inverse: https://github.com/dblock/jenkins-ansicolor-plugin/issues/64
+#     - color90: https://github.com/dblock/jenkins-ansicolor-plugin/issues/16
+#     - palette and rgb are addressed here: https://issues.jenkins-ci.org/browse/JENKINS-24378
+#     - palette: https://github.com/dblock/jenkins-ansicolor-plugin/issues/44
 ########################################################################################################################
 
 
@@ -56,6 +72,9 @@ styles = [
     { "name": "conceal"  , "on": 8, "off": 28 },
     { "name": "strikeout", "on": 9, "off": 29 },
     { "name": "dblunderl", "on":21, "off": 24 },  # 21 = double underline in Eclipse Ansi Console and on Jenkins
+    { "name": "framed"   , "on":51, "off": 54 },
+    { "name": "encircled", "on":52, "off": 54 },
+    { "name": "overlined", "on":53, "off": 55 },
 ]
 
 ########################################################################################################################
@@ -155,6 +174,19 @@ def resetAttributes():
 
 
 ########################################################################################################################
+#
+########################################################################################################################
+def frames():
+    print("┌───────────────────────┐")
+    print("│ Framing, like esc[51m │")
+    print("└───────────────────────┘")
+
+    print("framed: \x1B[51minside\x1B[54moutside")
+    print("encircled: \x1B[52minside\x1B[54moutside")
+    print("overlined: \x1B[53minside\x1B[55moutside")
+
+
+########################################################################################################################
 #   __  __       _
 #  |  \/  | __ _(_)_ __
 #  | |\/| |/ _` | | '_ \
@@ -167,6 +199,7 @@ def main():
    rgbColors()
    font()
    resetAttributes()
+   frames()
 
 
 ########################################################################################################################
