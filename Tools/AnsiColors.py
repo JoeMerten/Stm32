@@ -20,9 +20,9 @@
 # ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
 # │ macOS console   │  ok  │  ok   │   -    │   -    │ slow  │   ok    │   ok    │   -    │   -    │   ok    │   ok    │  -  │  -   │partial│
 # ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
-# │ Eclipse         │  ok  │   -   │   ok   │   ok   │   -   │   ok    │   ok    │   ok   │   ok   │   ok    │   ok    │  -  │  -   │partial│
+# │ Eclipse         │  ok  │   -   │   ok   │   ok   │   -   │   ok    │   ok    │   ok   │   ok   │   ok    │   ok    │  -  │  -   │  ok   │
 # ├─────────────────┼──────┼───────┼────────┼────────┼───────┼─────────┼─────────┼────────┼────────┼─────────┼─────────┼─────┼──────┼───────┤
-# │ Jenkins         │  ok  │   -   │   -    │   ok   │   -   │    -    │   ok    │   ok   │   -    │    -    │    -    │  -  │  -   │partial│
+# │ Jenkins         │  ok  │   -   │   -    │   ok   │   -   │    -    │   ok*   │   ok   │   -    │    -    │    -    │  -  │  -   │partial│
 # ╰─────────────────┴──────┴───────┴────────┴────────┴───────┴─────────┴─────────┴────────┴────────┴─────────┴─────────┴─────┴──────┴───────╯
 # Notes / Issues:
 # ⚫ Kubuntu 16.04 konsole
@@ -33,9 +33,8 @@
 #   • reset single attributes don't works with foreground [39m and background color [49m
 # ⚫ Eclipse Neon, Ansi Console
 #   • Mihai Nita, net.mihai-nita.ansicon.feature.group, version 1.3.3.201605090119
-#   • reset single attributes don't works with foreground [39m and background color [49m
 # ⚫ Jenkins AnsiColor
-#   • reset single attributes don't works with foreground [39m and background color [49m
+#   • conceal suppresses output completely, there is no placeholder (e.g. whitespace) output
 #   • reset single attributes don't works with conceal
 # ⚫ Mac XcodeColors
 #   • Still no Ansi support, see https://github.com/robbiehanson/XcodeColors/issues/66
@@ -146,8 +145,8 @@ def resetAttributes():
     print("│ Reset single attributes, like esc[39m and esc[22m │")
     print("└───────────────────────────────────────────────────┘")
 
-    print("foreground: \x1B[93;1;41myellow bold on red\x1B[38m just bold on red\x1B[m")
-    print("background: \x1B[93;1;41myellow bold on red\x1B[48m just yellow bold\x1B[m")
+    print("foreground: \x1B[33;1;41myellow bold on red\x1B[39m just bold on red\x1B[m")
+    print("background: \x1B[33;1;41myellow bold on red\x1B[49m just yellow bold\x1B[m")
 
     for s in range(1, len(styles)):
         print("{:10}: ".format(styles[s]["name"]), end='')
