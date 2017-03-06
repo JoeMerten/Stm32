@@ -179,7 +179,8 @@ def resetAttributes():
     for s in range(1, len(styles)):
         print("{:10}: ".format(styles[s]["name"]), end='')
         print("\x1B[{}mon\x1B[{}moff\x1B[m  ".format(styles[s]["on"], styles[s]["off"]), end='')
-        print("\x1B[33;41m\x1B[{}mon\x1B[{}moff\x1B[m".format(styles[s]["on"], styles[s]["off"]), end='')
+        print("\x1B[33;41;{}mon\x1B[{}moff\x1B[m  ".format(styles[s]["on"], styles[s]["off"]), end='')
+        print("\x1B[{};33;41mon\x1B[{}moff\x1B[m  ".format(styles[s]["on"], styles[s]["off"]), end='')
         print("")
 
 
@@ -222,16 +223,28 @@ def inverseCombinations():
     print("│ Some combinations with esc[7m │")
     print("└───────────────────────────────┘")
 
-    print("\x1B[33;41m" + "yellow on red, " +
-          "\x1B[7m" + "now inverse, " +
-          "\x1B[7m" + "one more [7m should change nothing, " +
-          "\x1B[27m" + "turned back to non inverse" + "\x1B[m")
+    print("\x1B[31m"    + "red text, " +
+          "\x1B[7m"     + "now inverse, " +
+          "\x1B[27m"    + "turned back to non inverse" +
+          "\x1B[m")
+
+    print("\x1B[41m"    + "red background, " +
+          "\x1B[7m"     + "now inverse, " +
+          "\x1B[27m"    + "turned back to non inverse" +
+          "\x1B[m")
 
     print("\x1B[33;41m" + "yellow on red, " +
-          "\x1B[7m" + "now inverse, " +
-          "\x1B[30m" + "[30m → red on black, " +
-          "\x1B[103m" + "[103m  → yellow on black, " +
-          "\x1B[27m" + "[27m → black on yellow" + "\x1B[m")
+          "\x1B[7m"     + "now inverse, " +
+          "\x1B[7m"     + "one more [7m should change nothing, " +
+          "\x1B[27m"    + "turned back to non inverse" +
+          "\x1B[m")
+
+    print("\x1B[33;41m" + "yellow on red, " +
+          "\x1B[7m"     + "now inverse, " +
+          "\x1B[30m"    + "[30m → red on black, " +
+          "\x1B[103m"   + "[103m  → yellow on black, " +
+          "\x1B[27m"    + "[27m → black on yellow" +
+          "\x1B[m")
 
 
 ########################################################################################################################
