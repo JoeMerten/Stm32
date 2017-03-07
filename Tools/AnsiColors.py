@@ -39,8 +39,9 @@
 #   • reset single attributes don't works with foreground [39m and background color [49m
 # ⚫ xterm testet version 322 in Kubuntu 16.04
 #   • xterm stops blinking when window loose focus
-#   • double underline just underlines single (might depend on font size?)
+#   • double underline just underlines single, even with huge font
 #   • rgb colors were parsed, but displayed incorrect; e.g. dark magenta became gray and even no smooth gradient rendering
+#   • conceal text became seems to be substituted with spaces
 # ⚫ Win Teraterm 4.9
 #   • [1m changes foreground color to yellow (if default color)
 #   • [5m changes foreground color to red (if default color) and also brighten background color (if not default background color)
@@ -48,7 +49,7 @@
 #   • Mihai Nita, net.mihai-nita.ansicon.feature.group, version 1.3.5.201612301822
 #   • homepage: https://mihai-nita.net/java/ or https://mihai-nita.net/2013/06/03/eclipse-plugin-ansi-in-console/
 #   • behaviour of [1m is customizable (bold versus bright colors)
-#   • conceal text became visible when selected
+#   • conceal text became visible when selected and can be copied into clipboard
 #   • for rgb colors, need at least version 1.3.5
 # ⚫ Jenkins AnsiColor
 #   • version 0.4.3
@@ -217,6 +218,8 @@ def standardVersusPaletteColors():
 
 ########################################################################################################################
 # Combinations with inverse attribute
+#-----------------------------------------------------------------------------------------------------------------------
+# This function I'd mainly made for testing esc[7m implementation in jenkins ansicolor plugin
 ########################################################################################################################
 def inverseCombinations():
     print("┌───────────────────────────────┐")
@@ -245,6 +248,20 @@ def inverseCombinations():
           "\x1B[103m"   + "[103m  → yellow on black, " +
           "\x1B[27m"    + "[27m → black on yellow" +
           "\x1B[m")
+
+    print("\033[31;7m" + "inv=redbg" + "\033[27m" + "norm=redfg" + "\x1B[m")
+    print("\033[7;31m" + "inv=redbg" + "\033[27m" + "norm=redfg" + "\x1B[m")
+    print("\033[41;7m" + "inv=redfg" + "\033[27m" + "norm=redbg" + "\x1B[m")
+    print("\033[7;41m" + "inv=redfg" + "\033[27m" + "norm=redbg" + "\x1B[m")
+
+    print("\x1B[31;7m" + "inv=redbg" + "\x1B[39m" + "default-inverse" + "\x1B[m")
+    print("\x1B[7;31m" + "inv=redbg" + "\x1B[39m" + "default-inverse" + "\x1B[m")
+    print("\x1B[41;7m" + "inv=redfg" + "\x1B[49m" + "default-inverse" + "\x1B[m")
+    print("\x1B[7;41m" + "inv=redfg" + "\x1B[49m" + "default-inverse" + "\x1B[m")
+    print("\x1B[33;41;7m" + "inv=red-on-yellow" + "\x1B[39m" + "defaultfg-inv=redfg" + "\x1B[m")
+    print("\x1B[7;33;41m" + "inv=red-on-yellow" + "\x1B[39m" + "defaultfg-inv=redfg" + "\x1B[m")
+    print("\x1B[33;41;7m" + "inv=red-on-yellow" + "\x1B[49m" + "defaultbg-inv=yellowbg" + "\x1B[m")
+    print("\x1B[7;33;41m" + "inv=red-on-yellow" + "\x1B[49m" + "defaultbg-inv=yellowbg" + "\x1B[m")
 
 
 ########################################################################################################################
