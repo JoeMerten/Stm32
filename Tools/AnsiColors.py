@@ -33,15 +33,14 @@
 # Notes / Issues:
 # ⚫ Kubuntu 16.04 konsole
 #   • applies bright colors for [1m instead of bold
-#   • needs [22m to return to low brightness, [21m won't to this
 #   • blink slow [5m works, but blink fast [6m not
 # ⚫ macOS console
-#   • reset single attributes don't works with foreground [39m and background color [49m
+#   • conceal text seems to be just fg=bg color, can be copied from console via clipboard
 # ⚫ xterm testet version 322 in Kubuntu 16.04
 #   • xterm stops blinking when window loose focus
 #   • double underline just underlines single, even with huge font
 #   • rgb colors were parsed, but displayed incorrect; e.g. dark magenta became gray and even no smooth gradient rendering
-#   • conceal text became seems to be substituted with spaces
+#   • conceal text seems to be substituted with spaces
 # ⚫ Win Teraterm 4.9
 #   • [1m changes foreground color to yellow (if default color)
 #   • [5m changes foreground color to red (if default color) and also brighten background color (if not default background color)
@@ -54,15 +53,10 @@
 # ⚫ Jenkins AnsiColor
 #   • version 0.4.3
 #   • conceal suppresses output completely, there is no placeholder (e.g. whitespace) output
-#   • reset single attributes don't works with conceal
-#   • version 0.4.4 will got much more ansi attribute and color functionality (work in progress)
+#   • reset single attributes don't works with conceal (fixed in version 0.4.4)
+#   • version 0.4.4 will got much more ansi attribute and color functionality
 # ⚫ Mac XcodeColors
 #   • Still no Ansi support, see https://github.com/robbiehanson/XcodeColors/issues/66
-# ⚫ My mission
-#   • Jenkins AnsiColor: add italic, inverse, strike, color90, palette, rgb - and maybe fix conceal issues
-#     - homepage: https://wiki.jenkins-ci.org/display/JENKINS/AnsiColor+Plugin
-#     - My issue report: https://github.com/dblock/jenkins-ansicolor-plugin/issues/89
-#     - For inverse: http://stackoverflow.com/questions/42585913/how-to-display-inverse-text-in-html
 ########################################################################################################################
 
 
